@@ -1,0 +1,75 @@
+/* Início configuração padrão de cada página */
+
+/* Importando fonte Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Anybody:wght@300;400;600;700&family=Montserrat:wght@300;500;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+/* Final da configuração padrão */
+
+
+/* Início da estilização do scrollbar das telas */
+
+body::-webkit-scrollbar {
+    width: 6px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #989898;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    /* creates padding around scroll thumb */
+}
+
+/* Final da Estilização do scrollbar das telas */
+
+/* Configurando classes padrões */
+.container{
+    margin: 10% 6%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: center;
+}
+
+.button{
+    width: 240px;
+    height: 65px;
+    border-radius: 12px;
+    border: none;
+
+    background-color: #006FB9;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+

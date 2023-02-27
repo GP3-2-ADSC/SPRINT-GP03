@@ -1,0 +1,295 @@
+/* Inicio da HEADER */
+
+.header-background {
+    margin: 1% 2%;
+    background: rgba(140, 204, 253, 1);
+    width: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.header-container {
+    width: 100%;
+    padding: 1% 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+
+}
+
+.navbar ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.navbar a {
+    font-size: 17px;
+    padding: 10px 15px;
+    color: #FFFFFF;
+}
+
+.cadastro {
+    background-color: #006FB9;
+    border-radius: 20px;
+}
+
+/* Final HEADER */
+
+/* Inicio da Home */
+/* Apresentação da empresa */
+
+
+.content-slogan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+.content-slogan h2 {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.content-slogan p {
+    font-size: 20px;
+    font-weight: 300;
+    color: #989898;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+}
+
+.content h2 {
+    font-size: 40px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.content p {
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    font-weight: 300;
+    color: #989898;
+}
+
+/* Inicio slideshow */
+
+.container-slider {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 516px;
+    height: 617px;
+    margin: 0 0;
+    padding: 24px 24px;
+}
+
+.slide {
+    width: 516px;
+    height: 617px;
+    padding: 10%;
+    display: none;
+    background-color: #5DABD1;
+    border-radius: 30px;
+}
+
+.slide h2 {
+    color: #FFFFFF;
+    margin-top: 1.3rem;
+}
+
+.slide p {
+    color: #FFFFFF;
+    margin-top: 1.3rem;
+}
+
+
+.proximo-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.arrow-left,
+.arrow-right {
+    cursor: pointer;
+    position: absolute;
+    top: 20%;
+    padding: 16px;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    border: none;
+    outline: none;
+    z-index: 3;
+
+}
+
+.arrow-right {
+    right: 20%;
+    left: auto;
+    border-radius: 3px 0 0 3px;
+}
+
+.arrow-left {
+    left: 20%;
+    right: auto;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 0.3s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.9
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* Final slideshow */
+
+/* Nossos serviços */
+
+.content-servicos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-servicos2{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.caixa {
+    width: 940px;
+    height: 177px;
+    padding: 20px 20px;
+    background-color: #F8FAFC;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin: 5% 0;
+}
+
+.caixa-quadrado {
+    width: 346px;
+    height: 386px;
+    padding: 30px 30px;
+    background-color: #F8FAFC;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    margin: 5% 0;
+}
+
+.texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.texto h3 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 1.1rem;
+}
+
+.caixa-quadrado .texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+}
+
+.caixa-quadrado .texto h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+/* Final servicos */
+/* Final home */
+
+/* Footer */
+.footer{
+    width: 100%;
+    height: 20vh;
+    background: #5DABD1;
+}
+
+.conteudo{
+    height: 100%;
+    width: 60%;
+    padding: 24px 24px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.conteudo .logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.redes-sociais {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.redes-sociais h3{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.redes-sociais p{
+   margin-bottom: 0.3rem
+}
