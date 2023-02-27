@@ -101,7 +101,6 @@
     width: 516px;
     height: 617px;
     margin: 0 0;
-    padding: 24px 24px;
 }
 
 .slide {
@@ -181,14 +180,32 @@
 
 .content-servicos{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    height: 80vh;
+    width: auto;
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+}
+
+.content-servicos::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-servicos::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255);
+}
+
+.content-servicos::-webkit-scrollbar-thumb {
+    background-color: #989898;
+    border-radius: 20px;
+
 }
 
 .content-servicos2{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .caixa {
@@ -197,12 +214,14 @@
     padding: 20px 20px;
     background-color: #F8FAFC;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    margin: 5% 0;
+    margin: 1.2% 0;
 }
+
+
 
 .caixa-quadrado {
     width: 346px;
