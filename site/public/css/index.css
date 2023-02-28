@@ -80,29 +80,25 @@
 }
 
 .link:hover {
-    color: #343045;
+    color: #0D0897;
 }
 
 .after {
     font-size: 18px;
     padding: 10px 15px;
     font-weight: 700;
-    color: #343045;
+    color: #000000;
     transition: all 0.3s;
 }
 
 .after:hover {
-    color: #ff3300;
+    color: #8CCCF0;
 }
-
-
 
 /* Final HEADER */
 
 /* Inicio da Home */
 /* Apresentação da empresa */
-
-
 .content-slogan {
     background: url("../assets/testde\ imagem\ de\ fundo\ copiar.jpg");
     width: 100%;
@@ -273,8 +269,6 @@
     border-radius: 10px;
     margin: 1.2% 0;
 }
-
-
 
 .caixa-quadrado {
     width: 346px;
