@@ -1,11 +1,31 @@
 /* Inicio da HEADER */
 
-.background-inical{
+.background-inical {
     width: 100%;
     height: 100vh;
-    background: url("../assets/Main_Control_Room_at_ESA\'s_Space_Operations_Centre_ESA11252261.jpeg");
+    background: url("../assets/testde\ imagem\ de\ fundo2\ copiar.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.background-inical h1{
+    font-family: "Poppins";
+    font-weight: 500;
+    font-size: 50px;
+    color: #FFFFFF;
+    width: 750px;
+    z-index: 999;
+}
+
+.slogan {
+    margin: 27%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .header-background {
@@ -16,6 +36,7 @@
     display: flex;
     align-items: center;
     position: fixed;
+    z-index: 999;
 }
 
 .header-container {
@@ -23,7 +44,7 @@
     padding: 2% 3%;
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 .navbar {
@@ -39,7 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
+
 }
 
 .navbar a {
@@ -47,6 +68,12 @@
     padding: 10px 15px;
     font-weight: 500;
     color: #FFFFFF;
+    transition: all 0.3s;
+}
+
+.navbar a:hover {
+    color: #006FB9;
+    transform: scale(1.07);
 }
 
 .cadastro {
