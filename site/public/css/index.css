@@ -1,8 +1,6 @@
-/* Inicio da HEADER */
-
 .background-inical {
     width: 100%;
-    height: 100vh;
+    height: 93vh;
     background: url("../assets/testde\ imagem\ de\ fundo2\ copiar.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,11 +15,11 @@
     font-size: 50px;
     color: #FFFFFF;
     width: 750px;
-    z-index: 999;
+    z-index: 0;
 }
 
 .slogan {
-    margin: 26%;
+    margin: 18%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,65 +35,6 @@
     z-index: 999;
 }
 
-.header-background {
-    background: rgba(133, 133, 133, 0);
-    backdrop-filter: blur(5px);
-    margin: auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    z-index: 999;
-}
-
-.header-container {
-    width: 100%;
-    padding: 2% 3%;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.navbar {
-    width: 30%;
-    display: flex;
-    align-items: center;
-    margin-right: 3%;
-}
-
-.navbar ul {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-}
-
-.link {
-    font-size: 18px;
-    padding: 10px 15px;
-    font-weight: 700;
-    color: #FFFFFF;
-    transition: all 0.3s;
-}
-
-.link:hover {
-    color: #0D0897;
-}
-
-.after {
-    font-size: 18px;
-    padding: 10px 15px;
-    font-weight: 700;
-    color: #000000;
-    transition: all 0.3s;
-}
-
-.after:hover {
-    color: #8CCCF0;
-}
-
-/* Final HEADER */
 
 /* Inicio da Home */
 /* Apresentação da empresa */
@@ -128,7 +67,7 @@
 .content h2 {
     font-size: 40px;
     margin-bottom: 1.5rem;
-    text-align: center;
+    text-align: start;
     font-weight: 700;
 }
 
@@ -142,7 +81,7 @@
 
 /* Inicio slideshow */
 
-.container-slider {
+/* .container-slider {
     position: relative;
     display: flex;
     justify-content: center;
@@ -153,11 +92,10 @@
 
 .slide {
     width: 516px;
-    height: 617px;
+    height: 417px;
     padding: 10%;
     display: none;
     background-color: rgba(140, 204, 253, 0.3);
-    ;
     border-radius: 30px;
 }
 
@@ -170,7 +108,6 @@
     color: #989898;
     margin-top: 1.3rem;
 }
-
 
 .proximo-slide {
     display: flex;
@@ -221,7 +158,7 @@
     to {
         opacity: 1
     }
-}
+} */
 
 /* Final slideshow */
 
@@ -232,10 +169,10 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    height: 80vh;
+    height: 70vh;
     width: auto;
-    overflow-y: scroll;
-    flex-wrap: nowrap;
+    /* overflow-y: scroll;
+    flex-wrap: nowrap; */
 }
 
 .content-servicos::-webkit-scrollbar {
@@ -257,30 +194,16 @@
     justify-content: space-around;
 }
 
-.caixa {
-    width: 940px;
-    height: 177px;
-    padding: 20px 20px;
-    background-color: #F8FAFC;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    margin: 1.2% 0;
-}
-
 .caixa-quadrado {
     width: 346px;
     height: 386px;
     padding: 30px 30px;
-    background-color: #F8FAFC;
+    background-color: #fafafa;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 50px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     margin: 5% 0;
 }
 
@@ -297,7 +220,7 @@
 }
 
 .texto p {
-    color: #989898;
+    color: #777777;
 }
 
 .caixa-quadrado .texto {
