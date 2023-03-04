@@ -55,7 +55,7 @@ function redimensionar() {
 function openClose(n) {
     if (n == 1) {
         document.getElementById("myNav").style.width = "100%";
-        document.getElementById("myNav").style.height = "30%";
+        document.getElementById("myNav").style.height = "40%";
     } else {
         document.getElementById("myNav").style.width = "100%";
         document.getElementById("myNav").style.height = "0%";
