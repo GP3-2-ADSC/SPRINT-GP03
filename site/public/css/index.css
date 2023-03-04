@@ -160,7 +160,7 @@ p {
     width: fit-content;
 }
 
-.conteudo-footer{
+.conteudo-footer {
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -183,7 +183,6 @@ p {
 
 .redes-sociais p {
     margin-bottom: 0.3rem
-    
 }
 
 .copyright {
@@ -231,6 +230,7 @@ p {
         width: 70%;
     }
 
+
     .texto {
         width: 10%;
     }
@@ -254,12 +254,20 @@ p {
 
     .footer {
         width: 100%;
-        height: 6vh;
+        height: 10vh;
         background: rgba(140, 204, 253, 0.3);
     }
 
+    .copyright {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 1.4rem;
+    }
+
+
     .logo-header {
-        width: 180px;
+        width: 140px;
+        height: 39.02px;
     }
 
     h2 {

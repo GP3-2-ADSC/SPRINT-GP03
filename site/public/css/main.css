@@ -214,6 +214,7 @@ body::-webkit-scrollbar-thumb {
 
     .header-container {
         justify-content: space-between;
+        align-items: center;
         width: 62%;
         transition: ease-in-out 3s;
     }    
