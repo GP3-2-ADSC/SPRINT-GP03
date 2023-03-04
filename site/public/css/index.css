@@ -9,7 +9,7 @@
     align-items: flex-start;
 }
 
-.background-inical h1{
+.background-inical h1 {
     font-family: "Poppins";
     font-weight: 700;
     font-size: 50px;
@@ -26,7 +26,7 @@
     text-align: center;
 }
 
-.logo-empresa{
+.logo-empresa {
     font-size: 70px;
     font-family: "Poppins";
     font-weight: 700;
@@ -35,7 +35,6 @@
     z-index: 999;
 }
 
-
 /* Inicio da Home */
 /* Apresentação da empresa */
 .content-slogan {
@@ -43,18 +42,6 @@
     width: 100%;
     height: 100vh;
 }
-
-.content-slogan h2 {
-    font-size: 34px;
-    font-weight: 700;
-}
-
-.content-slogan p {
-    font-size: 20px;
-    font-weight: 300;
-    color: #989898;
-}
-
 
 .content {
     display: flex;
@@ -65,102 +52,12 @@
 }
 
 .content h2 {
-    font-size: 40px;
-    margin-bottom: 1.5rem;
     text-align: start;
-    font-weight: 700;
 }
 
 .content p {
-    font-size: 20px;
-    margin-bottom: 1.5rem;
     text-align: justify;
-    font-weight: 300;
-    color: #989898;
 }
-
-/* Inicio slideshow */
-
-/* .container-slider {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 516px;
-    height: 617px;
-    margin: 0 0;
-}
-
-.slide {
-    width: 516px;
-    height: 417px;
-    padding: 10%;
-    display: none;
-    background-color: rgba(140, 204, 253, 0.3);
-    border-radius: 30px;
-}
-
-.slide h2 {
-    color: #343045;
-    margin-top: 1.3rem;
-}
-
-.slide p {
-    color: #989898;
-    margin-top: 1.3rem;
-}
-
-.proximo-slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.arrow-left,
-.arrow-right {
-    cursor: pointer;
-    position: absolute;
-    top: 20%;
-    padding: 16px;
-    background-color: transparent;
-    color: #343045;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    border: none;
-    outline: none;
-    z-index: 3;
-
-}
-
-.arrow-right {
-    right: 20%;
-    left: auto;
-    border-radius: 3px 0 0 3px;
-}
-
-.arrow-left {
-    left: 20%;
-    right: auto;
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 0.3s;
-}
-
-@keyframes fade {
-    from {
-        opacity: 0.9
-    }
-
-    to {
-        opacity: 1
-    }
-} */
-
-/* Final slideshow */
 
 /* Nossos serviços */
 
@@ -213,14 +110,10 @@
     justify-content: flex-start;
 }
 
-.texto h3 {
-    font-size: 25px;
+h3 {
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.1rem;
-}
-
-.texto p {
-    color: #777777;
 }
 
 .caixa-quadrado .texto {
@@ -229,19 +122,21 @@
     justify-content: center;
     align-items: center;
     text-align: justify;
-}
-
-.caixa-quadrado .texto h3 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    width: 90%;
 }
 
 h2 {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 700;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    color: #989898;
 }
 
 /* Final servicos */
@@ -256,7 +151,7 @@ h2 {
 
 .conteudo {
     height: 100%;
-    width: 60%;
+    width: 100%;
     padding: 24px 24px;
     display: flex;
     align-items: center;
@@ -286,4 +181,78 @@ h2 {
 
 .redes-sociais p {
     margin-bottom: 0.3rem
+}
+
+@media screen and (max-width: 1200px) {
+    .background-inical {
+        transition: 1s;
+        height: 30vh;
+        background-size: contain;
+    }
+
+    .sobre-nos {
+        width: 100%;
+        text-align: center;
+    }
+
+    .imagem-hospital {
+        display: none;
+    }
+
+    .content-servicos2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .caixa-quadrado {
+        width: 100%;
+        height: 250px;
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 3% 0;
+    }
+
+    .nossos-servicos{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nossos-servicos .content{  
+        width: 100%;
+    }
+
+    .nossos-servicos h2{
+        text-align: center;
+    }
+
+    .nossos-servicos img{
+        width: 100%;
+    }
+
+    .footer {
+        width: 100%;
+        height: 6vh;
+        background: rgba(140, 204, 253, 0.3);
+    }
+    
+    .logo-header {
+        width: 180px;
+    }
+
+    h2 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+
+    p {
+        font-size: 1.7rem;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+        color: #050505;
+    }
 }

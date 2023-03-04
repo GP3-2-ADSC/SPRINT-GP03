@@ -1,4 +1,3 @@
-let validacao = 0;
 window.addEventListener('scroll', () => {
     const background = document.getElementById("background")
     let posicoes = background.getBoundingClientRect();

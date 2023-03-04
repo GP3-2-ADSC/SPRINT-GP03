@@ -11,9 +11,9 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    
 }
 /* Final da configuração padrão */
-
 
 /* Início da estilização do scrollbar das telas */
 
@@ -33,7 +33,6 @@ body::-webkit-scrollbar-thumb {
     /* roundness of the scroll thumb */
     /* creates padding around scroll thumb */
 }
-
 /* Final da Estilização do scrollbar das telas */
 
 /* Configurando classes padrões */
@@ -44,7 +43,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .container:first-child{
-    margin: 0.5% 6%;
+    margin: 2.5% 6%;
     display: flex;
     justify-content: space-between;
 }
@@ -88,8 +87,6 @@ body::-webkit-scrollbar-thumb {
     color: #FFFFFF;
     font-weight: 700;
 }
-
-
 
 .header-background {
     background: rgba(255, 255, 255, 0);
@@ -148,3 +145,34 @@ body::-webkit-scrollbar-thumb {
 .after:hover {
     color: #8CCCF0;
 }
+
+@media screen and (max-width: 1200px) {
+    .container{
+        margin: 10% 6%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .navbar {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        margin-right: 3%;
+    }
+
+    .link {
+        font-size: 2rem;
+        padding: 10px 15px;
+        font-weight: 700;
+        color: #FFFFFF;
+        transition: all 0.3s;
+    }
+    
+    .after {
+        font-size: 2rem;
+        padding: 10px 15px;
+        font-weight: 700;
+        color: #000000;
+        transition: all 0.3s;
+    }
+  }

@@ -83,21 +83,10 @@ body {
     transition: background-color .5s;
 }
 
-.btn-primary:hover {
-    background-color: #fff;
-    color: #58af9b;
-}
-
 .btn-second {
     background-color: #006FB9;
     border: 1px solid #006FB9;
     transition: background-color .5s;
-}
-
-.btn-second:hover {
-    background-color: #fff;
-    border: 1px solid #58af9b;
-    color: #58af9b;
 }
 
 .first-content {
