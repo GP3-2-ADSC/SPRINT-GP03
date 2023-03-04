@@ -23,3 +23,63 @@ window.addEventListener('scroll', () => {
     }
 
 })
+
+window.addEventListener('scroll', () => {
+    const background = document.getElementById("btHeader")
+    let posicoes = background.getBoundingClientRect();
+
+    if (posicoes.top <= 70) {
+
+        const element = document.getElementsByClassName("link");
+     
+            element[0].classList.add("after");
+            element[0].classList.remove("link");
+        
+    } else {
+
+        const element = document.getElementsByClassName("after");
+
+            element[index].classList.add("link");
+            element[index].classList.remove("after");
+
+    }
+
+})
+
+window.addEventListener('resize', (event) => {
+
+    const element = document.getElementById("header")
+    console.log(element);
+    if (window.innerWidth < 1201) {
+        element.classList.add("row-reverse");
+        element.classList.remove("row");
+
+    } else {
+        element.classList.add("row");
+        element.classList.remove("row-reverse");
+
+    }
+})
+
+function redimensionar() {
+    const element = document.getElementById("header")
+    console.log(element);
+    if (window.innerWidth < 1201) {
+        element.classList.add("row-reverse");
+        element.classList.remove("row");
+
+    } else {
+        element.classList.add("row");
+        element.classList.remove("row-reverse");
+    }
+}
+
+function openClose(n) {
+    if (n == 1) {
+        document.getElementById("myNav").style.width = "30%";
+        document.getElementById("myNav").style.height = "22%";
+    } else {
+        document.getElementById("myNav").style.width = "0%";
+        document.getElementById("myNav").style.height = "22%";
+    }
+}
