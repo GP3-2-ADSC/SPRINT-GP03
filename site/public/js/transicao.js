@@ -24,28 +24,6 @@ window.addEventListener('scroll', () => {
 
 })
 
-window.addEventListener('scroll', () => {
-    const background = document.getElementById("btHeader")
-    let posicoes = background.getBoundingClientRect();
-
-    if (posicoes.top <= 70) {
-
-        const element = document.getElementsByClassName("link");
-     
-            element[0].classList.add("after");
-            element[0].classList.remove("link");
-        
-    } else {
-
-        const element = document.getElementsByClassName("after");
-
-            element[index].classList.add("link");
-            element[index].classList.remove("after");
-
-    }
-
-})
-
 window.addEventListener('resize', (event) => {
 
     const element = document.getElementById("header")

@@ -104,12 +104,6 @@
     margin: 5% 0;
 }
 
-.texto {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
 h3 {
     font-size: 2rem;
     font-weight: 700;
@@ -137,6 +131,7 @@ p {
     margin-bottom: 1.5rem;
     font-weight: 300;
     color: #989898;
+    text-align: justify;
 }
 
 /* Final servicos */
@@ -162,7 +157,14 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 30%;
+    width: fit-content;
+}
+
+.conteudo-footer{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
 .redes-sociais {
@@ -181,7 +183,15 @@ p {
 
 .redes-sociais p {
     margin-bottom: 0.3rem
+    
 }
+
+.copyright {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+
 
 @media screen and (max-width: 1200px) {
     .background-inical {
@@ -217,20 +227,28 @@ p {
         margin: 3% 0;
     }
 
-    .nossos-servicos{
+    .caixa-quadrado .texto {
+        width: 70%;
+    }
+
+    .texto {
+        width: 10%;
+    }
+
+    .nossos-servicos {
         display: flex;
         flex-direction: column;
     }
 
-    .nossos-servicos .content{  
+    .nossos-servicos .content {
         width: 100%;
     }
 
-    .nossos-servicos h2{
+    .nossos-servicos h2 {
         text-align: center;
     }
 
-    .nossos-servicos img{
+    .nossos-servicos img {
         width: 100%;
     }
 
@@ -239,7 +257,7 @@ p {
         height: 6vh;
         background: rgba(140, 204, 253, 0.3);
     }
-    
+
     .logo-header {
         width: 180px;
     }

@@ -201,6 +201,17 @@ body::-webkit-scrollbar-thumb {
         justify-content: space-between;
     }
 
+    .background-inical {
+        width: 100%;
+        height: auto;
+        background: url("../assets/testde\ imagem\ de\ fundo2\ copiar.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
     .header-container {
         justify-content: space-between;
         width: 62%;
