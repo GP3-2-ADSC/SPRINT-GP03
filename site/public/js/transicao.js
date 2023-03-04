@@ -24,20 +24,20 @@ window.addEventListener('scroll', () => {
 
 })
 
-// window.addEventListener('resize', (event) => {
+window.addEventListener('resize', (event) => {
 
-//     const element = document.getElementById("header")
-//     console.log(element);
-//     if (window.innerWidth < 1000) {
-//         element.classList.add("row-reverse");
-//         element.classList.remove("row");
+    const element = document.getElementById("header")
+    console.log(element);
+    if (window.innerWidth < 1000) {
+        element.classList.add("row-reverse");
+        element.classList.remove("row");
 
-//     } else {
-//         element.classList.add("row");
-//         element.classList.remove("row-reverse");
+    } else {
+        element.classList.add("row");
+        element.classList.remove("row-reverse");
 
-//     }
-// })
+    }
+})
 
 function redimensionar() {
     const element = document.getElementById("header")
