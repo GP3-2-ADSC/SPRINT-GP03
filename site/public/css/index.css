@@ -1,6 +1,6 @@
 .background-inical {
     width: 100%;
-    height: 93vh;
+    height: 710px;
     background: url("../assets/testde\ imagem\ de\ fundo2\ copiar.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -189,8 +189,6 @@ p {
     margin-bottom: 0;
     text-align: center;
 }
-
-
 
 @media screen and (max-width: 600px) {
     .background-inical {

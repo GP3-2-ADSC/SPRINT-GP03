@@ -10,33 +10,32 @@
     <title>Home</title>
 </head>
 
-<body onload="iniciar()">
+<body>
+
+    <div class="header-background">
+        <div id="header" class="header-container row">
+            <img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="" width="140px">
+            <div class="navbar">
+                <ul>
+                    <li><a href="" class="link">Serviços</a></li>
+                    <li><a href="cadastro.html" class="link">Cadastre-se</a></li>
+                    <li><a href="login.html" class="link">Login</a></li>
+                </ul>
+            </div>
+            <span class="menu" onclick="openClose(1)">&#9776;</span>
+        </div>
+    </div>
+
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
+        <div class="overlay-content">
+            <a href="login.html">Login</a>
+            <a href="cadastro.html">Cadastre-se</a>
+        </div>
+    </div>
+   
     <div class="background-inical">
-
-        <div class="header-background">
-            <div id="header" class="header-container row">
-                <img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="" width="140px">
-                <div class="navbar">
-                    <ul>
-                        <li><a href="" class="link">Serviços</a></li>
-                        <li><a href="cadastro.html" class="link">Cadastre-se</a></li>
-                        <li><a href="login.html" class="link">Login</a></li>
-                    </ul>
-                </div>
-                <span class="menu" onclick="openClose(1)">&#9776;</span>
-            </div>
-        </div>
-
-        <div id="myNav" class="overlay">
-            <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
-            <div class="overlay-content">
-                <a href="cadastro.html">Login</a>
-                <a href="login.html">Cadastre-se</a>
-            </div>
-        </div>
-        <!-- <img class="slogan" src="./assets/teste slogan branco.png" alt="" width="580px"> -->
         <div class="slogan">
-            <!-- <h1>Mantendo seguro o que importa para você!</h1> -->
             <h1>Soluções modernas para problemas modernos</h1>
         </div>
     </div>
@@ -173,9 +172,5 @@
 <script src="./js/carrossel.js"></script>
 <script src="./js/transicao.js"></script>
 <script>
-    function iniciar() {
-        openClose(0);
-        redimensionar();
-    }
 
 </script>
