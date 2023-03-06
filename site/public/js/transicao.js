@@ -24,7 +24,6 @@
 
 // })
 
-
 function openClose(n) {
     if (n == 1) {
         document.getElementById("myNav").style.width = "100%";

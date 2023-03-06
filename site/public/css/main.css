@@ -80,15 +80,20 @@ body::-webkit-scrollbar-thumb {
 }
 
 .button {
-    width: 240px;
-    height: 65px;
+    width: 220px;
+    height: 45px;
     border-radius: 12px;
     border: none;
-
     background-color: #006FB9;
     color: #FFFFFF;
     font-weight: 700;
+    transition: all .3s;
 }
+
+.button:hover {
+    transform: scale(1.01);
+}
+
 
 .header-background {
     background: rgb(238, 238, 238);
@@ -97,7 +102,7 @@ body::-webkit-scrollbar-thumb {
     height: 10vh;
     display: flex;
     align-items: center;
-    position: fixed;
+    /* position: fixed; */
     z-index: 2;
 }
 
@@ -119,7 +124,6 @@ body::-webkit-scrollbar-thumb {
     overflow-y: hidden;
     flex-wrap: nowrap;
     transition: 0.5s;
-    z-index: 999;
     display: none;
 }
 
