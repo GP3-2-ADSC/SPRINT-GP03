@@ -1,8 +1,9 @@
 .background {
-    background: url("../assets/fundo\ cadastro\ editado.jpg");
+    background-image: url("../assets/fundo\ cadastro\ editado.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+    background-color: rgb(17, 56, 128);
 }
 
 .caixa-formulario {
@@ -57,6 +58,14 @@ label {
 }
 
 @media screen and (max-width: 600px) {
+    .background {
+        background-size: auto;
+        background-repeat: repeat-x;
+        height: auto;
+        padding: 24px 24px;
+    }
+    
+
     .caixa-formulario {
         background: rgb(238, 238, 238);
         width: 100%;
