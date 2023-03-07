@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Home</title>
+
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+
+    <title>Retria</title>
 </head>
 
 <body>
 
     <div class="header-background">
         <div id="header" class="header-container row">
-            <img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="" width="140px">
+            <a href="./index.html"><img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="Logo azul da Retria" width="140px"></a>
+
             <div class="navbar">
                 <ul>
-                    <li><a href="home.html" class="link">Login</a></li>
-                    <li><a href="" class="link">Serviços</a></li>
-                    <li><a href="cadastro.html" class="link">Cadastre-se</a></li>
+                    <li><a href="index.html" class="link">Início</a></li>
+                    <li><a href="#servicos" class="link">Serviços</a></li>
+                    <li><a href="cadastro.html" class="link">Cadastro</a></li>
                     <li><a href="login.html" class="link">Login</a></li>
-                    <li><a href="teste.html" class="link">Login</a></li>
                 </ul>
             </div>
             <span class="menu" onclick="openClose(1)">&#9776;</span>
@@ -31,10 +34,10 @@
     <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
         <div class="overlay-content">
-            <a href="home.html">Home</a>
+            <a href="index.html">Início</a>
+            <a href="#servicos">Serviços</a>
+            <a href="cadastro.html">Cadastro</a>
             <a href="login.html">Login</a>
-            <a href="cadastro.html">Cadastre-se</a>
-            <a href="teste.html">teste</a>
         </div>
     </div>
    
@@ -96,7 +99,7 @@
             </div>
         </div>
 
-        <div class="container column">
+        <div id="servicos" class="container column">
 
             <div class="row space-between nossos-servicos ">
                 <div class="content ">
@@ -156,7 +159,7 @@
                         <img src="./assets/testelogoSprint copiar.png" alt="" width="170px">
                     </div>
                     <div class="redes-sociais">
-                        <h3>Fale com a gente!</h3>
+                        <h3>Fale conosco!</h3>
                         <p>contato.retria@solutions.com</p>
                         <p>(99)98765-4321</p>
                     </div>
@@ -171,10 +174,6 @@
     </div>
 
 </body>
-
 </html>
 <script src="./js/carrossel.js"></script>
 <script src="./js/transicao.js"></script>
-<script>
-
-</script>

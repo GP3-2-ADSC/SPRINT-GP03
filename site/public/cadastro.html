@@ -3,52 +3,95 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+
+    <title>Retria | Cadastro</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="content first-content">
-            
+    <div class="header-background">
+        <div id="header" class="header-container row">
+            <a href="./index.html"><img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="Logo azul da Retria" width="140px"></a>
 
-            <div class="first-column">
-                <a href="index.html"><img src="./assets/voltar.png" class="icon-voltar"></a>
-                <h2 class="title title-primary">Seja Bem-vindo!</h2>
-                <p class="description description-primary">Para se conectar a sua</p>
-                <p class="description description-primary">conta clique no botão abaixo</p>
-                <a href="login.html"><button id="signin" class="btn btn-primary">Logar</button></a>
+            <div class="navbar">
+                <ul>
+                    <li><a href="./index.html" class="link">Início</a></li>
+                    <li><a href="./index.html#servicos" class="link">Serviços</a></li>
+                    <li><a href="./cadastro.html" class="link">Cadastro</a></li>
+                    <li><a href="./login.html" class="link">Login</a></li>
+                </ul>
             </div>
-            <div class="second-column">
-                <h2 class="title title-second">Cadastro</h2>
+            <span class="menu" onclick="openClose(1)">&#9776;</span>
+        </div>
+    </div>
 
-                <form class="form">
-                    <label class="label-input" for="">
-                        <img src="./assets/user.png" class="icon-modify">
-                        <input type="text" placeholder="Nome">
-                    </label>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
+        <div class="overlay-content">
+            <a href="./index.html">Início</a>
+            <a href="./index.html#servicos">Serviços</a>
+            <a href="./cadastro.html">Cadastro</a>
+            <a href="./login.html">Login</a>
+        </div>
+    </div>
 
-                    <label class="label-input" for="">
-                        <img src="./assets/email.png" class="icon-modify">
-                        <input type="email" placeholder="Email">
-                    </label>
+    <div class="background center">
+        <div class="container">
+            <div class="caixa-formulario">
+                <div class="campo">
+                    <h2>Junte-se a nós</h2>
+                    <h4>Faça o cadastro e tenha acesso a todas as inovações para seu negócio</h4>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="nome_empresa">Nome da Empresa
+                            <input type="text" placeholder="Digite o nome da empresa" id="in_empresa">
+                        </label>
+                    </div>
 
-                    <label class="label-input" for="">
-                        <img src="./assets/senha.png" class="icon-modify">
-                        <input type="password" placeholder="Senha">
-                    </label>
-                    <label class="label-input" for="">
-                        <img src="./assets/senha.png" class="icon-modify">
-                        <input type="password" placeholder="Confirmar Senha">
-                    </label>
+                    <div class="campo">
+                        <label for="cnpj_empresa">CNPJ da Empresa
+                            <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj">
+                        </label>
+                    </div>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="celular_telefone">Celular / Telefone
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone">
+                        </label>
+                    </div>
 
-                    <button class="btn btn-second">Cadastrar</button>
-                </form>
+                    <div class="campo">
+                        <label for="email">Email
+                            <input type="text" placeholder="Digite o email" id="in_email">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="senha">Criar uma senha
+                            <input type="password" placeholder="Digite sua senha" id="in_senha">
+                        </label>
+                    </div>
+                    <div class="campo">
+                        <label for="conf_senha"> Confirmar senha
+                            <input type="password" placeholder="Confirme sua senha" id="in_confirmacao">
+                        </label>
+                    </div>
+                </div>
+                <button class="button">Cadastre-se</button>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+<script src="./js/transicao.js"></script>

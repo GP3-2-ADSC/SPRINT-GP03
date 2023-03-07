@@ -1,47 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+
+    <title>Retria | Login</title>
 </head>
+
 <body>
-    <div class="container">
+    <div class="header-background">
+        <div id="header" class="header-container row">
+            <a href="./index.html"><img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="Logo azul da Retria" width="140px"></a>
 
-        <div class="container2">
+            <div class="navbar">
+                <ul>
+                    <li><a href="./index.html" class="link">Início</a></li>
+                    <li><a href="./index.html#servicos" class="link">Serviços</a></li>
+                    <li><a href="./cadastro.html" class="link">Cadastro</a></li>
+                    <li><a href="./login.html" class="link">Login</a></li>
+                </ul>
+            </div>
+            <span class="menu" onclick="openClose(1)">&#9776;</span>
+        </div>
+    </div>
 
-            <div class="login">
-                <div class="seta">
-                    <a href="index.html"><img src="./assets/voltar.png" class="icon-voltar"></a>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
+        <div class="overlay-content">
+            <a href="./index.html">Início</a>
+            <a href="./index.html#servicos">Serviços</a>
+            <a href="./cadastro.html">Cadastro</a>
+            <a href="./login.html">Login</a>
+        </div>
+    </div>
+
+    <div class="background center">
+        <div class="container">
+            <div class="caixa-formulario">
+                <div class="campo">
+                    <h2>Seja bem-vindo(a)!</h2>
+                    <h4 class="subtitulo-form">Acesse sua conta e tenha acesso a todas as inovações para seu negócio!</h4>
                 </div>
-            <div class="lolo">
-             <h2 class="titulo login-titulo">Login</h2>
-                <form action="" class="form">
-                    <label class="label-input" for="">
-                        <img src="./assets/email.png" class="icon-modify">
-                        <input type="email" placeholder="Email">
-                    </label>
-                    
-                    <label class="label-input" for="">
-                        <img src="./assets/senha.png" class="icon-modify">
-                        <input type="password" placeholder="Senha">
-                    </label>
-                </form>
-                <p class="recuperar-senha textos">Recuperar senha</p>
-                <button class="botao">Logar</button>
-            </div>
-        </div>
-            
-            <div class="cadastrar">
-                <h2 class = "titulo">Seja Bem-vindo!</h2>
-                <p class="texto-cadastro textos">Caso ainda não possua uma</p>
-                <p class="texto-cadastro textos">conta clique no botão abaixo</p>
-                <a href="cadastro.html"><button class="botao">Cadastre-se</button></a>
-            </div>
-        </div>
 
+                <div class="container-form">
+                    <div class="campo">
+                        <label for="in_email">Email</label>
+                        <input type="text" placeholder="Digite seu email" id="in_email">
+                    </div>
+                    <p class="mensagem-email"></p>
+
+                    <div class="campo">
+                        <label for="in_senha">Senha</label>
+                        <input type="password" placeholder="Digite sua senha" id="in_senha">
+                    </div>
+                    <p class="mensagem-senha"></p>
+                </div>
+
+                <button class="button">Logar</button>
+        
+                <div class="container-links">
+                    <p class="link-redirecionamento"><a href="./cadastro.html">Não possui conta? <span>Cadastre-se aqui</span></a></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
+<script src="./js/transicao.js"></script>

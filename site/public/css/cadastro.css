@@ -1,143 +1,106 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.background {
+    background-image: url("../assets/fundo\ cadastro\ editado.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 90vh;
+    background-color: rgb(17, 56, 128);
 }
 
-body {
-    font-family: 'Open Sans', sans-serif;
-}
-
-.container {
+.caixa-formulario {
+    background: rgb(238, 238, 238);
+    border-radius: 3%;
+    width: 800px;
+    height: 600px;
+    padding: 24px 24px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #ecf0f1;
 }
 
-.content {
-    background-color: #fff;
-    border-radius: 15px;
-    width: 1000px;
-    height: 70%;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+.campo h2 {
+    margin-bottom: 15px;
 }
 
-.content::before {
-    content: "";
-    position: absolute;
-    background-color: #8CCCFD;
-    width: 40%;
-    height: 100%;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    left: 0;
-}
-
-.title {
-    font-size: 28px;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.title-primary {
-    color: #fff;
-}
-
-.title-second {
-    color: #006FB9;
-}
-
-.description {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 30px;
-}
-
-.description-primary {
-    color: #fff;
-}
-
-.btn {
-    border-radius: 15px;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 40px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 150px;
-    align-self: center;
-    border: none;
-    margin-top: 1rem;
-
-}
-
-.btn-primary {
-    background-color: #006FB9;
-    border: 1px solid #006FB9;
-    transition: background-color .5s;
-}
-
-.btn-second {
-    background-color: #006FB9;
-    border: 1px solid #006FB9;
-    transition: background-color .5s;
-}
-
-.first-content {
-    display: flex;
-}
-
-.first-column {
-    text-align: center;
-    width: 40%;
-    z-index: 10;
-}
-
-.second-column {
-    width: 60%;
+.senha {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-
-.form {
+.linha {
     display: flex;
-    flex-direction: column;
-    width: 55%;
-}
-
-.form input {
-    height: 45px;
+    justify-content: space-around;
     width: 100%;
+    margin: 20px 0;
+}
+
+input {
+    margin-top: 5px;
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 7px;
+    background-color: #e1e1e1;
     border: none;
-    background-color: #ecf0f1;
-    font-weight: 600;
-    font-size: medium;
+    outline: none;
+    color: black;
+    font-weight: 400;
 }
 
-.label-input {
-    background-color: #ecf0f1;
-    display: flex;
-    align-items: center;
-    margin: 8px;
+label {
+    width: 300px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 1.08em;
+}
+
+@media screen and (max-width: 600px) {
+    .background {
+        background-size: auto;
+        background-repeat: repeat-x;
+        height: auto;
+        padding: 24px 24px;
+    }
     
-}
+    .caixa-formulario {
+        background: rgb(238, 238, 238);
+        width: 100%;
+        height: auto;
+        padding: 24px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    }
 
-.icon-modify {
-    height: 25px;
-    padding-right: 5%;
-    padding-left: 4%;
-}
+    .campo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
 
-.icon-voltar {
-    position: absolute;
-    top: 3%;
-    left: 1%;
+    .linha {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin: 0;
+    }
+
+    .button {
+        margin-top: 10px;
+    }
+
 }
