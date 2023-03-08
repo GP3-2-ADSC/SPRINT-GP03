@@ -64,6 +64,11 @@ label {
     font-size: 1.08em;
 }
 
+input[type=password]:not(:placeholder-shown)  {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
 @media screen and (max-width: 600px) {
     .background {
         background-size: auto;
