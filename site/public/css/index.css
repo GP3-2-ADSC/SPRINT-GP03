@@ -36,12 +36,6 @@
 }
 
 /* Inicio da Home */
-/* Apresentação da empresa */
-.content-slogan {
-    background: url("../assets/testde\ imagem\ de\ fundo\ copiar.jpg");
-    width: 100%;
-    height: 100vh;
-}
 
 .content {
     display: flex;
