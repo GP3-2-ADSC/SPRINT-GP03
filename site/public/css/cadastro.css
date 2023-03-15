@@ -9,7 +9,6 @@
 
 .caixa-formulario {
     background: rgb(238, 238, 238);
-    border-radius: 3%;
     width: 800px;
     height: 550px;
     padding: 24px 24px;
@@ -88,7 +87,6 @@ input[type=password]:not(:placeholder-shown)  {
         justify-content: space-around;
         align-items: center;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
     }
 
     .campo {
