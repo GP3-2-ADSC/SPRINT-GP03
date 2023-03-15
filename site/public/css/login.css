@@ -26,6 +26,17 @@
     text-align: center;
 }
 
+.fgt-passwd {
+    margin-top: 0.5rem;
+    width: 100%;
+
+    text-align: start;
+    color: #006FB9;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
 input[type=password]:not(:placeholder-shown)  {
     font-size: 1.2em;
     font-weight: 700;
