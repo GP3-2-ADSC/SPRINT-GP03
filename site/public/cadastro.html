@@ -17,7 +17,8 @@
 <body>
     <div class="header-background">
         <div id="header" class="header-container row">
-            <a href="./index.html"><img class="logo-header" src="./assets/testelogoSprint copiar.png" alt="Logo azul da Retria" width="140px"></a>
+            <a href="./index.html"><img class="logo-header" src="./assets/testelogoSprint copiar.png"
+                    alt="Logo azul da Retria" width="140px"></a>
 
             <div class="navbar">
                 <ul>
@@ -48,34 +49,47 @@
                     <span id="mensagem_erro"></span>
                 </div>
             </div>
-            <div class="caixa-formulario">
+            <div class="caixa-formulario" id="caixaFormulario">
                 <div class="campo">
                     <h2>Junte-se a nós</h2>
                     <h4>Faça o cadastro e tenha acesso a todas as inovações para seu negócio</h4>
                 </div>
                 <div class="linha">
                     <div class="campo">
-                        <label for="nome_empresa">Nome da Empresa
+                        <label for="in_empresa">Nome da Empresa
                             <input type="text" placeholder="Digite o nome da empresa" id="in_empresa">
                         </label>
                     </div>
 
                     <div class="campo">
-                        <label for="cnpj_empresa">CNPJ da Empresa
+                        <label for="in_cnpj">CNPJ da Empresa
                             <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj">
                         </label>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
-                        <label for="celular_telefone">Celular / Telefone
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone">
+                        <label for="in_telefone_1">Celular / Telefone (1)
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1">
                         </label>
                     </div>
 
                     <div class="campo">
-                        <label for="email">Email
+                        <label for="in_telefone_2">Celular / Telefone (2)
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_email">Email
                             <input type="text" placeholder="Digite o email" id="in_email">
+                        </label>
+                    </div>
+                    <div class="campo">
+                        <label for="in_resp"> Responsável
+                            <input type="text" placeholder="Responsável pelo empresa" id="in_resp">
                         </label>
                     </div>
                 </div>
@@ -92,15 +106,19 @@
                         </label>
                     </div>
                 </div>
-                <button class="button">Cadastre-se</button>
+                <div class="ponto">
+                    <span class="dot" style="background-color:#8cccf0;"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="button" onclick="nextPage(1)">Próximo</button>
             </div>
-            <div id="div_aguardar" class="loading-div">
+            <!-- <div id="div_aguardar" class="loading-div">
                 <img src="./assets/circle-loading.gif" id="loading-gif">
             </div>
 
             <div id="div_erros_login">
 
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
@@ -108,3 +126,80 @@
 </html>
 <script src="./js/transicao.js"></script>
 <script src="./js/cadastro.js"></script>
+
+<script>
+
+    function nextPage(n) {
+
+        if (n == 1) {
+            caixaFormulario.innerHTML = "";
+            caixaFormulario.innerHTML = `
+        
+                <div class="campo">
+                    <h2>Junte-se a nós</h2>
+                    <h4>Finalize o cadastro e obtenha acesso a seu aba de monitoramento</h4>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_cep">CEP
+                            <input type="text" placeholder="Digite seu CEP" id="in_cep">
+                        </label>
+                    </div>
+
+                    <div class="campo">
+                        <label for="in_rua">Rua
+                            <input type="text" placeholder="Digite sua rua" id="in_rua">
+                        </label>
+                    </div>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_numero">Numero
+                            <input type="number" placeholder="Digite o numero" id="in_numero">
+                        </label>
+                    </div>
+
+                    <div class="campo">
+                        <label for="in_bairro">Bairro
+                            <input type="text" placeholder="Digite o bairro" id="in_bairro">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_cidade">Cidade
+                            <input type="text" placeholder="Digite a cidade" id="in_cidade">
+                        </label>
+                    </div>
+                    <div class="campo">
+                        <label for="in_estado">Estado
+                            <input type="text" placeholder="Digite o estado" id="in_estado">
+                        </label>
+                    </div>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                            <label for="in_complemento">Complemento
+                                <input type="text" placeholder="Digite o complemento" id="in_complemento">
+                            </label>
+                    </div>
+                </div>
+
+                <div class="ponto">
+                    <span class="dot"></span>
+                    <span class="dot" style="background-color:#8cccf0;"></span>
+                </div>
+
+                <div class="linha">
+                    <button class="button" onclick="nextPage(2)">Voltar</button>
+                    <button class="button">Cadastrar</button>
+                </div>   
+           `
+        } else {
+            window.location = "./cadastro.html";
+        }
+
+    }
+
+</script>
