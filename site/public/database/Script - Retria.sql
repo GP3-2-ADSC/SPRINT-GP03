@@ -8,7 +8,6 @@ create table empresa(
     telefone02 varchar(11),
     email varchar(45),
     senha varchar(256),
-    qtdMaquinas int,
     resposavelEmpresa varchar(45),
     fkMatriz int,
     primary key(idEmpresa, fkMatriz),
@@ -17,6 +16,10 @@ create table empresa(
 create table endereco(
 	idEndereco int auto_increment,
     cep char(8),
+    logradouro varchar(100),
+    numero varchar(8),
+    bairro varchar(45),
+    cidade varchar(40),
     complemento varchar(45),
     fkEmpresa int,
     primary key (idEndereco),
@@ -115,6 +118,119 @@ create table alerta(
     foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
 );
 
+/* Script AZURE*\
+
+/*create table empresa(
+	idEmpresa int identity(1,1) unique,
+    nomeEmpresa varchar(45),
+    cnpj char(14),
+    telefone01 varchar(11),
+    telefone02 varchar(11),
+    email varchar(45),
+    senha varchar(256),
+    resposavelEmpresa varchar(45),
+    fkMatriz int unique,
+    constraint fk_Matriz foreign key(fkMatriz) references empresa(idEmpresa)
+);
+alter table [dbo].[empresa] add constraint fk_Matriz foreign key(fkMatriz) 
+references empresa(idEmpresa);
+
+create table endereco(
+	idEndereco int identity(1,1) unique,
+    cep char(8),
+    logradouro varchar(100),
+    numero varchar(8),
+    bairro varchar(45),
+    cidade varchar(40),
+    complemento varchar(45),
+    fkEmpresa int,
+    foreign key (fkEmpresa) references empresa(idEmpresa)
+);
+
+create table administrador(
+	idAdministrador int identity(1,1) unique,
+	nomeAdministrador varchar(45),
+    emailAdministrador varchar(90),
+	senhaAdministrador varchar(256),
+    telefoneAdministrador varchar(11),
+    cargo varchar(45),
+    chaveSegurancaAdministrador varchar(45),
+    fkEmpresa int,
+    foreign key (fkEmpresa) references empresa(idEmpresa)
+);
+alter table [dbo].[administrador] add constraint chk_email check (emailAdministrador like '%_@__%.__%');
+
+create table maquinaUltrassonografica(
+    idMaquina int identity(1,1) unique,
+    fornecedor varchar(45),
+    numeroSerial int,
+    tipoMaquina varchar(45),
+    setor varchar(45),
+    andar int,
+    fkAdministrador int unique,
+    fkEmpresa int unique,
+    foreign key (fkAdministrador) references administrador(idAdministrador),
+    foreign key (fkEmpresa) references empresa(idEmpresa)
+);
+
+create table especificacaoComponente(
+    idEspecificacaoComponente int identity(1,1) unique,
+    sistemaOperacional Varchar(45),
+    modeloCpu varchar(80),
+    fabricanteCpu varchar(40),
+    modeloMemoria varchar(50),
+    fabricanteMemoria varchar(50),
+    modeloDisco varchar(50),
+    fabricanteDisco varchar(40),
+    serialNumberCpu int,
+    serialNumberDisco int,
+    serialNumberMemoria int,
+);
+
+create table maquinaUtrassonomatograficaEspecificada(
+    fkMaquina int unique,
+    fkAdministrador int unique,
+    fkEmpresa int unique,
+    fkEspecificacaoComponente int unique,
+    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente),
+    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
+    foreign key (fkAdministrador) references administrador(idAdministrador),
+    foreign key (fkEmpresa) references empresa(idEmpresa),
+    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente)
+);
+
+create table metricasComponentes(
+    idMetricasComponentes int identity(1,1) unique,
+    fkMaquina int unique,
+    fkAdministrador int unique,
+    fkEmpresa int unique,
+    fkEspecificacaoComponente int unique,
+    dtMetrica datetime,
+    usoCpu Decimal(4,2),
+    usoMemoria Decimal(4,2),
+    usoDisco Decimal(4,2),
+    usoRede Decimal(4,2),
+    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
+    foreign key (fkAdministrador) references administrador(idAdministrador),
+    foreign key (fkEmpresa) references empresa(idEmpresa),
+    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente)
+);
+
+create table alerta(
+    idAlerta int identity(1,1) unique,
+    tipoAlerta varchar(100),
+    fkMetricasComponentes int unique,
+    fkMaquina int unique,
+    fkAdministrador int unique, 
+    fkEmpresa int unique, 
+    fkEspecificacaoComponente int unique,
+    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
+    foreign key (fkAdministrador) references administrador(idAdministrador),
+    foreign key (fkEmpresa) references empresa(idEmpresa),
+    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente),
+    foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
+);
+ *\
 
 
     
