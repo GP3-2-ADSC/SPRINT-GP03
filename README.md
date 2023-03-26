@@ -24,10 +24,15 @@ UMMS (Ultrasound Machine Monitoring Solution) é uma das soluções providas pel
 16. Avisar previamente sobre indisponibilidades, reuniões, dificuldades e imprevistos;  
 17. Possibilidade de usar o “Vale descanso”, disponibilizado apenas 1 por Sprint a todos integrantes e permitindo que a pessoa se ausente de uma reunião quando estiver em momento crítico, salvo em reuniões de emergências; 
 18. Em reuniões de emergência (que não foram combinadas previamente) não será cobrada a presença de todos os integrantes e tão pouco anotada em ata de reunião; 
-19. Usar branches no versionamento do projeto;  
+19. Usar branches no versionamento do projeto com o padrão:
+  - **Abreviação do motivo da branch + Nº versão + Descrição em até 3 palavras + Nome do autor**;
+  - Versão sempre começa com "001", Para dividir palavras do mesmo padrão usar underline ("_") e para o restante utilizar hífen ("-") 
+  - Exemplo: 'wip-001-dashboard_especifico-luiz'
+
 20. Sempre que abrir o VsCode, antes mesmo de fazer qualquer atualização, realizar um ‘git pull’;  
 21. 'Commitar' quando os MVPs estiverem prontos  
-22. Os 'commits' devem ter descrições complementares e seguir o padrão: Update/Add/Rename/Delete + 'o que foi feito'. 
+22. Os 'commits' devem ter descrições complementares e seguir o padrão:
+- **Update/Add/Rename/Delete + 'o que foi feito'**. 
 
 ## Tecnologias sendo utilizadas
 ![image](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -40,7 +45,7 @@ UMMS (Ultrasound Machine Monitoring Solution) é uma das soluções providas pel
 ### Clone o projeto
 
 ```bash
-  git clone https://github.com/GP3-2-ADSC/SPRINT-GP03.git
+  git clone https://github.com/GP3-2-ADSC/UMMS-Retria.git
 ```
 
 ### Entre no diretório do projeto
