@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="./css/dash-espec.css">
+        <link rel="stylesheet" href="./css/main.css">
+
+        <title>Dashboard Específico</title>
+    </head>
+<body>
+    
+    <div class="container-menu">
+        <span class="outside-icon">
+            <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
+        </span>
+
+        <!-- Menu lateral -->
+        <div class="container-list">
+            <ul>
+                <li class="list">
+                    <a href="dashboard-geral.html">
+
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="stats-chart-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Dashboard geral</span>
+                    </a>
+                </li>
+                
+                <li class="list">
+                    <a href="dashboard-espec.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="analytics-outline"></ion-icon>
+                            </span>
+                        </span>
+                        
+                        <span class="list-title" id="list-active">Dashboard específico</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="historico-alertas.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="alert-circle-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Histórico de alertas</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <!-- Inserir link da Help Desk -->
+                    <a href="#">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="help-circle-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Ajuda</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="download-app.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="download-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Download aplicação</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <a class="outside-icon" href="login.html" onclick="limparSessao()">
+            <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+        </a>
+    </div>
+
+    <div class="container-title">
+        <h1>Dashboard específica | </h1> 
+        <span>Máquina 1</span>
+
+        <div class="container-button">
+            <button>
+                <ion-icon name="arrow-back-circle-outline"></ion-icon>
+            </button>
+            <button>
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-all">
+        <div class="container-content">
+    
+            <div class="container-kpi">
+                <!-- Legenda das KPIs -->
+                <div class="kpi-bar">
+                    <div class="tag-kpi">
+                        <span class="circle-kpi" id="blue"></span>
+    
+                        <span class="text-kpi">Perigo (< 18%)</span>
+                    </div>
+    
+    
+                    <div class="tag-kpi">
+                        <span class="circle-kpi" id="cyan"></span>
+    
+                        <span class="text-kpi">Alerta (25 - 45%)</span>
+                    </div>
+    
+                    <div class="tag-kpi">
+                        <span class="circle-kpi" id="green"></span>
+    
+                        <span class="text-kpi">Ideal (25 - 45%) </span>
+                    </div>
+    
+    
+                    <div class="tag-kpi">
+                        <span class="circle-kpi" id="yellow"></span>
+    
+                        <span class="text-kpi">Alerta (60 - 75%)</span>
+                    </div>
+    
+    
+                    <div class="tag-kpi">
+                        <span class="circle-kpi" id="red"></span>
+    
+                        <span class="text-kpi">Perigo (> 80%)</span>
+                    </div>
+                </div>
+    
+                <!-- Cards das KPIs -->
+                <div class="container-cards-kpi">
+                    <div class="card-kpi">
+                        <span class="text-card-kpi">Uso da CPU</span>
+    
+                        <span class="grafico">70%</span>
+                    </div>
+    
+                    <div class="card-kpi">
+                        <span class="text-card-kpi">Uso da RAM</span>
+    
+                        <span class="grafico">25%</span>
+                    </div>
+    
+                    <div class="card-kpi">
+                        <span class="text-card-kpi">Uso da Discos</span>
+    
+                        <span class="grafico">40%</span>
+                    </div>
+    
+                    <div class="card-kpi">
+                        <span class="text-card-kpi">Uso da Rede</span>
+    
+                        <span class="grafico">15%</span>
+                    </div>
+                </div>
+    
+                <!-- Menu vertical dos gráficos -->
+                <div class="menu-graphics">
+                    <div class="content-menu">
+                        <span id="content-menu-activated">CPU</span>
+    
+                        <span>Memória</span>
+    
+                        <span>Disco</span>
+                        
+                        <span>Rede</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+        <!-- Quadro de Alertas -->
+        <div class="container-alerts">
+            <span>Alertas da Máquina 1</span>
+    
+            <div class="table-titles">
+                <span>Data</span>
+                <span>|</span>
+                <span>Descrição</span>
+            </div>
+    
+            <div class="historic"></div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="./js/dashboard-espec.js"></script>

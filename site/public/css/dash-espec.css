@@ -1,0 +1,265 @@
+.container-menu {
+    position: fixed;
+    width: 280px;
+    height: 100%;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  
+    background-color: #0061BA;
+    color: white;
+    padding: 0 10px 10px 0;
+    /* overflow: hidden; */
+  }
+  
+  #menu-icon {
+      padding-bottom: 106px;
+  }
+  
+  #exit-icon {
+      padding-top: 135px;
+  }
+  
+  .container-list ul li a {
+      width: 100%;
+      display: flex;
+  }
+  
+  .list {
+      padding-left: 20px;
+      padding-bottom: 26px;
+      display: flex;
+      text-align: center;
+  }
+  
+  #list-active {
+      /* color: red; */
+      font-weight: bold;
+  }
+  
+  .outside-icon {
+      display: flex;
+      justify-content: end;
+      color: white;
+      font-size: 2.7em;
+  }
+  
+  .circle {
+      height: 32px;
+      width: 32px;
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      background-color: #fff;
+      border-radius: 50%;
+  }
+  
+  .icon {
+    color: black;
+    font-size: 1.3em;
+    display: flex;
+  }
+  
+  .list-title {
+      padding-left: 10px;
+      font-size: 1em;
+      color: white;
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+  
+  
+  /* Títulos e botões */
+  .container-title {
+      margin-left: 300px;
+      width: calc(100% - 300px);
+      margin-bottom: 15px;
+  }
+  
+  .container-title, h1 {
+      display: flex;
+      font-size: 1.6em;
+      font-weight: 500;
+  }
+  
+  .container-title span {
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+  
+  .container-button {
+      margin-top: auto;
+      margin-bottom: auto;
+      background-color: #8CCCF0;
+      
+      display: flex;
+      margin-left: 5px;
+      padding: 5px;
+      border-radius: 20px;
+  }
+  
+  .container-button button {
+      background: none;
+      border: none;
+  
+      font-size: 1.3em;
+      display: flex;
+      cursor: pointer;
+  }
+  
+  /* Conteúdos de KPIs, Gráficos e Alertas */
+  .container-all {
+      width: calc(100% - 280px);
+      display: flex;
+      justify-content: space-between;
+      column-gap: 20px;
+  }
+  
+  /* Conteúdo  */
+  .container-content {
+      margin-left: 300px;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  
+  /* Legenda das KPIs */
+  
+  .kpi-bar {
+      display: flex;
+      flex-direction: row;
+      width: 736px;
+      background-color: #8CCCF0;
+      padding: 8px 8px;
+      border-radius: 10px;
+      justify-content: space-evenly;
+  }
+  
+  .tag-kpi {
+      display: flex;
+  }
+  
+  .circle-kpi {
+      width: 100%;
+      height: 22px;
+      width: 22px;
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      border-radius: 50%;
+  }
+  
+  #blue {
+      background-color: #0061BA;
+  }
+  
+  #cyan {
+      background-color: #05CAE5;
+  }
+  
+  #green {
+      background-color: #39FF4D;
+  }
+  
+  #yellow {
+      background-color: #FFEB3C;
+  }
+  
+  #red {
+      background-color: #FF0000;
+  }
+  
+  .text-kpi {
+      padding-left: 10px;
+      font-size: 0.8em;
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+  
+  /* Cards das KPIs */
+  .container-cards-kpi {
+      display: flex;
+      justify-content: space-between;
+      width: 736px;
+  
+      margin-top: 20px;
+  }
+  
+  .card-kpi {
+      width: 175px;
+      height: 204px;
+      background-color: #8CCCF0;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  /* Menu dos gráficos */
+  .menu-graphics {
+      margin-top: 20px;
+  
+      width: fit-content;
+      
+      background-color: #8CCCF0;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+  }
+  
+  .content-menu span {
+      background-color: #5EACD2;
+      padding: 8px;
+      border-radius: 20px;
+  }
+  
+  #content-menu-activated {
+      background-color: #0070BA;
+  }
+  
+  
+  
+  /* Quadro de Alertas */
+  .container-alerts {
+      width: 100%;
+      height: 590px;
+  
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+  
+      background-color: #8CCCF0;
+      border-radius: 10px;
+      padding: 17px 25px;
+  }
+  
+  .container-alerts span {
+      font-weight: 500;
+  }
+  
+  .table-titles {
+      background-color: white;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .table-titles span {
+      font-weight: 300;
+  }
+  
+  .historic {
+      width: 234px;
+      height: 450px;
+      background-color: #D9D9D9;
+      border-radius: 5px;
+  }
