@@ -118,9 +118,9 @@ create table alerta(
     foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
 );
 
-/* Script AZURE*\
+-- Script AZURE
 
-/*create table empresa(
+create table empresa(
 	idEmpresa int identity(1,1) unique,
     nomeEmpresa varchar(45),
     cnpj char(14),
@@ -230,10 +230,19 @@ create table alerta(
     foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente),
     foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
 );
- *\
+ 
 
+CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
+WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
+DEFAULT_SCHEMA = dbo;
 
-    
+EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
+@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+
+EXEC sys.sp_addrolemember @rolename = N'db_datareader',
+@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+
+  
 
 
 
