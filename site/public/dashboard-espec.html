@@ -121,20 +121,20 @@
                     <div class="tag-kpi">
                         <span class="circle-kpi" id="cyan"></span>
     
-                        <span class="text-kpi">Alerta (25 - 45%)</span>
+                        <span class="text-kpi">Alerta (19 - 45%)</span>
                     </div>
     
                     <div class="tag-kpi">
                         <span class="circle-kpi" id="green"></span>
     
-                        <span class="text-kpi">Ideal (25 - 45%) </span>
+                        <span class="text-kpi">Ideal (46 - 59%) </span>
                     </div>
     
     
                     <div class="tag-kpi">
                         <span class="circle-kpi" id="yellow"></span>
     
-                        <span class="text-kpi">Alerta (60 - 75%)</span>
+                        <span class="text-kpi">Alerta (60 - 79%)</span>
                     </div>
     
     
@@ -149,26 +149,35 @@
                 <div class="container-cards-kpi">
                     <div class="card-kpi">
                         <span class="text-card-kpi">Uso da CPU</span>
-    
-                        <span class="grafico">70%</span>
+                        
+                        <div class="chart-container">
+                            <canvas id="kpi-chart-cpu"></canvas>
+                        </div>
+
                     </div>
     
                     <div class="card-kpi">
                         <span class="text-card-kpi">Uso da RAM</span>
     
-                        <span class="grafico">25%</span>
+                        <div class="chart-container">
+                            <canvas id="kpi-chart-memoria"></canvas>
+                        </div>                    
                     </div>
     
                     <div class="card-kpi">
                         <span class="text-card-kpi">Uso da Discos</span>
     
-                        <span class="grafico">40%</span>
+                        <div class="chart-container">
+                            <canvas id="kpi-chart-disco"></canvas>
+                        </div>                    
                     </div>
     
                     <div class="card-kpi">
                         <span class="text-card-kpi">Uso da Rede</span>
     
-                        <span class="grafico">15%</span>
+                        <div class="chart-container">
+                            <canvas id="kpi-chart-rede"></canvas>
+                        </div>                    
                     </div>
                 </div>
             </div>
