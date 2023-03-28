@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="./css/dash-espec.css">
         <link rel="stylesheet" href="./css/main.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <title>Dashboard Específico</title>
     </head>
@@ -170,21 +171,35 @@
                         <span class="grafico">15%</span>
                     </div>
                 </div>
-    
-                <!-- Menu vertical dos gráficos -->
-                <div class="menu-graphics">
-                    <div class="content-menu">
-                        <span id="content-menu-activated">CPU</span>
-    
-                        <span>Memória</span>
-    
-                        <span>Disco</span>
-                        
-                        <span>Rede</span>
-                    </div>
-                </div>
-    
             </div>
+
+            <!-- Menu vertical dos gráficos -->                
+            <div class="menu-graphics">
+                <div class="content-menu">
+                    <button class="btn-menu-chart">
+                        <span id="content-menu-activated">CPU</span>
+                    </button>
+                    
+                    <button class="btn-menu-chart">
+                        <span>Memória</span>
+                    </button>
+
+                    <button class="btn-menu-chart">
+                        <span>Disco</span>
+                    </button>
+                    
+                    <button class="btn-menu-chart">
+                        <span>Rede</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gráfico com ChartJS -->
+            <div class="container-general-chart">
+                <canvas id="chart-geral-uso"></canvas>
+            </div>
+
+            <div class="semDadosNovos-gerais"></div>
         </div>
     
         <!-- Quadro de Alertas -->
@@ -204,7 +219,7 @@
 </body>
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/dashboard-espec.js"></script>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="./js/dashboard-espec.js"></script>
