@@ -8,7 +8,11 @@
         <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="./css/dash-espec.css">
         <link rel="stylesheet" href="./css/main.css">
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
+        integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <title>Dashboard Específico</title>
     </head>
@@ -165,7 +169,7 @@
                     </div>
     
                     <div class="card-kpi">
-                        <span class="text-card-kpi">Uso da Discos</span>
+                        <span class="text-card-kpi">Uso do Disco</span>
     
                         <div class="chart-container">
                             <canvas id="kpi-chart-disco"></canvas>
@@ -185,19 +189,19 @@
             <!-- Menu vertical dos gráficos -->                
             <div class="menu-graphics">
                 <div class="content-menu">
-                    <button class="btn-menu-chart">
+                    <button class="btn-menu-chart" onclick="plotarGraficoCPU()">
                         <span id="content-menu-activated">CPU</span>
                     </button>
                     
-                    <button class="btn-menu-chart">
+                    <button class="btn-menu-chart" onclick="plotarGraficoMemoria()">
                         <span>Memória</span>
                     </button>
 
-                    <button class="btn-menu-chart">
+                    <button class="btn-menu-chart" onclick="plotarGraficoDisco()">
                         <span>Disco</span>
                     </button>
                     
-                    <button class="btn-menu-chart">
+                    <button class="btn-menu-chart" onclick="plotarGraficoRede()">
                         <span>Rede</span>
                     </button>
                 </div>
@@ -205,10 +209,21 @@
 
             <!-- Gráfico com ChartJS -->
             <div class="container-general-chart">
-                <canvas id="chart-geral-uso"></canvas>
+                <!-- CPU -->
+                <canvas id="chart-geral-cpu"></canvas>
+
+                <!-- Memória -->
+                <canvas id="chart-geral-memoria" style="display: none;"></canvas>
+                
+                <!-- Disco -->
+                <canvas id="chart-geral-disco" style="display: none;"></canvas>
+
+                <!-- Rede -->
+                <canvas id="chart-geral-rede" style="display: none;"></canvas>
             </div>
 
             <div class="semDadosNovos-gerais"></div>
+
         </div>
     
         <!-- Quadro de Alertas -->

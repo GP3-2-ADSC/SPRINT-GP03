@@ -17,10 +17,10 @@ const config_kpi_cpu = {
   options: {
     plugins: {
       legend: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 };
 
 const myChart_kpi_cpu = new Chart(
@@ -47,10 +47,10 @@ const config_kpi_memoria = {
   options: {
     plugins: {
       legend: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 };
 
 const myChart_kpi_memoria = new Chart(
@@ -77,10 +77,10 @@ const config_kpi_disco = {
   options: {
     plugins: {
       legend: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 };
 
 const myChart_kpi_disco = new Chart(
@@ -107,10 +107,10 @@ const config_kpi_rede = {
   options: {
     plugins: {
       legend: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 };
 
 const myChart_kpi_rede = new Chart(
@@ -119,10 +119,9 @@ const myChart_kpi_rede = new Chart(
 );
 
 
-
 // ChartJS do uso da CPU
 // Criando estrutura para plotar gráfico - labels
-let labels_geral = [
+let labels_geral_cpu = [
   "12:02",
   "12:04",
   "12:06",
@@ -134,40 +133,27 @@ let labels_geral = [
 ];
 
 // Criando estrutura para plotar gráfico - dados
-let data_geral = {
-  labels: labels_geral,
+let data_geral_cpu = {
+  labels: labels_geral_cpu,
   datasets: [
     {
       label: "Uso da CPU (%)",
-      backgroundColor: "#E0211B",
-      borderColor: "#E0211B",
+      backgroundColor: "#0061BA",
+      borderColor: "#0061BA",
       pointRadius: 5,
       pointBorderWidth: 1,
       data: [10, 25, 32, 24, 15, 56, 27, 38],
     },
     {
       label: "Uso ideal",
-      backgroundColor: "rgba(112, 255, 99, 0.25)",
+      backgroundColor: "rgba(0, 255, 51, 0.452)",
     },
   ],
 };
 
-// Linha horizontal de parâmetro
-yAxes: [
-  {
-    display: true,
-    gridLines: {
-      color: "#fff",
-    },
-    ticks: {
-      fontColor: "black",
-    },
-  },
-];
-
-let config_geral = {
+let config_geral_cpu = {
   type: "line",
-  data: data_geral,
+  data: data_geral_cpu,
   options: {
     scales: {
       y: {
@@ -194,17 +180,17 @@ let config_geral = {
         annotations: {
           box1: {
             type: "box",
-            yMin: 23,
-            yMax: 26,
+            yMin: 40,
+            yMax: 45,
             xMin: 0,
-            xMax: 18,
-            backgroundColor: "rgba(112, 255, 99, 0.25)",
+            xMax: 100,
+            backgroundColor: "rgba(0, 255, 51, 0.452)",
           },
         },
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da CPU da máquina  1",
+        text: "Monitoramento do uso da CPU da máquina 1",
         align: "center",
         fullSize: false,
         color: "#000",
@@ -218,10 +204,318 @@ let config_geral = {
   },
 };
 
-let myChart_geral = new Chart(
-  document.getElementById("chart-geral-uso"),
-  config_geral
+let myChart_geral_cpu = new Chart(
+  document.getElementById("chart-geral-cpu"),
+  config_geral_cpu
 );
+
+
+// ChartJS do uso da Memória
+let labels_geral_memoria = [
+  "12:02",
+  "12:04",
+  "12:06",
+  "12:08",
+  "12:10",
+  "12:12",
+  "12:14",
+  "12:16",
+];
+
+// Criando estrutura para plotar gráfico - dados
+let data_geral_memoria = {
+  labels: labels_geral_memoria,
+  datasets: [
+    {
+      label: "Uso da Memória (%)",
+      backgroundColor: "#0061BA",
+      borderColor: "#0061BA",
+      pointRadius: 5,
+      pointBorderWidth: 1,
+      data: [55, 58, 62, 67, 58, 62, 65, 72],
+    },
+    {
+      label: "Uso ideal",
+      backgroundColor: "rgba(0, 255, 51, 0.452)",
+    },
+  ],
+};
+
+let config_geral_memoria = {
+  type: "line",
+  data: data_geral_memoria,
+  options: {
+    scales: {
+      y: {
+        ticks: {
+          color: "#000",
+        },
+        beginAtZero: true,
+        type: "linear",
+        grid: {
+          color: "#FFF",
+        },
+      },
+      x: {
+        ticks: {
+          color: "#000",
+        },
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      autocolors: false,
+      annotation: {
+        annotations: {
+          box1: {
+            type: "box",
+            yMin: 55,
+            yMax: 65,
+            xMin: 0,
+            xMax: 100,
+            backgroundColor: "rgba(0, 255, 51, 0.452)",
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Monitoramento do uso da memória da máquina 1",
+        align: "center",
+        fullSize: false,
+        color: "#000",
+        font: {
+          size: 20,
+          weight: 600,
+          lineHeight: 1.0,
+        },
+      },
+    },
+  },
+};
+
+let myChart_geral_memoria = new Chart(
+  document.getElementById("chart-geral-memoria"),
+  config_geral_memoria
+);
+
+
+// ChartJS do Uso do Disco
+let labels_geral_disco = [
+  "12:02",
+  "12:04",
+  "12:06",
+  "12:08",
+  "12:10",
+  "12:12",
+  "12:14",
+  "12:16",
+];
+
+// Criando estrutura para plotar gráfico - dados
+let data_geral_disco = {
+  labels: labels_geral_disco,
+  datasets: [
+    {
+      label: "Uso do Disco (%)",
+      backgroundColor: "#0061BA",
+      borderColor: "#0061BA",
+      pointRadius: 5,
+      pointBorderWidth: 1,
+      data: [32, 38, 53, 65, 59, 60, 75, 82],
+    },
+    {
+      label: "Uso ideal",
+      backgroundColor: "rgba(0, 255, 51, 0.452)",
+    },
+  ],
+};
+
+let config_geral_disco = {
+  type: "line",
+  data: data_geral_disco,
+  options: {
+    scales: {
+      y: {
+        ticks: {
+          color: "#000",
+        },
+        beginAtZero: true,
+        type: "linear",
+        grid: {
+          color: "#FFF",
+        },
+      },
+      x: {
+        ticks: {
+          color: "#000",
+        },
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      autocolors: false,
+      annotation: {
+        annotations: {
+          box1: {
+            type: "box",
+            yMin: 40,
+            yMax: 50,
+            xMin: 0,
+            xMax: 100,
+            backgroundColor: "rgba(0, 255, 51, 0.452)",
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Monitoramento do uso do disco da máquina 1",
+        align: "center",
+        fullSize: false,
+        color: "#000",
+        font: {
+          size: 20,
+          weight: 600,
+          lineHeight: 1.0,
+        },
+      },
+    },
+  },
+};
+
+let myChart_geral_disco = new Chart(
+  document.getElementById("chart-geral-disco"),
+  config_geral_disco
+);
+
+
+// ChartJS do Uso do Rede
+let labels_geral_rede = [
+  "12:02",
+  "12:04",
+  "12:06",
+  "12:08",
+  "12:10",
+  "12:12",
+  "12:14",
+  "12:16",
+];
+
+// Criando estrutura para plotar gráfico - dados
+let data_geral_rede = {
+  labels: labels_geral_rede,
+  datasets: [
+    {
+      label: "Uso da Rede (%)",
+      backgroundColor: "#0061BA",
+      borderColor: "#0061BA",
+      pointRadius: 5,
+      pointBorderWidth: 1,
+      data: [55, 58, 62, 67, 58, 62, 65, 72],
+    },
+    {
+      label: "Uso ideal",
+      backgroundColor: "rgba(0, 255, 51, 0.452)",
+    },
+  ],
+};
+
+let config_geral_rede = {
+  type: "line",
+  data: data_geral_rede,
+  options: {
+    scales: {
+      y: {
+        ticks: {
+          color: "#000",
+        },
+        beginAtZero: true,
+        type: "linear",
+        grid: {
+          color: "#FFF",
+        },
+      },
+      x: {
+        ticks: {
+          color: "#000",
+        },
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      autocolors: false,
+      annotation: {
+        annotations: {
+          box1: {
+            type: "box",
+            yMin: 60,
+            yMax: 70,
+            xMin: 0,
+            xMax: 100,
+            backgroundColor: "rgba(0, 255, 51, 0.452)",
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: "Monitoramento do uso da rede da máquina 1",
+        align: "center",
+        fullSize: false,
+        color: "#000",
+        font: {
+          size: 20,
+          weight: 600,
+          lineHeight: 1.0,
+        },
+      },
+    },
+  },
+};
+
+let myChart_geral_rede = new Chart(
+  document.getElementById("chart-geral-rede"),
+  config_geral_rede
+);
+
+
+var chartCPU = document.getElementById("chart-geral-cpu");
+var chartMemoria = document.getElementById("chart-geral-memoria");
+var chartDisco = document.getElementById("chart-geral-disco");
+var chartRede = document.getElementById("chart-geral-rede");
+
+function plotarGraficoCPU() {
+  chartCPU.style.display = "flex";
+  
+  chartMemoria.style.display = "none";
+  chartDisco.style.display = "none";
+  chartRede.style.display = "none";
+}
+
+function plotarGraficoMemoria() {
+  chartMemoria.style.display = "flex";
+
+  chartCPU.style.display = "none";
+  chartDisco.style.display = "none";
+  chartRede.style.display = "none";  
+}
+
+function plotarGraficoDisco() {
+  chartDisco.style.display = "flex";
+  
+  chartCPU.style.display = "none";
+  chartMemoria.style.display = "none";
+  chartRede.style.display = "none";  
+}
+
+function plotarGraficoRede() {
+  chartRede.style.display = "flex";  
+  
+  chartCPU.style.display = "none";
+  chartMemoria.style.display = "none";
+  chartDisco.style.display = "none";
+}
 
 // TESTE WIP - Integração da ferramenta de Help Desk com o Site (Chat Box)
 //<![CDATA[
