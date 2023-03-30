@@ -10,20 +10,18 @@
     <link rel="stylesheet" href="./css/main.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
-      integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
+    integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
     ></script>
 
     <title>Dashboard Específico</title>
   </head>
   <body>
     <div class="container-menu">
-      <span class="outside-icon">
-        <ion-icon id="menu-icon" name="menu-outline"></ion-icon>
-      </span>
 
       <div class="img-logo">
         <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
@@ -115,27 +113,25 @@
     </div>
 
     <div class="container-title">
+      <div class="container-title-button">
+        <h1>Dashboard específica |</h1>
+        <span>Máquina 1</span>
 
-        <div class="container-title-button">
-            <h1>Dashboard específica |</h1>
-            <span>Máquina 1</span>
-      
-            <div class="container-button">
-              <button>
-                <ion-icon name="arrow-back-circle-outline"></ion-icon>
-              </button>
-      
-              <button>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-              </button>
-            </div>
+        <div class="container-button">
+          <button>
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </button>
+
+          <button>
+            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          </button>
         </div>
+      </div>
     </div>
 
     <div class="container-all">
       <div class="container-content">
         <div class="container-kpi">
-
           <!-- Cards das KPIs -->
           <div class="container-cards-kpi">
             <div class="card-kpi">
@@ -187,38 +183,38 @@
                 <canvas id="kpi-chart-memoria"></canvas>
 
                 <div class="pop-out-content">
-                    <ul>
-                      <li>
-                        <span class="circle-kpi blue"></span>
-  
-                        <span class="text-kpi">Perigo (< 18%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi cyan"></span>
-  
-                        <span class="text-kpi">Alerta (19 - 45%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi green"></span>
-  
-                        <span class="text-kpi">Ideal (46 - 59%) </span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi yellow"></span>
-  
-                        <span class="text-kpi">Alerta (60 - 79%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi red"></span>
-  
-                        <span class="text-kpi">Perigo (> 80%)</span>
-                      </li>
-                    </ul>
-                  </div>
+                  <ul>
+                    <li>
+                      <span class="circle-kpi blue"></span>
+
+                      <span class="text-kpi">Perigo (< 18%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi cyan"></span>
+
+                      <span class="text-kpi">Alerta (19 - 45%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi green"></span>
+
+                      <span class="text-kpi">Ideal (46 - 59%) </span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi yellow"></span>
+
+                      <span class="text-kpi">Alerta (60 - 79%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi red"></span>
+
+                      <span class="text-kpi">Perigo (> 80%)</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -229,38 +225,38 @@
                 <canvas id="kpi-chart-disco"></canvas>
 
                 <div class="pop-out-content">
-                    <ul>
-                      <li>
-                        <span class="circle-kpi blue"></span>
-  
-                        <span class="text-kpi">Perigo (< 18%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi cyan"></span>
-  
-                        <span class="text-kpi">Alerta (19 - 45%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi green"></span>
-  
-                        <span class="text-kpi">Ideal (46 - 59%) </span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi yellow"></span>
-  
-                        <span class="text-kpi">Alerta (60 - 79%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi red"></span>
-  
-                        <span class="text-kpi">Perigo (> 80%)</span>
-                      </li>
-                    </ul>
-                  </div>
+                  <ul>
+                    <li>
+                      <span class="circle-kpi blue"></span>
+
+                      <span class="text-kpi">Perigo (< 18%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi cyan"></span>
+
+                      <span class="text-kpi">Alerta (19 - 45%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi green"></span>
+
+                      <span class="text-kpi">Ideal (46 - 59%) </span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi yellow"></span>
+
+                      <span class="text-kpi">Alerta (60 - 79%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi red"></span>
+
+                      <span class="text-kpi">Perigo (> 80%)</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -271,45 +267,64 @@
                 <canvas id="kpi-chart-rede"></canvas>
 
                 <div class="pop-out-content">
-                    <ul>
-                      <li>
-                        <span class="circle-kpi blue"></span>
-  
-                        <span class="text-kpi">Perigo (< 18%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi cyan"></span>
-  
-                        <span class="text-kpi">Alerta (19 - 45%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi green"></span>
-  
-                        <span class="text-kpi">Ideal (46 - 59%) </span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi yellow"></span>
-  
-                        <span class="text-kpi">Alerta (60 - 79%)</span>
-                      </li>
-  
-                      <li>
-                        <span class="circle-kpi red"></span>
-  
-                        <span class="text-kpi">Perigo (> 80%)</span>
-                      </li>
-                    </ul>
-                  </div>    
+                  <ul>
+                    <li>
+                      <span class="circle-kpi blue"></span>
+
+                      <span class="text-kpi">Perigo (< 18%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi cyan"></span>
+
+                      <span class="text-kpi">Alerta (19 - 45%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi green"></span>
+
+                      <span class="text-kpi">Ideal (46 - 59%) </span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi yellow"></span>
+
+                      <span class="text-kpi">Alerta (60 - 79%)</span>
+                    </li>
+
+                    <li>
+                      <span class="circle-kpi red"></span>
+
+                      <span class="text-kpi">Perigo (> 80%)</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Gráfico com ChartJS -->
+        <div class="container-general-chart">
+          <!-- CPU -->
+          <canvas id="chart-geral-cpu"></canvas>
+
+          <!-- Memória -->
+          <canvas id="chart-geral-memoria" style="display: none"></canvas>
+
+          <!-- Disco -->
+          <canvas id="chart-geral-disco" style="display: none"></canvas>
+
+          <!-- Rede -->
+          <canvas id="chart-geral-rede" style="display: none"></canvas>
+        </div>
+
         <!-- Menu horizontal dos gráficos -->
         <div class="menu-graphics">
+          <div class="content-text-menu">
+            <span id="text-menu-graphics">Altere entre os gráficos:</span>
+          </div>
+
           <div class="content-menu">
             <button class="btn-menu-chart" onclick="plotarGraficoCPU()">
               <span id="btn-menu-cpu">CPU</span>
@@ -327,21 +342,6 @@
               <span id="btn-menu-rede">Rede</span>
             </button>
           </div>
-        </div>
-
-        <!-- Gráfico com ChartJS -->
-        <div class="container-general-chart">
-          <!-- CPU -->
-          <canvas id="chart-geral-cpu"></canvas>
-
-          <!-- Memória -->
-          <canvas id="chart-geral-memoria" style="display: none"></canvas>
-
-          <!-- Disco -->
-          <canvas id="chart-geral-disco" style="display: none"></canvas>
-
-          <!-- Rede -->
-          <canvas id="chart-geral-rede" style="display: none"></canvas>
         </div>
 
         <div class="semDadosNovos-gerais"></div>
