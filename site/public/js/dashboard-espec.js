@@ -5,6 +5,7 @@ const data_cpu = {
     {
       data: [100 - 72, 72],
       backgroundColor: ["#d0d0d0", "#FFCD56"],
+      borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -35,6 +36,7 @@ const data_memoria = {
     {
       data: [100 - 87, 87],
       backgroundColor: ["#d0d0d0", "#e10000"],
+      borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -65,6 +67,7 @@ const data_disco = {
     {
       data: [100 - 55, 55],
       backgroundColor: ["#d0d0d0", "#3cb600"],
+      borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -95,6 +98,7 @@ const data_rede = {
     {
       data: [100 - 19, 19],
       backgroundColor: ["#d0d0d0", "#36A2EB"],
+      borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -485,8 +489,18 @@ var chartMemoria = document.getElementById("chart-geral-memoria");
 var chartDisco = document.getElementById("chart-geral-disco");
 var chartRede = document.getElementById("chart-geral-rede");
 
+var btnCPU = document.getElementById("btn-menu-cpu");
+var btnMemoria = document.getElementById("btn-menu-memoria");
+var btnDisco = document.getElementById("btn-menu-disco");
+var btnRede = document.getElementById("btn-menu-rede");
+
 function plotarGraficoCPU() {
   chartCPU.style.display = "flex";
+  btnCPU.style.backgroundColor = "#0070ba";
+
+  btnMemoria.style.backgroundColor = "#5eacd2";
+  btnDisco.style.backgroundColor = "#5eacd2";
+  btnRede.style.backgroundColor = "#5eacd2";
   
   chartMemoria.style.display = "none";
   chartDisco.style.display = "none";
@@ -495,6 +509,11 @@ function plotarGraficoCPU() {
 
 function plotarGraficoMemoria() {
   chartMemoria.style.display = "flex";
+  btnMemoria.style.backgroundColor = "#0070ba";
+
+  btnCPU.style.backgroundColor = "#5eacd2";
+  btnDisco.style.backgroundColor = "#5eacd2";
+  btnRede.style.backgroundColor = "#5eacd2";
 
   chartCPU.style.display = "none";
   chartDisco.style.display = "none";
@@ -503,15 +522,25 @@ function plotarGraficoMemoria() {
 
 function plotarGraficoDisco() {
   chartDisco.style.display = "flex";
-  
+  btnDisco.style.backgroundColor = "#0070ba";
+
+  btnCPU.style.backgroundColor = "#5eacd2";
+  btnMemoria.style.backgroundColor = "#5eacd2";
+  btnRede.style.backgroundColor = "#5eacd2";
+
   chartCPU.style.display = "none";
   chartMemoria.style.display = "none";
   chartRede.style.display = "none";  
 }
 
 function plotarGraficoRede() {
-  chartRede.style.display = "flex";  
-  
+  chartRede.style.display = "flex";
+  btnRede.style.backgroundColor = "#0070ba";
+
+  btnCPU.style.backgroundColor = "#5eacd2";
+  btnMemoria.style.backgroundColor = "#5eacd2";
+  btnDisco.style.backgroundColor = "#5eacd2";
+
   chartCPU.style.display = "none";
   chartMemoria.style.display = "none";
   chartDisco.style.display = "none";

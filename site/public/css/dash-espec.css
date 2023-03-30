@@ -1,3 +1,7 @@
+body {
+  background-color: #8ccbf049;
+}
+
 :root {
   --card-kpi-width: 175px;
 }
@@ -77,8 +81,15 @@
 
 /* Títulos e botões */
 .container-title {
-  width: calc(100% - 300px);
-  margin: 5px 0 15px 300px;
+  width: fit-content;
+  /* width: calc(100% - 300px); */
+  z-index: -1;
+  margin: 0 0 15px 300px;
+}
+
+.container-title-button {
+  display: flex;
+  margin-top: 15px;
 }
 
 .container-title,
@@ -89,6 +100,10 @@ h1 {
 }
 
 .container-title span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   margin-top: 12px;
 }
 
@@ -129,19 +144,6 @@ h1 {
 
 /* Legenda das KPIs */
 
-.kpi-bar {
-  display: flex;
-  flex-direction: row;
-  width: 736px;
-  background-color: #8cccf0;
-  padding: 8px 8px;
-  border-radius: 10px;
-  justify-content: space-evenly;
-}
-
-.tag-kpi {
-  display: flex;
-}
 
 .circle-kpi {
   width: 100%;
@@ -175,21 +177,11 @@ h1 {
   background-color: #e10000;
 }
 
-.text-kpi {
-  padding-left: 10px;
-  font-size: 0.8em;
-  font-weight: 400;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
 /* Cards das KPIs */
 .container-cards-kpi {
   display: flex;
   justify-content: space-between;
   width: 736px;
-
-  margin-top: 20px;
 }
 
 .card-kpi {
@@ -203,8 +195,27 @@ h1 {
   align-items: center;
 }
 
+.pop-out-content li {
+  width: 160px;
+  display: flex;
+
+  padding: 8px 5px 8px 5px;
+}
+
 .text-card-kpi {
   font-weight: 400;
+}
+
+.pop-out-content {
+  display: none;
+  z-index: 1;
+  background-color: #f1f1f1;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.card-kpi:hover .pop-out-content {
+  display: flex;
 }
 
 .chart-container {
@@ -218,7 +229,7 @@ h1 {
 
 /* Menu dos gráficos */
 .menu-graphics {
-  margin-top: 20px;
+  margin-top: 40px;
 
   width: calc(2 * var(--card-kpi-width) + 12px);
 
@@ -245,18 +256,21 @@ h1 {
   height: 335px;
   width: calc(100vw - 630px);
   background-color: #8cccf0;
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 10px;
   padding: 15px;
 }
 
-.content-menu span {
+#btn-menu-cpu,
+#btn-menu-memoria,
+#btn-menu-disco,
+#btn-menu-rede {
   background-color: #5eacd2;
   padding: 8px;
   border-radius: 20px;
 }
 
-#content-menu-activated {
+#btn-menu-cpu {
   background-color: #0070ba;
 }
 
