@@ -8,8 +8,8 @@ create table empresa(
     telefone02 varchar(11),
     email varchar(45),
     responsavelEmpresa varchar(45),
-    fkMatriz int,
-    primary key(idEmpresa, fkMatriz),
+    fkMatriz int default null,
+    primary key(idEmpresa),
     foreign key(fkMatriz) references empresa(idEmpresa));
     
 create table endereco(
@@ -230,6 +230,8 @@ create table alerta(
     foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
 );
  
+ alter table empresa modify column fkmatriz int default null;
+  
  select * from empresa;
  select * from endereco;
 

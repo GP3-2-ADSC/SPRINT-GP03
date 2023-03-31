@@ -1,11 +1,10 @@
-function cadastrar() {
-    console.log("estou no fetch" + sessionStorage.getItem("NOME_EMPRESA"),
-    sessionStorage.getItem("CNPJ"),
-    sessionStorage.getItem("CNPJ"),
-    sessionStorage.getItem("TEL_1"),
-    sessionStorage.getItem("TEL_2"),
-    sessionStorage.getItem("EMAIL"),
-    sessionStorage.getItem("RESPONSAVEL"));
+function cadastrar(empresaStorage) {
+    console.log("estou no fetch " + empresaStorage[0],
+    empresaStorage[1],
+    empresaStorage[2],
+    empresaStorage[3],
+    empresaStorage[4],
+    empresaStorage[5]);
     
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -16,12 +15,12 @@ function cadastrar() {
         body: JSON.stringify({
             // crie um atributo que recebe o valor recuperado aqui
             // Agora vá para o arquivo routes/usuario.js
-            nomeEmpresaServer: sessionStorage.getItem("NOME_EMPRESA"),
-            cnpjServer: sessionStorage.getItem("CNPJ"),
-            telefone1Server: sessionStorage.getItem("TEL_1"),
-            telefone2Server: sessionStorage.getItem("TEL_2"),
-            emailServer: sessionStorage.getItem("EMAIL"),
-            responsavelServer: sessionStorage.getItem("RESPONSAVEL")
+            nomeEmpresaServer: empresaStorage[0],
+            cnpjServer: empresaStorage[1],
+            telefone1Server: empresaStorage[2],
+            telefone2Server: empresaStorage[3],
+            emailServer: empresaStorage[4],
+            responsavelServer: empresaStorage[5]
         })
     }).then(function (resposta) {
 
@@ -64,10 +63,11 @@ function cadastrarEndereco() {
     var cidadeVar = in_cidade.value;
     var complementoVar = in_complemento.value;
 
+
     var campovazio = cepVar == "" || logradouroVar == "" || numeroVar == "" || bairroVar == "" || cidadeVar == "" || complementoVar == "";
 
 
-    if (campovazio ) {
+    if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -75,7 +75,7 @@ function cadastrarEndereco() {
         return false;
     }
     else {
-        setInterval(sumirMensagem, 5000)
+        setInterval(sumirMensagem, 5000);
     }
 
     // Enviando o valor da nova input

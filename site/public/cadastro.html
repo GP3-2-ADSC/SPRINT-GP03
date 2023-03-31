@@ -137,30 +137,52 @@
 <script src="./js/cadastro.js"></script>
 
 <script>
+    let empresaStorage = [];
+    let enderecoStorage = [];
 
     function getStorage() {
+        console.log("Estou no storage da empresa!");
+        console.log(empresaStorage);
 
-        in_empresa.value = sessionStorage.getItem("NOME_EMPRESA");
-        in_cnpj.value = sessionStorage.getItem("CNPJ");
-        in_telefone_1.value = sessionStorage.getItem("TEL_1");
-        in_telefone_2.value = sessionStorage.getItem("TEL_2");
-        in_email.value = sessionStorage.getItem("EMAIL");
-        in_resp.value = sessionStorage.getItem("RESPONSAVEL");
+        in_empresa.value = empresaStorage[0];
+        in_cnpj.value = empresaStorage[1];
+        in_telefone_1.value = empresaStorage[2];
+        in_telefone_2.value = empresaStorage[3];
+        in_email.value = empresaStorage[4];
+        in_resp.value = empresaStorage[5];
 
-       
+    }
+
+    function getStorageEnd() {
+        console.log("Estou no storage do endereco!");
+        console.log(empresaStorage);
+
+        in_cep.value = enderecoStorage[0];
+        in_logradouro.value = enderecoStorage[1];
+        in_numero.value = enderecoStorage[2];
+        in_bairro.value = enderecoStorage[3];
+        in_cidade.value = enderecoStorage[4];
+        in_complemento.value = enderecoStorage[5];
     }
 
     function nextPage(n) {
 
         if (n == 1) {
-            sessionStorage.NOME_EMPRESA = in_empresa.value;
-            sessionStorage.CNPJ = in_cnpj.value;
-            sessionStorage.TEL_1 = in_telefone_1.value;
-            sessionStorage.TEL_2 = in_telefone_2.value;
-            sessionStorage.EMAIL = in_email.value;
-            sessionStorage.RESPONSAVEL = in_resp.value;
+            let nomeEmpresa = in_empresa.value;
+            let cnpj = in_cnpj.value;
+            let tel1 = in_telefone_1.value;
+            let tel2 = in_telefone_2.value;
+            let email = in_email.value;
+            let resp = in_resp.value;
 
-            let campoVazio = in_empresa.value == "" || in_cnpj.value == "" || in_telefone_1.value == "" || in_telefone_2.value == "" || in_email.value == "" || in_resp.value == "";
+            empresaStorage.push(nomeEmpresa);
+            empresaStorage.push(cnpj);
+            empresaStorage.push(tel1);
+            empresaStorage.push(tel2);
+            empresaStorage.push(email);
+            empresaStorage.push(resp);
+
+            let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || tel2 == "" || email == "" || resp == "";
 
             if (campoVazio) {
                 cardErro.style.display = "block"
@@ -329,7 +351,7 @@
     }
 
     function cadastrarDados() {
-        cadastrar();
+        cadastrar(empresaStorage);
         cadastrarEndereco();
     }
 
