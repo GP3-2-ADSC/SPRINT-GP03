@@ -7,8 +7,7 @@ create table empresa(
     telefone01 varchar(11),
     telefone02 varchar(11),
     email varchar(45),
-    senha varchar(256),
-    resposavelEmpresa varchar(45),
+    responsavelEmpresa varchar(45),
     fkMatriz int,
     primary key(idEmpresa, fkMatriz),
     foreign key(fkMatriz) references empresa(idEmpresa));
@@ -20,7 +19,7 @@ create table endereco(
     numero varchar(8),
     bairro varchar(45),
     cidade varchar(40),
-    complemento varchar(45),
+    complemento varchar(45) NOT NULL,
     fkEmpresa int,
     primary key (idEndereco),
     foreign key (fkEmpresa) references empresa(idEmpresa)
@@ -128,7 +127,7 @@ create table empresa(
     telefone02 varchar(11),
     email varchar(45),
     senha varchar(256),
-    resposavelEmpresa varchar(45),
+    responsavelEmpresa varchar(45),
     fkMatriz int unique,
     constraint fk_Matriz foreign key(fkMatriz) references empresa(idEmpresa)
 );
@@ -231,6 +230,8 @@ create table alerta(
     foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
 );
  
+ select * from empresa;
+ select * from endereco;
 
 CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
 WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
@@ -241,6 +242,8 @@ EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
 
 EXEC sys.sp_addrolemember @rolename = N'db_datareader',
 @membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+
+
 
   
 

@@ -57,15 +57,14 @@
                 <div class="linha">
                     <div class="campo">
                         <label for="in_empresa">Nome da Empresa
-                    <input type="text" placeholder="Digite o nome da empresa" 
-                        id="in_empresa" oninput="nameValidate()" class="required">
+                            <input type="text" placeholder="Digite o nome da empresa" id="in_empresa">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_cnpj">CNPJ da Empresa
-                            <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj" oninput="cnpjValidate()" class="required">
+                            <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
@@ -73,15 +72,14 @@
                 <div class="linha">
                     <div class="campo">
                         <label for="in_telefone_1">Celular / Telefone (1)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1" oninput="telefoneValidate()" class="required">
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_telefone_2">Celular / Telefone (2)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2" 
-                            oninput="telefoneValidate()" class="required">
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
@@ -90,20 +88,145 @@
                 <div class="linha">
                     <div class="campo">
                         <label for="in_email">Email
-                            <input type="text" placeholder="Digite o email" id="in_email" oninput=" emailValidate()" class="required">
+                            <input type="text" placeholder="Digite o email" id="in_email">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                     <div class="campo">
                         <label for="in_resp"> Responsável
-                            <input type="text" placeholder="Responsável pelo empresa" id="in_resp" 
-                            oninput="nameValidate()"  class="required">
+                            <input type="text" placeholder="Responsável pelo empresa" id="in_resp">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- <div class="linha">
+                    <div class="campo">
+                        <label for="senha">Criar uma senha
+                            <input type="password" placeholder="Digite sua senha" id="in_senha">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                    <div class="campo">
+                        <label for="conf_senha"> Confirmar senha
+                            <input type="password" placeholder="Confirme sua senha" id="in_confirmacao">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                </div> -->
+
+                <div class="ponto">
+                    <span class="dot" style="background-color:#8cccf0;"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="button" onclick="nextPage(1)">Próximo</button>
+            </div>
+            <div id="div_aguardar" class="loading-div">
+                <img src="./assets/circle-loading.gif" id="loading-gif">
+            </div>
+
+            <div id="div_erros_login">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./js/transicao.js"></script>
+<script src="./js/cadastro.js"></script>
+
+<script>
+
+    function getStorage() {
+
+        in_empresa.value = sessionStorage.getItem("NOME_EMPRESA");
+        in_cnpj.value = sessionStorage.getItem("CNPJ");
+        in_telefone_1.value = sessionStorage.getItem("TEL_1");
+        in_telefone_2.value = sessionStorage.getItem("TEL_2");
+        in_email.value = sessionStorage.getItem("EMAIL");
+        in_resp.value = sessionStorage.getItem("RESPONSAVEL");
+
+       
+    }
+
+    function nextPage(n) {
+
+        if (n == 1) {
+            sessionStorage.NOME_EMPRESA = in_empresa.value;
+            sessionStorage.CNPJ = in_cnpj.value;
+            sessionStorage.TEL_1 = in_telefone_1.value;
+            sessionStorage.TEL_2 = in_telefone_2.value;
+            sessionStorage.EMAIL = in_email.value;
+            sessionStorage.RESPONSAVEL = in_resp.value;
+
+            let campoVazio = in_empresa.value == "" || in_cnpj.value == "" || in_telefone_1.value == "" || in_telefone_2.value == "" || in_email.value == "" || in_resp.value == "";
+
+            if (campoVazio) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+                finalizarAguardar();
+                return false;
+            }
+            else {
+                plotarNovaPagina();
+            }
+
+        } else {
+            caixaFormulario.innerHTML = ``;
+            caixaFormulario.innerHTML = `
+            <div class="campo">
+                    <h2>Junte-se a nós</h2>
+                    <h4>Faça o cadastro e tenha acesso a todas as inovações para seu negócio</h4>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_empresa">Nome da Empresa
+                            <input type="text" placeholder="Digite o nome da empresa" id="in_empresa">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+
+                    <div class="campo">
+                        <label for="in_cnpj">CNPJ da Empresa
+                            <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="in_telefone_1">Celular / Telefone (1)
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+
+                    <div class="campo">
+                        <label for="in_telefone_2">Celular / Telefone (2)
+                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="linha">
+                    <div class="campo">
+                        <label for="in_email">Email
+                            <input type="text" placeholder="Digite o email" id="in_email">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                    <div class="campo">
+                        <label for="in_resp"> Responsável
+                            <input type="text" placeholder="Responsável pelo empresa" id="in_resp">
+                            <span class="span-required">Campo inválido</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- <div class="linha">
                     <div class="campo">
                         <label for="senha">Criar uma senha
                             <input type="password" placeholder="Digite sua senha" id="in_senha" 
@@ -117,35 +240,22 @@
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
-                </div>
+                </div> -->
                 <div class="ponto">
                     <span class="dot" style="background-color:#8cccf0;"></span>
                     <span class="dot"></span>
                 </div>
                 <button class="button" onclick="nextPage(1)">Próximo</button>
-            </div>
-            <!-- <div id="div_aguardar" class="loading-div">
-                <img src="./assets/circle-loading.gif" id="loading-gif">
-            </div>
+            `;
+            getStorage();
+        }
 
-            <div id="div_erros_login">
+    }
 
-            </div> -->
-        </div>
-    </div>
-</body>
+    function plotarNovaPagina() {
 
-</html>
-<script src="./js/transicao.js"></script>
-<script src="./js/cadastro.js"></script>
-
-<script>
-
-    function nextPage(n) {
-
-        if (n == 1) {
-            caixaFormulario.innerHTML = "";
-            caixaFormulario.innerHTML = `
+        caixaFormulario.innerHTML = "";
+        caixaFormulario.innerHTML = `
 
                 <div class="campo">
                     <h2>Junte-se a nós</h2>
@@ -160,8 +270,8 @@
                     </div>
 
                     <div class="campo">
-                        <label for="in_rua">Rua
-                            <input type="text" placeholder="Digite sua rua" id="in_rua"  class="required">
+                        <label for="in_logradouro">logradouro
+                            <input type="text" placeholder="Digite sua logradouro" id="in_logradouro"  class="required">
                             <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
@@ -212,13 +322,15 @@
 
                 <div class="linha">
                     <button class="button" onclick="nextPage(2)">Voltar</button>
-                    <button type="submit"class="button">Cadastrar</button>
+                    <button class="button" onclick = "cadastrarDados()">Cadastrar</button>
                 </div>
            `
-        } else {
-            window.location = "./cadastro.html";
-        }
 
+    }
+
+    function cadastrarDados() {
+        cadastrar();
+        cadastrarEndereco();
     }
 
 </script>
