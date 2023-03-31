@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Geral</title>
+    <link rel="stylesheet" href="./css/dashboardGeral.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="barraPesquisa"></div>
+    <div class="novaMaquina"></div>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="grafico-container1">
+                <canvas id="grafico1"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="grafico-container2">
+                <canvas id="grafico2"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="grafico-container3">
+                <canvas id="grafico3"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-container-menores">
+        <div class="card-menor card-menor1"></div>
+        <div class="card-menor card-menor2"></div>
+        <div class="card-menor card-menor3"></div>
+      </div>
+
+    <script>
+        var ctx1 = document.getElementById('grafico1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Uso de Rede'],
+                datasets: [{
+                    data: [60, 40],
+                    backgroundColor: ['#F44336', '#FAEBD7']
+                }]
+            },
+            options: {
+                cutoutPercentage: 90,
+                responsive: false,
+                maintainAspectRatio: false,
+                tooltips: {
+                    enabled: false
+                },
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('grafico2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Uso de Rede'],
+                datasets: [{
+                    data: [30, 70],
+                    backgroundColor: ['#F44336', '#FAEBD7']
+                }]
+            },
+            options: {
+                cutoutPercentage: 90,
+                responsive: false,
+                maintainAspectRatio: false,
+                tooltips: {
+                    enabled: false
+                },
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
+
+        var ctx3 = document.getElementById('grafico3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['Uso de Rede'],
+                datasets: [{
+                    data: [80, 20],
+                    backgroundColor: ['#F44336', '#FAEBD7']
+                }]
+            },
+            options: {
+                cutoutPercentage: 90,
+                responsive: false,
+                maintainAspectRatio: false,
+                tooltips: {
+                    enabled: false
+                },
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
+    </script>
+    </div>
+
+</body>
+
+</html>

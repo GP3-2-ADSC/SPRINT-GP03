@@ -1,0 +1,90 @@
+/* Estilos para o botão de adicionar nova máquina */
+.novaMaquina {
+    width: 10vw;
+    height: 7vh;
+    left: 30vw;
+    top: 60vh;
+    left: 30vw;
+    margin-left: 80vw;
+
+    background: #9CB8FF;
+    border-radius: 20px;
+}
+
+/* Estilos para a barra de pesquisa */
+.barraPesquisa {
+    width: 40vw;
+    height: 5vh;
+    margin-left: 6vw;
+    background: #D6E7F8;
+    border-radius: 100px;
+}
+
+/* Graficos */
+
+.grafico-container {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+.card-container {
+    margin-top: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    height:45vh;
+    width: 190vh;
+    
+}
+
+.card {
+    height: 90vh;
+    width: 60vw;
+    height: 40vh;
+    border-radius: 10px;
+    margin-left: 80px;
+    background: #D6E7F8;
+}
+
+#grafico1, #grafico2, #grafico3 {
+  margin-top: 10vh;
+  width: 10vw;
+  height: 8vh;
+}
+
+
+
+
+/* Estilos para os cards menores */
+.card-container-menores {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    height:45vh;
+    width: 190vh;
+  }
+  
+  .card-menor {
+    height: 20vh;
+    width: 20vw;
+    border-radius: 10px;
+    margin-right: 8vw;
+    margin-left: 80px;
+    
+  }
+  
+  .card-menor1 {
+    background-color: #8BC34A;
+  }
+  
+  .card-menor2 {
+    background-color: #FFC107;
+  }
+  
+  .card-menor3 {
+    background-color: #ff0000;
+  }
+  
+
