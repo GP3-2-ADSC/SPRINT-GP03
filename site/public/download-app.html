@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/dash-espec.css" />
+    <link rel="stylesheet" href="./css/download-app.css" />
+
+    <title>Download app</title>
+  </head>
+  <body>
+    <div class="container-menu">
+      <div class="img-logo">
+        <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
+      </div>
+
+      <!-- Menu lateral -->
+      <div class="container-list">
+        <ul>
+          <li class="list">
+            <a href="dashboard-geral.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="stats-chart-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Dashboard geral</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="dashboard-espec.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="analytics-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Dashboard específico</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="historico-alertas.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Histórico de alertas</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="inventario-maquina.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="construct-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Inventário de máquinas</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <!-- Inserir link da Help Desk -->
+            <a href="#">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="help-circle-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Ajuda</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="download-app.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="download-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title" id="list-active"
+                >Download aplicação</span
+              >
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="outside-icon" href="login.html" onclick="limparSessao()">
+        <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+      </a>
+    </div>
+
+    <div class="container-all-dwn">
+      <div class="container-content">
+        <h1>Adquira nossa aplicação</h1>
+
+        <p>
+          Baixe agora mesmo, de forma simples, rápida e segura, a solução que
+          trará agilidade aos processos por meio do monitoramento contínuo e
+          assíduo de seu maquinário!
+        </p>
+
+        <button class="btn-download">
+          <span>Download</span>
+
+          <img src="assets/download.svg" alt="Botão de download" />
+        </button>
+
+        <div class="content-doc">
+          <small>
+            Para maior detalhamento da instalação da aplicação, faça download da
+            documentação
+            <a href="assets/doc/Documentação - UMMS - Retria.pdf" class="span-link" download>aqui</a>.
+          </small>
+        </div>
+      </div>
+
+      <div class="container-img-download">
+        <img
+          id="download-animation"
+          src="assets/download-animation.svg"
+          alt="Mulher fazendo download"
+        />
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="js/download-app.js"></script>
+
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>

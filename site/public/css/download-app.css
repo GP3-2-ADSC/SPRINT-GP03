@@ -1,0 +1,144 @@
+body {
+    background-color: white;
+}
+
+.container-all-dwn {
+  display: flex;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 545px;
+  height: 560px;
+  margin-left: 320px;
+}
+
+.container-content h1 {
+  margin-top: 40px;
+  margin-bottom: 12px;
+  font-size: 2.6em;
+  font-weight: 600;
+}
+body {
+    background-color: white;
+}
+
+.container-all-dwn {
+  display: flex;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 545px;
+  height: 560px;
+  margin-left: 320px;
+}
+
+.container-content h1 {
+  margin-top: 40px;
+  margin-bottom: 12px;
+  font-size: 2.6em;
+  font-weight: 600;
+}
+
+.container-content p {
+  margin-bottom: 40px;
+  font-size: 1.1em;
+
+  text-align: justify;
+}
+
+.btn-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 169px;
+  height: 46px;
+  margin-bottom: 19px;
+
+  background-color: #8cccf0;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-download span {
+  font-weight: 800;
+  font-size: 16px;
+
+  padding-right: 12px;
+}
+
+.btn-download img {
+  width: 22px;
+  height: 22px;
+}
+
+.span-link {
+  font-weight: 700;
+  color: #0074cc;
+}
+
+.container-img-download {
+  display: flex;
+  margin-top: 150px;
+}
+
+#download-animation {
+  width: 500px;
+}
+
+.container-content p {
+  margin-bottom: 40px;
+  font-size: 1.1em;
+
+  text-align: justify;
+}
+
+.btn-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 169px;
+  height: 46px;
+  margin-bottom: 19px;
+
+  background-color: #8cccf0;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-download span {
+  font-weight: 800;
+  font-size: 16px;
+
+  padding-right: 12px;
+}
+
+.btn-download img {
+  width: 22px;
+  height: 22px;
+}
+
+.span-link {
+  font-weight: 700;
+  color: #0074cc;
+}
+
+.container-img-download {
+  display: flex;
+  margin-top: 150px;
+}
+
+#download-animation {
+  width: 500px;
+}
