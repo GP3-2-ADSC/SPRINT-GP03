@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --card-kpi-width: 175px;
+}
+
+.container-menu {
+    position: fixed;
+    width: 280px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #0061ba;
+    color: white;
+    padding: 0 10px 0 0;
+}
+
+#exit-icon {
+    padding-top: 135px;
+}
+
+.container-list ul li a {
+    width: 100%;
+    display: flex;
+}
+
+.list {
+    padding-left: 20px;
+    padding-bottom: 26px;
+    display: flex;
+    text-align: center;
+}
+
+#list-active {
+    font-weight: bold;
+}
+
+.outside-icon {
+    display: flex;
+    justify-content: end;
+    color: white;
+    font-size: 2.7em;
+}
+
+.img-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 35px;
+}
+
+.circle {
+    height: 32px;
+    width: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+.circle-lista {
+    height: 64px;
+    width: 64px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.circle-lista2 {
+    height: 64px;
+    width: 64px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.icon {
+    color: black;
+    font-size: 1.3em;
+    display: flex;
+}
+.icon-edit-exc {
+    color: black;
+    font-size: 2.0em;
+    display: flex;
+}
+
+.list-title {
+    padding-left: 10px;
+    font-size: 1em;
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* Títulos  */
+.container-title {
+    width: fit-content;
+    margin: 0 0 10px 330px;
+    display: flex;
+}
+
+.container-title-button {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 15px;
+}
+
+.container-user {
+    padding-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15px;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+.container-user i {
+    padding-right: 10px;
+}
+
+.container-title,
+h1 {
+    display: flex;
+    font-size: 1.6em;
+    font-weight: 500;
+    font-family: Poppins;
+}
+
+.container-title,
+.container-button h1 {
+    display: flex;
+    font-size: 1.6em;
+    font-weight: 600;
+    font-family: Poppins;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.container-button {
+    margin-top: auto;
+    background-color: #8cccf0;
+
+    display: flex;
+    justify-content: end;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.container-button button {
+    background: none;
+    border: none;
+
+    font-size: 1.3em;
+    display: flex;
+    cursor: pointer;
+}
+
+/* Conteúdos de KPIs, Gráficos e Alertas */
+.container-all {
+    width: calc(100% - 280px);
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    margin-top: 0px;
+}
+
+/* Conteúdo  */
+.container-content {
+    margin-left: 330px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.blue {
+    background-color: #0061ba;
+}
+
+.cyan {
+    background-color: #36a2eb;
+}
+
+.green {
+    background-color: #3cb600;
+}
+
+.yellow {
+    background-color: #ffcd56;
+}
+
+.red {
+    background-color: #e10000;
+}
+
+.container-general-chart {
+    height: 335px;
+    width: calc(100vw - 400px);
+    background-color: #D8E5FF;
+    margin-top: 0px;
+    border-radius: 10px 10px 10px 10px;
+    padding: 15px;
+}
+
+.inputs-maquinas {
+    height: 250px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.inputs-maquinas .campos-cima {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 550px;
+    padding-right: 20px;
+}
+
+.inputs-maquinas .campos-baixo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 550px;
+}
+
+.input-text {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.inputs-maquinas .input-maquina {
+    width: 100%;
+    height: 46px;
+    left: 316px;
+    top: 185px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border-style: none;
+    margin-bottom: 15px;
+
+}
+
+.btn-add {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+button {
+    width: 224px;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow, transform;
+    background: #9CB8FF;
+    box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+    padding: 0 2em;
+    border-radius: 0.3em;
+    color: #000000;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+button:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+    transform: translateY(-0.1em);
+}
+
+button:active {
+    box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+    transform: translateY(0em);
+}
+
+.title-lista {
+    width: fit-content;
+    margin: 28px 0 10px 350px;
+    display: flex;
+}
+
+.container-maquinas-add {
+    height: 204px;
+    width: calc(100vw - 400px);
+    background-color: #D8E5FF;
+    margin-top: 0px;
+    border-radius: 10px 10px 10px 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.container-dados-maquina {
+    height: 250px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.container-dados-maquina .dados-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    width: 550px;
+}
+.container-dados-maquina .dados-user span{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+}
+.container-dados-maquina .btns-editar-excluir{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 550px;
+    height: 64px;
+    
+}
