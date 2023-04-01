@@ -1,11 +1,12 @@
 function cadastrar(empresaStorage) {
     console.log("estou no fetch " + empresaStorage[0],
-    empresaStorage[1],
-    empresaStorage[2],
-    empresaStorage[3],
-    empresaStorage[4],
-    empresaStorage[5]);
-    
+        empresaStorage[1],
+        empresaStorage[2],
+        empresaStorage[3],
+        empresaStorage[4],
+        empresaStorage[5]);
+
+
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
         method: "POST",
@@ -29,10 +30,10 @@ function cadastrar(empresaStorage) {
         if (resposta.ok) {
             cardErro.style.display = "block";
 
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de cadastro do adiministrador...";
 
             setTimeout(() => {
-                window.location = "login.html";
+                carregarFkempresa(empresaStorage[1]);
             }, "2000")
 
             limparFormulario();
@@ -51,7 +52,6 @@ function cadastrar(empresaStorage) {
 function sumirMensagem() {
     cardErro.style.display = "none"
 }
-
 
 function cadastrarEndereco() {
     aguardar();
@@ -73,9 +73,6 @@ function cadastrarEndereco() {
 
         finalizarAguardar();
         return false;
-    }
-    else {
-        setInterval(sumirMensagem, 5000);
     }
 
     // Enviando o valor da nova input
@@ -100,14 +97,6 @@ function cadastrarEndereco() {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            cardErro.style.display = "block";
-
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-            setTimeout(() => {
-                window.location = "login.html";
-            }, "2000")
-
             limparFormulario();
             finalizarAguardar();
         } else {
@@ -121,7 +110,118 @@ function cadastrarEndereco() {
     return false;
 }
 
-function sumirMensagem() {
-    cardErro.style.display = "none"
+function carregarFkempresa(cnpj) {
+    let cnpjVar = cnpj;
+
+    fetch(`/usuarios/carregarFkempresa/${cnpjVar}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                sessionStorage.FK_EMPRESA = resposta[0].idEmpresa;
+            });
+            window.location = "cadastro-admin.html";
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
 }
 
+function cadastrarAdmin() {
+    aguardar();
+
+    var nomeAdm = in_nomeAdm.value;
+    var cargoVar = in_cargo.value;
+    var telVar = in_telefone.value;
+    var emailVar = in_email.value;
+    var senhaVar = in_senha.value;
+
+    var campovazio = nomeAdm == "" || cargoVar == "" || telVar == "" || emailVar == "" || senhaVar == "";
+
+
+    if (campovazio) {
+        cardErro.style.display = "block"
+        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+        finalizarAguardar();
+        return false;
+    }
+    else {
+        setInterval(sumirMensagem, 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarAdmin", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeAdmServer: nomeAdm,
+            cargoServer: cargoVar,
+            telServer: telVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            serialKeyServer: gerarChaveDeSeguranca(),
+            fkEmpresaServer: sessionStorage.getItem("FK_EMPRESA")
+        })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            getSerialKey(emailVar);
+
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+    });
+
+    return false;
+}
+
+function gerarChaveDeSeguranca() {
+    let serialKey = ``;
+    const caracteres = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/*!@#$%&{}[]`;
+
+    for (let i = 0; serialKey.length < 25; i++) {
+        serialKey += caracteres.charAt(parseInt(Math.random() * caracteres.length + 1))
+    }
+
+    return serialKey;
+}
+
+function getSerialKey(emailVar) {
+    console.log("O email que veio é: " + emailVar);
+    let emailAdm = emailVar;
+    fetch(`/usuarios/getSerialKey/${emailAdm}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML = "Cadastro de admin realizado com sucesso!<br>"
+                mensagem_erro.innerHTML += "Seu código de acesso é: " + resposta[0].chaveSegurancaAdministrador;
+
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "4000")
+
+                limparFormulario();
+                finalizarAguardar();
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
