@@ -301,6 +301,11 @@ button:active {
     margin: 28px 0 10px 350px;
     display: flex;
 }
+.div_maquinas {
+    /* width: fit-content; */
+    margin: 28px 0 10px 350px;
+    /* display: flex; */
+}
 
 .container-maquinas-add {
     height: 204px;
