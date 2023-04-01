@@ -1,7 +1,6 @@
 .caixa-formulario {
     width: 400px;
     height: 500px;
-    padding: 0px;
 }
 
 .campo {
@@ -29,7 +28,6 @@
 .fgt-passwd {
     margin-top: 0.5rem;
     width: 100%;
-
     text-align: start;
     color: #006FB9;
     text-decoration: underline;
@@ -37,7 +35,62 @@
     font-size: 0.8em;
 }
 
-input[type=password]:not(:placeholder-shown)  {
+.campo-validacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-validacao {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bt-validacao {
+    width: 50px;
+    height: 36px;
+    border: none;
+    background-color: #006FB9;
+    color: #FFFFFF;
+    font-weight: 700;
+    transition: all .3s;
+}
+
+.ipt-validacao {
+    margin-top: 5px;
+    padding: 10px 20px;
+    width: 300px;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background-color: #e1e1e1;
+    border: none;
+    outline: none;
+    color: black;
+    font-weight: 400;
+}
+
+.caixa-formulario-validacao {
+    width: 400px;
+    height: 500px;
+    background: rgb(238, 238, 238);
+    padding: 24px 24px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 0.4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cmp-validacao {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+input[type=password]:not(:placeholder-shown) {
     font-size: 1.2em;
     font-weight: 700;
 }

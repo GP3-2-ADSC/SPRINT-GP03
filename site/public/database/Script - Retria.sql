@@ -234,6 +234,9 @@ create table alerta(
   
  select * from empresa;
  select * from endereco;
+ select * from administrador;
+ 
+ select emailAdministrador from administrador where emailAdministrador = 'resende@adm.com';
 
 CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
 WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',

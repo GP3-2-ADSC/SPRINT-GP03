@@ -40,9 +40,9 @@ function entrar() {
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
 
-                setTimeout(function () {
-                    window.location = "./dashboard/cards.html";
-                }, 1000); // apenas para exibir o loading
+                // setTimeout(function () {
+                //     window.location = "./dashboard/cards.html";
+                // }, 1000); // apenas para exibir o loading
 
             });
 
@@ -61,6 +61,44 @@ function entrar() {
     })
 
     return false;
+}
+
+function plotarValidacaoDeSerialKey(){
+    container.innerHTML = ``;
+    container.innerHTML = `
+    <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+    </div>
+        <div class="caixa-formulario-validacao" id="caixaFormulario">        
+            <div class="campo cmp-validacao">
+                <h2>Validação de acesso!</h2>
+                <h4 class="subtitulo-form">Insira a chave de acesso do administrador!
+                </h4>
+            </div>
+
+            <div class="container-validacao">
+                <div class="campo-validacao">
+                    <label for="in_serialKey">Chave de acesso</label>
+                    <input type="text" placeholder="Digite a chave de acesso" id="in_serialKey" class="ipt-validacao">
+                </div>
+                <button class="bt-validacao">></button>
+            </div>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+                <img src="./assets/circle-loading.gif" id="loading-gif">
+        </div>
+
+        <div id="div_erros_login">
+
+        </div>
+        
+    </div>
+
+    
+`
 }
 
 function sumirMensagem() {
