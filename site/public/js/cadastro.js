@@ -174,11 +174,13 @@ function cadastrarAdmin() {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            getSerialKey(emailVar);
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Cadastro de admin realizado com sucesso!";
 
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
+        getSerialKey(emailVar);
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
         finalizarAguardar();
@@ -205,14 +207,7 @@ function getSerialKey(emailVar) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                cardErro.style.display = "block";
-                mensagem_erro.innerHTML = "Cadastro de admin realizado com sucesso!<br>"
-                mensagem_erro.innerHTML += "Seu código de acesso é: " + resposta[0].chaveSegurancaAdministrador;
-
-
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "4000")
+                plotarSerialKey(resposta);
 
                 limparFormulario();
                 finalizarAguardar();
@@ -224,4 +219,25 @@ function getSerialKey(emailVar) {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
+}
+
+function plotarSerialKey(resposta) {
+    caixaFormulario.innerHTML = "";
+    caixaFormulario.innerHTML = `
+
+                <div class="campo">
+                    <h2>ATENÇÃO</h2>
+                    <h4 style="margin-bottom: 1rem ;">O código abaixo é o seu código de acesso para a dashboard de monitoramento! Este código é de uso exclusivo do administrador e não deve ser compartilhado com ninguém!
+                    </h4>
+                    <h3>${resposta[0].chaveSegurancaAdministrador}</h3>
+                    <button class="button" onclick="alterarPagina(1)">Continuar</button>
+                </div>
+                
+           `
+}
+
+function alterarPagina(n){
+    if (n == 1) {
+        window.location = "login.html";
+    }
 }
