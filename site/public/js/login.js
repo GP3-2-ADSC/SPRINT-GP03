@@ -1,8 +1,10 @@
+let serialKeyBanco = "";
+
 function entrar() {
     aguardar();
 
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
+    var emailVar = in_email.value;
+    var senhaVar = in_senha.value;
 
     if (emailVar == "" || senhaVar == "") {
         cardErro.style.display = "block"
@@ -36,15 +38,13 @@ function entrar() {
                 console.log(json);
                 console.log(JSON.stringify(json));
 
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
-
-                // setTimeout(function () {
-                //     window.location = "./dashboard/cards.html";
-                // }, 1000); // apenas para exibir o loading
+                sessionStorage.EMAIL_USUARIO = json.emailAdministrador;
+                sessionStorage.NOME_USUARIO = json.nomeAdministrador;
+                sessionStorage.ID_USUARIO = json.idAdministrador;
+                serialKeyBanco = json.chaveSegurancaAdministrador
 
             });
+            plotarValidacaoDeSerialKey();
 
         } else {
 
@@ -63,7 +63,7 @@ function entrar() {
     return false;
 }
 
-function plotarValidacaoDeSerialKey(){
+function plotarValidacaoDeSerialKey() {
     container.innerHTML = ``;
     container.innerHTML = `
     <div class="alerta_erro">
@@ -83,7 +83,7 @@ function plotarValidacaoDeSerialKey(){
                     <label for="in_serialKey">Chave de acesso</label>
                     <input type="text" placeholder="Digite a chave de acesso" id="in_serialKey" class="ipt-validacao">
                 </div>
-                <button class="bt-validacao">></button>
+                <button class="bt-validacao" onclick="validarSerialKey()">></button>
             </div>
         </div>
 
@@ -96,9 +96,29 @@ function plotarValidacaoDeSerialKey(){
         </div>
         
     </div>
-
-    
 `
+
+
+}
+
+function validarSerialKey() {
+    let serialKeyInserida = in_serialKey.value;
+    console.log("serialKeyInseridada " + serialKeyInserida);
+    console.log("do banco " + serialKeyBanco);
+    serialKeyInserida == serialKeyBanco ? autorizar(1) : autorizar(2);
+}
+
+function autorizar(n) {
+    if (n == 1) {
+        cardErro.style.display = "block"
+        mensagem_erro.innerHTML = "Acesso validado! Acessando dashboard!";
+        setTimeout(() => {
+            window.location = "dashboard-espec.html";
+        }, "2000")
+    } else {
+        cardErro.style.display = "block"
+        mensagem_erro.innerHTML = "Acesso invalido! Acesso à dashboard <b>NEGADO</b>!";
+    }
 }
 
 function sumirMensagem() {
