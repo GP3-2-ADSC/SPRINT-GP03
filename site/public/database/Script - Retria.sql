@@ -35,6 +35,7 @@ create table administrador(
     chaveSegurancaAdministrador varchar(45),
     fkEmpresa int,
     primary key (idAdministrador, fkEmpresa),
+    unique (fkEmpresa),
     foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 ALTER TABLE `administrador` 
