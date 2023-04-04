@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/main.css" />
     
 
-    <title>Dashboard Específico</title>
+    <title>Histórcio de alertas</title>
   </head>
   <body>
     <div class="container-menu">
@@ -115,14 +115,19 @@
       <div class="container-content">
         <div class="group-subtitles">
             <span class="circle-kpi green"></span>
+
             <span class="text-kpi">Baixa</span>
         </div>
+
         <div class="group-subtitles">
             <span class="circle-kpi yellow"></span>
+            
             <span class="text-kpi">Médio</span>
         </div>
+        
         <div class="group-subtitles">
             <span class="circle-kpi red"></span>
+            
             <span class="text-kpi">Alta</span>
         </div>
       </div>
@@ -130,71 +135,113 @@
       <div class="container-alerts">
 
         <div class="alerts">
-          <div class="alerts-information">
-            <b id="machine">Máquina - 01</b>
-            <div class="details">
-              <div id="container-button-details">
-                <div class="historic">
-                  
-                </div>
-              </div>
-              <p id="details-button"><b>Ver detalhes</b></p>
+            <span class="title-machine">Máquina - 01</span>
+
+            <div class="container-details" id="details-1">
+              <p class="details">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+              </p>
+
+              <p class="details">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+              </p>
+
+              <p class="details">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+              </p>
+
+              <p class="details">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+              </p>
             </div>
-            <div class="div-icon">
-              <span class="icon">
-                <button onclick="mostrarEsconderDiv()">
-                  <ion-icon name="chevron-down-circle-outline" class="arrows-icon" id="arrow-down1"></ion-icon>
-                  <ion-icon name="chevron-up-circle-outline" class="arrows-icon" id="arrow-up1"></ion-icon>
-                </button>
-              </span>
+
+            
+            <div class="details-options">
+              <p class="p-details" id="p-more-details">Mais detalhes</p>
+              <p class="p-details" id="p-less-details">Menos detalhes</p>
+
+              <button class="details-button" onclick="mostrarEsconderDiv()">
+                <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-1"></ion-icon>
+
+                <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-1"></ion-icon>
+              </button>
             </div>
-          </div>
         </div>
-        
+
         <div class="alerts">
-          <div class="alerts-information">
-            <b id="machine">Máquina - 02</b>
-            <div class="details">
-              <div id="container-button-details2">
-                dsijasddasjkdaskkasd
-              </div>
-              <p><b id="details-button2">Ver detalhes</b></p>
-            </div>
-            <div class="div-icon">
-              <span class="icon">
-                <button onclick="mostrarEsconderDiv2()">
-                  <ion-icon name="chevron-down-circle-outline" class="arrows-icon" id="arrow-down2"></ion-icon>
-                  <ion-icon name="chevron-up-circle-outline" class="arrows-icon" id="arrow-up2"></ion-icon>
-                </button>
-              </span>
-            </div>
+          <span class="title-machine">Máquina - 02</span>
+
+          <div class="container-details" id="details-2">
+            <p class="details">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+            </p>
+
+            <p class="details">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+            </p>
+
+            <p class="details">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+            </p>
+
+            <p class="details">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+            </p>
           </div>
-        </div>
-        
-        <div class="alerts">
-          <div class="alerts-information">
-            <b id="machine">Máquina - 03</b>
-            <div class="details">
-              <div id="container-button-details3">
-                asddasasdasd
-              </div>
-              <p id="details-button3"><b>Ver detalhes</b></p>
-            </div>
-            <div class="div-icon">
-              <span class="icon">
-                <button onclick="mostrarEsconderDiv3()">
-                  <ion-icon name="chevron-down-circle-outline" class="arrows-icon" id="arrow-down3"></ion-icon>
-                  <ion-icon name="chevron-up-circle-outline" class="arrows-icon" id="arrow-up3"></ion-icon>
-                </button>
-              </span>
-            </div>
+
+          
+          <div class="details-options">
+            <p class="p-details" id="p-more-details-2">Mais detalhes</p>
+            <p class="p-details" id="p-less-details-2">Menos detalhes</p>
+
+            <button class="details-button" onclick="mostrarEsconderDiv2()">
+              <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-2"></ion-icon>
+
+              <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-2"></ion-icon>
+            </button>
           </div>
-        </div>
+      </div>
         
+      <div class="alerts">
+        <span class="title-machine">Máquina - 03</span>
+
+        <div class="container-details" id="details-3">
+          <p class="details">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+          </p>
+
+          <p class="details">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+          </p>
+
+          <p class="details">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quibusdam, deleniti vel dolore tenetur illum doloremque temporibus dolorum nisi cum! Laborum aperiam perspiciatis repudiandae molestiae nostrum, velit sequi rem mollitia.
+          </p>
+
+          <p class="details">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut eum est, minima accusantium placeat amet pariatur explicabo? Veniam numquam autem corrupti facere? Eaque porro illum, omnis ipsum totam esse laudantium?
+          </p>
+        </div>
+
+        
+        <div class="details-options">
+          <p class="p-details" id="p-more-details-3">Mais detalhes</p>
+          <p class="p-details" id="p-less-details-3">Menos detalhes</p>
+
+          <button class="details-button" onclick="mostrarEsconderDiv3()">
+            <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-3"></ion-icon>
+
+            <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-3"></ion-icon>
+          </button>
+        </div>
+    </div>
+
       </div>
     </div>
     </body>
     </html>
+
+    
     <script src="./js/historico_alertas.js" defer></script>
     
     
