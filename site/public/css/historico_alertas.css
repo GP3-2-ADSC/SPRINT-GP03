@@ -219,6 +219,32 @@ h1 {
   padding: 10px 0; 
 }
 
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+
+.log-details {
+  font-weight: 500;
+}
+
+.container-text {
+  display: flex;
+  align-items: center;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.log-phrase {
+  padding: 10px;
+}
+
 .container-details {
   display: none;
   max-height: 180px;
