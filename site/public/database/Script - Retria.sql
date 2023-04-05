@@ -73,11 +73,12 @@ create table especificacaoComponente(
 );
     
 create table maquinaUtrassonomatograficaEspecificada(
+	idEspecificacaoComponenteMaquina int auto_increment,
 	fkMaquina int,
     fkAdministrador int,
     fkEmpresa int,
     fkEspecificacaoComponente int,
-    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente),
+    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente,idEspecificacaoComponenteMaquina),
     foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
     foreign key (fkAdministrador) references administrador(idAdministrador),
     foreign key (fkEmpresa) references empresa(idEmpresa),
@@ -188,11 +189,12 @@ create table especificacaoComponente(
 );
 
 create table maquinaUtrassonomatograficaEspecificada(
+	idEspecificacaoComponenteMaquina int unique,
     fkMaquina int unique,
     fkAdministrador int unique,
     fkEmpresa int unique,
     fkEspecificacaoComponente int unique,
-    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente),
+    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente, idEspecificacaoComponenteMaquina),
     foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
     foreign key (fkAdministrador) references administrador(idAdministrador),
     foreign key (fkEmpresa) references empresa(idEmpresa),
