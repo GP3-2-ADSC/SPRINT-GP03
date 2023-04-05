@@ -50,7 +50,7 @@
                             </span>
                         </span>
 
-                        <span class="list-title" id="list-active">Dashboard específico</span>
+                        <span class="list-title" >Dashboard específico</span>
                     </a>
                 </li>
 
@@ -74,7 +74,7 @@
                             </span>
                         </span>
 
-                        <span class="list-title">Inventário de máquinas</span>
+                        <span class="list-title" id="list-active">Inventário de máquinas</span>
                     </a>
                 </li>
 
@@ -128,16 +128,24 @@
                 <div class="container-general-chart">
                     <div class="inputs-maquinas">
                         <div class="campos-cima">
-                            <label class="input-text">Nome da máquina</label>
-                            <input class="input-maquina" type="text" id="in_nome">
-                            <label class="input-text">Hostname</label>
-                            <input class="input-maquina" type="text" id="in_hostname">
+                            <label class="input-text">Fornecedor:</label>
+                            <input class="input-maquina" type="text" id="in_fornecedor">
+                            <label class="input-text">Número Serial:</label>
+                            <input class="input-maquina" type="text" id="in_numSerial">
+                            <label class="input-text">Andar:</label>
+                            <input class="input-maquina" type="text" id="in_andar">
+                            <label class="input-text">Setor:</label>
+                            <input class="input-maquina" type="text" id="in_setor">
                         </div>
                         <div class="campos-baixo">
+                            <label class="input-text">Tipo de máquina</label>
+                            <input class="input-maquina" type="text" id="in_tipoMaquina">
                             <label class="input-text">Responsável</label>
                             <input class="input-maquina" type="text" id="in_responsavel">
-                            <label class="input-text">Setor</label>
-                            <input class="input-maquina" type="text" id="in_setor">
+                            <label class="input-text">XXX</label>
+                            <input class="input-maquina" type="text" id="in_xxx">
+                            <label class="input-text">XXX</label>
+                            <input class="input-maquina" type="text" id="in_xxx">
                         </div>
                     </div>
                     <div class="btn-add">
@@ -156,19 +164,19 @@
     <div class="div_maquinas" id="div_maquinas">
         <h1 id="title_cadastro">Nenhuma máquina foi cadastrada até o momento</h1>
     </div>
-
-    </div>
-</body>
+    </body>
 
 </html>
 <script>
     var id = 0; 
     function adicionar_maquina() {
         title_cadastro.innerHTML = ""
-        var nome_maquina = in_nome.value
-        var hostname = in_hostname.value
+        var fornecedor = in_fornecedor.value
+        var numSerial = in_numSerial.value
+        var andar = in_andar.value
         var responsavel = in_responsavel.value
         var setor = in_setor.value
+        var tipoMaquina = in_tipoMaquina.value
         
         id++
         div_maquinas.style = "margin: 28px 0 10px 0px;"
@@ -179,9 +187,9 @@
                 <div class="container-dados-maquina">
                     <div class="dados-user">
                         <span>ID: ${id}</span>
-                        <span>Máquina: ${nome_maquina}</span></span>
-                        <span>Nome: ${responsavel}</span>
-                        <span>Email: teste@gmail.com</span></span>
+                        <span>Tipo Máquina: ${tipoMaquina}</span>
+                        <span>Responsável: ${responsavel}</span></span>
+                        <span>Número Serial: ${numSerial}</span></span>
                     </div>
                     <div class="btns-editar-excluir">
                         <a href="#">
