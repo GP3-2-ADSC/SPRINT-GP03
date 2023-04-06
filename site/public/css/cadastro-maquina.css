@@ -311,7 +311,7 @@ button:active {
 }
 
 .container-maquinas-add {
-    height: 204px;
+    height: 230px;
     width: calc(100vw - 400px);
     background-color: #D8E5FF;
     margin-top: 0px;
@@ -331,7 +331,7 @@ button:active {
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    width: 550px;
+    width: 90%;
 }
 .container-dados-maquina .dados-user span{
     margin-bottom: 15px;
@@ -346,7 +346,6 @@ button:active {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    width: 550px;
     height: 64px;
     
 }
