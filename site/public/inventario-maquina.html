@@ -50,7 +50,7 @@
                             </span>
                         </span>
 
-                        <span class="list-title" >Dashboard específico</span>
+                        <span class="list-title">Dashboard específico</span>
                     </a>
                 </li>
 
@@ -134,18 +134,15 @@
                             <input class="input-maquina" type="text" id="in_numSerial">
                             <label class="input-text">Andar:</label>
                             <input class="input-maquina" type="text" id="in_andar">
-                            <label class="input-text">Setor:</label>
-                            <input class="input-maquina" type="text" id="in_setor">
+
                         </div>
                         <div class="campos-baixo">
                             <label class="input-text">Tipo de máquina</label>
                             <input class="input-maquina" type="text" id="in_tipoMaquina">
                             <label class="input-text">Responsável</label>
                             <input class="input-maquina" type="text" id="in_responsavel">
-                            <label class="input-text">XXX</label>
-                            <input class="input-maquina" type="text" id="in_xxx">
-                            <label class="input-text">XXX</label>
-                            <input class="input-maquina" type="text" id="in_xxx">
+                            <label class="input-text">Setor:</label>
+                            <input class="input-maquina" type="text" id="in_setor">
                         </div>
                     </div>
                     <div class="btn-add">
@@ -164,11 +161,11 @@
     <div class="div_maquinas" id="div_maquinas">
         <h1 id="title_cadastro">Nenhuma máquina foi cadastrada até o momento</h1>
     </div>
-    </body>
+</body>
 
 </html>
 <script>
-    var id = 0; 
+    var id = 0;
     function adicionar_maquina() {
         title_cadastro.innerHTML = ""
         var fornecedor = in_fornecedor.value
@@ -177,7 +174,7 @@
         var responsavel = in_responsavel.value
         var setor = in_setor.value
         var tipoMaquina = in_tipoMaquina.value
-        
+
         id++
         div_maquinas.style = "margin: 28px 0 10px 0px;"
 
@@ -186,10 +183,10 @@
             <div class="container-maquinas-add">
                 <div class="container-dados-maquina">
                     <div class="dados-user">
-                        <span>ID: ${id}</span>
-                        <span>Tipo Máquina: ${tipoMaquina}</span>
-                        <span>Responsável: ${responsavel}</span></span>
-                        <span>Número Serial: ${numSerial}</span></span>
+                        <span id="list-active">ID:<span>${id}</span></span>
+                        <span id="list-active">Responsável:<span>${responsavel}</span>;<span id="list-active">Tipo Máquina:<span>${tipoMaquina}</span></span></span>
+                        <span id="list-active">Andar:<span>${andar}</span>;<span id="list-active">Número Setor:</span><span>${setor}</span></span>
+                        <span id="list-active">Fornecedor:<span>${fornecedor}</span>;<span id="list-active">Número Serial:<span>${numSerial}</span></span></span>
                     </div>
                     <div class="btns-editar-excluir">
                         <a href="#">
@@ -211,6 +208,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         `
     }
 
