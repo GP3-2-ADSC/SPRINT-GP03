@@ -22,7 +22,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "retria",
     user: "root",
-    password: "#Gf47592527898",
+    password: "sonic***",
 };
 
 function executar(instrucao) {

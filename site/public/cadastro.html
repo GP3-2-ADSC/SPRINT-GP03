@@ -58,29 +58,25 @@
                     <div class="campo">
                         <label for="in_empresa">Nome da Empresa
                             <input type="text" placeholder="Digite o nome da empresa" id="in_empresa" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_cnpj">CNPJ da Empresa
-                            <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj" class="input">
-                            <span class="span-required">Campo inválido</span>
+                            <input type="text" placeholder="'99.999.999.9999-99'" id="in_cnpj" class="input">
                         </label>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
                         <label for="in_telefone_1">Celular / Telefone (1)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1" class="input">
-                            <span class="span-required">Campo inválido</span>
+                            <input type="text" placeholder="'(99)99999-9999'" id="in_telefone_1" class="input">
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_telefone_2">Celular / Telefone (2)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2" class="input">
-                            <span class="span-required">Campo inválido</span>
+                            <input type="text" placeholder="'(99)99999-9999'" id="in_telefone_2" class="input">
                         </label>
                     </div>
                 </div>
@@ -89,37 +85,19 @@
                     <div class="campo">
                         <label for="in_email">Email
                             <input type="text" placeholder="Digite o email" id="in_email"  class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                     <div class="campo">
                         <label for="in_resp"> Responsável
                             <input type="text" placeholder="Responsável pelo empresa" id="in_resp" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
-
-                <!-- <div class="linha">
-                    <div class="campo">
-                        <label for="senha">Criar uma senha
-                            <input type="password" placeholder="Digite sua senha" id="in_senha">
-                            <span class="span-required">Campo inválido</span>
-                        </label>
-                    </div>
-                    <div class="campo">
-                        <label for="conf_senha"> Confirmar senha
-                            <input type="password" placeholder="Confirme sua senha" id="in_confirmacao">
-                            <span class="span-required">Campo inválido</span>
-                        </label>
-                    </div>
-                </div> -->
-
                 <div class="ponto">
                     <span class="dot" style="background-color:#8cccf0;"></span>
                     <span class="dot"></span>
                 </div>
-                <button class="button" onclick="nextPage(1)">Próximo</button>
+                <button class="button" id="passarpag" onclick="nextPage(1)">Próximo</button>
             </div>
             <div id="div_aguardar" class="loading-div">
                 <img src="./assets/circle-loading.gif" id="loading-gif">
@@ -182,19 +160,68 @@
             empresaStorage.push(email);
             empresaStorage.push(resp);
 
-            let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || tel2 == "" || email == "" || resp == "";
+            // const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
+            
+            // const telefoneRegex = /^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$/;
 
+            const cnpjRegex = /^\b\d{14}\b$/
+
+            const telefoneRegex = /^\b\d{11}\b$/;
+
+
+
+            let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || tel2 == "" || email == "" || resp == "";
+         
             if (campoVazio) {
                 cardErro.style.display = "block"
                 mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
                 finalizarAguardar();
+                setInterval(sumirMensagem, 5000);
                 return false;
             }
             else {
+                
+                if(cnpjRegex.test(cnpj)){
+                    console.log("Cnpj Correto")
+                    
+                } else {
+                    console.log("Cnpj Incorreto")
+                    cardErro.style.display = "block"
+                    mensagem_erro.innerHTML = "(Cnpj Incorreto)";
+                    
+                    
+                    finalizarAguardar();
+                    setInterval(sumirMensagem, 5000);
+                    return false;  
+                }
+                
+                if(telefoneRegex.test(tel1)){
+                    console.log("Telefone Correto");
+                } else {
+                    console.log("Telefone Incorreto")
+                    cardErro.style.display = "block"
+                    mensagem_erro.innerHTML = "(Telefone 1 Incorreto)";
+                    
+                    finalizarAguardar();
+                    setInterval(sumirMensagem, 5000);
+                    return false;
+                }
+                
+                if(telefoneRegex.test(tel2)){
+                    console.log("Telefone Correto");
+                } else {
+                    console.log("Telefone Incorreto")
+                    cardErro.style.display = "block"
+                    mensagem_erro.innerHTML = "(Telefone 2 Incorreto)";
+                    
+                    
+                    finalizarAguardar();
+                    setInterval(sumirMensagem, 5000);
+                    return false;
+                }
                 plotarNovaPagina();
             }
-
         } else {
             caixaFormulario.innerHTML = ``;
             caixaFormulario.innerHTML = `
@@ -206,29 +233,25 @@
                     <div class="campo">
                         <label for="in_empresa">Nome da Empresa
                             <input type="text" placeholder="Digite o nome da empresa" id="in_empresa" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_cnpj">CNPJ da Empresa
                             <input type="text" placeholder="Digite o CNPJ da empresa" id="in_cnpj" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
                         <label for="in_telefone_1">Celular / Telefone (1)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_1" class="input">
-                            <span class="span-required">Campo inválido</span>
+                            <input type="text" placeholder="(99)99999-9999" id="in_telefone_1" class="input">
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_telefone_2">Celular / Telefone (2)
-                            <input type="text" placeholder="Digite o telefone" id="in_telefone_2" class="input">
-                            <span class="span-required">Campo inválido</span>
+                            <input type="text" placeholder="(99)99999-9999" id="in_telefone_2" class="input">
                         </label>
                     </div>
                 </div>
@@ -237,13 +260,11 @@
                     <div class="campo">
                         <label for="in_email">Email
                             <input type="text" placeholder="Digite o email" id="in_email" class="input"> 
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                     <div class="campo">
                         <label for="in_resp"> Responsável
                             <input type="text" placeholder="Responsável pelo empresa" id="in_resp" class="input"> 
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
@@ -259,7 +280,6 @@
     }
 
     function plotarNovaPagina() {
-
         caixaFormulario.innerHTML = "";
         caixaFormulario.innerHTML = `
 
@@ -271,14 +291,12 @@
                     <div class="campo">
                         <label for="in_cep">CEP
                             <input type="text" placeholder="Digite seu CEP" id="in_cep"   class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_logradouro">logradouro
                             <input type="text" placeholder="Digite sua logradouro" id="in_logradouro"  class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
@@ -286,14 +304,12 @@
                     <div class="campo">
                         <label for="in_numero">Numero
                             <input type="number" placeholder="Digite o numero" id="in_numero"  class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
 
                     <div class="campo">
                         <label for="in_bairro">Bairro
                             <input type="text" placeholder="Digite o bairro" id="in_bairro" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
@@ -302,13 +318,11 @@
                     <div class="campo">
                         <label for="in_cidade">Cidade
                             <input type="text" placeholder="Digite a cidade" id="in_cidade"  class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                     <div class="campo">
                         <label for="in_estado">Estado
                             <input type="text" placeholder="Digite o estado" id="in_estado" class="input">
-                            <span class="span-required">Campo inválido</span>
                         </label>
                     </div>
                 </div>
@@ -327,7 +341,7 @@
                 </div>
 
                 <div class="linha">
-                    <button class="button" onclick="nextPage(2)">Voltar</button>
+                    <button class="button" id="passarpag" onclick="nextPage(2)">Voltar</button>
                     <button class="button" onclick = "cadastrarDados()">Cadastrar</button>
                 </div>
            `

@@ -137,20 +137,60 @@ function cadastrarAdmin() {
     var telVar = in_telefone.value;
     var emailVar = in_email.value;
     var senhaVar = in_senha.value;
+    var confirmarSenhaVar = in_confirmacao.value;
 
-    var campovazio = nomeAdm == "" || cargoVar == "" || telVar == "" || emailVar == "" || senhaVar == "";
+    var campovazio = nomeAdm == "" || cargoVar == "" || telVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "";
 
+
+    const telefoneRegex = /^\b\d{11}\b$/;
+
+    const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,}$/;
+
+
+    // const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
 
     if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
         finalizarAguardar();
+        setInterval(sumirMensagem, 5000);
         return false;
     }
     else {
-        setInterval(sumirMensagem, 5000);
+        if (telefoneRegex.test(telVar)) {
+            console.log("Telefone Correto");
+        } else {
+            console.log("Telefone Incorreto")
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Telefone Incorreto)";
+
+            finalizarAguardar();
+            setInterval(sumirMensagem, 5000);
+            return false;
+        }
+
+        if (senhaRegex.test(senhaVar)) {
+            console.log("Senha Correta");
+            if (!senhaVar == confirmarSenhaVar) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML += "(Suas senhas são diferentes)";
+
+                finalizarAguardar();
+                setInterval(sumirMensagem, 5000);
+                return false;
+            }
+        } else {
+            console.log("Senha Incorreta");
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Senha fora dos padrões)";
+
+            finalizarAguardar();
+            setInterval(sumirMensagem, 5000);
+            return false;
+        }
     }
+
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrarAdmin", {
@@ -186,6 +226,8 @@ function cadastrarAdmin() {
         finalizarAguardar();
     });
 
+
+    setInterval(sumirMensagem, 5000);
     return false;
 }
 
@@ -236,7 +278,7 @@ function plotarSerialKey(resposta) {
            `
 }
 
-function alterarPagina(n){
+function alterarPagina(n) {
     if (n == 1) {
         window.location = "login.html";
     }
