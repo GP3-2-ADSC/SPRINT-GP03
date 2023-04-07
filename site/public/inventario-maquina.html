@@ -153,19 +153,21 @@
             </div>
         </div>
     </div>
-
-    <div class="title-lista">
-        <h1>Máquina cadastrada com sucesso!</h1>
+    
+    <div id="div_title_cadastro">
+        <h1 id="title_cadastro2">Nenhuma máquina foi cadastrada até o momento</h1>
     </div>
 
     <div class="div_maquinas" id="div_maquinas">
-        <h1 id="title_cadastro">Nenhuma máquina foi cadastrada até o momento</h1>
+        <h1 id="title_cadastro"></h1>
     </div>
+
 </body>
 
 </html>
 <script>
     var id = 0;
+    title_cadastro2.style = "margin: 28px 0 10px 350px;"
     function adicionar_maquina() {
         title_cadastro.innerHTML = ""
         var fornecedor = in_fornecedor.value
@@ -174,42 +176,50 @@
         var responsavel = in_responsavel.value
         var setor = in_setor.value
         var tipoMaquina = in_tipoMaquina.value
+        var campoNull = fornecedor == "" || numSerial == "" || andar == "" || responsavel == "" || setor == "" || tipoMaquina == ""
+        
+        if (!campoNull) {    
+            
+            title_cadastro2.innerHTML = "Máquinas cadastradas com sucesso!"
+            
+            id++
+            div_maquinas.style = "margin: 28px 0 10px 0px;"
+            div_maquinas.innerHTML += `
+                <div class="container-content">
+                    <div class="container-maquinas-add">
+                        <div class="container-dados-maquina">
+                            <div class="dados-user">
+                                <span id="list-active">ID:<span>${id}</span></span>
+                                <span id="list-active">Responsável:<span>${responsavel}</span>;<span id="list-active">Tipo Máquina:<span>${tipoMaquina}</span></span></span>
+                                <span id="list-active">Andar:<span>${andar}</span>;<span id="list-active">Número Setor:</span><span>${setor}</span></span>
+                                <span id="list-active">Fornecedor:<span>${fornecedor}</span>;<span id="list-active">Número Serial:<span>${numSerial}</span></span></span>
+                            </div>
+                            <div class="btns-editar-excluir">
+                                <a href="#">
+                                    <span class="circle-lista">
+                                        <span class="icon-edit-exc">
+                                            <ion-icon name="pencil-outline"></ion-icon>
+                                        </span>
+                                    </span>
+                                </a>
+                                <i></i>
+                                <a href="#">
+                                    <span class="circle-lista2">
+                                        <span class="icon-edit-exc">
+                                            <ion-icon name="trash-bin-outline"></ion-icon>
+                                        </span>
+                                    </span>
 
-        id++
-        div_maquinas.style = "margin: 28px 0 10px 0px;"
-
-        div_maquinas.innerHTML += `
-        <div class="container-content">
-            <div class="container-maquinas-add">
-                <div class="container-dados-maquina">
-                    <div class="dados-user">
-                        <span id="list-active">ID:<span>${id}</span></span>
-                        <span id="list-active">Responsável:<span>${responsavel}</span>;<span id="list-active">Tipo Máquina:<span>${tipoMaquina}</span></span></span>
-                        <span id="list-active">Andar:<span>${andar}</span>;<span id="list-active">Número Setor:</span><span>${setor}</span></span>
-                        <span id="list-active">Fornecedor:<span>${fornecedor}</span>;<span id="list-active">Número Serial:<span>${numSerial}</span></span></span>
-                    </div>
-                    <div class="btns-editar-excluir">
-                        <a href="#">
-                            <span class="circle-lista">
-                                <span class="icon-edit-exc">
-                                    <ion-icon name="pencil-outline"></ion-icon>
-                                </span>
-                            </span>
-                        </a>
-                        <i></i>
-                        <a href="#">
-                            <span class="circle-lista2">
-                                <span class="icon-edit-exc">
-                                    <ion-icon name="trash-bin-outline"></ion-icon>
-                                </span>
-                            </span>
-
-                        </a>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        `
+                `
+
+        } else {
+            alert("Preencha todos os campos.")
+        }
     }
 
 </script>

@@ -306,6 +306,9 @@ button:active {
     margin: 28px 0 10px 350px;
     /* display: flex; */
 }
+.div_title_cadastro{
+    margin: 28px 0 10px 350px;
+}
 
 .container-maquinas-add {
     height: 230px;
