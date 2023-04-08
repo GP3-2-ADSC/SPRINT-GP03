@@ -2,130 +2,200 @@
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Geral</title>
-    <link rel="stylesheet" href="./css/dashboardGeral.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Geral</title>
+  <link rel="stylesheet" href="./css/dashboardGeral.css">
+  <link rel="stylesheet" href="./css/main.css" />
+
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
+  integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  ></script>
+
 </head>
 
 <body>
+  <div class="container-dash">
+    <div class="container-menu">
 
-    <div class="barraPesquisa"></div>
-    <div class="novaMaquina"></div>
-
-    <div class="card-container">
-        <div class="card">
-            <div class="grafico-container1">
-                <canvas id="grafico1"></canvas>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="grafico-container2">
-                <canvas id="grafico2"></canvas>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="grafico-container3">
-                <canvas id="grafico3"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="card-container-menores">
-        <div class="card-menor card-menor1"></div>
-        <div class="card-menor card-menor2"></div>
-        <div class="card-menor card-menor3"></div>
+      <div class="img-logo">
+        <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
       </div>
 
-    <script>
-        var ctx1 = document.getElementById('grafico1').getContext('2d');
-        var chart1 = new Chart(ctx1, {
-            type: 'doughnut',
-            data: {
-                labels: ['Uso de Rede'],
-                datasets: [{
-                    data: [60, 40],
-                    backgroundColor: ['#F44336', '#FAEBD7']
-                }]
-            },
-            options: {
-                cutoutPercentage: 90,
-                responsive: false,
-                maintainAspectRatio: false,
-                tooltips: {
-                    enabled: false
-                },
-                legend: {
-                    display: false
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-        });
+      <!-- Menu lateral -->
+      <div class="container-list">
+        <ul>
+          <li class="list">
+            <a href="dashboard-geral.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="stats-chart-outline"></ion-icon>
+                </span>
+              </span>
 
-        var ctx2 = document.getElementById('grafico2').getContext('2d');
-        var chart2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: ['Uso de Rede'],
-                datasets: [{
-                    data: [30, 70],
-                    backgroundColor: ['#F44336', '#FAEBD7']
-                }]
-            },
-            options: {
-                cutoutPercentage: 90,
-                responsive: false,
-                maintainAspectRatio: false,
-                tooltips: {
-                    enabled: false
-                },
-                legend: {
-                    display: false
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-        });
+              <span class="list-title">Dashboard geral</span>
+            </a>
+          </li>
 
-        var ctx3 = document.getElementById('grafico3').getContext('2d');
-        var chart3 = new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                labels: ['Uso de Rede'],
-                datasets: [{
-                    data: [80, 20],
-                    backgroundColor: ['#F44336', '#FAEBD7']
-                }]
-            },
-            options: {
-                cutoutPercentage: 90,
-                responsive: false,
-                maintainAspectRatio: false,
-                tooltips: {
-                    enabled: false
-                },
-                legend: {
-                    display: false
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-        });
-    </script>
+          <li class="list">
+            <a href="dashboard-espec.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="analytics-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title" id="list-active"
+                >Dashboard específico</span
+              >
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="historico-alertas.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Histórico de alertas</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="inventario-maquina.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="construct-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Inventário de máquinas</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <!-- Inserir link da Help Desk -->
+            <a href="#">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="help-circle-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Ajuda</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="download-app.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="download-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Download aplicação</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="outside-icon" href="login.html" onclick="limparSessao()">
+        <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+      </a>
     </div>
 
-</body>
+<div class="container-graficos">
+    <div class="top-page">
+      <div class="container-title">
+        <div class="barraPesquisa">
+          <input type="text" placeholder="Pesquisar...">
+        </div>
+        <div class="novaMaquina">
+          <button>Nova máquina</button>
+        </div>
+      </div>
+    </div>
 
+      <div class="card-container">
+        <div class="card">
+          <div class="card-kpi">
+            <span class="text-card-kpi">nome virtual da maquina</span>
+          </div>
+          <div class="grafico-container1">
+            <canvas id="grafico1" style="display: flex"></canvas>
+          </div>
+          <div class="verMais1">
+            <button>Ver mais</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso da Rede</span>
+          </div>
+          <div class="grafico-container2">
+            <canvas id="grafico2" style="display: flex"></canvas>
+          </div>
+          <div class="verMais2">
+            <button> Ver mais </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso da Rede</span>
+          </div>
+          <div class="grafico-container3">
+            <canvas id="grafico3" style="display: flex"></canvas>
+          </div>
+          <div class="verMais3">
+            <button>Ver mais</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-container-menores">
+        <div class="card-menor card-menor1">
+          <h2 class="card-title">Máquinas em estado crítico</h2>
+          <p class="card-metric">Alerta (19 - 45%)</p>
+          <p class="card-subtitle">Total de máquinas: <span class="card-number">15</span></p>
+        </div>
+        <div class="card-menor card-menor2">
+          <h2 class="card-title">Máquinas em estado de alerta</h2>
+          <p class="card-metric">Alerta (60 - 79%)</p>
+          <p class="card-subtitle">Total de máquinas: <span class="card-number">30</span></p>
+        </div>
+        <div class="card-menor card-menor3">
+          <h2 class="card-title">Máquinas em estado normal</h2>
+          <p class="card-metric">Ideal (46 - 59%)</p>
+          <p class="card-subtitle">Total de máquinas: <span class="card-number">200</span></p>
+        </div>
+      </div>
+      </div>
+  </div>
+
+
+
+
+</body>
 </html>
+
+<script src="./js/dashboard-geral.js"></script>
+
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
