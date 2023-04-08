@@ -144,7 +144,7 @@ function cadastrarAdmin() {
 
     const telefoneRegex = /^\b\d{11}\b$/;
 
-    const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,}$/;
+    const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,20}$/;
 
 
     // const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
