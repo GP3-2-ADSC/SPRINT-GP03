@@ -1,90 +1,246 @@
-/* Estilos para o botão de adicionar nova máquina */
-.novaMaquina {
-    width: 10vw;
-    height: 7vh;
-    left: 30vw;
-    top: 60vh;
-    left: 30vw;
-    margin-left: 80vw;
-
-    background: #9CB8FF;
-    border-radius: 20px;
+:root {
+  --card-kpi-width: 175px;
 }
 
-/* Estilos para a barra de pesquisa */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container-dash {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+.container-graficos {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.container-menu {
+  width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #0070BA;
+  color: rgb(0, 0, 0);
+  align-items: flex-start;
+}
+
+#exit-icon {
+  padding-top: 135px;
+}
+
+.container-list ul li a {
+  width: 100%;
+  display: flex;
+}
+
+.list {
+  padding-left: 20px;
+  padding-bottom: 26px;
+  display: flex;
+  text-align: center;
+}
+
+#list-active {
+  font-weight: bold;
+}
+
+.outside-icon {
+  display: flex;
+  justify-content: end;
+  color: rgb(0, 0, 0);
+  font-size: 2.7em;
+}
+
+.img-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 35px;
+}
+
+.circle {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.icon {
+  color: black;
+  font-size: 1.3em;
+  display: flex;
+}
+
+.list-title {
+  padding-left: 10px;
+  font-size: 1em;
+  color: #ffffff;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+
+/* estilos botões ver mais */
+.verMais1 button,
+.verMais2 button,
+.verMais3 button {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  margin-top: 5px;
+  width: 80px;
+  height: 60%;
+  border-radius: 10px;
+  text-align: center;
+
+  border: none; 
+  outline: none; 
+}
+
+/* Define as regras para o título do botão */
+.container-title-button h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Define as regras para a barra de pesquisa */
+.container-title {
+  width: 100%;
+  display: flex;
+  padding-right: 20px;
+  padding-left: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-page {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
 .barraPesquisa {
-    width: 40vw;
-    height: 5vh;
-    margin-left: 6vw;
-    background: #D6E7F8;
-    border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-/* Graficos */
-
-.grafico-container {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 10px;
-    text-align: center;
+.barraPesquisa input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.card-container {
-    margin-top: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    height:45vh;
-    width: 190vh;
-    
-}
+ /* Define as regras para o botão de nova máquina */
+ .novaMaquina {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+ }
 
-.card {
-    height: 90vh;
-    width: 60vw;
-    height: 40vh;
-    border-radius: 10px;
-    margin-left: 80px;
-    background: #D6E7F8;
-}
+ .novaMaquina button {
+   background-color: #4c77af;
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+ }
 
-#grafico1, #grafico2, #grafico3 {
-  margin-top: 10vh;
-  width: 10vw;
-  height: 8vh;
-}
+ .card-container {
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   gap: 2rem;
+   width: 100%;
+ }
+
+ .card {
+   width:30%;
+   background-color:#8cccf0;
+   padding: 40px;
+   border-radius: 5px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+ }
 
 
+ #grafico1,
+ #grafico2,
+ #grafico3 {
+   margin-top: 2vw;
+   height: 60px;
+   /* altura */
+   width: auto;
+   /* largura */
+   display: flex;
+   justify-content: center;
+ }
 
-
+ 
 /* Estilos para os cards menores */
 .card-container-menores {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    height:45vh;
-    width: 190vh;
-  }
-  
-  .card-menor {
-    height: 20vh;
-    width: 20vw;
-    border-radius: 10px;
-    margin-right: 8vw;
-    margin-left: 80px;
-    
-  }
-  
-  .card-menor1 {
-    background-color: #8BC34A;
-  }
-  
-  .card-menor2 {
-    background-color: #FFC107;
-  }
-  
-  .card-menor3 {
-    background-color: #ff0000;
-  }
-  
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* adiciona a propriedade flex-wrap: wrap; */
+}
 
+.card-menor {
+  flex-basis: calc(30% - 2vw);
+  border-radius: 10px;
+  margin: 1vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+.card-menor h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-menor p {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-menor span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
+ .card-menor1 {
+   background-color: #fc7171;
+ }
+ .card-menor2 {
+   background-color: #fddd7c;
+ }
+ .card-menor3 {
+   background-color: #c9ff8c;
+ }
