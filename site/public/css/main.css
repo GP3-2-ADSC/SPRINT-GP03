@@ -90,8 +90,9 @@ body::-webkit-scrollbar-thumb {
     transition: all .3s;
 }
 
-.button:hover {
-    transform: scale(1.01);
+.button:hover,
+.button:focus {
+    outline-offset: 3px;
 }
 
 
