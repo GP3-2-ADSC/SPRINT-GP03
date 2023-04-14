@@ -1,6 +1,4 @@
 
-
-
 function pegarEndereco() {
     var cep = document.getElementById('in_cep')
     var script = document.createElement('script')
