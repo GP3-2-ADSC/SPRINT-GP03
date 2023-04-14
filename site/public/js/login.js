@@ -16,9 +16,6 @@ function entrar() {
         setInterval(sumirMensagem, 5000)
     }
 
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-
     fetch("/usuarios/autenticar", {
         method: "POST",
         headers: {
@@ -51,8 +48,9 @@ function entrar() {
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
-                console.error(texto);
-                finalizarAguardar(texto);
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = texto;
+                finalizarAguardar();
             });
         }
 

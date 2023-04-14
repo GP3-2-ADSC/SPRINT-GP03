@@ -95,6 +95,23 @@ body::-webkit-scrollbar-thumb {
     outline-offset: 3px;
 }
 
+.buttonLogin {
+    width: 220px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #c7c7c7;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.buttonLogin:hover {
+    background-color: #006FB9;
+    color: white;
+    font-size: 1.5em;
+}
 
 .header-background {
     background: rgb(238, 238, 238);
@@ -211,15 +228,18 @@ body::-webkit-scrollbar-thumb {
     border: #8CCCF0 3px solid;
     padding: 10px;
     margin-right: -26%;
+    z-index: 998;
 }
 
 .card_erro #mensagem_erro {
     font-weight: 500;
     font-size: 20px;
+    z-index: 999;
 }
 
 .loading-div {
-    top: 100px;
+    top: 50%;
+    left: 45%;
     width: 50px;
     margin: auto;
     display: none;
@@ -227,8 +247,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .loading-div img {
-    height: 50px;
-    width: 50px;
+    width: 150px;
 }
 
 /* .after {

@@ -101,7 +101,7 @@
                 <button class="button" id="passarpag" onclick="nextPage(1)">Próximo</button>
             </div>
             <div id="div_aguardar" class="loading-div">
-                <img src="./assets/circle-loading.gif" id="loading-gif">
+                <img src="./assets/loading_blue.gif" id="loading-gif">
             </div>
 
             <div id="div_erros_login">
@@ -146,6 +146,11 @@
     }
 
     function nextPage(n) {
+        const allInput = document.querySelectorAll('input');
+
+        allInput.forEach(element => {
+            element.classList.add('valido');
+        });
 
         if (n == 1) {
             let nomeEmpresa = in_empresa.value;
@@ -187,18 +192,34 @@
                 if (!cnpjRegex.test(cnpj)) {
                     console.log("Cnpj Incorreto")
                     document.getElementById("span-cnpj").style.display = "block";
+
+                    const ipt_cnpj = document.querySelector('#in_cnpj');
+                    ipt_cnpj.classList.remove('valido');
+                    ipt_cnpj.classList.add('invalido');
+
+
                     error.push(document.getElementById("span-cnpj"))
                 }
 
                 if (!telefoneRegex.test(tel1)) {
                     console.log("Telefone Incorreto")
                     document.getElementById("span-telefone1").style.display = "block";
+
+                    const ipt_tel1 = document.querySelector('#in_telefone_1');
+                    ipt_tel1.classList.remove('valido');
+                    ipt_tel1.classList.add('invalido');
+
                     error.push(document.getElementById("span-telefone1"))
                 }
 
                 if (!telefoneRegex.test(tel2)) {
                     console.log("Telefone Incorreto")
                     document.getElementById("span-telefone2").style.display = "block";
+
+                    const ipt_tel2 = document.querySelector('#in_telefone_2');
+                    ipt_tel2.classList.remove('valido');
+                    ipt_tel2.classList.add('invalido');
+
                     error.push(document.getElementById("span-telefone2"))
                 }
 
@@ -208,7 +229,6 @@
                     plotarNovaPagina();
                 }
 
-                  
             }
         } else {
             caixaFormulario.innerHTML = ``;
@@ -330,7 +350,7 @@
 
                 <div class="linha">
                     <button class="button" onclick="nextPage(2)">Voltar</button>
-                    <button class="button" onclick = "cadastrarDados()">Cadastrar</button>
+                    <button class="buttonLogin" onclick = "cadastrarDados()">Cadastrar</button>
                 </div>
            `
 

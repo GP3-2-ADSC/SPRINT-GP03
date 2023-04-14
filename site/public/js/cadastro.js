@@ -146,9 +146,6 @@ function cadastrarAdmin() {
 
     const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,20}$/;
 
-
-    // const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/
-
     if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
@@ -267,7 +264,7 @@ function plotarSerialKey(resposta) {
     caixaFormulario.innerHTML = "";
     caixaFormulario.innerHTML = `
 
-                <div class="campo">
+                <div class="campo center column">
                     <h2>ATENÇÃO</h2>
                     <h4 style="margin-bottom: 1rem ;">O código abaixo é o seu código de acesso para a dashboard de monitoramento! Este código é de uso exclusivo do administrador e não deve ser compartilhado com ninguém!
                     </h4>
