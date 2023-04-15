@@ -76,7 +76,10 @@
           </li>
 
           <li class="list">
-            <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
+            <a
+              target="_blank"
+              href="https://retria.tomticket.com?account=3939712P05042023082156"
+            >
               <span class="circle">
                 <span class="icon">
                   <ion-icon name="help-circle-outline"></ion-icon>
@@ -112,11 +115,16 @@
           <div class="container-title">
             <div class="barraPesquisa">
               <input type="text" placeholder="Pesquisar..." />
-              <ion-icon id="search-circle-outline" name="search-circle-outline"></ion-icon>
+              <ion-icon
+                id="search-circle-outline"
+                name="search-circle-outline"
+              ></ion-icon>
             </div>
 
             <div class="novaMaquina">
-              <button>Nova máquina <span class="span-mais">+</span></button>
+              <a href="inventario-maquina.html">
+                <button>Nova máquina <span class="span-mais">+</span></button>
+              </a>
             </div>
           </div>
         </div>
@@ -161,40 +169,48 @@
           </div>
 
           <div class="card-container">
-            <div class="card">
-              <div class="card-kpi">
-                <span class="text-card-kpi">Máquina 1</span>
+            <div class="container-emergencias">
+              <div class="titulo">
+                <h2>Máquinas com Emergências</h2>
               </div>
 
-              <div class="grafico-container">
-                <canvas id="grafico1" style="display: flex"></canvas>
+              <div class="container-cards-emergencias">
+                <div class="card">
+                  <div class="card-kpi">
+                    <span class="text-card-kpi">Máquina 1</span>
+                  </div>
+  
+                  <div class="grafico-container">
+                    <canvas id="grafico1" style="display: flex"></canvas>
+                  </div>
+  
+                  <button class="btn-ver-mais">Ver mais</button>
+                </div>
+  
+                <div class="card">
+                  <div class="card-kpi">
+                    <span class="text-card-kpi">Máquina 2</span>
+                  </div>
+  
+                  <div class="grafico-container">
+                    <canvas id="grafico2" style="display: flex"></canvas>
+                  </div>
+  
+                  <button class="btn-ver-mais">Ver mais</button>
+                </div>
+  
+                <div class="card">
+                  <div class="card-kpi">
+                    <span class="text-card-kpi">Máquina 1</span>
+                  </div>
+  
+                  <div class="grafico-container">
+                    <canvas id="grafico3" style="display: flex"></canvas>
+                  </div>
+  
+                  <button class="btn-ver-mais">Ver mais</button>
+                </div>
               </div>
-
-              <button class="btn-ver-mais">Ver mais</button>
-            </div>
-
-            <div class="card">
-              <div class="card-kpi">
-                <span class="text-card-kpi">Máquina 2</span>
-              </div>
-
-              <div class="grafico-container">
-                <canvas id="grafico2" style="display: flex"></canvas>
-              </div>
-
-              <button class="btn-ver-mais">Ver mais</button>
-            </div>
-
-            <div class="card">
-              <div class="card-kpi">
-                <span class="text-card-kpi">Máquina 1</span>
-              </div>
-
-              <div class="grafico-container">
-                <canvas id="grafico3" style="display: flex"></canvas>
-              </div>
-
-              <button class="btn-ver-mais">Ver mais</button>
             </div>
           </div>
         </div>
