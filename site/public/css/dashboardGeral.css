@@ -1,6 +1,6 @@
-:root {
+/* :root {
   --card-kpi-width: 175px;
-}
+} */
 
 body {
   margin: 0;
@@ -8,29 +8,30 @@ body {
 }
 
 .container-dash {
-  display: flex;
-  height: 100%;
-  padding: 0;
-  width: 100%;
+  height: 768px;
+  margin: 0 0 0 300px;
 }
 
 .container-graficos {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-direction: column;
   padding-left: 20px;
   padding-right: 20px;
-  width: 100%;
+  height: 100%;
 }
 
 .container-menu {
+  position: fixed;
   width: 280px;
   height: 100%;
+
   display: flex;
   flex-direction: column;
-  background-color: #0070BA;
-  color: rgb(0, 0, 0);
-  align-items: flex-start;
+  justify-content: space-evenly;
+  background-color: #0061ba;
+  color: white;
+  padding: 0 10px 0 0;
 }
 
 #exit-icon {
@@ -56,7 +57,7 @@ body {
 .outside-icon {
   display: flex;
   justify-content: end;
-  color: rgb(0, 0, 0);
+  color: white;
   font-size: 2.7em;
 }
 
@@ -70,9 +71,11 @@ body {
 .circle {
   height: 32px;
   width: 32px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: #fff;
   border-radius: 50%;
 }
@@ -86,12 +89,10 @@ body {
 .list-title {
   padding-left: 10px;
   font-size: 1em;
-  color: #ffffff;
+  color: white;
   margin-top: auto;
   margin-bottom: auto;
 }
-
-
 
 /* estilos botões ver mais */
 .verMais1 button,
@@ -106,8 +107,8 @@ body {
   border-radius: 10px;
   text-align: center;
 
-  border: none; 
-  outline: none; 
+  border: none;
+  outline: none;
 }
 
 /* Define as regras para o título do botão */
@@ -120,103 +121,92 @@ body {
 .container-title {
   width: 100%;
   display: flex;
-  padding-right: 20px;
-  padding-left: 20px;
   justify-content: space-between;
   align-items: center;
 }
 
 .top-page {
   width: 100%;
-  justify-content: space-between;
-  display: flex;
 }
 
 .barraPesquisa {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
 }
 
-.barraPesquisa input[type="text"] {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
+.barraPesquisa {
+  width: 280px;
+  padding: 12px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  justify-content: space-between;
+}
+
+.barraPesquisa input {
+  border: none;
+}
+
+#search-circle-outline {
+  font-size: 1.8em;
+}
+
+
+/* Define as regras para o botão de nova máquina */
+.novaMaquina {
+  display: flex;
+  justify-content: center;
+}
+
+.novaMaquina button {
+  background-color: #4c77af;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 13px 20px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
- /* Define as regras para o botão de nova máquina */
- .novaMaquina {
-   display: flex;
-   justify-content: center;
-   margin-top: 20px;
- }
+.span-mais {
+  padding-left: 5px;
+  font-size: 1.8em;
+  font-weight: 500;
+}
 
- .novaMaquina button {
-   background-color: #4c77af;
-   color: #fff;
-   padding: 10px 20px;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
-   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
- }
-
- .card-container {
-   display: flex;
-   justify-content: space-between;
-   flex-wrap: wrap;
-   gap: 2rem;
-   width: 100%;
- }
-
- .card {
-   width:30%;
-   background-color:#8cccf0;
-   padding: 40px;
-   border-radius: 5px;
-   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-   text-align: center;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
- }
-
-
- #grafico1,
- #grafico2,
- #grafico3 {
-   margin-top: 2vw;
-   height: 60px;
-   /* altura */
-   width: auto;
-   /* largura */
-   display: flex;
-   justify-content: center;
- }
-
- 
 /* Estilos para os cards menores */
 .card-container-menores {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* adiciona a propriedade flex-wrap: wrap; */
+  flex-direction: column;
 }
 
-.card-menor {
-  flex-basis: calc(30% - 2vw);
-  border-radius: 10px;
-  margin: 1vw;
+.container-shadow {
+  height: 530px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.container-cards {
+  flex-basis: calc(30% - 2vw);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   text-align: center;
   font-size: 0.8rem;
-  flex: 1;
+  padding: 8px;
+}
+
+.card-menor {
+  width: 30%;
+  border-radius: 10px;
 }
 
 .card-menor h2 {
@@ -234,13 +224,62 @@ body {
   font-weight: bold;
 }
 
+.card-menor1 {
+  background-color: #fc7171;
+}
+.card-menor2 {
+  background-color: #fddd7c;
+}
+.card-menor3 {
+  background-color: #c9ff8c;
+}
 
- .card-menor1 {
-   background-color: #fc7171;
- }
- .card-menor2 {
-   background-color: #fddd7c;
- }
- .card-menor3 {
-   background-color: #c9ff8c;
- }
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  height: 250px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.card {
+  width: 30%;
+  background-color: #8cccf0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.grafico-container {
+  width: 120px;
+}
+
+#grafico1,
+#grafico2,
+#grafico3 {
+  height: 60px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-ver-mais {
+  border: none;
+  background-color: #5eacd2;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 0.89em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
