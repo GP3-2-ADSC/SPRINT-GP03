@@ -114,140 +114,94 @@ create table alerta(
     foreign key (fk_metrica_componente) references  metrica_componente(id_metrica_componente)
 );
 
--- Script AZURE
-/*
-create table empresa(
-	idEmpresa int identity(1,1) unique,
-    nomeEmpresa varchar(45),
-    cnpj char(14),
-    telefone01 varchar(11),
-    telefone02 varchar(11),
-    email varchar(45),
-    senha varchar(256),
-    responsavelEmpresa varchar(45),
-    fkMatriz int unique,
-    constraint fk_Matriz foreign key(fkMatriz) references empresa(idEmpresa)
-);
-alter table [dbo].[empresa] add constraint fk_Matriz foreign key(fkMatriz) 
-references empresa(idEmpresa);
 
-create table endereco(
-	idEndereco int identity(1,1) unique,
-    cep char(8),
-    logradouro varchar(100),
-    numero varchar(8),
-    bairro varchar(45),
-    cidade varchar(40),
-    complemento varchar(45),
-    fkEmpresa int,
-    foreign key (fkEmpresa) references empresa(idEmpresa)
+-- Script da Azure
+CREATE TABLE empresa (
+    id_empresa INT IDENTITY(1,1) UNIQUE,
+    nome_empresa VARCHAR(45),
+    cnpj CHAR(14),
+    telefone_01 VARCHAR(11),
+    telefone_02 VARCHAR(11),
+    email VARCHAR(45),
+    senha VARCHAR(256),
+    responsavel_empresa VARCHAR(45),
+    fk_matriz INT DEFAULT NULL,
+    PRIMARY KEY (id_empresa),
+    FOREIGN KEY (fk_matriz) REFERENCES empresa(id_empresa)
 );
 
-create table administrador(
-	idAdministrador int identity(1,1) unique,
-	nomeAdministrador varchar(45),
-    emailAdministrador varchar(90),
-	senhaAdministrador varchar(256),
-    telefoneAdministrador varchar(11),
-    cargo varchar(45),
-    chaveSegurancaAdministrador varchar(45),
-    fkEmpresa int,
-    foreign key (fkEmpresa) references empresa(idEmpresa)
-);
-alter table [dbo].[administrador] add constraint chk_email check (emailAdministrador like '%_@__%.__%');
-
-create table maquinaUltrassonografica(
-    idMaquina int identity(1,1) unique,
-    fornecedor varchar(45),
-    numeroSerial int,
-    tipoMaquina varchar(45),
-    setor varchar(45),
-    andar int,
-    fkAdministrador int unique,
-    fkEmpresa int unique,
-    foreign key (fkAdministrador) references administrador(idAdministrador),
-    foreign key (fkEmpresa) references empresa(idEmpresa)
+CREATE TABLE endereco (
+    id_endereco INT IDENTITY(1,1) UNIQUE,
+    cep CHAR(8),
+    numero VARCHAR(8),
+    complemento VARCHAR(45) NOT NULL,
+    fk_empresa INT,
+    PRIMARY KEY (id_endereco),
+    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-create table especificacaoComponente(
-    idEspecificacaoComponente int identity(1,1) unique,
-    sistemaOperacional Varchar(45),
-    modeloCpu varchar(80),
-    fabricanteCpu varchar(40),
-    modeloMemoria varchar(50),
-    fabricanteMemoria varchar(50),
-    modeloDisco varchar(50),
-    fabricanteDisco varchar(40),
-    serialNumberCpu int,
-    serialNumberDisco int,
-    serialNumberMemoria int,
+CREATE TABLE administrador (
+    id_administrador INT IDENTITY(1,1) UNIQUE,
+    nome_administrador VARCHAR(45),
+    email_administrador VARCHAR(90),
+    senha_administrador VARCHAR(256),
+    telefone_administrador VARCHAR(11),
+    ocupacao VARCHAR(45),
+    chave_seguranca_administrador VARCHAR(45),
+    fk_empresa INT,
+    CONSTRAINT chkEmail CHECK (email_administrador LIKE '%@%.%' AND email_administrador NOT LIKE '@%' and email_administrador NOT LIKE '%.'), 
+    PRIMARY KEY (id_administrador, fk_empresa),
+    UNIQUE (fk_empresa),
+    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-create table maquinaUtrassonomatograficaEspecificada(
-	idEspecificacaoComponenteMaquina int unique,
-    fkMaquina int unique,
-    fkAdministrador int unique,
-    fkEmpresa int unique,
-    fkEspecificacaoComponente int unique,
-    primary key (fkMaquina, fkAdministrador, fkEmpresa, fkEspecificacaoComponente, idEspecificacaoComponenteMaquina),
-    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
-    foreign key (fkAdministrador) references administrador(idAdministrador),
-    foreign key (fkEmpresa) references empresa(idEmpresa),
-    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente)
+CREATE TABLE maquina_ultrassom (
+    id_maquina INT IDENTITY(1,1) UNIQUE,
+    nome_fornecedor VARCHAR(45),
+    tipo_maquina VARCHAR(45),
+    sistema_operacional VARCHAR(45),
+    setor VARCHAR(45),
+    andar INT,
+    fk_administrador INT,
+    fk_empresa INT,
+    PRIMARY KEY (id_maquina, fk_administrador, fk_empresa),
+    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
+    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-create table metricasComponentes(
-    idMetricasComponentes int identity(1,1) unique,
-    fkMaquina int unique,
-    fkAdministrador int unique,
-    fkEmpresa int unique,
-    fkEspecificacaoComponente int unique,
-    dtMetrica datetime,
-    usoCpu Decimal(4,2),
-    usoMemoria Decimal(4,2),
-    usoDisco Decimal(4,2),
-    usoRede Decimal(4,2),
-    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
-    foreign key (fkAdministrador) references administrador(idAdministrador),
-    foreign key (fkEmpresa) references empresa(idEmpresa),
-    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente)
+CREATE TABLE especificacao_componente (
+    id_especificacao_componente INT IDENTITY(1,1) UNIQUE,
+    tipo VARCHAR(45),
+    nome_fabricante VARCHAR(45),
+    PRIMARY KEY (id_especificacao_componente)
 );
 
-create table alerta(
-    idAlerta int identity(1,1) unique,
-    tipoAlerta varchar(100),
-    fkMetricasComponentes int unique,
-    fkMaquina int unique,
-    fkAdministrador int unique, 
-    fkEmpresa int unique, 
-    fkEspecificacaoComponente int unique,
-    foreign key (fkMaquina) references maquinaUltrassonografica(idMaquina),
-    foreign key (fkAdministrador) references administrador(idAdministrador),
-    foreign key (fkEmpresa) references empresa(idEmpresa),
-    foreign key (fkEspecificacaoComponente) references especificacaoComponente(idEspecificacaoComponente),
-    foreign key (fkMetricasComponentes) references  metricasComponentes(idmetricasComponentes)
+CREATE TABLE maquina_ultrassom_especificada (
+    id_especificacao_componente_maquina INT IDENTITY(1,1) UNIQUE,
+    numero_serial VARCHAR(45),
+    uso_maximo FLOAT,
+    frequencia_maxima FLOAT,
+    fk_maquina INT,
+    fk_administrador INT,
+    fk_empresa INT,
+    fk_especificacao_componente INT,
+    PRIMARY KEY (id_especificacao_componente_maquina, fk_maquina, fk_administrador, fk_empresa, fk_especificacao_componente),
+    FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
+    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
+    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
+    FOREIGN KEY (fk_especificacao_componente) REFERENCES especificacao_componente(id_especificacao_componente)
 );
- 
- alter table empresa modify column fkmatriz int default null;
-  
- select * from empresa;
- select * from endereco;
- select * from administrador;
- 
- SELECT 
-    emailAdministrador
-FROM
-    administrador
-WHERE
-    emailAdministrador = 'resende@adm.com';
 
-CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
-WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
-DEFAULT_SCHEMA = dbo;
-
-EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
-
-EXEC sys.sp_addrolemember @rolename = N'db_datareader',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
-*/
+CREATE TABLE metrica_componente (
+    id_metrica_componente INT IDENTITY(1,1) UNIQUE,
+    dt_metrica DATETIME,
+    uso FLOAT,
+    frequencia FLOAT,
+    fk_maquina INT,
+    fk_administrador INT,
+    fk_empresa INT,
+    fk_especificacao_componente INT,
+    PRIMARY KEY (id_metrica_componente, fk_maquina, fk_administrador, fk_empresa, fk_especificacao_componente),
+    FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
+    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador)
+);
