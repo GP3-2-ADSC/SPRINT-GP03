@@ -12,16 +12,16 @@ function listar() {
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-        SELECT * FROM administrador WHERE emailAdministrador = '${email}' AND senhaAdministrador = '${senha}';
+        SELECT * FROM administrador WHERE email_administrador = '${email}' AND senha_administrador = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function cadastrarEndereco(cep, logradouro, numero, bairro, cidade, complemento) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", cep, logradouro, numero, bairro, cidade, complemento);
+function cadastrarEndereco(cep, numero, complemento, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", cep, numero, complemento, fkEmpresa);
 
     var instrucao = `
-        INSERT INTO endereco (cep,logradouro,numero,bairro,cidade,complemento) VALUES ('${cep}','${logradouro}','${numero}','${bairro}', '${cidade}', '${complemento}');
+        INSERT INTO endereco (cep,numero,complemento, fk_empresa) VALUES ('${cep}','${numero}','${complemento}', ${fkEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -31,7 +31,7 @@ function cadastrarAdmin(nomeAdmin, cargo, tel, email, senha, serialKey, fkEmpres
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeAdmin, cargo, tel, email, senha, serialKey, fkEmpresa);
 
     var instrucao = `
-        INSERT INTO administrador (nomeAdministrador,emailAdministrador,senhaAdministrador,telefoneAdministrador,cargo,chaveSegurancaAdministrador, fkEmpresa) VALUES ('${nomeAdmin}','${email}','${senha}','${tel}', '${cargo}','${serialKey}','${fkEmpresa}');
+        INSERT INTO administrador (nome_administrador,email_administrador,senha_administrador,telefone_administrador,ocupacao,chave_seguranca_administrador, fk_empresa) VALUES ('${nomeAdmin}','${email}','${senha}','${tel}', '${cargo}','${serialKey}',${fkEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -44,7 +44,7 @@ function cadastrar(nomeEmpresa, cnpj, telefone1, telefone2, email, responsavel) 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO empresa (nomeEmpresa,cnpj,telefone01,telefone02, email, responsavelEmpresa) VALUES ('${nomeEmpresa}','${cnpj}','${telefone1}','${telefone2}', '${email}','${responsavel}');
+        INSERT INTO empresa (nome_empresa,cnpj,telefone_01,telefone_02, email, responsavel_empresa) VALUES ('${nomeEmpresa}','${cnpj}','${telefone1}','${telefone2}', '${email}','${responsavel}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -54,7 +54,7 @@ function carregarFkempresa(cnpj) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", cnpj)
     var instrucao = `
     SELECT 
-        idEmpresa
+        id_empresa
     FROM
         empresa
     WHERE
@@ -68,11 +68,11 @@ function getSerialKey(email) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email)
     var instrucao = `
     SELECT 
-        chaveSegurancaAdministrador
+        chave_seguranca_administrador
     FROM
         administrador
     WHERE
-        emailAdministrador = '${email}';
+        email_administrador = '${email}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

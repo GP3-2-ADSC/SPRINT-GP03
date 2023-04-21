@@ -62,6 +62,7 @@ create table especificacao_componente(
 	id_especificacao_componente int auto_increment,
     tipo varchar(45),
     nome_fabricante varchar(45),
+    descricao_componente VARCHAR(255),
     primary key (id_especificacao_componente)
 );
     
@@ -123,7 +124,6 @@ CREATE TABLE empresa (
     telefone_01 VARCHAR(11),
     telefone_02 VARCHAR(11),
     email VARCHAR(45),
-    senha VARCHAR(256),
     responsavel_empresa VARCHAR(45),
     fk_matriz INT DEFAULT NULL,
     PRIMARY KEY (id_empresa),
@@ -173,6 +173,7 @@ CREATE TABLE especificacao_componente (
     id_especificacao_componente INT IDENTITY(1,1) UNIQUE,
     tipo VARCHAR(45),
     nome_fabricante VARCHAR(45),
+    descricao_componente VARCHAR(255),
     PRIMARY KEY (id_especificacao_componente)
 );
 
@@ -205,3 +206,30 @@ CREATE TABLE metrica_componente (
     FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
     FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador)
 );
+
+CREATE TABLE alerta (
+    id_alerta INT IDENTITY(1,1) UNIQUE,
+    dt_alerta DATETIME,
+    tipo_alerta VARCHAR(255),
+    fk_metrica_componente INT,
+    fk_maquina INT,
+    fk_administrador INT,
+    fk_empresa INT,
+    fk_especificacao_componente INT NOT NULL,
+    CONSTRAINT pk_alerta PRIMARY KEY (id_alerta),
+    CONSTRAINT fk_alerta_maquina FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
+    CONSTRAINT fk_alerta_administrador FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
+    CONSTRAINT fk_alerta_empresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
+    CONSTRAINT fk_alerta_especificacao_componente FOREIGN KEY (fk_especificacao_componente) REFERENCES especificacao_componente(id_especificacao_componente),
+    CONSTRAINT fk_alerta_metrica_componente FOREIGN KEY (fk_metrica_componente) REFERENCES metrica_componente(id_metrica_componente)
+);
+
+-- Drop tables 
+drop table [dbo].[alerta];
+drop table [dbo].[metrica_componente];
+drop table [dbo].[maquina_ultrassom_especificada];
+drop table [dbo].[maquina_ultrassom];
+drop table [dbo].[especificacao_componente];
+drop table [dbo].[endereco];
+drop table [dbo].[administrador];
+drop table [dbo].[empresa];

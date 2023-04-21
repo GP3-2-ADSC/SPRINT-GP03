@@ -107,29 +107,24 @@ function cadastrar(req, res) {
 function cadastrarEndereco(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var cep = req.body.cepServer;
-    var logradouro = req.body.logradouroServer;
     var numero = req.body.numeroServer;
-    var bairro = req.body.bairroServer;
-    var cidade = req.body.cidadeServer;
     var complemento = req.body.complementoServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
 
     // Faça as validações dos valores
     if (cep == undefined) {
         res.status(400).send("Seu CEP está undefined!");
-    } else if (logradouro == undefined) {
-        res.status(400).send("Sua Rua está undefined!")
     } else if (numero == undefined) {
         res.status(400).send("Seu numero está undefined!")
-    } else if (bairro == undefined) {
-        res.status(400).send("Seu bairro está undefined!")
-    } else if (cidade == undefined) {
-        res.status(400).send("Sua cidade está undefined!");
     } else if (complemento == undefined) {
         res.status(400).send("Seu complemento está undefined!")
-    } else {
+    } else if (fkEmpresa == undefined) {
+        res.status(400).send("fkEmpresa está undefined!")
+    } 
+    else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarEndereco(cep, logradouro, numero, bairro, cidade, complemento)
+        usuarioModel.cadastrarEndereco(cep, numero, complemento, fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);

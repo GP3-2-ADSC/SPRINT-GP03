@@ -34,7 +34,7 @@ function cadastrar(empresaStorage) {
 
             setTimeout(() => {
                 carregarFkempresa(empresaStorage[1]);
-            }, "2000")
+            }, "20")
 
             limparFormulario();
             finalizarAguardar();
@@ -85,12 +85,9 @@ function cadastrarEndereco() {
             // crie um atributo que recebe o valor recuperado aqui
             // Agora vá para o arquivo routes/usuario.js
             cepServer: cepVar,
-            logradouroServer: logradouroVar,
             numeroServer: numeroVar,
-            bairroServer: bairroVar,
-            cidadeServer: cidadeVar,
             complementoServer: complementoVar,
-
+            fkEmpresa: sessionStorage.getItem('FK_EMPRESA')
         })
     }).then(function (resposta) {
 
@@ -99,6 +96,8 @@ function cadastrarEndereco() {
         if (resposta.ok) {
             limparFormulario();
             finalizarAguardar();
+
+            window.location = "cadastro-admin.html";
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -117,9 +116,13 @@ function carregarFkempresa(cnpj) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                sessionStorage.FK_EMPRESA = resposta[0].idEmpresa;
+                sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa )
             });
-            window.location = "cadastro-admin.html";
+            
+            setTimeout(() => {
+                cadastrarEndereco();
+            }, 2000); 
+
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
