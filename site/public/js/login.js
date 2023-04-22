@@ -38,7 +38,7 @@ function entrar() {
                 sessionStorage.EMAIL_USUARIO = json.emailAdministrador;
                 sessionStorage.NOME_USUARIO = json.nomeAdministrador;
                 sessionStorage.ID_USUARIO = json.idAdministrador;
-                serialKeyBanco = json.chaveSegurancaAdministrador
+                serialKeyBanco = json.chave_seguranca_administrador
 
             });
             plotarValidacaoDeSerialKey();

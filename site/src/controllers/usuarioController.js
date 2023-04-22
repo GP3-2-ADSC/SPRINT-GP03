@@ -190,9 +190,10 @@ function cadastrarAdmin(req, res) {
 }
 
 function carregarFkempresa(req, res) {
-
     let cnpj = req.params.cnpjVar;
 
+    console.log("Na controller foi: " + cnpj);
+    
     usuarioModel.carregarFkempresa(cnpj).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);

@@ -28,19 +28,22 @@ function cadastrar(empresaStorage) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            cardErro.style.display = "block";
 
+            carregarFkempresa(empresaStorage[1]);
+            cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de cadastro do adiministrador...";
 
             setTimeout(() => {
-                carregarFkempresa(empresaStorage[1]);
-            }, "20")
+                window.location = "cadastro-admin.html";
+            }, "2000");
+
 
             limparFormulario();
             finalizarAguardar();
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
+
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
         finalizarAguardar();
@@ -87,17 +90,15 @@ function cadastrarEndereco() {
             cepServer: cepVar,
             numeroServer: numeroVar,
             complementoServer: complementoVar,
-            fkEmpresa: sessionStorage.getItem('FK_EMPRESA')
+            fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
         })
     }).then(function (resposta) {
 
         console.log("resposta: ", resposta);
-
         if (resposta.ok) {
             limparFormulario();
             finalizarAguardar();
 
-            window.location = "cadastro-admin.html";
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -111,18 +112,17 @@ function cadastrarEndereco() {
 
 function carregarFkempresa(cnpj) {
     let cnpjVar = cnpj;
+    console.log("O que veio no carregar foi " + cnpj);
 
     fetch(`/usuarios/carregarFkempresa/${cnpjVar}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa )
+                sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa)
             });
-            
             setTimeout(() => {
                 cadastrarEndereco();
-            }, 2000); 
-
+            }, "1000");
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
@@ -271,7 +271,7 @@ function plotarSerialKey(resposta) {
                     <h2>ATENÇÃO</h2>
                     <h4 style="margin-bottom: 1rem ;">O código abaixo é o seu código de acesso para a dashboard de monitoramento! Este código é de uso exclusivo do administrador e não deve ser compartilhado com ninguém!
                     </h4>
-                    <h3>${resposta[0].chaveSegurancaAdministrador}</h3>
+                    <h3>${resposta[0].chave_seguranca_administrador}</h3>
                     <button class="button" onclick="alterarPagina(1)">Continuar</button>
                 </div>
                 
@@ -288,12 +288,12 @@ function alterarPagina(n) {
 var ttChatLoaderS = document.createElement('script');
 document.tomticketChatLoaderScriptVersion = 2;
 ttChatLoaderS.src = 'https://retria.tomticket.com/scripts-chat/chat.min.js'
-+ '?id=EP61558'
-+ '&account=3939712P05042023082156'
-+ '&autoOpen=0'
-+ '&hideWhenOffline=0'
-+ '&d=retria'
-+ '&ts=' + new Date().getTime()
-+ '&ref=' + encodeURIComponent(document.URL);
+    + '?id=EP61558'
+    + '&account=3939712P05042023082156'
+    + '&autoOpen=0'
+    + '&hideWhenOffline=0'
+    + '&d=retria'
+    + '&ts=' + new Date().getTime()
+    + '&ref=' + encodeURIComponent(document.URL);
 document.body.appendChild(ttChatLoaderS);
 //]]>

@@ -21,7 +21,7 @@ function cadastrarEndereco(cep, numero, complemento, fkEmpresa) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", cep, numero, complemento, fkEmpresa);
 
     var instrucao = `
-        INSERT INTO endereco (cep,numero,complemento, fk_empresa) VALUES ('${cep}','${numero}','${complemento}', ${fkEmpresa});
+        INSERT INTO endereco (cep,numero,complemento,fk_empresa) VALUES ('${cep}','${numero}','${complemento}', ${fkEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -58,7 +58,7 @@ function carregarFkempresa(cnpj) {
     FROM
         empresa
     WHERE
-        cnpj = ${cnpj};
+        cnpj = '${cnpj}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
