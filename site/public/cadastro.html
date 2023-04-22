@@ -44,11 +44,10 @@
 
     <div class="background center">
         <div class="container">
-            <div class="alerta_erro">
-                <div class="card_erro" id="cardErro">
-                    <span id="mensagem_erro"></span>
-                </div>
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
             </div>
+
             <div class="caixa-formulario" id="caixaFormulario">
                 <div class="campo">
                     <h2>Junte-se a nós</h2>
@@ -58,26 +57,26 @@
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_empresa">
                         <label class="user-label">Empresa</label>
-                        <span class="span-required" id="span-empresa">Campo inválido</span>
+                        <span class="span-required" id="span-empresa">É necessário inserir um nome</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_cnpj">
                         <label class="user-label">CPNJ</label>
-                        <span class="span-required" id="span-cnpj">Campo inválido</span>
+                        <span class="span-required" id="span-cnpj">Necessário CNPJ com 14 dígitos</span>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone_1">
                         <label class="user-label">Celular/Telefone (1)</label>
-                        <span class="span-required" id="span-telefone1">Campo inválido</span>
+                        <span class="span-required" id="span-telefone1">Necessário telefone com 11 dígitos</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone_2">
                         <label class="user-label">Celular/Telefone (2)</label>
-                        <span class="span-required" id="span-telefone2">Campo inválido</span>
+                        <span class="span-required" id="span-telefone2">Necessário telefone com 11 dígitos</span>
                     </div>
                 </div>
 
@@ -85,12 +84,12 @@
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_resp">
                         <label class="user-label">Responsável</label>
-                        <span class="span-required" id="span-resp">Campo inválido</span>
+                        <span class="span-required" id="span-resp">É necessário inserir um nome</span>
                     </div>
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_email">
-                        <label class="user-label">Email do responsável</label>
-                        <span class="span-required" id="span-email">Campo inválido</span>
+                        <label class="user-label">E-mail do responsável</label>
+                        <span class="span-required" id="span-email">Necessário inserir um e-mail válido</span>
                     </div>
                 </div>
 
@@ -167,21 +166,17 @@
             empresaStorage.push(email);
             empresaStorage.push(resp); ''
 
-            // const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
-
-            // const telefoneRegex = /^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$/;
-
             const cnpjRegex = /^\b\d{14}\b$/
 
             const telefoneRegex = /^\b\d{11}\b$/;
 
-
+            const emailPadrao = /\S+@\S+\.\S+/;
 
             let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || tel2 == "" || email == "" || resp == "";
 
             if (campoVazio) {
-                cardErro.style.display = "block"
-                mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+                cardErro.style.display = "flex"
+                mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
                 finalizarAguardar();
                 setInterval(sumirMensagem, 5000);
@@ -190,7 +185,7 @@
             else {
                 let error = []
                 if (!cnpjRegex.test(cnpj)) {
-                    console.log("Cnpj Incorreto")
+                    console.log("CNPJ Incorreto")
                     document.getElementById("span-cnpj").style.display = "block";
 
                     const ipt_cnpj = document.querySelector('#in_cnpj');
@@ -198,7 +193,13 @@
                     ipt_cnpj.classList.add('invalido');
 
 
-                    error.push(document.getElementById("span-cnpj"))
+                    error.push(document.getElementById("span-cnpj"));
+                } else {
+                    document.getElementById("span-cnpj").style.display = "none";
+
+                    const ipt_cnpj = document.querySelector('#in_cnpj');
+                    ipt_cnpj.classList.add('valido');
+                    ipt_cnpj.classList.remove('invalido');
                 }
 
                 if (!telefoneRegex.test(tel1)) {
@@ -209,18 +210,31 @@
                     ipt_tel1.classList.remove('valido');
                     ipt_tel1.classList.add('invalido');
 
-                    error.push(document.getElementById("span-telefone1"))
+                    error.push(document.getElementById("span-telefone1"));
+                } else {
+                    document.getElementById("span-telefone1").style.display = "none";
+
+                    const ipt_tel1 = document.querySelector('#in_telefone_1');
+                    ipt_tel1.classList.add('valido');
+                    ipt_tel1.classList.remove('invalido');
+
                 }
 
-                if (!telefoneRegex.test(tel2)) {
-                    console.log("Telefone Incorreto")
-                    document.getElementById("span-telefone2").style.display = "block";
+                if (!emailPadrao.test(email)) {
+                    console.log("Email Incorreto");
+                    document.getElementById("span-email").style.display = "block";
 
-                    const ipt_tel2 = document.querySelector('#in_telefone_2');
-                    ipt_tel2.classList.remove('valido');
-                    ipt_tel2.classList.add('invalido');
+                    const ipt_span_email = document.querySelector('#in_email');
+                    ipt_span_email.classList.remove('valido');
+                    ipt_span_email.classList.add('invalido');
 
-                    error.push(document.getElementById("span-telefone2"))
+                    error.push(document.getElementById("span-email"));
+                } else {
+                    document.getElementById("span-email").style.display = "none";
+
+                    const ipt_span_email = document.querySelector('#in_email');
+                    ipt_span_email.classList.add('valido');
+                    ipt_span_email.classList.remove('invalido');
                 }
 
                 if (error.length > 0) {
@@ -241,26 +255,26 @@
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_empresa">
                         <label class="user-label">Empresa</label>
-                        <span class="span-required" id="span-empresa">Campo inválido</span>
+                        <span class="span-required" id="span-empresa">É necessário inserir um nome</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_cnpj">
                         <label class="user-label">CPNJ</label>
-                        <span class="span-required" id="span-cnpj">Campo inválido</span>
+                        <span class="span-required" id="span-cnpj">Necessário CNPJ com 14 dígitos</span>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone_1">
                         <label class="user-label">Celular/Telefone (1)</label>
-                        <span class="span-required" id="span-telefone1">Campo inválido</span>
+                        <span class="span-required" id="span-telefone1">Necessário telefone com 11 dígitos</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone_2">
                         <label class="user-label">Celular/Telefone (2)</label>
-                        <span class="span-required" id="span-telefone2">Campo inválido</span>
+                        <span class="span-required" id="span-telefone2">Necessário telefone com 11 dígitos</span>
                     </div>
                 </div>
 
@@ -268,12 +282,12 @@
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_resp">
                         <label class="user-label">Responsável</label>
-                        <span class="span-required" id="span-resp">Campo inválido</span>
+                        <span class="span-required" id="span-resp">É necessário inserir um nome</span>
                     </div>
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_email">
                         <label class="user-label">Email do responsável</label>
-                        <span class="span-required" id="span-email">Campo inválido</span>
+                        <span class="span-required" id="span-email">Necessário inserir um e-mail válido</span>
                     </div>
                 </div>
 
@@ -353,7 +367,6 @@
                     <button class="buttonLogin" onclick = "cadastrarDados()">Cadastrar</button>
                 </div>
            `
-
     }
 
     function cadastrarDados() {
