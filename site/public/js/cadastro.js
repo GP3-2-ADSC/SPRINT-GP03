@@ -72,7 +72,7 @@ function cadastrarEndereco() {
 
     if (campovazio) {
         cardErro.style.display = "block"
-        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
         finalizarAguardar();
         return false;
@@ -144,14 +144,15 @@ function cadastrarAdmin() {
 
     var campovazio = nomeAdm == "" || cargoVar == "" || telVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "";
 
-
     const telefoneRegex = /^\b\d{11}\b$/;
 
     const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,20}$/;
 
+    const emailPadrao = /\S+@\S+\.\S+/;
+
     if (campovazio) {
         cardErro.style.display = "block"
-        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
         finalizarAguardar();
         setInterval(sumirMensagem, 5000);
@@ -161,33 +162,49 @@ function cadastrarAdmin() {
         if (telefoneRegex.test(telVar)) {
             console.log("Telefone Correto");
         } else {
+            document.getElementById("span-telefone-admin").style.display = "block";
+
             console.log("Telefone Incorreto")
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Telefone Incorreto)";
 
             finalizarAguardar();
             setInterval(sumirMensagem, 5000);
-            return false;
         }
 
         if (senhaRegex.test(senhaVar)) {
             console.log("Senha Correta");
             if (!senhaVar == confirmarSenhaVar) {
+                document.getElementById("span-senha-admin").style.display = "block";
+
                 cardErro.style.display = "block"
-                mensagem_erro.innerHTML += "(Suas senhas são diferentes)";
+                mensagem_erro.innerHTML += "As senhas devem ser iguais!";
+                
 
                 finalizarAguardar();
                 setInterval(sumirMensagem, 5000);
-                return false;
             }
         } else {
+            document.getElementById("span-senha-admin").style.display = "block";
+            document.getElementById("span-confirm-senha-admin").style.display = "block";
+
             console.log("Senha Incorreta");
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Senha fora dos padrões)";
 
             finalizarAguardar();
             setInterval(sumirMensagem, 5000);
-            return false;
+        }
+
+        if (!emailPadrao.test(emailVar)) {
+            console.log("Email Incorreto");
+            document.getElementById("span-email-admin").style.display = "block";
+
+            const ipt_span_email = document.querySelector('#in_email');
+            ipt_span_email.classList.remove('valido');
+            ipt_span_email.classList.add('invalido');
+        } else {
+            document.getElementById("span-email-admin").style.display = "none";
+
+            const ipt_span_email = document.querySelector('#in_email');
+            ipt_span_email.classList.add('valido');
+            ipt_span_email.classList.remove('invalido');
         }
     }
 
@@ -214,7 +231,7 @@ function cadastrarAdmin() {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            cardErro.style.display = "block"
+            cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Cadastro de admin realizado com sucesso!";
 
         } else {
