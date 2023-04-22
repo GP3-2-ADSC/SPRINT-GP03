@@ -266,7 +266,10 @@ function getSerialKey(emailVar) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarSerialKey(resposta);
+                
+                setTimeout(() => {
+                    plotarSerialKey(resposta);
+                }, 2000);t
 
                 limparFormulario();
                 finalizarAguardar();

@@ -164,7 +164,7 @@
             empresaStorage.push(tel1);
             empresaStorage.push(tel2);
             empresaStorage.push(email);
-            empresaStorage.push(resp); ''
+            empresaStorage.push(resp);
 
             const cnpjRegex = /^\b\d{14}\b$/
 
@@ -172,7 +172,7 @@
 
             const emailPadrao = /\S+@\S+\.\S+/;
 
-            let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || tel2 == "" || email == "" || resp == "";
+            let campoVazio = nomeEmpresa == "" || cnpj == "" || tel1 == "" || email == "" || resp == "";
 
             if (campoVazio) {
                 cardErro.style.display = "flex"
