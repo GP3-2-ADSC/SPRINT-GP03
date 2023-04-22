@@ -8,12 +8,10 @@ function entrar() {
 
     if (emailVar == "" || senhaVar == "") {
         cardErro.style.display = "block"
-        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        mensagem_erro.innerHTML = "Necessário preencher todos os campos.";
         finalizarAguardar();
+        setInterval(sumirMensagem, 5000);
         return false;
-    }
-    else {
-        setInterval(sumirMensagem, 5000)
     }
 
     fetch("/usuarios/autenticar", {
@@ -64,15 +62,14 @@ function entrar() {
 function plotarValidacaoDeSerialKey() {
     container.innerHTML = ``;
     container.innerHTML = `
-    <div class="alerta_erro">
-                <div class="card_erro" id="cardErro">
-                    <span id="mensagem_erro"></span>
-                </div>
-    </div>
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+
         <div class="caixa-formulario-validacao" id="caixaFormulario">        
             <div class="campo cmp-validacao">
                 <h2>Validação de acesso!</h2>
-                <h4 class="subtitulo-form">Insira a chave de acesso do administrador!
+                <h4 class="subtitulo-form">Insira a chave de acesso de administrador!
                 </h4>
             </div>
 
@@ -94,7 +91,7 @@ function plotarValidacaoDeSerialKey() {
         </div>
         
     </div>
-`
+    `
 
 
 }

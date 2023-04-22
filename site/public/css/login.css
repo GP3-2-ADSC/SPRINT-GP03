@@ -1,3 +1,13 @@
+.background {
+    height: 675px;
+}
+
+.card_erro {
+    width: 310px !important;
+    justify-content: center;
+    align-items: center;
+}
+
 .caixa-formulario {
     width: 400px;
     height: 500px;
