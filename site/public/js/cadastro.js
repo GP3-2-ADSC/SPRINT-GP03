@@ -30,13 +30,6 @@ function cadastrar(empresaStorage) {
         if (resposta.ok) {
 
             carregarFkempresa(empresaStorage[1]);
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de cadastro do adiministrador...";
-
-            setTimeout(() => {
-                window.location = "cadastro-admin.html";
-            }, "2000");
-
 
             limparFormulario();
             finalizarAguardar();
@@ -70,44 +63,57 @@ function cadastrarEndereco() {
     var campovazio = cepVar == "" || logradouroVar == "" || numeroVar == "" || bairroVar == "" || cidadeVar == "" || complementoVar == "";
 
 
-    if (campovazio) {
+    if (cepVar.length > 8 || cepVar.length < 8 && cepVar.length > 0) {
+        cardErro.style.display = "block"
+        mensagem_erro.innerHTML = "É necessário CEP ter 8 dígitos.";
+
+        finalizarAguardar();
+        setInterval(sumirMensagem, 5000);
+    } else if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
         finalizarAguardar();
+        setInterval(sumirMensagem, 5000);
+    } else {
+
+        fetch("/usuarios/cadastrarEndereco", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                cepServer: cepVar,
+                numeroServer: numeroVar,
+                complementoServer: complementoVar,
+                fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+                mensagem_erro.innerHTML = `Cadastro realizado com sucesso! <br> Redirecionando para tela de cadastro do adiministrador`;    
+
+                setTimeout(() => {
+                    window.location = "cadastro-admin.html";
+                }, "2500");
+
+                limparFormulario();
+                finalizarAguardar();
+
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
         return false;
     }
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrarEndereco", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            cepServer: cepVar,
-            numeroServer: numeroVar,
-            complementoServer: complementoVar,
-            fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
-        })
-    }).then(function (resposta) {
-
-        console.log("resposta: ", resposta);
-        if (resposta.ok) {
-            limparFormulario();
-            finalizarAguardar();
-
-        } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-    });
-
-    return false;
 }
 
 function carregarFkempresa(cnpj) {
@@ -118,11 +124,9 @@ function carregarFkempresa(cnpj) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa)
+                sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa);
             });
-            setTimeout(() => {
-                cadastrarEndereco();
-            }, "1000");
+            cadastrarEndereco();
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
@@ -269,7 +273,7 @@ function getSerialKey(emailVar) {
                 
                 setTimeout(() => {
                     plotarSerialKey(resposta);
-                }, 2000);t
+                }, 2000);
 
                 limparFormulario();
                 finalizarAguardar();

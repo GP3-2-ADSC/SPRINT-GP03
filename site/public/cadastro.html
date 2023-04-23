@@ -97,7 +97,7 @@
                     <span class="dot" style="background-color:#8cccf0;"></span>
                     <span class="dot"></span>
                 </div>
-                <button class="button" id="passarpag" onclick="nextPage(1)">Próximo</button>
+                <button class="buttonLogin" id="passarpag" onclick="nextPage(1)">Próximo</button>
             </div>
             <div id="div_aguardar" class="loading-div">
                 <img src="./assets/loading_blue.gif" id="loading-gif">
@@ -129,7 +129,6 @@
         in_telefone_2.value = empresaStorage[3];
         in_email.value = empresaStorage[4];
         in_resp.value = empresaStorage[5];
-
     }
 
     function getStorageEnd() {
@@ -363,7 +362,7 @@
                 </div>
 
                 <div class="linha">
-                    <button class="button" onclick="nextPage(2)">Voltar</button>
+                    <button class="buttonLogin" onclick="nextPage(2)">Voltar</button>
                     <button class="buttonLogin" onclick = "cadastrarDados()">Cadastrar</button>
                 </div>
            `

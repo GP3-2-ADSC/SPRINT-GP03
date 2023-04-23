@@ -103,15 +103,10 @@ body::-webkit-scrollbar-thumb {
     border-radius: 12px;
     transition: all 0.3s;
     cursor: pointer;
-    background: #c7c7c7;
-    font-size: 1.2em;
+    background: #006FB9;
     font-weight: 700;
-}
-
-.buttonLogin:hover {
-    background-color: #006FB9;
     color: white;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .header-background {
