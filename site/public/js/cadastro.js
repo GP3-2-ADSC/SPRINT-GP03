@@ -30,6 +30,13 @@ function cadastrar(empresaStorage) {
         if (resposta.ok) {
 
             carregarFkempresa(empresaStorage[1]);
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de cadastro do adiministrador...";
+
+            setTimeout(() => {
+                window.location = "cadastro-admin.html";
+            }, "2000");
+
 
             limparFormulario();
             finalizarAguardar();
@@ -63,57 +70,44 @@ function cadastrarEndereco() {
     var campovazio = cepVar == "" || logradouroVar == "" || numeroVar == "" || bairroVar == "" || cidadeVar == "" || complementoVar == "";
 
 
-    if (cepVar.length > 8 || cepVar.length < 8 && cepVar.length > 0) {
-        cardErro.style.display = "block"
-        mensagem_erro.innerHTML = "É necessário CEP ter 8 dígitos.";
-
-        finalizarAguardar();
-        setInterval(sumirMensagem, 5000);
-    } else if (campovazio) {
+    if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
         finalizarAguardar();
-        setInterval(sumirMensagem, 5000);
-    } else {
-
-        fetch("/usuarios/cadastrarEndereco", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                cepServer: cepVar,
-                numeroServer: numeroVar,
-                complementoServer: complementoVar,
-                fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
-            })
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-            if (resposta.ok) {
-                cardErro.style.display = "block";
-                mensagem_erro.innerHTML = `Cadastro realizado com sucesso! <br> Redirecionando para tela de cadastro do adiministrador`;    
-
-                setTimeout(() => {
-                    window.location = "cadastro-admin.html";
-                }, "2500");
-
-                limparFormulario();
-                finalizarAguardar();
-
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
         return false;
     }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarEndereco", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            cepServer: cepVar,
+            numeroServer: numeroVar,
+            complementoServer: complementoVar,
+            fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
+        })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+        if (resposta.ok) {
+            limparFormulario();
+            finalizarAguardar();
+
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+    });
+
+    return false;
 }
 
 function carregarFkempresa(cnpj) {
@@ -126,7 +120,9 @@ function carregarFkempresa(cnpj) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa);
             });
-            cadastrarEndereco();
+            setTimeout(() => {
+                cadastrarEndereco();
+            }, "1000");
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
@@ -153,7 +149,7 @@ function cadastrarAdmin() {
     const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,20}$/;
 
     const emailPadrao = /\S+@\S+\.\S+/;
-
+    
     if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
@@ -168,10 +164,9 @@ function cadastrarAdmin() {
         } else {
             document.getElementById("span-telefone-admin").style.display = "block";
 
-            console.log("Telefone Incorreto")
-
             finalizarAguardar();
             setInterval(sumirMensagem, 5000);
+            return false;
         }
 
         if (senhaRegex.test(senhaVar)) {
@@ -181,10 +176,11 @@ function cadastrarAdmin() {
 
                 cardErro.style.display = "block"
                 mensagem_erro.innerHTML += "As senhas devem ser iguais!";
-                
+
 
                 finalizarAguardar();
                 setInterval(sumirMensagem, 5000);
+                return false;
             }
         } else {
             document.getElementById("span-senha-admin").style.display = "block";
@@ -194,6 +190,7 @@ function cadastrarAdmin() {
 
             finalizarAguardar();
             setInterval(sumirMensagem, 5000);
+            return false;
         }
 
         if (!emailPadrao.test(emailVar)) {
@@ -238,6 +235,8 @@ function cadastrarAdmin() {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Cadastro de admin realizado com sucesso!";
 
+            finalizarAguardar();
+
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -270,10 +269,7 @@ function getSerialKey(emailVar) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                
-                setTimeout(() => {
-                    plotarSerialKey(resposta);
-                }, 2000);
+                plotarSerialKey(resposta);
 
                 limparFormulario();
                 finalizarAguardar();
@@ -290,10 +286,11 @@ function getSerialKey(emailVar) {
 function plotarSerialKey(resposta) {
     caixaFormulario.innerHTML = "";
     caixaFormulario.innerHTML = `
-
                 <div class="campo center column">
                     <h2>ATENÇÃO</h2>
-                    <h4 style="margin-bottom: 1rem ;">O código abaixo é o seu código de acesso para a dashboard de monitoramento! Este código é de uso exclusivo do administrador e não deve ser compartilhado com ninguém!
+                    <h4 style="width: 650px; margin-bottom: 1rem; text-align: justify; font-size: 1.2em;">Abaixo, encontra-se o seu código de acesso, o qual <b style="font-weight: 600;">sempre será requerido ao acessar a dashboard de monitoramento</b>! <br> Este código é de uso exclusivo do administrador e não deve ser compartilhado com ninguém!
+                    <br> <br>
+                    É <b style="font-weight: 600;">necessário guardar esse código em um lugar seguro e confiável</b>.
                     </h4>
                     <h3>${resposta[0].chave_seguranca_administrador}</h3>
                     <button class="button" onclick="alterarPagina(1)">Continuar</button>
