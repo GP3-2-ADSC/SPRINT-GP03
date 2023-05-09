@@ -501,7 +501,7 @@ function plotarGraficoCPU() {
   btnMemoria.style.backgroundColor = "#5eacd2";
   btnDisco.style.backgroundColor = "#5eacd2";
   btnRede.style.backgroundColor = "#5eacd2";
-  
+
   chartMemoria.style.display = "none";
   chartDisco.style.display = "none";
   chartRede.style.display = "none";
@@ -517,7 +517,7 @@ function plotarGraficoMemoria() {
 
   chartCPU.style.display = "none";
   chartDisco.style.display = "none";
-  chartRede.style.display = "none";  
+  chartRede.style.display = "none";
 }
 
 function plotarGraficoDisco() {
@@ -530,7 +530,7 @@ function plotarGraficoDisco() {
 
   chartCPU.style.display = "none";
   chartMemoria.style.display = "none";
-  chartRede.style.display = "none";  
+  chartRede.style.display = "none";
 }
 
 function plotarGraficoRede() {
@@ -547,9 +547,9 @@ function plotarGraficoRede() {
 }
 
 //<![CDATA[
-  var ttChatLoaderS = document.createElement('script');
-  document.tomticketChatLoaderScriptVersion = 2;
-  ttChatLoaderS.src = 'https://retria.tomticket.com/scripts-chat/chat.min.js'
+var ttChatLoaderS = document.createElement('script');
+document.tomticketChatLoaderScriptVersion = 2;
+ttChatLoaderS.src = 'https://retria.tomticket.com/scripts-chat/chat.min.js'
   + '?id=EP61558'
   + '&account=3939712P05042023082156'
   + '&autoOpen=0'
@@ -557,5 +557,80 @@ function plotarGraficoRede() {
   + '&d=retria'
   + '&ts=' + new Date().getTime()
   + '&ref=' + encodeURIComponent(document.URL);
-  document.body.appendChild(ttChatLoaderS);
-  //]]>
+document.body.appendChild(ttChatLoaderS);
+//]]>
+
+
+// Funções de plotagem da KPI
+
+let idMaquinas = []
+
+function getMaquinas() {
+
+  const elements = [sessionStorage.getItem('FK_EMPRESA'), sessionStorage.getItem('ID_ADMIN')]
+
+  console.log("idAdmin " + elements[1])
+  console.log("fkEmpresaServer " + elements[0])
+
+  fetch(`/medidas/carregarMaquinas/${elements}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+        if (sessionStorage.getItem("ID_MAQUINA_0") == null) {
+          for (let index = 0; index < resposta.length; index++) {
+            const maquinaAtual = resposta[index];
+            const idMaquinaAtual = resposta[index].id_maquina;
+            sessionStorage.setItem("ID_MAQUINA_" + resposta.indexOf(maquinaAtual), idMaquinaAtual)
+          }
+        } else {
+          console.log("Máquinas já foram carregadas!")
+        }
+      });
+      getKpiCpu();
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getKpiCpu() {
+  console.log("NA FUNÇÃO DE KPI - CPU")
+
+  fetch("/medidas/getKpiCpu", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_adminServer: sessionStorage.getItem('ID_ADMIN'),
+      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA'),
+      emailServer: sessionStorage.getItem('EMAIL_USUARIO'),
+      id_maquina_Server: sessionStorage.getItem('ID_MAQUINA_0')
+    })
+  }).then(function (resposta) {
+    console.log("ESTOU NO THEN DO entrar()!")
+
+    if (resposta.ok) {
+      console.log(resposta);
+
+      resposta.json().then(json => {
+        
+
+      });
+
+    } else {
+
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+  })
+}
+
+function iniciar() {
+  getMaquinas();
+}
+

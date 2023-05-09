@@ -33,9 +33,10 @@ function entrar() {
                 console.log(json);
                 console.log(JSON.stringify(json));
 
-                sessionStorage.EMAIL_USUARIO = json.emailAdministrador;
-                sessionStorage.NOME_USUARIO = json.nomeAdministrador;
-                sessionStorage.ID_USUARIO = json.idAdministrador;
+                sessionStorage.EMAIL_USUARIO = json.email_administrador;
+                sessionStorage.NOME_USUARIO = json.nome_administrador;
+                sessionStorage.ID_ADMIN = json.id_administrador;
+                sessionStorage.FK_EMPRESA = json.fk_empresa
                 serialKeyBanco = json.chave_seguranca_administrador
 
             });

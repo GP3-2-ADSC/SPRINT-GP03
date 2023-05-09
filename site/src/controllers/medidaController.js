@@ -1,14 +1,17 @@
 var medidaModel = require("../models/medidaModel");
 
-function buscarUltimasMedidas(req, res) {
+function carregarMaquinas(req, res) {
 
-    const limite_linhas = 7;
+    let fkEmpresa = req.params.elements[0];
+    let idAdmin = req.params.elements[2];
 
-    var idAquario = req.params.idAquario;
+    console.log("ESTOU NA CONTROLLER !!!! ")
+    console.log("O PARAMS É " + req.params.elements)
+    console.log("TAMANHO " + req.params.elements.length)
+    console.log("fkEmpresa " + req.params.elements[0])
+    console.log("idAdmin " + req.params.elements[2])
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
-
-    medidaModel.buscarUltimasMedidas(idAquario, limite_linhas).then(function (resultado) {
+    medidaModel.carregarMaquinas(fkEmpresa, idAdmin).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -16,33 +19,51 @@ function buscarUltimasMedidas(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as máquinas do adm!", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
 
 
-function buscarMedidasEmTempoReal(req, res) {
+function getKpiCpu(req, res) {
+    let idAdmin = req.body.id_adminServer;
+    let fkEmpresa = req.body.fk_empresaServer;
+    let email = req.body.emailServer;
+    let idMaquina = req.body.id_maquina_Server;
 
-    var idAquario = req.params.idAquario;
+    console.log("NA CONTROLLER DO KPI CPU")
+    console.log("idAmdin " + idAdmin)
+    console.log("fkEmpresa " + fkEmpresa)
+    console.log("email " + email)
+    console.log("idMaquina " + idMaquina)
 
-    console.log(`Recuperando medidas em tempo real`);
+    if (idAdmin == null) {
+        res.status(400).send("Seu idAdmin está undefined!");
+    } else if (fkEmpresa == null) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (email == null) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
+        medidaModel.getKpiCpu(idAdmin, fkEmpresa, email, idMaquina).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    carregarMaquinas,
+    getKpiCpu
 
 }

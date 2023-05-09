@@ -20,7 +20,7 @@
 
     <title>Dashboard Específico</title>
   </head>
-  <body>
+  <body onload="iniciar()">
     <div class="container-menu">
 
       <div class="img-logo">
@@ -106,7 +106,7 @@
         </ul>
       </div>
 
-      <a class="outside-icon" href="login.html" onclick="limparSessao()">
+      <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
         <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
       </a>
     </div>
