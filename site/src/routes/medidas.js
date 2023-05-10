@@ -3,8 +3,8 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
-router.post("/carregarMaquinas", function (req, res) {
-    medidaController.carregarMaquinas(req, res);
+router.post("/carregarMaquinaEspec", function (req, res) {
+    medidaController.carregarMaquinaEspec(req, res);
 });
 
 router.post("/getKpiCpu", function (req, res) {

@@ -565,21 +565,17 @@ document.body.appendChild(ttChatLoaderS);
 
 let idMaquinas = []
 
-function getMaquinas() {
+function getMaquina(idMaquina) {
 
-  const elements = [sessionStorage.getItem('FK_EMPRESA'), sessionStorage.getItem('ID_ADMIN')]
-
-  console.log("idAdmin " + elements[1])
-  console.log("fkEmpresaServer " + elements[0])
-
-  fetch("/medidas/carregarMaquinas", {
+  fetch("/medidas/carregarMaquinaEspec", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
+      id_maquinaServer: idMaquina,
       id_adminServer: sessionStorage.getItem('ID_ADMIN'),
-      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA'),
+      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA')
     })
   }).then(function (response) {
 
@@ -588,13 +584,13 @@ function getMaquinas() {
         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
         if (sessionStorage.getItem("ID_MAQUINA_0") == null) {
-          for (let index = 0; index < resposta.length; index++) {
-            const maquinaAtual = resposta[index];
-            const idMaquinaAtual = resposta[index].id_maquina;
-            sessionStorage.setItem("ID_MAQUINA_" + resposta.indexOf(maquinaAtual), idMaquinaAtual)
-          }
+
+          const maquinaAtual = resposta[index];
+          const idMaquinaAtual = resposta[index].id_maquina;
+          sessionStorage.setItem("ID_MAQUINA_" + resposta.indexOf(maquinaAtual), idMaquinaAtual)
+
         } else {
-          console.log("Máquinas já foram carregadas!")
+          console.log("Máquina já foi carregada!")
         }
       });
       getKpiCpu();
@@ -607,7 +603,7 @@ function getMaquinas() {
     });
 }
 
-function getKpiCpu() {
+function getKpiCpu(idMaquina) {
   console.log("NA FUNÇÃO DE KPI - CPU")
 
   fetch("/medidas/getKpiCpu", {
@@ -641,6 +637,6 @@ function getKpiCpu() {
 }
 
 function iniciar() {
-  getMaquinas();
+  getMaquina(1);
 }
 

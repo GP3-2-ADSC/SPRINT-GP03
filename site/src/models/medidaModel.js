@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function carregarMaquinas(fkEmpresa, idAdmin) {
+function carregarMaquinaEspec(fkEmpresa, idAdmin, idMaquina) {
 
     instrucaoSql = ''
 
@@ -17,9 +17,9 @@ function carregarMaquinas(fkEmpresa, idAdmin) {
         SELECT 
             *
         FROM
-            maquina_ultrassom
+           mu.maquina_ultrassom
         WHERE
-            fk_administrador = ${idAdmin}  AND fk_empresa = ${fkEmpresa} `;
+            fk_administrador = ${idAdmin} AND fk_empresa = ${fkEmpresa} AND id_maquina = ${idMaquina}`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -60,6 +60,6 @@ function getKpiCpu(idAdmin, fkEmpresa, email, idMaquina) {
 
 
 module.exports = {
-    carregarMaquinas,
+    carregarMaquinaEspec,
     getKpiCpu
 }
