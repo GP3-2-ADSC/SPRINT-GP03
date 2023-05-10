@@ -572,7 +572,17 @@ function getMaquinas() {
   console.log("idAdmin " + elements[1])
   console.log("fkEmpresaServer " + elements[0])
 
-  fetch(`/medidas/carregarMaquinas/${elements}`, { cache: 'no-store' }).then(function (response) {
+  fetch("/medidas/carregarMaquinas", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_adminServer: sessionStorage.getItem('ID_ADMIN'),
+      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA'),
+    })
+  }).then(function (response) {
+
     if (response.ok) {
       response.json().then(function (resposta) {
         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -601,7 +611,7 @@ function getKpiCpu() {
   console.log("NA FUNÇÃO DE KPI - CPU")
 
   fetch("/medidas/getKpiCpu", {
-    method: "PUT",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
@@ -618,7 +628,7 @@ function getKpiCpu() {
       console.log(resposta);
 
       resposta.json().then(json => {
-        
+        // Aqui precisamos utilizar o join para puxar certinho
 
       });
 

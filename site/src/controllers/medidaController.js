@@ -2,14 +2,8 @@ var medidaModel = require("../models/medidaModel");
 
 function carregarMaquinas(req, res) {
 
-    let fkEmpresa = req.params.elements[0];
-    let idAdmin = req.params.elements[2];
-
-    console.log("ESTOU NA CONTROLLER !!!! ")
-    console.log("O PARAMS É " + req.params.elements)
-    console.log("TAMANHO " + req.params.elements.length)
-    console.log("fkEmpresa " + req.params.elements[0])
-    console.log("idAdmin " + req.params.elements[2])
+    let fkEmpresa = req.body.id_adminServer;
+    let idAdmin = req.body.fk_empresaServer;
 
     medidaModel.carregarMaquinas(fkEmpresa, idAdmin).then(function (resultado) {
         if (resultado.length > 0) {

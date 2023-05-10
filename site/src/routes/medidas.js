@@ -3,11 +3,11 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
-router.get("/carregarMaquinas/:elements", function (req, res) {
+router.post("/carregarMaquinas", function (req, res) {
     medidaController.carregarMaquinas(req, res);
 });
 
-router.put("/getKpiCpu", function (req, res) {
+router.post("/getKpiCpu", function (req, res) {
     medidaController.getKpiCpu(req, res);
 })
 
