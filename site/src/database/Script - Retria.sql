@@ -9,7 +9,6 @@ create table empresa(
     telefone_01 varchar(11),
     telefone_02 varchar(11),
     email varchar(45),
-    senha varchar(256),
     responsavel_empresa varchar(45),
     fk_matriz int default null,
     primary key(id_empresa),
@@ -119,6 +118,7 @@ create table alerta(
 -- Script da Azure
 CREATE TABLE empresa (
     id_empresa INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_empresa),
     nome_empresa VARCHAR(45),
     cnpj CHAR(14),
     telefone_01 VARCHAR(11),
@@ -126,110 +126,115 @@ CREATE TABLE empresa (
     email VARCHAR(45),
     responsavel_empresa VARCHAR(45),
     fk_matriz INT DEFAULT NULL,
-    PRIMARY KEY (id_empresa),
-    FOREIGN KEY (fk_matriz) REFERENCES empresa(id_empresa)
+        FOREIGN KEY (fk_matriz) REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE endereco (
     id_endereco INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_endereco),
     cep CHAR(8),
     numero VARCHAR(8),
     complemento VARCHAR(45) NOT NULL,
     fk_empresa INT,
-    PRIMARY KEY (id_endereco),
-    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
+        FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
+
+CREATE TABLE ocupacao (
+    id_ocupacao INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_ocupacao)
+    nome_ocupacao VARCHAR(45),
+);  
 
 CREATE TABLE administrador (
     id_administrador INT IDENTITY(1,1) UNIQUE,
     nome_administrador VARCHAR(45),
     email_administrador VARCHAR(90),
+        CONSTRAINT chkEmail CHECK (email_administrador LIKE '%@%.%' AND email_administrador NOT LIKE '@%' and email_administrador NOT LIKE '%.'), 
     senha_administrador VARCHAR(256),
     telefone_administrador VARCHAR(11),
-    ocupacao VARCHAR(45),
     chave_seguranca_administrador VARCHAR(45),
+    fk_ocupacao INT, 
+        REFERENCES ocupacao(id_ocupacao),
     fk_empresa INT,
-    CONSTRAINT chkEmail CHECK (email_administrador LIKE '%@%.%' AND email_administrador NOT LIKE '@%' and email_administrador NOT LIKE '%.'), 
-    PRIMARY KEY (id_administrador, fk_empresa),
-    UNIQUE (fk_empresa),
-    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
+        PRIMARY KEY (id_administrador, fk_empresa),
+        UNIQUE (fk_empresa),
+        FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE maquina_ultrassom (
     id_maquina INT IDENTITY(1,1) UNIQUE,
-    nome_fornecedor VARCHAR(45),
-    tipo_maquina VARCHAR(45),
+        PRIMARY KEY (id_maquina),
     sistema_operacional VARCHAR(45),
-    setor VARCHAR(45),
-    andar INT,
+    numero_serial_maquina VARCHAR(45),
     fk_administrador INT,
+        FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
     fk_empresa INT,
-    PRIMARY KEY (id_maquina, fk_administrador, fk_empresa),
-    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
-    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
+        FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
+);
+
+CREATE TABLE tipo_componente (
+    id_tipo_componente INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_tipo_componente)
+    nome_tipo_componente VARCHAR(45),
 );
 
 CREATE TABLE especificacao_componente (
     id_especificacao_componente INT IDENTITY(1,1) UNIQUE,
-    tipo VARCHAR(45),
-    nome_fabricante VARCHAR(45),
+        PRIMARY KEY (id_especificacao_componente)
     descricao_componente VARCHAR(255),
-    PRIMARY KEY (id_especificacao_componente)
+    nome_fabricante VARCHAR(45),
+    numero_serial VARCHAR(45),
+    fk_tipo_componente INT,
+        FOREIGN KEY (fk_tipo_componente) REFERENCES tipo_componente(id_tipo_componente)
 );
 
 CREATE TABLE maquina_ultrassom_especificada (
     id_especificacao_componente_maquina INT IDENTITY(1,1) UNIQUE,
-    numero_serial VARCHAR(45),
+        PRIMARY KEY (id_especificacao_componente_maquina),
     uso_maximo FLOAT,
     frequencia_maxima FLOAT,
     fk_maquina INT,
-    fk_administrador INT,
-    fk_empresa INT,
+        FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
     fk_especificacao_componente INT,
-    PRIMARY KEY (id_especificacao_componente_maquina, fk_maquina, fk_administrador, fk_empresa, fk_especificacao_componente),
-    FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
-    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
-    FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
-    FOREIGN KEY (fk_especificacao_componente) REFERENCES especificacao_componente(id_especificacao_componente)
+        FOREIGN KEY (fk_especificacao_componente) REFERENCES especificacao_componente(id_especificacao_componente)
 );
 
 CREATE TABLE metrica_componente (
     id_metrica_componente INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_metrica_componente),
     dt_metrica DATETIME,
     uso FLOAT,
     frequencia FLOAT,
-    fk_maquina INT,
-    fk_administrador INT,
-    fk_empresa INT,
-    fk_especificacao_componente INT,
-    PRIMARY KEY (id_metrica_componente, fk_maquina, fk_administrador, fk_empresa, fk_especificacao_componente),
-    FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
-    FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador)
+    fk_especificacao_componente_maquina INT,
+        FOREIGN KEY (fk_especificacao_componente_maquina) REFERENCES maquina_ultrassom_especificada(id_especificacao_componente_maquina)
+);
+
+CREATE TABLE tipo_alerta (
+    id_tipo_alerta INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_tipo_alerta)
+    nome_tipo_alerta VARCHAR(45),
+    descricao_alerta VARCHAR(255)
 );
 
 CREATE TABLE alerta (
     id_alerta INT IDENTITY(1,1) UNIQUE,
+        PRIMARY KEY (id_alerta),
     dt_alerta DATETIME,
-    tipo_alerta VARCHAR(255),
+    fk_tipo_alerta INT,
+        FOREIGN KEY (fk_tipo_alerta) REFERENCES tipo_alerta(id_tipo_alerta),    
     fk_metrica_componente INT,
-    fk_maquina INT,
-    fk_administrador INT,
-    fk_empresa INT,
-    fk_especificacao_componente INT NOT NULL,
-    CONSTRAINT pk_alerta PRIMARY KEY (id_alerta),
-    CONSTRAINT fk_alerta_maquina FOREIGN KEY (fk_maquina) REFERENCES maquina_ultrassom(id_maquina),
-    CONSTRAINT fk_alerta_administrador FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
-    CONSTRAINT fk_alerta_empresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
-    CONSTRAINT fk_alerta_especificacao_componente FOREIGN KEY (fk_especificacao_componente) REFERENCES especificacao_componente(id_especificacao_componente),
-    CONSTRAINT fk_alerta_metrica_componente FOREIGN KEY (fk_metrica_componente) REFERENCES metrica_componente(id_metrica_componente)
+        FOREIGN KEY (fk_metrica_componente) REFERENCES metrica_componente(id_metrica_componente)
 );
 
 -- Drop tables 
+drop table [dbo].[tipo_alerta];
 drop table [dbo].[alerta];
 drop table [dbo].[metrica_componente];
 drop table [dbo].[maquina_ultrassom_especificada];
 drop table [dbo].[maquina_ultrassom];
+drop table [dbo].[tipo_componente];
 drop table [dbo].[especificacao_componente];
 drop table [dbo].[endereco];
+drop table [dbo].[ocupacao];
 drop table [dbo].[administrador];
 drop table [dbo].[empresa];
