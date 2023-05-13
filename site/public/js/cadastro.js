@@ -59,18 +59,23 @@ function mascaraTelefone() {
     let telefone02 = in_telefone_2.value.replace(/\D+/g, '').trim();
     
 
-    if (telefone01.length >= 11 || telefone02.length >= 11) {
+    if (telefone01.length >= 11 && telefone02.length >= 11) {
         return false;
     }
 
-    if (telefone01.length > 10 || telefone02.length > 10) {
+    if (telefone01.length > 10) {
         telefone01 = telefone01.replace(patterns.TELEFONE_11, "($1) $2-$3");
-        telefone02 = telefone02.replace(patterns.TELEFONE_11, "($1) $2-$3");
-    }  else if (telefone01.length > 6 || telefone02.length > 6) {
+    } else if (telefone01.length > 6) {
         telefone01 = telefone01.replace(patterns.TELEFONE_6, "($1) $2-");
-        telefone02 = telefone02.replace(patterns.TELEFONE_6, "($1) $2-");
-    } else if (telefone01.length > 1 || telefone02.length > 1) {
+    } else if (telefone01.length > 1) {
         telefone01 = telefone01.replace(patterns.TELEFONE_2, "($1)");
+    }  
+
+    if (telefone02.length > 10) {
+        telefone02 = telefone02.replace(patterns.TELEFONE_11, "($1) $2-$3");
+    } else if (telefone02.length > 6) {
+        telefone02 = telefone02.replace(patterns.TELEFONE_6, "($1) $2-");
+    } else if (telefone02.length > 1) {
         telefone02 = telefone02.replace(patterns.TELEFONE_2, "($1)");
     }
 
