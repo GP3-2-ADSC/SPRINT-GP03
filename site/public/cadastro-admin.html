@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/cadastro.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+
     <script src="./js/funcoes.js"></script>
+    <script src="./js/transicao.js"></script>
+    <script src="./js/cadastro.js"></script>
 
     <title>Retria | Cadastro de administrador</title>
 </head>
@@ -53,6 +57,7 @@
                     <h2>Junte-se a nós</h2>
                     <h4>Cadastre o administrador de monitoramento</h4>
                 </div>
+
                 <div class="linha">
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_nomeAdm">
@@ -66,9 +71,10 @@
                         <span class="span-required" id="span-cargo-admin">É necessário inserir um cargo.</span>
                     </div>
                 </div>
+
                 <div class="linha">
                     <div class="campo">
-                        <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone">
+                        <input required="" type="text" name="text" autocomplete="off" maxlength="15" class="input" id="in_telefone" onkeyup="mascaraTelefoneAdmin()">
                         <label class="user-label">Celular / Telefone</label>
                         <span class="span-required" id="span-telefone-admin">Necessário telefone com 11 dígitos.</span>
                     </div>
@@ -86,6 +92,7 @@
                         <label class="user-label">Criar uma senha</label>
                         <span class="span-required" id="span-senha-admin" style="max-width: 280px;">Senha deve conter caracteres especiais e alfanuméricos maiúsculos e minúsculos.</span>
                     </div>
+
                     <div class="campo">
                         <input required="" type="password" name="text" autocomplete="off" class="input" id="in_confirmacao">
                         <label class="user-label">Confirmar senha</label>
@@ -95,6 +102,7 @@
 
                 <button class="buttonLogin" onclick="cadastrarAdmin();">Cadastrar</button>
             </div>
+
             <div id="div_aguardar" class="loading-div">
                 <img src="./assets/loading_blue.gif" id="loading-gif">
             </div>
@@ -105,7 +113,30 @@
         </div>
     </div>
 </body>
-
 </html>
-<script src="./js/transicao.js"></script>
-<script src="./js/cadastro.js"></script>
+
+<script>
+    const patternsTel = {
+        TELEFONE_11: /^(\d{2})(\d{5})(\d{4})/,
+        TELEFONE_6: /^(\d{2})(\d{4})/,
+        TELEFONE_2: /^(\d{2})/,
+    }
+
+    function mascaraTelefoneAdmin() {
+    let telefoneAdmin = in_telefone.value.replace(/\D+/g, '').trim(); 
+
+    if (telefoneAdmin.length > 11) {
+        return false;
+    }
+
+    if (telefoneAdmin.length > 10) {
+        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_11, "($1) $2-$3");
+    }  else if (telefoneAdmin.length > 6) {
+        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_6, "($1) $2-");
+    } else if (telefoneAdmin.length > 1) {
+        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_2, "($1)");
+    }
+
+    in_telefone.value = telefoneAdmin;
+}
+</script>
