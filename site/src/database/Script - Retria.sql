@@ -101,10 +101,9 @@ create table tipo_alerta (
 );
 
 insert into tipo_alerta (nome_tipo_alerta, descricao_alerta) values 
-    ('Perigo', 'O uso do componente está muito acima do limite. Recomenda-se análise do componente e sua resolução imediata.'),
-    ('Alerta', 'O uso do componente está se aproximando da zona de perigo. Isso pode gerar desgastes do componente, instabilidade e lentidão dos processos da sua máquina.'),
-    ('Crítico', 'O uso do componente está em um nível crítico. Isso pode causar danos irreparáveis e falhas graves no sistema.'),
-    ('Aviso', 'O uso do componente está acima do normal, mas ainda abaixo do limite de alerta. Recomenda-se monitoramento contínuo.');
+    ('Alerta', 'O uso do componente está se aproximando da zona de perigo de 70 a 80% do uso máximo aceitável. Isso pode gerar desgastes do componente, instabilidade e lentidão dos processos da sua máquina.'),
+    ('Perigo', 'O uso do componente está de 80% a 90% do limite de consumo aceitável. A sua permanência pode acarretar na diminuição da sua eficiência e da sua vida útil.'),
+    ('Crítico', 'O uso do componente está entre 90 e 100% do limite do consumo aceitável. Isso pode causar danos irreparáveis e falhas graves no sistema. Recomenda-se análise do componente e sua resolução imediata.');
 
 create table alerta (
 	id_alerta int auto_increment,
@@ -217,10 +216,9 @@ CREATE TABLE tipo_alerta (
 );
 
 INSERT INTO [dbo].[tipo_alerta] (nome_tipo_alerta, descricao_alerta) VALUES 
-    ('Perigo', 'O uso do componente está muito acima do limite. Recomenda-se análise do componente e sua resolução imediata.'),
-    ('Alerta', 'O uso do componente está se aproximando da zona de perigo. Isso pode gerar desgastes do componente, instabilidade e lentidão dos processos da sua máquina.'),
-    ('Crítico', 'O uso do componente está em um nível crítico. Isso pode causar danos irreparáveis e falhas graves no sistema.'),
-    ('Aviso', 'O uso do componente está acima do normal, mas ainda abaixo do limite de alerta. Recomenda-se monitoramento contínuo.');
+    ('Alerta', 'O uso do componente está se aproximando da zona de perigo de 70 a 80% do uso máximo aceitável. Isso pode gerar desgastes do componente, instabilidade e lentidão dos processos da sua máquina.'),
+    ('Perigo', 'O uso do componente está de 80% a 90% do limite de consumo aceitável. A sua permanência pode acarretar na diminuição da sua eficiência e da sua vida útil.'),
+    ('Crítico', 'O uso do componente está entre 90 e 100% do limite do consumo aceitável. Isso pode causar danos irreparáveis e falhas graves no sistema. Recomenda-se análise do componente e sua resolução imediata.');
 
 CREATE TABLE alerta (
     id_alerta INT IDENTITY(1,1) UNIQUE,
