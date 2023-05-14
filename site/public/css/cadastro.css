@@ -102,7 +102,7 @@ input:focus{
 }
 
 .input:focus~label,
-input:valid~label {
+.input:valid~label {
     transform: translateY(-50%) scale(0.8);
     background-color: rgb(238, 238, 238);
     color: #2196f3;

@@ -217,6 +217,7 @@ function nextPage(n) {
                     <span class="span-required" id="span-cnpj">Necessário CNPJ com 14 dígitos</span>
                 </div>
             </div>
+
             <div class="linha">
                 <div class="campo">
                     <input required="" type="text" name="text" autocomplete="off" class="input" id="in_telefone_1">
@@ -237,6 +238,7 @@ function nextPage(n) {
                     <label class="user-label">Responsável</label>
                     <span class="span-required" id="span-resp">É necessário inserir um nome</span>
                 </div>
+                
                 <div class="campo">
                     <input required="" type="text" name="text" autocomplete="off" class="input" id="in_email">
                     <label class="user-label">Email do responsável</label>
@@ -363,10 +365,9 @@ function cadastrar(empresaStorage) {
 
             setTimeout(() => {
                 window.location = "cadastro-admin.html";
-            }, "2000");
+            }, 2000);
 
 
-            limparFormulario();
             finalizarAguardar();
         } else {
             throw ("Houve um erro ao tentar realizar o cadastro!");
@@ -387,55 +388,59 @@ function sumirMensagem() {
 function cadastrarEndereco() {
     aguardar();
 
-    var cepVar = in_cep.value;
+    var cepVar = in_cep.value.replace(/\D+/g, '');;
     var logradouroVar = in_logradouro.value;
     var numeroVar = in_numero.value;
     var bairroVar = in_bairro.value;
     var cidadeVar = in_cidade.value;
     var complementoVar = in_complemento.value;
 
-
     var campovazio = cepVar == "" || logradouroVar == "" || numeroVar == "" || bairroVar == "" || cidadeVar == "" || complementoVar == "";
 
+    if (numeroVar = "") {
+        cardErro.style.display = "block"
+        mensagem_erro.innerHTML = "O número não pode ser negativo.";
 
-    if (campovazio) {
+        finalizarAguardar();
+        return false;
+    } else if (campovazio) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "É necessário preencher todos os campos.";
 
         finalizarAguardar();
         return false;
-    }
+    } else {
+        console.log("ESTOU NA PORRA DO FETCH");
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrarEndereco", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                cepServer: cepVar,
+                numeroServer: numeroVar,
+                complementoServer: complementoVar,
+                fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
+            })
+        }).then(function (resposta) {
 
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrarEndereco", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            cepServer: cepVar,
-            numeroServer: numeroVar,
-            complementoServer: complementoVar,
-            fkEmpresaServer: sessionStorage.getItem('FK_EMPRESA')
-        })
-    }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                finalizarAguardar();
 
-        console.log("resposta: ", resposta);
-        if (resposta.ok) {
-            limparFormulario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
             finalizarAguardar();
+        });
 
-        } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-    });
-
-    return false;
+        return false;
+    }
 }
 
 function carregarFkempresa(cnpj) {
@@ -450,7 +455,7 @@ function carregarFkempresa(cnpj) {
             });
             setTimeout(() => {
                 cadastrarEndereco();
-            }, "1000");
+            }, 1000);
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
@@ -465,14 +470,14 @@ function cadastrarAdmin() {
 
     var nomeAdm = in_nomeAdm.value;
     var cargoVar = in_cargo.value;
-    var telVar = in_telefone.value;
+    var telVar = in_telefone.value.replace(/\D/g, '');
     var emailVar = in_email.value;
     var senhaVar = in_senha.value;
     var confirmarSenhaVar = in_confirmacao.value;
 
     var campovazio = nomeAdm == "" || cargoVar == "" || telVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "";
 
-    const telefoneRegex = /^\b\d{11}\b$/;
+    const telefoneRegex = patterns.TELEFONE_11;
 
     const senhaRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z@#$%^&*]{8,20}$/;
 
@@ -499,7 +504,7 @@ function cadastrarAdmin() {
 
         if (senhaRegex.test(senhaVar)) {
             console.log("Senha Correta");
-            if (!senhaVar == confirmarSenhaVar) {
+            if (senhaVar != confirmarSenhaVar) {
                 document.getElementById("span-senha-admin").style.display = "block";
 
                 cardErro.style.display = "block"
@@ -528,6 +533,10 @@ function cadastrarAdmin() {
             const ipt_span_email = document.querySelector('#in_email');
             ipt_span_email.classList.remove('valido');
             ipt_span_email.classList.add('invalido');
+            finalizarAguardar();
+
+
+            return false;
         } else {
             document.getElementById("span-email-admin").style.display = "none";
 
@@ -599,7 +608,6 @@ function getSerialKey(emailVar) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarSerialKey(resposta);
 
-                limparFormulario();
                 finalizarAguardar();
             });
         } else {

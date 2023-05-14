@@ -38,6 +38,7 @@
 
     <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn " onclick="openClose(0)">&times;</a>
+
         <div class="overlay-content">
             <a href="./index.html">Início</a>
             <a href="./index.html#servicos">Serviços</a>
@@ -66,8 +67,16 @@
                     </div>
 
                     <div class="campo">
-                        <input required="" type="text" name="text" autocomplete="off" class="input" id="in_cargo">
+                        <select required="" type="text" name="text" autocomplete="off" class="input" id="in_cargo">
+                            <option value=""></option>
+                            <option value="1">Engenheiro de Operações de TI</option>
+                            <option value="2">Engenheiro de NOC</option>
+                            <option value="3">Administrador de Sistemas</option>
+                            <option value="4">Administrador de Sistemas de Monitoramento</option>
+                            <option value="5">Analista de Operações de TI</option>
+                        </select>
                         <label class="user-label">Cargo</label>
+
                         <span class="span-required" id="span-cargo-admin">É necessário inserir um cargo.</span>
                     </div>
                 </div>
@@ -76,12 +85,14 @@
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" maxlength="15" class="input" id="in_telefone" onkeyup="mascaraTelefoneAdmin()">
                         <label class="user-label">Celular / Telefone</label>
+
                         <span class="span-required" id="span-telefone-admin">Necessário telefone com 11 dígitos.</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="in_email">
                         <label class="user-label">E-mail do admistrador</label>
+
                         <span class="span-required" id="span-email-admin">É necessário inserir um e-mail.</span>
                     </div> 
                 </div>
@@ -90,12 +101,14 @@
                     <div class="campo">
                         <input required="" type="password" name="text" autocomplete="off" class="input" id="in_senha">
                         <label class="user-label">Criar uma senha</label>
+
                         <span class="span-required" id="span-senha-admin" style="max-width: 280px;">Senha deve conter caracteres especiais e alfanuméricos maiúsculos e minúsculos.</span>
                     </div>
 
                     <div class="campo">
                         <input required="" type="password" name="text" autocomplete="off" class="input" id="in_confirmacao">
                         <label class="user-label">Confirmar senha</label>
+
                         <span class="span-required" id="span-confirm-senha-admin" style="max-width: 280px;">Senha deve conter caracteres especiais e alfanuméricos maiúsculos e minúsculos.</span>
                     </div>
                 </div>
@@ -123,20 +136,20 @@
     }
 
     function mascaraTelefoneAdmin() {
-    let telefoneAdmin = in_telefone.value.replace(/\D+/g, '').trim(); 
+        let telefoneAdmin = in_telefone.value.replace(/\D+/g, '').trim(); 
 
-    if (telefoneAdmin.length > 11) {
-        return false;
+        if (telefoneAdmin.length >= 11) {
+            return false;
+        }
+
+        if (telefoneAdmin.length > 10) {
+            telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_11, "($1) $2-$3");
+        }  else if (telefoneAdmin.length > 6) {
+            telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_6, "($1) $2-");
+        } else if (telefoneAdmin.length > 1) {
+            telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_2, "($1)");
+        }
+
+        in_telefone.value = telefoneAdmin;
     }
-
-    if (telefoneAdmin.length > 10) {
-        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_11, "($1) $2-$3");
-    }  else if (telefoneAdmin.length > 6) {
-        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_6, "($1) $2-");
-    } else if (telefoneAdmin.length > 1) {
-        telefoneAdmin = telefoneAdmin.replace(patternsTel.TELEFONE_2, "($1)");
-    }
-
-    in_telefone.value = telefoneAdmin;
-}
 </script>
