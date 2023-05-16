@@ -157,7 +157,7 @@ function getKpiDisco(idMaquina,qtdDeDiscos) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-	        TOP(2) *
+	        TOP(${qtdDeDiscos}) *
         FROM 
 	        metrica_componente
         WHERE 
