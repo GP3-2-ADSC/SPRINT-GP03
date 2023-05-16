@@ -41,7 +41,8 @@ function getKpiCpu(idMaquina) {
   fetch(`/maquinas/getKpiCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        console.log("Data da métrica: " + resposta[0].dt_metrica);
+        console.log("Uso de CPU: " + resposta[0].uso + "%")
         getKpiRam(idMaquina);
       });
     } else {
@@ -59,8 +60,9 @@ function getKpiRam(idMaquina) {
   fetch(`/maquinas/getKpiRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-        getKpiDisco(idMaquina);
+        console.log("Data da métrica: " + resposta[0].dt_metrica);
+        console.log("Uso de ram: " + resposta[0].uso + "%")
+        getQtdDisco(idMaquina);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -71,8 +73,27 @@ function getKpiRam(idMaquina) {
     });
 }
 
-function getKpiDisco(idMaquina) {
+function getQtdDisco(idMaquina) {
+  console.log("NA FUNÇÃO DE QTD - DISCO")
+
+  fetch(`/maquinas/getQtdDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(resposta[0].quantidade)
+        getKpiDisco(idMaquina, resposta[0].quantidade);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getKpiDisco(idMaquina, qtdDeDiscos) {
   console.log("NA FUNÇÃO DE KPI - DISCO")
+
 
   fetch("/maquinas/getKpiDisco", {
     method: "POST",
@@ -81,13 +102,18 @@ function getKpiDisco(idMaquina) {
     },
     body: JSON.stringify({
       idMaquinaServer: idMaquina,
+      qtdDeDiscosServer: qtdDeDiscos
     })
   }).then(function (response) {
 
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         
+        for (let index = 0; index < resposta.length; index++) {
+          const element = resposta[index];
+          console.log("Data da métrica: " + element.dt_metrica);
+          console.log("Uso de Disco_" + index  + ": " + element.uso + "%")
+        }
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -97,7 +123,6 @@ function getKpiDisco(idMaquina) {
       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-
 function iniciar() {
   getMaquinas();
 }

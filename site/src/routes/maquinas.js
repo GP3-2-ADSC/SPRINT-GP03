@@ -15,6 +15,11 @@ router.get("/getKpiRam/:idMaquina", function (req, res) {
     maquinaController.getKpiRam(req, res);
 });
 
+router.get("/getQtdDisco/:idMaquina", function (req, res) {
+    maquinaController.getQtdDisco(req, res);
+});
+
+
 router.post("/getKpiDisco", function (req, res) {
     maquinaController.getKpiDisco(req, res);
 });
