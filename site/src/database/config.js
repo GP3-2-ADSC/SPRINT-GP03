@@ -5,8 +5,8 @@ var sql = require('mssql');
 var sqlServerConfig = {
     server: "umms-retria.database.windows.net",
     database: "BD-UMMS",
-    user: "usuarioParaAPIWebDataViz_datawriter_datareader",
-    password: "#Gf_senhaParaAPIWebDataViz",
+    user: "adm",
+    password: "#Gfgrupo3",
     pool: {
         max: 10,
         min: 0,
