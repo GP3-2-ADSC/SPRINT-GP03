@@ -1,5 +1,7 @@
+let listaMaquinas = []
+
 // ChartJS da KPI da CPU
-const data_cpu = {
+let data_cpu = {
   labels: ["Disponível", "Utilizando"],
   datasets: [
     {
@@ -12,7 +14,7 @@ const data_cpu = {
   ],
 };
 
-const config_kpi_cpu = {
+let config_kpi_cpu = {
   type: "doughnut",
   data: data_cpu,
   options: {
@@ -24,13 +26,13 @@ const config_kpi_cpu = {
   },
 };
 
-const myChart_kpi_cpu = new Chart(
+let myChart_kpi_cpu = new Chart(
   document.getElementById("kpi-chart-cpu"),
   config_kpi_cpu
 );
 
 // ChartJS da KPI da Memória
-const data_memoria = {
+let data_memoria = {
   labels: ["Disponível", "Utilizando"],
   datasets: [
     {
@@ -43,7 +45,7 @@ const data_memoria = {
   ],
 };
 
-const config_kpi_memoria = {
+let config_kpi_memoria = {
   type: "doughnut",
   data: data_memoria,
   options: {
@@ -55,13 +57,13 @@ const config_kpi_memoria = {
   },
 };
 
-const myChart_kpi_memoria = new Chart(
+let myChart_kpi_memoria = new Chart(
   document.getElementById("kpi-chart-memoria"),
   config_kpi_memoria
 );
 
 // ChartJS da KPI do Disco
-const data_disco = {
+let data_disco = {
   labels: ["Disponível", "Utilizando"],
   datasets: [
     {
@@ -74,7 +76,7 @@ const data_disco = {
   ],
 };
 
-const config_kpi_disco = {
+let config_kpi_disco = {
   type: "doughnut",
   data: data_disco,
   options: {
@@ -86,13 +88,13 @@ const config_kpi_disco = {
   },
 };
 
-const myChart_kpi_disco = new Chart(
+let myChart_kpi_disco = new Chart(
   document.getElementById("kpi-chart-disco"),
   config_kpi_disco
 );
 
 // ChartJS da KPI da Rede
-const data_rede = {
+let data_rede = {
   labels: ["Disponível", "Utilizando"],
   datasets: [
     {
@@ -105,7 +107,7 @@ const data_rede = {
   ],
 };
 
-const config_kpi_rede = {
+let config_kpi_rede = {
   type: "doughnut",
   data: data_rede,
   options: {
@@ -117,7 +119,7 @@ const config_kpi_rede = {
   },
 };
 
-const myChart_kpi_rede = new Chart(
+let myChart_kpi_rede = new Chart(
   document.getElementById("kpi-chart-rede"),
   config_kpi_rede
 );
@@ -545,6 +547,141 @@ function plotarGraficoRede() {
   chartMemoria.style.display = "none";
   chartDisco.style.display = "none";
 }
+
+// Funções de plotagem da KPI
+
+function getMaquinas() {
+
+  fetch("/maquinas/carregarMaquinaEspec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_adminServer: sessionStorage.getItem('ID_USUARIO'),
+      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA')
+    })
+  }).then(function (response) {
+
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        console.log("Tamanho " + resposta.length)
+        resposta.forEach(element => {
+          listaMaquinas.push(element);
+        });
+        getKpiCpu(listaMaquinas[0].id_maquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getKpiCpu(idMaquina) {
+  console.log("NA FUNÇÃO DE KPI - CPU")
+
+  fetch(`/maquinas/getKpiCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        let usoAtual = resposta[0].uso;
+        myChart_kpi_cpu.update()
+        data_cpu.datasets[0].data = [100 - usoAtual, usoAtual]
+        getKpiRam(idMaquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getKpiRam(idMaquina) {
+  console.log("NA FUNÇÃO DE KPI - RAM")
+
+  fetch(`/maquinas/getKpiRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        let usoAtual = resposta[0].uso;
+        myChart_kpi_memoria.update()
+        data_memoria.datasets[0].data = [100 - usoAtual, usoAtual]
+        getQtdDisco(idMaquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getQtdDisco(idMaquina) {
+  console.log("NA FUNÇÃO DE QTD - DISCO")
+
+  fetch(`/maquinas/getQtdDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(resposta[0].quantidade)
+        getKpiDisco(idMaquina, resposta[0].quantidade);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function getKpiDisco(idMaquina, qtdDeDiscos) {
+  console.log("NA FUNÇÃO DE KPI - DISCO")
+
+
+  fetch("/maquinas/getKpiDisco", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      idMaquinaServer: idMaquina,
+      qtdDeDiscosServer: qtdDeDiscos
+    })
+  }).then(function (response) {
+
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        
+        for (let index = 0; index < resposta.length; index++) {
+          const element = resposta[index];
+          let usoAtual = resposta[0].uso;
+          myChart_kpi_disco.update()
+          data_disco.datasets[0].data = [100 - usoAtual, usoAtual]
+        }
+        console.log("Atualizando em 10 segundos");
+        setInterval(() => {
+          console.log("Atualizando...");
+          getKpiCpu(idMaquina)
+        }, 10000);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function iniciar() {
+  getMaquinas();
+}
+
 
 //<![CDATA[
   var ttChatLoaderS = document.createElement('script');
