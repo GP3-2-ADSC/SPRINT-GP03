@@ -1,4 +1,4 @@
-var medidaModel = require("../models/maquinaModel");
+var maquinaModel = require("../models/maquinaModel");
 
 function carregarMaquinaEspec(req, res) {
     let fkEmpresa = req.body.id_adminServer;
@@ -10,7 +10,7 @@ function carregarMaquinaEspec(req, res) {
         res.status(400).send("Seu fkEmpresa está undefined!");
     } else {
 
-        medidaModel.carregarMaquinaEspec(fkEmpresa, idAdmin).then(function (resultado) {
+        maquinaModel.carregarMaquinaEspec(fkEmpresa, idAdmin).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -33,7 +33,7 @@ function getKpiCpu(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-        medidaModel.getKpiCpu(idMaquina).then(function (resultado) {
+        maquinaModel.getKpiCpu(idMaquina).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -55,7 +55,7 @@ function getKpiRam(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-        medidaModel.getKpiRam(idMaquina).then(function (resultado) {
+        maquinaModel.getKpiRam(idMaquina).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -77,7 +77,7 @@ function getQtdDisco(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-        medidaModel.getQtdDisco(idMaquina).then(function (resultado) {
+        maquinaModel.getQtdDisco(idMaquina).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -102,7 +102,7 @@ function getKpiDisco(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-        medidaModel.getKpiDisco(idMaquina,qtdDeDiscos).then(function (resultado) {
+        maquinaModel.getKpiDisco(idMaquina,qtdDeDiscos).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
