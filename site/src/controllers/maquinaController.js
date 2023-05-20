@@ -24,97 +24,6 @@ function carregarMaquinaEspec(req, res) {
     }
 }
 
-function getKpiCpu(req, res) {
-    let idMaquina = req.params.idMaquina;
-
-    if (idMaquina == null) {
-        res.status(400).send("Seu idMaquina está undefined!");
-    } else {
-        console.log(`Recuperando medidas em tempo real`);
-
-        maquinaModel.getKpiCpu(idMaquina).then(function (resultado) {
-            if (resultado.length > 0) {
-                res.status(200).json(resultado);
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!")
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-    }
-}
-
-function getKpiRam(req, res) {
-    let idMaquina = req.params.idMaquina;
-
-    if (idMaquina == null) {
-        res.status(400).send("Seu idMaquina está undefined!");
-    } else {
-        console.log(`Recuperando medidas em tempo real`);
-
-        maquinaModel.getKpiRam(idMaquina).then(function (resultado) {
-            if (resultado.length > 0) {
-                res.status(200).json(resultado);
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!")
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-    }
-}
-
-function getQtdDisco(req, res) {
-    let idMaquina = req.params.idMaquina;
-
-    if (idMaquina == null) {
-        res.status(400).send("Seu idMaquina está undefined!");
-    } else {
-        console.log(`Recuperando medidas em tempo real`);
-
-        maquinaModel.getQtdDisco(idMaquina).then(function (resultado) {
-            if (resultado.length > 0) {
-                res.status(200).json(resultado);
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!")
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-    }
-}
-
-function getKpiDisco(req, res) {
-    let idMaquina = req.body.idMaquinaServer;
-    let qtdDeDiscos= req.body.qtdDeDiscosServer
-
-    if (idMaquina == null) {
-        res.status(400).send("Seu idMaquina está undefined!");
-    } else if (qtdDeDiscos == null) {
-        res.status(400).send("Sua quantidade de discos está undefined!");
-    } else {
-        console.log(`Recuperando medidas em tempo real`);
-
-        maquinaModel.getKpiDisco(idMaquina,qtdDeDiscos).then(function (resultado) {
-            if (resultado.length > 0) {
-                res.status(200).json(resultado);
-            } else {
-                res.status(204).send("Nenhum resultado encontrado!")
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-    }
-}
-
 function obterDadosIniciaisCpu(req, res) {
     console.log("NA CONTROLLER DO OBTER DADOS");
     let idMaquina = req.params.idMaquina;
@@ -207,14 +116,60 @@ function atualizarGraficoRam(req, res) {
     }
 }
 
+function obterDadosIniciaisDisco(req, res) {
+    console.log("NA CONTROLLER DO OBTER DADOS");
+    let idMaquina = req.params.idMaquina;
+
+    if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        console.log(`Recuperando medidas em tempo real`);
+
+        maquinaModel.obterDadosIniciaisDisco(idMaquina).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
+function atualizarGraficoDisco(req, res) {
+    console.log("NA CONTROLLER DO ATUALIZAR DADOS");
+    let idMaquina = req.params.idMaquina;
+    console.log(idMaquina);
+    if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        console.log(`Recuperando medidas em tempo real`);
+
+        maquinaModel.atualizarGraficoDisco(idMaquina).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
+
 module.exports = {
     carregarMaquinaEspec,
-    getKpiCpu,
-    getKpiRam,
-    getQtdDisco,
-    getKpiDisco,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
+    obterDadosIniciaisDisco,
     atualizarGraficoCpu,
-    atualizarGraficoRam
+    atualizarGraficoRam,
+    atualizarGraficoDisco
+
 }

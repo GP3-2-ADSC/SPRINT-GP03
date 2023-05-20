@@ -109,7 +109,7 @@ function autorizar(n) {
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "Acesso validado! Acessando dashboard!";
         setTimeout(() => {
-            window.location = "dashboard-espec.html";
+            window.location = "dashboardGeral.html";
         }, "2000")
     } else {
         cardErro.style.display = "block"
