@@ -162,12 +162,36 @@ function atualizarGraficoDisco(req, res) {
     }
 }
 
+function obterAlertas(req, res) {
+    console.log("NA CONTROLLER DO OBTER ALERTAS");
+    let idMaquina = req.params.idMaquina;
+
+    if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        console.log(`Recuperando medidas em tempo real`);
+
+        maquinaModel.obterAlertas(idMaquina).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
 
 module.exports = {
     carregarMaquinaEspec,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
     obterDadosIniciaisDisco,
+    obterAlertas,
     atualizarGraficoCpu,
     atualizarGraficoRam,
     atualizarGraficoDisco

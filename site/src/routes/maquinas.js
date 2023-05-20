@@ -31,4 +31,8 @@ router.get("/atualizarGraficoDisco/:idMaquina", function (req, res) {
     maquinaController.atualizarGraficoRam(req, res);
 });
 
+router.get("/obterAlertas/:idMaquina", function (req, res) {
+    maquinaController.obterAlertas(req, res);
+});
+
 module.exports = router;

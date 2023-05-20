@@ -1,5 +1,6 @@
 let listaMaquinas = []
 var posicao_maquina_atual = 0;
+
 // ChartJS da KPI da CPU
 let data_cpu = {
   labels: ["Disponível", "Utilizando"],
@@ -585,6 +586,7 @@ function obterDadosIniciaisCpu(idMaquina) {
           console.log("Ja foi apertado");
         }
         atualizarGraficoCpu(idMaquina);
+        obterAlertas(idMaquina)
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -621,7 +623,7 @@ function atualizarGraficoCpu(idMaquina) {
         }
         myChart_geral_cpu.update();
         myChart_kpi_cpu.update();
-
+        
         setTimeout(() => atualizarGraficoCpu(idMaquina), 5000);
       });
     } else {
@@ -757,7 +759,7 @@ function atualizarGraficoDisco(idMaquina) {
           data_geral_disco.datasets[0].data.shift();
           data_geral_disco.datasets[0].data.push(novoRegistro[0].uso);
           data_disco.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
-          
+
         }
         myChart_geral_cpu.update();
         myChart_kpi_disco.update();
@@ -778,13 +780,14 @@ function iniciar() {
   if (sessionStorage.POSICAO_ATUAL != null) {
     posicao_maquina_atual = sessionStorage.getItem("POSICAO_ATUAL")
     let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `MAQUINA ${parseInt(paraPlotar) + 1}`
-    console.log(``);
+    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
+    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
     getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
   } else {
     sessionStorage.POSICAO_ATUAL = posicao_maquina_atual
     let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `MAQUINA ${parseInt(paraPlotar) + 1}`
+    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
+    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
     getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
   }
 }
@@ -793,16 +796,61 @@ function proximaMaquina(acao) {
   if (acao == 1) {
     if (posicao_maquina_atual <= (listaMaquinas.length - 1) && posicao_maquina_atual > 0) {
       posicao_maquina_atual--;
-      sessionStorage.setItem("POSICAO_ATUAL",posicao_maquina_atual)
+      sessionStorage.setItem("POSICAO_ATUAL", posicao_maquina_atual)
       location.reload();
     }
   } else {
     if (posicao_maquina_atual < (listaMaquinas.length - 1) && posicao_maquina_atual >= 0) {
       posicao_maquina_atual++;
-      sessionStorage.setItem("POSICAO_ATUAL",posicao_maquina_atual)
+      sessionStorage.setItem("POSICAO_ATUAL", posicao_maquina_atual)
       location.reload();
     }
   }
+}
+
+function obterAlertas(idMaquina) {
+
+  console.log("Entrando na função obter alertas");
+  fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log("DADOS DO OBTER DADOS INICIAIS");
+        console.log(JSON.stringify(response));
+        resposta.forEach(element => {
+
+          let situacao = "";
+          if (element.id_tipo_alerta == 1) {
+            situacao = "alerta"
+          } else if (element.id_tipo_alerta == 2) {
+            situacao = "perigo"
+          } else {
+            situacao = "crítico"
+          }
+          if (resposta.indexOf(element) == 0) {
+            historic.innerHTML = `
+            <div class="card-historic">
+            <p class="historic-date">${element.dia}</p>
+              <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso}%)</p>
+            </div>`
+          }
+
+          historic.innerHTML += `
+              <div class="card-historic">
+              <p class="historic-date">${element.dia}</p>
+                <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso}%)</p>
+              </div>`
+          
+        });
+      });
+      setTimeout(() => obterAlertas(idMaquina), 5000);
+    } else {
+      setTimeout(() => obterAlertas(idMaquina), 5000);
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
 }
 
 //<![CDATA[
