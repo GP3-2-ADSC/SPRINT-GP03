@@ -1,5 +1,5 @@
 let listaMaquinas = []
-
+let id_maquina_atual = 0;
 // ChartJS da KPI da CPU
 let data_cpu = {
   labels: ["Disponível", "Utilizando"],
@@ -127,16 +127,7 @@ let myChart_kpi_rede = new Chart(
 
 // ChartJS do uso da CPU
 // Criando estrutura para plotar gráfico - labels
-let labels_geral_cpu = [
-  "12:02",
-  "12:04",
-  "12:06",
-  "12:08",
-  "12:10",
-  "12:12",
-  "12:14",
-  "12:16",
-];
+let labels_geral_cpu = [];
 
 // Criando estrutura para plotar gráfico - dados
 let data_geral_cpu = {
@@ -148,7 +139,7 @@ let data_geral_cpu = {
       borderColor: "#0061BA",
       pointRadius: 5,
       pointBorderWidth: 1,
-      data: [10, 25, 32, 24, 15, 56, 27, 38],
+      data: [],
     },
     {
       label: "Uso ideal",
@@ -217,16 +208,7 @@ let myChart_geral_cpu = new Chart(
 
 
 // ChartJS do uso da Memória
-let labels_geral_memoria = [
-  "12:02",
-  "12:04",
-  "12:06",
-  "12:08",
-  "12:10",
-  "12:12",
-  "12:14",
-  "12:16",
-];
+let labels_geral_memoria = [];
 
 // Criando estrutura para plotar gráfico - dados
 let data_geral_memoria = {
@@ -238,7 +220,7 @@ let data_geral_memoria = {
       borderColor: "#0061BA",
       pointRadius: 5,
       pointBorderWidth: 1,
-      data: [55, 58, 62, 67, 58, 62, 65, 72],
+      data: [],
     },
     {
       label: "Uso ideal",
@@ -308,14 +290,7 @@ let myChart_geral_memoria = new Chart(
 
 // ChartJS do Uso do Disco
 let labels_geral_disco = [
-  "12:02",
-  "12:04",
-  "12:06",
-  "12:08",
-  "12:10",
-  "12:12",
-  "12:14",
-  "12:16",
+
 ];
 
 // Criando estrutura para plotar gráfico - dados
@@ -328,7 +303,7 @@ let data_geral_disco = {
       borderColor: "#0061BA",
       pointRadius: 5,
       pointBorderWidth: 1,
-      data: [32, 38, 53, 65, 59, 60, 75, 82],
+      data: [],
     },
     {
       label: "Uso ideal",
@@ -418,7 +393,7 @@ let data_geral_rede = {
       borderColor: "#0061BA",
       pointRadius: 5,
       pointBorderWidth: 1,
-      data: [55, 58, 62, 67, 58, 62, 65, 72],
+      data: [],
     },
     {
       label: "Uso ideal",
@@ -503,10 +478,11 @@ function plotarGraficoCPU() {
   btnMemoria.style.backgroundColor = "#5eacd2";
   btnDisco.style.backgroundColor = "#5eacd2";
   btnRede.style.backgroundColor = "#5eacd2";
-  
+
   chartMemoria.style.display = "none";
   chartDisco.style.display = "none";
   chartRede.style.display = "none";
+
 }
 
 function plotarGraficoMemoria() {
@@ -519,7 +495,9 @@ function plotarGraficoMemoria() {
 
   chartCPU.style.display = "none";
   chartDisco.style.display = "none";
-  chartRede.style.display = "none";  
+  chartRede.style.display = "none";
+
+  obterDadosIniciaisRam(listaMaquinas[id_maquina_atual].id_maquina);
 }
 
 function plotarGraficoDisco() {
@@ -532,7 +510,9 @@ function plotarGraficoDisco() {
 
   chartCPU.style.display = "none";
   chartMemoria.style.display = "none";
-  chartRede.style.display = "none";  
+  chartRede.style.display = "none";
+
+  plotarGraficoDisco(listaMaquinas[id_maquina_atual].id_maquina);
 }
 
 function plotarGraficoRede() {
@@ -550,7 +530,8 @@ function plotarGraficoRede() {
 
 // Funções de plotagem da KPI
 
-function getMaquinas() {
+function getMaquinas(idMaquina) {
+  id_maquina_atual = idMaquina;
 
   fetch("/maquinas/carregarMaquinaEspec", {
     method: "POST",
@@ -565,12 +546,14 @@ function getMaquinas() {
 
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-        console.log("Tamanho " + resposta.length)
+        // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        // console.log("Tamanho " + resposta.length)
         resposta.forEach(element => {
           listaMaquinas.push(element);
         });
-        getKpiCpu(listaMaquinas[0].id_maquina);
+        // getKpiCpu(listaMaquinas[idMaquina].id_maquina);
+        obterDadosIniciaisCpu(listaMaquinas[idMaquina].id_maquina);
+        obterDadosIniciaisRam(listaMaquinas[idMaquina].id_maquina);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -581,93 +564,127 @@ function getMaquinas() {
     });
 }
 
-function getKpiCpu(idMaquina) {
-  console.log("NA FUNÇÃO DE KPI - CPU")
+// function getKpiCpu(idMaquina) {
+//   console.log("NA FUNÇÃO DE KPI - CPU")
 
-  fetch(`/maquinas/getKpiCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+//   fetch(`/maquinas/getKpiCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+//     if (response.ok) {
+//       response.json().then(function (resposta) {
+//         let usoAtual = resposta[0].uso;
+//         myChart_kpi_cpu.update()
+//         data_cpu.datasets[0].data = [100 - usoAtual, usoAtual]
+//         getKpiRam(idMaquina);
+//       });
+//     } else {
+//       console.error('Nenhum dado encontrado ou erro na API');
+//     }
+//   })
+//     .catch(function (error) {
+//       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//     });
+// }
+
+// function getKpiRam(idMaquina) {
+//   console.log("NA FUNÇÃO DE KPI - RAM")
+
+//   fetch(`/maquinas/getKpiRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+//     if (response.ok) {
+//       response.json().then(function (resposta) {
+//         let usoAtual = resposta[0].uso;
+//         myChart_kpi_memoria.update()
+//         data_memoria.datasets[0].data = [100 - usoAtual, usoAtual]
+//         getQtdDisco(idMaquina);
+//       });
+//     } else {
+//       console.error('Nenhum dado encontrado ou erro na API');
+//     }
+//   })
+//     .catch(function (error) {
+//       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//     });
+// }
+
+// function getQtdDisco(idMaquina) {
+//   console.log("NA FUNÇÃO DE QTD - DISCO")
+
+//   fetch(`/maquinas/getQtdDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+//     if (response.ok) {
+//       response.json().then(function (resposta) {
+//         console.log(resposta[0].quantidade)
+//         getKpiDisco(idMaquina, resposta[0].quantidade);
+//       });
+//     } else {
+//       console.error('Nenhum dado encontrado ou erro na API');
+//     }
+//   })
+//     .catch(function (error) {
+//       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//     });
+// }
+
+// function getKpiDisco(idMaquina, qtdDeDiscos) {
+//   console.log("NA FUNÇÃO DE KPI - DISCO")
+
+
+//   fetch("/maquinas/getKpiDisco", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({
+//       idMaquinaServer: idMaquina,
+//       qtdDeDiscosServer: qtdDeDiscos
+//     })
+//   }).then(function (response) {
+
+//     if (response.ok) {
+//       response.json().then(function (resposta) {
+
+//         for (let index = 0; index < resposta.length; index++) {
+//           const element = resposta[index];
+//           let usoAtual = resposta[0].uso;
+//           myChart_kpi_disco.update()
+//           data_disco.datasets[0].data = [100 - usoAtual, usoAtual]
+//         }
+//         console.log("Atualizando em 10 segundos");
+//         setInterval(() => {
+//           console.log("Atualizando...");
+//           getKpiCpu(idMaquina)
+//         }, 10000);
+//       });
+//     } else {
+//       console.error('Nenhum dado encontrado ou erro na API');
+//     }
+//   })
+//     .catch(function (error) {
+//       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//     });
+// }
+
+// Funções de atualizar dados
+function obterDadosIniciaisCpu(idMaquina) {
+  console.log("Entrando na função obter dados iniciais");
+  fetch(`/maquinas/obterDadosIniciaisCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        let usoAtual = resposta[0].uso;
-        myChart_kpi_cpu.update()
-        data_cpu.datasets[0].data = [100 - usoAtual, usoAtual]
-        getKpiRam(idMaquina);
-      });
-    } else {
-      console.error('Nenhum dado encontrado ou erro na API');
-    }
-  })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
+        console.log("DADOS DO OBTER DADOS INICIAIS");
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
+        if (labels_geral_cpu.length == 0 && data_geral_cpu.datasets[0].data.length == 0) {
+          resposta.forEach(element => {
+            labels_geral_cpu.push(element.horario);
+            data_geral_cpu.datasets[0].data.push(element.uso);
+          });
+          myChart_geral_cpu.update()
 
-function getKpiRam(idMaquina) {
-  console.log("NA FUNÇÃO DE KPI - RAM")
+          let usoAtual = resposta[resposta.length - 1].uso;
+          data_cpu.datasets[0].data = [100 - usoAtual, usoAtual]
+          myChart_kpi_cpu.update()
 
-  fetch(`/maquinas/getKpiRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        let usoAtual = resposta[0].uso;
-        myChart_kpi_memoria.update()
-        data_memoria.datasets[0].data = [100 - usoAtual, usoAtual]
-        getQtdDisco(idMaquina);
-      });
-    } else {
-      console.error('Nenhum dado encontrado ou erro na API');
-    }
-  })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
-
-function getQtdDisco(idMaquina) {
-  console.log("NA FUNÇÃO DE QTD - DISCO")
-
-  fetch(`/maquinas/getQtdDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        console.log(resposta[0].quantidade)
-        getKpiDisco(idMaquina, resposta[0].quantidade);
-      });
-    } else {
-      console.error('Nenhum dado encontrado ou erro na API');
-    }
-  })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
-
-function getKpiDisco(idMaquina, qtdDeDiscos) {
-  console.log("NA FUNÇÃO DE KPI - DISCO")
-
-
-  fetch("/maquinas/getKpiDisco", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      idMaquinaServer: idMaquina,
-      qtdDeDiscosServer: qtdDeDiscos
-    })
-  }).then(function (response) {
-
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        
-        for (let index = 0; index < resposta.length; index++) {
-          const element = resposta[index];
-          let usoAtual = resposta[0].uso;
-          myChart_kpi_disco.update()
-          data_disco.datasets[0].data = [100 - usoAtual, usoAtual]
+        } else {
+          console.log("Ja foi apertado");
         }
-        console.log("Atualizando em 10 segundos");
-        setInterval(() => {
-          console.log("Atualizando...");
-          getKpiCpu(idMaquina)
-        }, 10000);
+        atualizarGraficoCpu(idMaquina);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -678,15 +695,189 @@ function getKpiDisco(idMaquina, qtdDeDiscos) {
     });
 }
 
-function iniciar() {
-  getMaquinas();
+function atualizarGraficoCpu(idMaquina) {
+  fetch(`/maquinas/atualizarGraficoCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (novoRegistro) {
+
+        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        console.log(`Dados atuais do gráfico:`);
+        console.log(novoRegistro[0].horario);
+        console.log(labels_geral_cpu[labels_geral_cpu.length - 1]);
+
+        if (novoRegistro[0].horario == labels_geral_cpu[labels_geral_cpu.length - 1]) {
+          console.log("---------------------------------------------------------------")
+          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+          console.log(novoRegistro[0].horario)
+
+        } else {
+          console.log("TEM DADO NOVO!");
+          labels_geral_cpu.shift();
+          labels_geral_cpu.push(novoRegistro[0].horario);
+
+          data_geral_cpu.datasets[0].data.shift();
+          data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso);
+          data_cpu.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+        }
+        myChart_geral_cpu.update();
+        myChart_kpi_cpu.update();
+
+        setTimeout(() => atualizarGraficoCpu(idMaquina), 2000);
+      });
+    } else {
+      setTimeout(() => atualizarGraficoCpu(idMaquina), 2000);
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+
+function obterDadosIniciaisRam(idMaquina) {
+  console.log("Entrando na função obter dados iniciais");
+  fetch(`/maquinas/obterDadosIniciaisRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log("DADOS DO OBTER DADOS INICIAIS");
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
+
+        if (labels_geral_memoria.length == 0 && data_geral_memoria.datasets[0].data.length == 0) {
+          resposta.forEach(element => {
+            console.log("No foreach");
+            labels_geral_memoria.push(element.horario);
+            data_geral_memoria.datasets[0].data.push(element.uso);
+          });
+          myChart_geral_memoria.update()
+          let usoAtual = resposta[resposta.length - 1].uso;
+          data_memoria.datasets[0].data = [100 - usoAtual, usoAtual]
+          myChart_kpi_memoria.update()
+        } else {
+          console.log("Já foi apertado!");
+        }
+
+        atualizarGraficoRam(idMaquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function atualizarGraficoRam(idMaquina) {
+  fetch(`/maquinas/atualizarGraficoRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (novoRegistro) {
+
+        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        console.log(`Dados atuais do gráfico:`);
+        console.log(novoRegistro[0].horario);
+        console.log(labels_geral_memoria[labels_geral_memoria.length - 1]);
+
+        if (novoRegistro[0].horario == labels_geral_memoria[labels_geral_memoria.length - 1]) {
+          console.log("---------------------------------------------------------------")
+          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+          console.log(novoRegistro[0].horario)
+
+        } else {
+          console.log("TEM DADO NOVO!");
+          labels_geral_memoria.shift();
+          labels_geral_memoria.push(novoRegistro[0].horario);
+
+          data_geral_memoria.datasets[0].data.shift();
+          data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso);
+          data_memoria.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+        }
+        myChart_geral_memoria.update();
+        myChart_kpi_memoria.update()
+
+        setTimeout(() => atualizarGraficoRam(idMaquina), 2000);
+      });
+    } else {
+      setTimeout(() => atualizarGraficoRam(idMaquina), 2000);
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+
+function obterDadosIniciaisDisco(idMaquina) {
+  console.log("Entrando na função obter dados iniciais");
+  fetch(`/maquinas/obterDadosIniciaisDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log("DADOS DO OBTER DADOS INICIAIS");
+        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
+        resposta.forEach(element => {
+          labels_geral_cpu.push(element.horario);
+          data_geral_cpu.datasets[0].data.push(element.uso);
+        });
+        myChart_geral_cpu.update()
+        atualizarGraficoCpu(idMaquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function atualizarGraficoDisco(idMaquina) {
+  fetch(`/maquinas/atualizarGraficoRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (novoRegistro) {
+
+        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        console.log(`Dados atuais do gráfico:`);
+        console.log(novoRegistro[0].horario);
+        console.log(labels_geral_cpu[labels_geral_cpu.length - 1]);
+
+        if (novoRegistro[0].horario == labels_geral_cpu[labels_geral_cpu.length - 1]) {
+          console.log("---------------------------------------------------------------")
+          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+          console.log(novoRegistro[0].horario)
+
+        } else {
+          console.log("TEM DADO NOVO!");
+          labels_geral_cpu.shift();
+          labels_geral_cpu.push(novoRegistro[0].horario);
+
+          data_geral_cpu.datasets[0].data.shift();
+          data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso);
+        }
+        myChart_geral_cpu.update();
+
+        setTimeout(() => atualizarGraficoRam(idMaquina), 2000);
+      });
+    } else {
+      setTimeout(() => atualizarGraficoRam(idMaquina), 2000);
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+
+function iniciar(idMaquina) {
+  console.log("No iniciar id maquina é " + idMaquina);
+  getMaquinas(idMaquina);
 }
 
 
 //<![CDATA[
-  var ttChatLoaderS = document.createElement('script');
-  document.tomticketChatLoaderScriptVersion = 2;
-  ttChatLoaderS.src = 'https://retria.tomticket.com/scripts-chat/chat.min.js'
+var ttChatLoaderS = document.createElement('script');
+document.tomticketChatLoaderScriptVersion = 2;
+ttChatLoaderS.src = 'https://retria.tomticket.com/scripts-chat/chat.min.js'
   + '?id=EP61558'
   + '&account=3939712P05042023082156'
   + '&autoOpen=0'
@@ -694,5 +885,5 @@ function iniciar() {
   + '&d=retria'
   + '&ts=' + new Date().getTime()
   + '&ref=' + encodeURIComponent(document.URL);
-  document.body.appendChild(ttChatLoaderS);
+document.body.appendChild(ttChatLoaderS);
   //]]>
