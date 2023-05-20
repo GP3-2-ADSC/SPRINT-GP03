@@ -720,6 +720,9 @@ function obterDadosIniciaisDisco(idMaquina) {
           data_geral_disco.datasets[0].data.push(element.uso);
         });
         myChart_geral_disco.update()
+        let usoAtual = resposta[resposta.length - 1].uso;
+        data_disco.datasets[0].data = [100 - usoAtual, usoAtual]
+        myChart_kpi_disco.update()
         atualizarGraficoDisco(idMaquina);
       });
     } else {
@@ -753,8 +756,11 @@ function atualizarGraficoDisco(idMaquina) {
 
           data_geral_disco.datasets[0].data.shift();
           data_geral_disco.datasets[0].data.push(novoRegistro[0].uso);
+          data_disco.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+          
         }
         myChart_geral_cpu.update();
+        myChart_kpi_disco.update();
 
         setTimeout(() => atualizarGraficoDisco(idMaquina), 5000);
       });
@@ -798,8 +804,6 @@ function proximaMaquina(acao) {
     }
   }
 }
-
-
 
 //<![CDATA[
 var ttChatLoaderS = document.createElement('script');
