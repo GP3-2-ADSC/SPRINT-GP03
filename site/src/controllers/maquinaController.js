@@ -188,12 +188,35 @@ function obterAlertas(req, res) {
     }
 }
 
+function obterEspecificacaoComponentes(req, res) {
+    console.log("ENTREI NA *CONSOLE* DO ESPECIFICAÇÃO COMPONENTES");
+    console.log("ID DA MÁQUINA: " + idMaquina);
+    console.log(`--------------------------------------------------`);
+
+    var idMaquina = req.params.idMaquina;
+    var idEspecificacaoComponente = req.params.idEspecificacaoComponente;
+
+    maquinaModel.obterEspecificacaoComponentes(idMaquina, idEspecificacaoComponente).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 
 module.exports = {
     carregarMaquinaEspec,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
     obterDadosIniciaisDisco,
+    obterEspecificacaoComponentes,
     obterAlertas,
     atualizarGraficoCpu,
     atualizarGraficoRam,

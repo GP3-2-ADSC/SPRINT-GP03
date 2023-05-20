@@ -553,6 +553,7 @@ function getMaquinas(idMaquina) {
         obterDadosIniciaisCpu(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisRam(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisDisco(listaMaquinas[idMaquina].id_maquina);
+        obterEspecificacaoComponentes(listaMaquinas[idMaquina].id_maquina);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -853,6 +854,37 @@ function obterAlertas(idMaquina) {
       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
+
+function obterEspecificacaoComponentes(idMaquina) {
+  fetch(`/maquinas/especificacao-componentes/${idMaquina}`)
+    .then(resposta => {
+      console.log("ENTREI NO FETCH DO ESPECIFICAÇÃO COMPONENTES");
+      console.log("ID DA MÁQUINA: " + idMaquina);
+      console.log(`--------------------------------------------------`);
+
+      if (resposta.ok) {
+        resposta.json().then(resposta => {
+
+          console.log(`ESPECIFICAÇÃO RECEBIDA: ${JSON.stringify(resposta)}`);
+
+          document.getElementById("dado-espec-serial").innerHTML = resposta[0].numero_serial_maquina;
+          document.getElementById("dado-espec-so").innerHTML = resposta[0].sistema_operacional;
+
+          document.getElementById("dado-espec-cpu").innerHTML = resposta[0].descricao_componente;
+          document.getElementById("dado-espec-ram").innerHTML = resposta[1].descricao_componente;
+          document.getElementById("dado-espec-disco").innerHTML = resposta[2].descricao_componente;
+        });
+
+        plotarGraficoCPU(listaMaquinas[0].id_maquina);
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+    });
+}
+
 
 //<![CDATA[
 var ttChatLoaderS = document.createElement('script');

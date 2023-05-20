@@ -224,6 +224,8 @@ function getSerialKey(req, res) {
     });
 }
 
+
+
 module.exports = {
     entrar,
     cadastrar,

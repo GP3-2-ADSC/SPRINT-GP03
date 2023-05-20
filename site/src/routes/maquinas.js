@@ -35,4 +35,8 @@ router.get("/obterAlertas/:idMaquina", function (req, res) {
     maquinaController.obterAlertas(req, res);
 });
 
+router.get("/especificacao-componentes/:idMaquina", function (req, res) {
+    maquinaController.obterEspecificacaoComponentes(req, res);
+});
+
 module.exports = router;

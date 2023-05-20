@@ -656,12 +656,48 @@ function obterAlertas(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+function obterEspecificacaoComponentes(idMaquina) {
+    console.log("ENTREI NA **MODEL** DO ESPECIFICAÇÃO COMPONENTES");
+    console.log("ID DA MÁQUINA: " + idMaquina);
+    console.log(`--------------------------------------------------`);
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT espec.descricao_componente, maq.sistema_operacional, maq.numero_serial_maquina
+            FROM maquina_ultrassom AS maq
+                JOIN maquina_ultrassom_especificada AS maq_espec 
+                    ON maq.id_maquina = maq_espec.fk_maquina
+                JOIN especificacao_componente AS espec 
+                    ON maq_espec.fk_especificacao_componente = espec.id_especificacao_componente
+        WHERE maq.id_maquina = ${idMaquina};
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT espec.descricao_componente, maq.sistema_operacional, maq.numero_serial_maquina
+            FROM maquina_ultrassom AS maq
+                JOIN maquina_ultrassom_especificada AS maq_espec 
+                    ON maq.id_maquina = maq_espec.fk_maquina
+                JOIN especificacao_componente AS espec 
+                    ON maq_espec.fk_especificacao_componente = espec.id_especificacao_componente
+        WHERE maq.id_maquina = ${idMaquina};
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     carregarMaquinaEspec,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
     obterDadosIniciaisDisco,
+    obterEspecificacaoComponentes,
     obterAlertas,
     atualizarGraficoCpu,
     atualizarGraficoRam,
