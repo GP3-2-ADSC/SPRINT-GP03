@@ -33,11 +33,8 @@ function obterDadosIniciaisCpu(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-<<<<<<< HEAD
         maquinaModel.obterDadosIniciaisCpu(idMaquina).then(function (resultado) {
-=======
-        maquinaModel.getKpiCpu(idMaquina).then(function (resultado) {
->>>>>>> main
+
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -83,11 +80,8 @@ function obterDadosIniciaisRam(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-<<<<<<< HEAD
         maquinaModel.obterDadosIniciaisRam(idMaquina).then(function (resultado) {
-=======
-        maquinaModel.getKpiRam(idMaquina).then(function (resultado) {
->>>>>>> main
+
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -133,11 +127,8 @@ function obterDadosIniciaisDisco(req, res) {
     } else {
         console.log(`Recuperando medidas em tempo real`);
 
-<<<<<<< HEAD
         maquinaModel.obterDadosIniciaisDisco(idMaquina).then(function (resultado) {
-=======
-        maquinaModel.getQtdDisco(idMaquina).then(function (resultado) {
->>>>>>> main
+
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -159,12 +150,8 @@ function atualizarGraficoDisco(req, res) {
         res.status(400).send("Seu idMaquina está undefined!");
     } else {
         console.log(`Recuperando medidas em tempo real`);
-
-<<<<<<< HEAD
         maquinaModel.atualizarGraficoDisco(idMaquina).then(function (resultado) {
-=======
-        maquinaModel.getKpiDisco(idMaquina,qtdDeDiscos).then(function (resultado) {
->>>>>>> main
+
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
