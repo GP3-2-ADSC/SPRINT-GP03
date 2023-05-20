@@ -1,141 +1,365 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/dash-espec.css" />
-    <link rel="stylesheet" href="./css/main.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/dash-espec.css" />
+  <link rel="stylesheet" href="./css/main.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
     integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    ></script>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<<<<<<< HEAD
+  <title>Dashboard Específico</title>
+</head>
+=======
     <title>Dashboard Específico</title>
   </head>
   <body onload="iniciar()">
     <div class="container-menu">
+>>>>>>> main
 
-      <div class="img-logo">
-        <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
-      </div>
+<body onload="iniciar()">
+  <div class="container-menu">
 
-      <!-- Menu lateral -->
-      <div class="container-list">
-        <ul>
-          <li class="list">
-            <a href="dashboardGeral.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="stats-chart-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Dashboard geral</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="dashboard-espec.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="analytics-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title" id="list-active"
-                >Dashboard específico</span
-              >
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="historico-alertas.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="alert-circle-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Histórico de alertas</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="inventario-maquina.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="construct-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Inventário de máquinas</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="help-circle-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Ajuda</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="download-app.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="download-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Download aplicação</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <a class="outside-icon" href="login.html" onclick="limparSessao()">
-        <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
-      </a>
+    <div class="img-logo">
+      <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
     </div>
 
-    <div class="container-title">
-      <div class="container-title-button">
-        <h1>Dashboard específica |</h1>
-        <span>Máquina 1</span>
+    <!-- Menu lateral -->
+    <div class="container-list">
+      <ul>
+        <li class="list">
+          <a href="dashboardGeral.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+              </span>
+            </span>
 
-        <div class="container-button">
-          <button>
-            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+            <span class="list-title">Dashboard geral</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="dashboard-espec.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="analytics-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title" id="list-active">Dashboard específico</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="historico-alertas.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Histórico de alertas</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="inventario-maquina.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="construct-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Inventário de máquinas</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="help-circle-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Ajuda</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="download-app.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="download-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Download aplicação</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
+      <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+    </a>
+  </div>
+
+  <div class="container-title">
+    <div class="container-title-button">
+      <h1>Dashboard específica |</h1>
+      <span id="num_maquina_atual"></span>
+
+      <div class="container-button">
+        <button>
+          <ion-icon name="arrow-back-circle-outline" onclick="proximaMaquina(1)"></ion-icon>
+        </button>
+
+        <button>
+          <ion-icon name="arrow-forward-circle-outline" onclick="proximaMaquina(2)"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-all">
+    <div class="container-content">
+      <div class="container-kpi">
+        <!-- Cards das KPIs -->
+        <div class="container-cards-kpi">
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso da CPU</span>
+
+            <div class="chart-container">
+              <canvas id="kpi-chart-cpu"></canvas>
+
+              <div class="pop-out-content">
+                <ul>
+                  <li>
+                    <span class="circle-kpi blue"></span>
+
+                    <span class="text-kpi">Perigo ( 18%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi cyan"></span>
+
+                    <span class="text-kpi">Alerta (19 - 45%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi green"></span>
+
+                    <span class="text-kpi">Ideal (46 - 59%) </span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi yellow"></span>
+
+                    <span class="text-kpi">Alerta (60 - 79%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi red"></span>
+
+                    <span class="text-kpi">Perigo (> 80%)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso da RAM</span>
+
+            <div class="chart-container">
+              <canvas id="kpi-chart-memoria"></canvas>
+
+              <div class="pop-out-content">
+                <ul>
+                  <li>
+                    <span class="circle-kpi blue"></span>
+
+                    <span class="text-kpi">Perigo (< 18%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi cyan"></span>
+
+                    <span class="text-kpi">Alerta (19 - 45%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi green"></span>
+
+                    <span class="text-kpi">Ideal (46 - 59%) </span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi yellow"></span>
+
+                    <span class="text-kpi">Alerta (60 - 79%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi red"></span>
+
+                    <span class="text-kpi">Perigo (> 80%)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso do Disco</span>
+
+            <div class="chart-container">
+              <canvas id="kpi-chart-disco"></canvas>
+
+              <div class="pop-out-content">
+                <ul>
+                  <li>
+                    <span class="circle-kpi blue"></span>
+
+                    <span class="text-kpi">Perigo (< 18%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi cyan"></span>
+
+                    <span class="text-kpi">Alerta (19 - 45%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi green"></span>
+
+                    <span class="text-kpi">Ideal (46 - 59%) </span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi yellow"></span>
+
+                    <span class="text-kpi">Alerta (60 - 79%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi red"></span>
+
+                    <span class="text-kpi">Perigo (> 80%)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-kpi">
+            <span class="text-card-kpi">Uso da Rede</span>
+
+            <div class="chart-container">
+              <canvas id="kpi-chart-rede"></canvas>
+
+              <div class="pop-out-content">
+                <ul>
+                  <li>
+                    <span class="circle-kpi blue"></span>
+
+                    <span class="text-kpi">Perigo ( 18%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi cyan"></span>
+
+                    <span class="text-kpi">Alerta (19 - 45%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi green"></span>
+
+                    <span class="text-kpi">Ideal (46 - 59%) </span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi yellow"></span>
+
+                    <span class="text-kpi">Alerta (60 - 79%)</span>
+                  </li>
+
+                  <li>
+                    <span class="circle-kpi red"></span>
+
+                    <span class="text-kpi">Perigo (> 80%)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfico com ChartJS -->
+      <div class="container-general-chart">
+        <!-- CPU -->
+        <canvas id="chart-geral-cpu"></canvas>
+
+        <!-- Memória -->
+        <canvas id="chart-geral-memoria" style="display: none"></canvas>
+
+        <!-- Disco -->
+        <canvas id="chart-geral-disco" style="display: none"></canvas>
+
+        <!-- Rede -->
+        <canvas id="chart-geral-rede" style="display: none"></canvas>
+      </div>
+
+      <!-- Menu horizontal dos gráficos -->
+      <div class="menu-graphics">
+        <div class="content-text-menu">
+          <span id="text-menu-graphics">Altere entre os gráficos:</span>
+        </div>
+
+        <div class="content-menu">
+          <button class="btn-menu-chart" onclick="plotarGraficoCPU()">
+            <span id="btn-menu-cpu">CPU</span>
           </button>
 
-          <button>
-            <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          <button class="btn-menu-chart" onclick="plotarGraficoMemoria()">
+            <span id="btn-menu-memoria">Memória</span>
+          </button>
+
+          <button class="btn-menu-chart" onclick="plotarGraficoDisco()">
+            <span id="btn-menu-disco">Disco</span>
+          </button>
+
+          <button class="btn-menu-chart" onclick="plotarGraficoRede()">
+            <span id="btn-menu-rede">Rede</span>
           </button>
         </div>
       </div>
+
+      <div class="semDadosNovos-gerais"></div>
     </div>
 
-    <div class="container-all">
-      <div class="container-content">
-        <div class="container-kpi">
-          <!-- Cards das KPIs -->
-          <div class="container-cards-kpi">
-            <div class="card-kpi">
-              <span class="text-card-kpi">Uso da CPU</span>
+    <!-- Quadro de Alertas -->
+    <div class="container-alerts">
+      <span id="nome_tabela"></span>
 
+<<<<<<< HEAD
+      <div class="table-titles">
+        <span>Data</span>
+        <span>|</span>
+        <span>Descrição</span>
+=======
               <div class="chart-container">
                 <canvas id="kpi-chart-cpu"></canvas>
 
@@ -344,86 +568,30 @@
         </div>
 
         <div class="semDadosNovos-gerais"></div>
+>>>>>>> main
       </div>
 
-      <!-- Quadro de Alertas -->
-      <div class="container-alerts">
-        <span>Alertas da Máquina 1</span>
-
-        <div class="table-titles">
-          <span>Data</span>
-          <span>|</span>
-          <span>Descrição</span>
-        </div>
-
-        <div class="historic">
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:12</p>
-            <p class="historic-text">CPU em <span>perigo</span> (82%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:16</p>
-            <p class="historic-text">Memória em <span>alerta</span> (72%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-
-          <div class="card-historic">
-            <p class="historic-date">03/04/2023 - 12:18</p>
-            <p class="historic-text">Memória em <span>perigo</span> (83%)</p>
-          </div>
-        </div>
+      <div class="historic" id="historic">
+        <div class="card-historic">
+          <p class="historic-date">A máquina não possui alertas!</p>
+          <p class="historic-text">Componentes dentro do uso ideal.</p>
+        </div>`
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script src="./js/dashboard-espec.js"></script>
 <script src="./js/funcoes-maquinas.js"></script>
+<<<<<<< HEAD
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+
+=======
 <script
   type="module"
   src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -435,4 +603,5 @@
 
 <script>
   
+>>>>>>> main
 </script>

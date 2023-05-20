@@ -34,214 +34,92 @@ function carregarMaquinaEspec(fkEmpresa, idAdmin) {
     return database.executar(instrucaoSql);
 }
 
-function getKpiCpu(idMaquina) {
+
+function obterDadosIniciaisCpu(idMaquina) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-	        TOP(1) *
-        FROM 
-	        metrica_componente
-        WHERE 
-	        fk_especificacao_componente_maquina 
-        in 
-	        (select 
-	            mu.id_especificacao_componente_maquina
-            from 
-	            maquina_ultrassom_especificada as mu
-            where 
-	            mu.fk_maquina = ${idMaquina}
-            and
-	            fk_especificacao_componente
-            in 
-	            (select 
-	                e.id_especificacao_componente
-                from 
-	                especificacao_componente as e
-                where 
-	                e.id_especificacao_componente 
-                in 
-	                ( select mu.fk_especificacao_componente 
-                    from 
-	                    maquina_ultrassom as m 
-                    join 
-	                    maquina_ultrassom_especificada as mu 
-                    on 
-	                    m.id_maquina = mu.fk_maquina 
-                    where 
-	                    mu.fk_maquina = ${idMaquina})
-                and 
-	            e.tipo_componente = 'CPU'))
-        order by dt_metrica DESC;`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `
-        SELECT 
-            *
-        FROM
-            maquina_ultrassom
-        WHERE
-            fk_administrador = ${idAdmin}  AND fk_empresa = ${fkEmpresa} `;
-    } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
-    }
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function getKpiRam(idMaquina) {
-
-    instrucaoSql = ''
-
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `
-        SELECT 
-	        TOP(1) *
-        FROM 
-	        metrica_componente
-        WHERE 
-	        fk_especificacao_componente_maquina 
-        in 
-	        (select 
-	            mu.id_especificacao_componente_maquina
-            from 
-	            maquina_ultrassom_especificada as mu
-            where 
-	            mu.fk_maquina = ${idMaquina}
-            and
-	            fk_especificacao_componente
-            in 
-	            (select 
-	                e.id_especificacao_componente
-                from 
-	                especificacao_componente as e
-                where 
-	                e.id_especificacao_componente 
-                in 
-	                ( select mu.fk_especificacao_componente 
-                    from 
-	                    maquina_ultrassom as m 
-                    join 
-	                    maquina_ultrassom_especificada as mu 
-                    on 
-	                    m.id_maquina = mu.fk_maquina 
-                    where 
-	                    mu.fk_maquina = ${idMaquina})
-                and 
-	            e.tipo_componente = 'RAM'))
-        order by dt_metrica DESC;`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `
-        SELECT 
-            *
-        FROM
-            maquina_ultrassom
-        WHERE
-            fk_administrador = ${idAdmin}  AND fk_empresa = ${fkEmpresa} `;
-    } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
-    }
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function getKpiDisco(idMaquina,qtdDeDiscos) {
-
-    instrucaoSql = ''
-
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `
-        SELECT 
-	        TOP(${qtdDeDiscos}) *
-        FROM 
-	        metrica_componente
-        WHERE 
-	        fk_especificacao_componente_maquina 
-        in 
-	        (select 
-	            mu.id_especificacao_componente_maquina
-            from 
-	            maquina_ultrassom_especificada as mu
-            where 
-	            mu.fk_maquina = ${idMaquina}
-            and
-	            fk_especificacao_componente
-            in 
-	            (select 
-	                e.id_especificacao_componente
-                from 
-	                especificacao_componente as e
-                where 
-	                e.id_especificacao_componente 
-                in 
-	                ( select mu.fk_especificacao_componente 
-                    from 
-	                    maquina_ultrassom as m 
-                    join 
-	                    maquina_ultrassom_especificada as mu 
-                    on 
-	                    m.id_maquina = mu.fk_maquina 
-                    where 
-	                    mu.fk_maquina = ${idMaquina})
-                and 
-	            e.tipo_componente = 'DISCO'))
-        order by dt_metrica DESC;`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `
-        SELECT 
-            *
-        FROM
-            maquina_ultrassom
-        WHERE
-            fk_administrador = ${idAdmin}  AND fk_empresa = ${fkEmpresa} `;
-    } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
-    }
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function getQtdDisco(idMaquina) {
-
-    instrucaoSql = ''
-
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `
-    select 
-        COUNT(*) as quantidade
-    from 
-        especificacao_componente 
-    where 
-        id_especificacao_componente 
-    in 
-        ( select mu.fk_especificacao_componente 
-    from 
-        maquina_ultrassom as m 
-    join 
-        maquina_ultrassom_especificada as mu 
-    on 
-        m.id_maquina = mu.fk_maquina 
-    where 
-        mu.fk_maquina = ${idMaquina}
-        )
-    and
-        tipo_componente = 'DISCO' ;
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'CPU'))
+     order by dt_metrica desc;
                 `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT 
-            *
-        FROM
-            maquina_ultrassom
-        WHERE
-            fk_administrador = ${idAdmin}  AND fk_empresa = ${fkEmpresa} `;
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'CPU'))
+     order by dt_metrica desc; `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -251,10 +129,541 @@ function getQtdDisco(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+function atualizarGraficoCpu(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+         top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'CPU'))
+     order by dt_metrica desc;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'CPU'))
+     order by dt_metrica desc; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterDadosIniciaisRam(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'RAM'))
+     order by dt_metrica desc;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'RAM'))
+     order by dt_metrica desc; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarGraficoRam(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'RAM'))
+     order by dt_metrica desc;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'RAM'))
+     order by dt_metrica desc; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterDadosIniciaisDisco(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'DISCO'))
+     order by dt_metrica desc;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        top(8) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'DISCO'))
+     order by dt_metrica desc; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarGraficoDisco(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'DISCO'))
+     order by dt_metrica desc;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        top(1) id_metrica_componente,
+         uso,
+         FORMAT(dt_metrica, 'dd/MM') AS dia,
+         FORMAT(dt_metrica, 'HH:mm:ss') AS horario
+     FROM 
+         metrica_componente
+     WHERE 
+         fk_especificacao_componente_maquina 
+     in 
+         (select 
+         mu.id_especificacao_componente_maquina
+     from 
+         maquina_ultrassom_especificada as mu
+     where 
+         mu.fk_maquina = ${idMaquina}
+     and
+         fk_especificacao_componente
+     in 
+         (select 
+         e.id_especificacao_componente
+     from 
+         especificacao_componente as e
+     where 
+         e.id_especificacao_componente 
+     in 
+         ( select mu.fk_especificacao_componente 
+     from 
+         maquina_ultrassom as m 
+     join 
+         maquina_ultrassom_especificada as mu 
+     on 
+         m.id_maquina = mu.fk_maquina 
+     where 
+         mu.fk_maquina = ${idMaquina})
+     and 
+         e.tipo_componente = 'DISCO'))
+     order by dt_metrica desc; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterAlertas(idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        TOP(20)
+        ta.id_tipo_alerta,
+        FORMAT(a.dt_alerta, 'dd/MM HH:mm:ss') AS dia,
+        mc.uso,
+        e.tipo_componente
+    FROM
+        tipo_alerta AS ta
+            JOIN
+        alerta AS a ON a.fk_tipo_alerta = ta.id_tipo_alerta
+            JOIN
+        metrica_componente AS mc ON a.fk_metrica_componente = mc.id_metrica_componente
+            JOIN
+        maquina_ultrassom_especificada AS mu ON mc.fk_especificacao_componente_maquina = mu.id_especificacao_componente_maquina
+            JOIN
+        especificacao_componente AS e ON mu.fk_especificacao_componente = e.id_especificacao_componente
+    WHERE
+        mu.fk_maquina = ${idMaquina}
+    ORDER BY dia DESC;
+                `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        TOP(20)
+        ta.id_tipo_alerta,
+        FORMAT(a.dt_alerta, 'dd/MM HH:mm:ss') AS dia,
+        mc.uso,
+        e.tipo_componente
+    FROM
+        tipo_alerta AS ta
+            JOIN
+        alerta AS a ON a.fk_tipo_alerta = ta.id_tipo_alerta
+            JOIN
+        metrica_componente AS mc ON a.fk_metrica_componente = mc.id_metrica_componente
+            JOIN
+        maquina_ultrassom_especificada AS mu ON mc.fk_especificacao_componente_maquina = mu.id_especificacao_componente_maquina
+            JOIN
+        especificacao_componente AS e ON mu.fk_especificacao_componente = e.id_especificacao_componente
+    WHERE
+        mu.fk_maquina = ${idMaquina}
+    ORDER BY dia DESC;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     carregarMaquinaEspec,
-    getKpiCpu,
-    getKpiRam,
-    getQtdDisco,
-    getKpiDisco
+    obterDadosIniciaisCpu,
+    obterDadosIniciaisRam,
+    obterDadosIniciaisDisco,
+    obterAlertas,
+    atualizarGraficoCpu,
+    atualizarGraficoRam,
+    atualizarGraficoDisco
 }
