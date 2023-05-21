@@ -5,7 +5,7 @@ body {
 
 .container-dash {
   height: 768px;
-  margin: 0 0 0 300px;
+  margin: 0 0 0 285px;
 }
 
 .container-graficos {
@@ -178,13 +178,13 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .container-shadow {
   height: 580px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   padding: 14px;
   border-radius: 10px;
@@ -201,20 +201,14 @@ body {
   padding: 8px;
 }
 
-.container-emergencias {
+.container-cards-emergencias {
   width: 100%;
   display: flex;
-  flex-direction: column;
-}
 
-.container-cards-emergencias {
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   text-align: center;
-  font-size: 0.8rem;
-  padding: 8px;
 }
 
 .card-menor {
@@ -224,6 +218,64 @@ body {
 
 .titulo  h2{
   font-weight: 400;
+}
+
+.container-cc {
+  display: flex;
+  justify-content: center;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+
+  width: 60%;
+  height: 35px;
+  border-radius: 10px;
+  
+  background-color: #0061ba;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.group-subtitles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Legendas  */
+.text-kpi {
+  padding-left: 10px;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.circle-kpi {
+  height: 22px;
+  width: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.green {
+  background-color: #3cb600;
+}
+
+.yellow {
+  background-color: #ffcd56;
+}
+
+.red {
+  background-color: #e10000;
 }
 
 .card-menor h2 {
@@ -251,20 +303,9 @@ body {
   background-color: #c9ff8c;
 }
 
-
-.card-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  height: 310px;
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); */
-  padding: 8px;
-  border-radius: 10px;
-}
-
 .card {
-  width: 30%;
-  height: 220px;
+  width: 32%;
+  height: 420px;
   background-color: #8cccf0;
   padding: 15px;
   border-radius: 5px;
@@ -273,9 +314,106 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
 }
 
+.container-scroll-detalhamento {
+  overflow: scroll;
+}
+
+.card-contagem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e7eef37a;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  padding: 7.5px 15px;
+  margin-bottom: 12px;
+  top: 14px;
+}
+
+.card-contagem .contagem {
+  font-size: 1.1em;
+  padding-left: 25px;
+}
+
+.card-contagem span {
+  font-size: 0.9em;
+}
+
+.container-maquina-detalhamento {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  border: solid 1px #000;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 3px;
+}
+
+.titulo-detalhamento {
+  font-size: 0.9em;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+#p-sem-maquinas-alerta,
+#p-sem-maquinas-critico,
+#p-sem-maquinas-perigo {
+  display: none;
+  font-size:0.9em;
+  margin-top: 15px;
+}
+
+.contagem {
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.container-maquina-detalhamento {
+  font-size: 1em;
+  background-color: #d9d9d9;
+  display: flex;
+  /* justify-content: space-evenly; */
+}
+
+.componentes {
+  font-size: 0.9em;
+  padding-left: 20px;
+}
+
+#eye-outline {
+  font-size: 1.2em;
+}
+
+.btn-mais {
+  padding-left: 55px;
+}
+
+.btn-mais button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 25px;
+  padding: 2px;
+  background-color: #0061ba;
+  border: solid 1.5px #000;
+  border-radius: 10px;
+}
+
+.titulo-maquina-detalhamento {
+  font-size: 0.9em;
+  display: flex;
+  align-items: start;
+}
+
+.titulo-maquina-detalhamento a {
+  font-weight: 500;
+  color: #0061ba;
+}
 .text-card-kpi {
   font-size: 1rem;
   margin-bottom: 0.5rem;

@@ -113,14 +113,6 @@
       <div class="container-graficos">
         <div class="top-page">
           <div class="container-title">
-            <div class="barraPesquisa">
-              <input type="text" placeholder="Pesquisar..." />
-              <ion-icon
-                id="search-circle-outline"
-                name="search-circle-outline"
-              ></ion-icon>
-            </div>
-
             <div class="novaMaquina">
               <a href="inventario-maquina.html">
                 <button>Nova máquina <span class="span-mais">+</span></button>
@@ -134,81 +126,138 @@
             <div class="titulo">
               <h2>Alertas gerais</h2>
             </div>
-
-            <div class="container-cards">
-              <div class="card-menor card-menor1">
-                <h2 class="card-title">Máquinas em estado crítico</h2>
-
-                <p class="card-metric">Alerta (19 - 45%)</p>
-
-                <p class="card-subtitle">
-                  Total de máquinas: <span class="card-number">15</span>
-                </p>
-              </div>
-
-              <div class="card-menor card-menor2">
-                <h2 class="card-title">Máquinas em estado de alerta</h2>
-
-                <p class="card-metric">Alerta (60 - 79%)</p>
-
-                <p class="card-subtitle">
-                  Total de máquinas: <span class="card-number">30</span>
-                </p>
-              </div>
-
-              <div class="card-menor card-menor3">
-                <h2 class="card-title">Máquinas em estado normal</h2>
-
-                <p class="card-metric">Ideal (46 - 59%)</p>
-
-                <p class="card-subtitle">
-                  Total de máquinas: <span class="card-number">200</span>
-                </p>
+            <div class="container-cc">
+              <div class="container-content">
+                <div class="group-subtitles">
+                    <span class="circle-kpi green"></span>
+        
+                    <span class="text-kpi">Baixa</span>
+                </div>
+        
+                <div class="group-subtitles">
+                    <span class="circle-kpi yellow"></span>
+                    
+                    <span class="text-kpi">Médio</span>
+                </div>
+                
+                <div class="group-subtitles">
+                    <span class="circle-kpi red"></span>
+                    
+                    <span class="text-kpi">Alta</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="card-container">
-            <div class="container-emergencias">
-              <div class="titulo">
-                <h2>Máquinas com Emergências</h2>
+          <div class="container-cards-emergencias">
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado crítico</span>
+                <span class="contagem">1/3</span>
               </div>
 
-              <div class="container-cards-emergencias">
-                <div class="card">
-                  <div class="card-kpi">
-                    <span class="text-card-kpi">Máquina 1</span>
-                  </div>
+              <p id="p-sem-maquinas-critico">Não há máquinas em estado crítico.</p>
+
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-critico">
+                <div class="container-detalhammento">
+                  <div class="container-maquina-detalhamento">
+                    <div class="titulo-maquina-detalhamento">
+                      <p>
+                        <a href="">Máquina 3</a>
+                      </p>
+                    </div>
   
-                  <div class="grafico-container">
-                    <canvas id="grafico1" style="display: flex"></canvas>
-                  </div>
+                    <div class="componentes">
+                      <p>CPU: <span>60%</span></p>
+                      <p>RAM: <span>60%</span></p>
+                      <p>Disco: <span>60%</span></p>
+                      <p>PING: <span>60%</span></p>
+                    </div>
   
-                  <button class="btn-ver-mais">Ver mais</button>
+                    <div class="btn-mais">
+                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
+                      <button onclick="">
+                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
+                    </button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado alerta</span>
+
+                <!-- TODO - Função p/ plotar em todas class "contagem" os dados de acordo com o estado atual da máquina -->
+                <span class="contagem">0/3</span>
+              </div>
+
+              <!-- TODO - Retirar o display flex do semMaquinaAlerta -->
+              <p id="p-sem-maquinas-alerta" style="display: flex;">Não há máquinas em estado de alerta.</p>
+              
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-alerta">
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado perigo</span>
+                <span class="contagem">2/3</span>
+              </div>
+              
+              <p id="p-sem-maquinas-perigo">Não há máquinas em estado de alerta.</p>
+
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-perigo">
+                <div class="container-detalhammento">
+                  <div class="container-maquina-detalhamento">
+                    <div class="titulo-maquina-detalhamento">
+                      <p>
+                        <a href="">Máquina 5</a>
+                      </p>
+                    </div>
+  
+                    <div class="componentes">
+                      <p id="comp_cpu">CPU: <span>60%</span></p>
+                      <p id="comp_ram">RAM: <span>60%</span></p>
+                      <p id="comp_disco">Disco: <span>60%</span></p>
+                      <p id="comp_ping">PING: <span>60%</span></p>
+                    </div>
+  
+                    <div class="btn-mais">
+                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
+                      <button onclick="">
+                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
+                    </button>
+                    </div>
+                  </div>
+                  
                 </div>
   
-                <div class="card">
-                  <div class="card-kpi">
-                    <span class="text-card-kpi">Máquina 2</span>
+                <div class="container-detalhammento">
+                  <div class="container-maquina-detalhamento">
+                    <div class="titulo-maquina-detalhamento">
+                      <p>
+                        <a href="">Máquina 8</a>
+                      </p>
+                    </div>
+  
+                    <div class="componentes">
+                      <p id="comp_cpu">CPU: <span>60%</span></p>
+                      <p id="comp_ram">RAM: <span>60%</span></p>
+                      <p id="comp_disco">Disco: <span>60%</span></p>
+                      <p id="comp_ping">PING: <span>60%</span></p>
+                    </div>
+  
+                    <div class="btn-mais">
+                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
+                      <button onclick="">
+                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
+                    </button>
+                    </div>
                   </div>
-  
-                  <div class="grafico-container">
-                    <canvas id="grafico2" style="display: flex"></canvas>
-                  </div>
-  
-                  <button class="btn-ver-mais">Ver mais</button>
-                </div>
-  
-                <div class="card">
-                  <div class="card-kpi">
-                    <span class="text-card-kpi">Máquina 1</span>
-                  </div>
-  
-                  <div class="grafico-container">
-                    <canvas id="grafico3" style="display: flex"></canvas>
-                  </div>
-  
-                  <button class="btn-ver-mais">Ver mais</button>
+                  
                 </div>
               </div>
             </div>
