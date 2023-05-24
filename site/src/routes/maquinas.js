@@ -39,4 +39,8 @@ router.get("/especificacao-componentes/:idMaquina", function (req, res) {
     maquinaController.obterEspecificacaoComponentes(req, res);
 });
 
+router.get("/exibirTotalSinalizacoes/:idMaquina", function (req, res) {
+    maquinaController.exibirTotalSinalizacoes(req, res);
+});
+
 module.exports = router;

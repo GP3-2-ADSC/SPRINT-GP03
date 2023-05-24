@@ -209,6 +209,28 @@ function obterEspecificacaoComponentes(req, res) {
     });
 }
 
+function exibirTotalSinalizacoes(req, res) {
+    console.log("ENTREI NA *CONTROLLER* DO TOTAL SINALIZAÇÕES");
+    console.log("ID DA MÁQUINA: " + idMaquina);
+    console.log(`--------------------------------------------------`);
+
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel
+        .exibirTotalSinalizacoes(idMaquina)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar o COUNT de sinalizações.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
 
 module.exports = {
@@ -220,6 +242,6 @@ module.exports = {
     obterAlertas,
     atualizarGraficoCpu,
     atualizarGraficoRam,
-    atualizarGraficoDisco
-
+    atualizarGraficoDisco,
+    exibirTotalSinalizacoes
 }

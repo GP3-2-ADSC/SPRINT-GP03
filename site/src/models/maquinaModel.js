@@ -692,6 +692,64 @@ function obterEspecificacaoComponentes(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+function exibirTotalSinalizacoes(idMaquina) {
+    console.log("ENTREI NA **MODEL** DO ESPECIFICAÇÃO COMPONENTES");
+    console.log("ID DA MÁQUINA: " + idMaquina);
+    console.log(`--------------------------------------------------`);
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+            COUNT(*) AS total_alertas
+        FROM
+            alerta AS al
+                JOIN
+            metrica_componente AS mc ON mc.id_metrica_componente = al.fk_metrica_componente
+                JOIN
+            maquina_ultrassom_especificada AS mue ON mc.fk_especificacao_componente_maquina = mue.id_especificacao_componente_maquina
+                JOIN
+            especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN
+            maquina_ultrassom AS mu ON mue.fk_maquina = mu.id_maquina
+                JOIN
+            administrador AS adm ON adm.id_administrador = mu.fk_administrador
+                JOIN
+            empresa AS emp ON emp.id_empresa = adm.fk_empresa
+        WHERE
+            emp.id_empresa = ${idMaquina};
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+            COUNT(*) AS total_alertas
+        FROM
+            alerta AS al
+                JOIN
+            metrica_componente AS mc ON mc.id_metrica_componente = al.fk_metrica_componente
+                JOIN
+            maquina_ultrassom_especificada AS mue ON mc.fk_especificacao_componente_maquina = mue.id_especificacao_componente_maquina
+                JOIN
+            especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN
+            maquina_ultrassom AS mu ON mue.fk_maquina = mu.id_maquina
+                JOIN
+            administrador AS adm ON adm.id_administrador = mu.fk_administrador
+                JOIN
+            empresa AS emp ON emp.id_empresa = adm.fk_empresa
+        WHERE
+            emp.id_empresa = ${idMaquina};
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     carregarMaquinaEspec,
     obterDadosIniciaisCpu,
@@ -701,5 +759,6 @@ module.exports = {
     obterAlertas,
     atualizarGraficoCpu,
     atualizarGraficoRam,
-    atualizarGraficoDisco
+    atualizarGraficoDisco,
+    exibirTotalSinalizacoes
 }

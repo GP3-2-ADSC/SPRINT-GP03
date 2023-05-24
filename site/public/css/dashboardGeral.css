@@ -24,8 +24,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #0061ba;
-  color: white;
+  background-color: #0061BA;
+  color: #FFF;
   padding: 0 10px 0 0;
 }
 
@@ -52,7 +52,7 @@ body {
 .outside-icon {
   display: flex;
   justify-content: end;
-  color: white;
+  color: #FFF;
   font-size: 2.7em;
 }
 
@@ -71,7 +71,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: #fff;
+  background-color: #FFF;
   border-radius: 50%;
 }
 
@@ -84,7 +84,7 @@ body {
 .list-title {
   padding-left: 10px;
   font-size: 1em;
-  color: white;
+  color: #FFF;
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -125,7 +125,7 @@ body {
 }
 
 .kpi-geral {
-  background-color: #8cccf0;
+  background-color: #8CCCF0;
   padding: 15px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -143,12 +143,18 @@ body {
   padding: 7.5px 15px;
 }
 
+#total-sinalizacoes,
+#total-maquinas {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
 .content-kpi-geral {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e7eef37a;
+  background-color: #E7EEF37A;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
   padding: 5px 0px;
 }
@@ -221,7 +227,7 @@ body {
   height: 35px;
   border-radius: 10px 10px 0px 0px;
   
-  background-color: #5eacd2;
+  background-color: #5EACD2;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -250,24 +256,24 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: #fff;
+  background-color: #FFF;
   border-radius: 50%;
 }
 
 .green {
-  background-color: #3cb600;
+  background-color: #3CB600;
 }
 
 .yellow {
-  background-color: #ffcd56;
+  background-color: #FFCC00;
 }
 
 .red {
-  background-color: #e10000;
+  background-color: #E10000;
 }
 
 .orange {
-  background-color: #ff8c00;
+  background-color: #FF8C00;
 }
 
 .card-menor h2 {
@@ -286,19 +292,19 @@ body {
 }
 
 .card-menor1 {
-  background-color: #fc7171;
+  background-color: #FC7171;
 }
 .card-menor2 {
-  background-color: #fddd7c;
+  background-color: #FDDD7C;
 }
 .card-menor3 {
-  background-color: #c9ff8c;
+  background-color: #C9FF8C;
 }
 
 .card {
   width: 32%;
   height: 490px;
-  background-color: #8cccf0;
+  background-color: #8CCCF0;
   padding: 15px;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -316,7 +322,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e7eef37a;
+  background-color: #E7EEF37A;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
   padding: 7.5px 15px;
   margin-bottom: 12px;
@@ -366,7 +372,7 @@ body {
 
 .container-maquina-detalhamento {
   font-size: 1em;
-  background-color: #d9d9d9;
+  background-color: #D9D9D9;
   display: flex;
 }
 
@@ -390,7 +396,7 @@ body {
   margin-bottom: 40px;
   width: 25px;
   padding: 2px;
-  background-color: #5eacd2;
+  background-color: #5EACD2;
   border: solid 1.5px #000;
   border-radius: 10px;
 }
@@ -425,7 +431,7 @@ body {
 
 .btn-ver-mais {
   border: none;
-  background-color: #5eacd2;
+  background-color: #5EACD2;
   padding: 10px;
   border-radius: 10px;
   font-weight: 400;

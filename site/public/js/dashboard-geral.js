@@ -1,100 +1,39 @@
-// ChartJS da KPI da CPU
-const data_grafico1 = {
-  labels: ["Rede disponível", "Uso da rede"],
-  datasets: [
-    {
-      data: [100 - 72, 72],
-      backgroundColor: ["#d0d0d0", "#F44336"],
-      borderColor: "#b8b8b8",
-      hoverOffset: 4,
-      cutout: "50%",
-    },
-  ],
-};
+function iniciar() {
+// setInterval(function () {
+  console.log("Entrando na função iniciar()");
+  exibirTotalSinalizacoes();
+// }, 2000);
+}
 
-const config_grafico1= {
-  type: "doughnut",
-  data: data_grafico1,
-  options: {
-    responsive: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  },
-};
+function exibirTotalSinalizacoes() {
+  totalSinalizacoes = document.getElementById("total-sinalizacoes");
+  idEmpresa = sessionStorage.FK_EMPRESA;
+  console.log(`ID_EMPRESA -> ${idEmpresa}`);
 
-const myChart_kpi1 = new Chart(
-  document.getElementById("grafico1"),
-  config_grafico1
-);
-
-
-
-const data_grafico2 = {
-    labels: ["RAM disponível", "Uso da RAM"],
-    datasets: [
-      {
-        data: [34, 100 - 34],
-        backgroundColor: ["#d0d0d0", "#F44336"],
-        borderColor: "#b8b8b8",
-        hoverOffset: 4,
-        cutout: "50%",
-      },
-    ],
-  };
-
-  const config_grafico2 = {
-    type: "doughnut",
-    data: data_grafico2,
-    options: {
-      responsive: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    },
-  };
+  console.log("Entrando na função obter COUNT de sinalizações");
   
-  const myChart_kpi2 = new Chart(
-    document.getElementById("grafico2"),
-    config_grafico2
+  fetch(`/maquinas/exibirTotalSinalizacoes/${idEmpresa}`, { cache: "no-store" })
+    .then(function (response) {
+      console.log("RESPONSE -> ", response);
+      if (response.ok) {
+        response
+          .json()
+          .then(function (resposta) {
+            console.log("COUNT recebido:", resposta);
+            console.log(`RESPOSTA TOTAL_ALERTAS -> ${resposta[0].total_alertas}`);
+
+            totalSinalizacoes.innerHTML = resposta[0].total_alertas;
+          });
+      } else {
+        console.error("Nenhum dado encontrado ou erro na API");
+      }
+    }
+  )
+    .catch(function (error) {
+      console.error(`Erro na obtenção do COUNT de sinalizações: ${error.message}`);
+    }
   );
-
-  
-
-  const data_grafico3 = {
-    labels: ["CPU disponível", "Uso da CPU"],
-    datasets: [
-      {
-        data: [20,92],
-        backgroundColor: ["#d0d0d0", "#F44336"],
-        borderColor: "#b8b8b8",
-        hoverOffset: 4,
-        cutout: "50%",
-      },
-    ],
-  };
-  
-  const config_grafico3 = {
-    type: "doughnut",
-    data: data_grafico3,
-    options: {
-      responsive: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    },
-  };
-  
-  const myChart_kpi3 = new Chart(
-    document.getElementById("grafico3"),
-    config_grafico3
-  );
+}
 
 
   //<![CDATA[
