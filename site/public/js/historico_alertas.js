@@ -87,7 +87,7 @@ async function obterAlertas(maquinas) {
             <div class="container-text">
               <span class="${situacao}"></span>
 
-              <p class="log-phrase">A máquina está tendo ${element.uso} de uso de ${element.tipo_componente}</p>
+              <p class="log-phrase">A máquina está tendo ${element.uso}% de uso de ${element.tipo_componente}</p>
             </div>
             <hr>
           </div>
