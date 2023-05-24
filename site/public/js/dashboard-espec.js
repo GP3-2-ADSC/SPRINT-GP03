@@ -375,14 +375,6 @@ let myChart_geral_disco = new Chart(
 
 // ChartJS do Uso do Rede
 let labels_geral_rede = [
-  "12:02",
-  "12:04",
-  "12:06",
-  "12:08",
-  "12:10",
-  "12:12",
-  "12:14",
-  "12:16",
 ];
 
 // Criando estrutura para plotar gráfico - dados
@@ -553,6 +545,7 @@ function getMaquinas(idMaquina) {
         obterDadosIniciaisCpu(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisRam(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisDisco(listaMaquinas[idMaquina].id_maquina);
+        obterDadosIniciaisRede(listaMaquinas[idMaquina].id_maquina);
         obterEspecificacaoComponentes(listaMaquinas[idMaquina].id_maquina);
       });
     } else {
@@ -770,6 +763,67 @@ function atualizarGraficoDisco(idMaquina) {
       });
     } else {
       setTimeout(() => atualizarGraficoDisco(idMaquina), 5000);
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+
+function obterDadosIniciaisRede(idMaquina) {
+  console.log("Entrando na função obter dados iniciais");
+  fetch(`/maquinas/obterDadosIniciaisRede/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log("DADOS DO OBTER DADOS INICIAIS");
+        console.log(`Dados recebidos na REDE: ${JSON.stringify(resposta)}`);
+        resposta.reverse();
+        resposta.forEach(element => {
+          labels_geral_rede.push(element.horario);
+          data_geral_rede.datasets[0].data.push(element.uso);
+        });
+        myChart_geral_rede.update()
+        atualizarGraficoRede(idMaquina);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function atualizarGraficoRede(idMaquina) {
+  fetch(`/maquinas/atualizarGraficoRede/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (novoRegistro) {
+
+        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        console.log(`Dados atuais do gráfico:`);
+        console.log(novoRegistro[0].horario);
+        console.log(labels_geral_disco[labels_geral_disco.length - 1]);
+
+        if (novoRegistro[0].horario == labels_geral_disco[labels_geral_disco.length - 1]) {
+          console.log("---------------------------------------------------------------")
+          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+          console.log(novoRegistro[0].horario)
+
+        } else {
+          console.log("TEM DADO NOVO!");
+          labels_geral_rede.shift();
+          labels_geral_rede.push(novoRegistro[0].horario);
+
+          data_geral_rede.datasets[0].data.shift();
+          data_geral_rede.datasets[0].data.push(novoRegistro[0].uso);
+        }
+        myChart_geral_cpu.update();
+
+        setTimeout(() => atualizarGraficoRede(idMaquina), 5000);
+      });
+    } else {
+      setTimeout(() => atualizarGraficoRede(idMaquina), 5000);
     }
   })
     .catch(function (error) {

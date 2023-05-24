@@ -24,11 +24,19 @@ router.get("/atualizarGraficoRam/:idMaquina", function (req, res) {
 });
 
 router.get("/obterDadosIniciaisDisco/:idMaquina", function (req, res) {
-    maquinaController.obterDadosIniciaisRam(req, res);
+    maquinaController.obterDadosIniciaisDisco(req, res);
 });
 
 router.get("/atualizarGraficoDisco/:idMaquina", function (req, res) {
-    maquinaController.atualizarGraficoRam(req, res);
+    maquinaController.atualizarGraficoDisco(req, res);
+});
+
+router.get("/obterDadosIniciaisRede/:idMaquina", function (req, res) {
+    maquinaController.obterDadosIniciaisRede(req, res);
+});
+
+router.get("/atualizarGraficoRede/:idMaquina", function (req, res) {
+    maquinaController.atualizarGraficoRede(req, res);
 });
 
 router.get("/obterAlertas/:idMaquina", function (req, res) {
