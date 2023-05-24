@@ -1,13 +1,13 @@
 function mostrarEsconderDiv(index) {
     const details_1 = document.getElementById("details-" + index);
 
-    const p_more_details = document.getElementById("p-more-details");
-    const p_less_details = document.getElementById("p-less-details");
+    const p_more_details = document.getElementById("p-more-details-"+index);
+    const p_less_details = document.getElementById("p-less-details-"+index);
 
     const arrow_down_1 = document.getElementById("arrow-down-" + index);
     const arrow_up_1 = document.getElementById("arrow-up-" + index);
 
-    if (p_more_details.style.display !== "none") {
+    if (p_more_details.style.display != "none") {
         details_1.style.display = "flex";
 
         p_more_details.style.display = "none";
@@ -37,13 +37,13 @@ function getMaquinas() {
             id_adminServer: sessionStorage.getItem('ID_USUARIO'),
             fk_empresaServer: sessionStorage.getItem('FK_EMPRESA')
         })
-    }).then(function (response) {
+    }).then( function (response) {
 
         if (response.ok) {
-            response.json().then(function (resposta) {
+            response.json().then(async function (resposta) {
                 console.log("MAQUINAS PUXADAS!");
                 console.log(resposta);
-                obterAlertas(resposta)
+               obterAlertas(resposta)
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -54,32 +54,35 @@ function getMaquinas() {
         });
 }
 
-function obterAlertas(maquinas) {
+async function obterAlertas(maquinas) {
     for (let index = 0; index < maquinas.length; index++) {
         const idMaquina = maquinas[index].id_maquina
 
         console.log("Entrando na função obter alertas");
-        fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+        await fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then( async function (response) {
             if (response.ok) {
-                response.json().then(function (resposta) {
+                await response.json().then(function (resposta) {
                     console.log("DADOS DO OBTER DADOS INICIAIS");
                     console.log(JSON.stringify(response));
                     let alertas = ``;
 
                     resposta.forEach(element => {
-
+                        let cor = "";
                         let situacao = "";
                         if (element.id_tipo_alerta == 1) {
                             situacao = "circle-kpi green"
+                            cor="green"
                         } else if (element.id_tipo_alerta == 2) {
                             situacao = "circle-kpi yellow"
+                            cor="#F6AA1C"
                         } else {
                             situacao = "circle-kpi red"
+                            cor="red"
                         }
 
                         alertas += `
             <div class="details">
-            <p class="log-details">Log - ${element.dia}</p>
+            <p class="log-details" style="color:${cor}">Log - ${element.dia}</p>
 
             <div class="container-text">
               <span class="${situacao}"></span>
@@ -100,13 +103,13 @@ function obterAlertas(maquinas) {
                     </div>
             
                     <div class="details-options">
-                      <p class="p-details" id="p-more-details">Mais detalhes</p>
-                      <p class="p-details" id="p-less-details">Menos detalhes</p>
+                      <p class="p-details" id="p-more-details-${idMaquina}">Mais detalhes</p>
+                      <p class="p-details p-less-details" id="p-less-details-${idMaquina}">Menos detalhes</p>
             
                       <button class="details-button" onclick="mostrarEsconderDiv(${idMaquina})">
                         <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-${idMaquina}"></ion-icon>
             
-                        <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-${idMaquina}"></ion-icon>
+                        <ion-icon name="chevron-up-circle-outline" class="arrow-icon arrow-up" id="arrow-up-${idMaquina}"></ion-icon>
                       </button>
                     </div>
                   </div>

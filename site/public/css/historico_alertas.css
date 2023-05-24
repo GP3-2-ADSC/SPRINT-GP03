@@ -141,6 +141,7 @@ h1 {
   height: 35px;
   border-radius: 10px;
   
+  color:white;
   background-color: #0061ba;
   display: flex;
   flex-direction: row;
@@ -210,15 +211,16 @@ h1 {
   justify-content: center;
   text-align: center;
 
-  background-color: #8cccf0;
+  background-color: #ffffff;
   border-radius: 10px;
 }
 
 .title-machine {
   width: 100%;
-  font-weight: 500;
-  font-size: 1.2em;
+  font-weight: 700;
+  font-size: 1.4em;
   padding: 10px 0; 
+  color:#0061BA
 }
 
 .details {
@@ -230,7 +232,7 @@ h1 {
 }
 
 .log-details {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .container-text {
@@ -245,6 +247,7 @@ hr {
 
 .log-phrase {
   padding: 10px;
+  font-weight: 500;
 }
 
 .container-details {
@@ -264,9 +267,8 @@ hr {
   padding: 20px 0 5px 0;
 }
 
-#p-less-details,
-#p-less-details-2,
-#p-less-details-3 {
+
+.p-less-details {
   display: none;
 }
 
@@ -280,8 +282,6 @@ hr {
   font-size: 2.6em;
 }
 
-#arrow-up-1,
-#arrow-up-2,
-#arrow-up-3 {
+.arrow-up {
   display: none;
 }
