@@ -796,7 +796,6 @@ function obterAlertas(idMaquina) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-        TOP(20)
         ta.id_tipo_alerta,
         FORMAT(a.dt_alerta, 'dd/MM HH:mm:ss') AS dia,
         mc.uso,
@@ -818,7 +817,6 @@ function obterAlertas(idMaquina) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT 
-        TOP(20)
         ta.id_tipo_alerta,
         FORMAT(a.dt_alerta, 'dd/MM HH:mm:ss') AS dia,
         mc.uso,

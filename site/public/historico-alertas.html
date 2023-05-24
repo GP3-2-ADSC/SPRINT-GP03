@@ -1,370 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/historico_alertas.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Histórcio de alertas</title>
-  </head>
-  <body>
-    <div class="container-menu">
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/historico_alertas.css" />
+  <link rel="stylesheet" href="./css/main.css" />
 
-      <div class="img-logo">
-        <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
-      </div>
 
-      <!-- Menu lateral -->
-      <div class="container-list">
-        <ul>
-          <li class="list">
-            <a href="dashboardGeral.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="stats-chart-outline"></ion-icon>
-                </span>
-              </span>
+  <title>Histórcio de alertas</title>
+</head>
 
-              <span class="list-title">Dashboard geral</span>
-            </a>
-          </li>
+<body onload="iniciar()">
+  <div class="container-menu">
 
-          <li class="list">
-            <a href="dashboard-espec.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="analytics-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title" 
-                >Dashboard específico</span
-              >
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="historico-alertas.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="alert-circle-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title" id="list-active">Histórico de alertas</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="inventario-maquina.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="construct-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Inventário de máquinas</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="help-circle-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Ajuda</span>
-            </a>
-          </li>
-
-          <li class="list">
-            <a href="download-app.html">
-              <span class="circle">
-                <span class="icon">
-                  <ion-icon name="download-outline"></ion-icon>
-                </span>
-              </span>
-
-              <span class="list-title">Download aplicação</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
-        <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
-      </a>
+    <div class="img-logo">
+      <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
     </div>
 
-    <div class="container-title">
-      <div class="container-title-button">
-        <h1>Nivel de complexidade</h1>
-        
+    <!-- Menu lateral -->
+    <div class="container-list">
+      <ul>
+        <li class="list">
+          <a href="dashboardGeral.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Dashboard geral</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="dashboard-espec.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="analytics-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Dashboard específico</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="historico-alertas.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title" id="list-active">Histórico de alertas</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="inventario-maquina.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="construct-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Inventário de máquinas</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="help-circle-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Ajuda</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="download-app.html">
+            <span class="circle">
+              <span class="icon">
+                <ion-icon name="download-outline"></ion-icon>
+              </span>
+            </span>
+
+            <span class="list-title">Download aplicação</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
+      <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+    </a>
+  </div>
+
+  <div class="container-title">
+    <div class="container-title-button">
+      <h1>Nivel de complexidade</h1>
+
+    </div>
+  </div>
+
+  <div class="container-all">
+    <div class="container-content">
+      <div class="group-subtitles">
+        <span class="circle-kpi green"></span>
+
+        <span class="text-kpi">Baixa</span>
+      </div>
+
+      <div class="group-subtitles">
+        <span class="circle-kpi yellow"></span>
+
+        <span class="text-kpi">Médio</span>
+      </div>
+
+      <div class="group-subtitles">
+        <span class="circle-kpi red"></span>
+
+        <span class="text-kpi">Alta</span>
       </div>
     </div>
 
-    <div class="container-all">
-      <div class="container-content">
-        <div class="group-subtitles">
-            <span class="circle-kpi green"></span>
+    <div class="container-alerts" id="containerAlerts">
 
-            <span class="text-kpi">Baixa</span>
-        </div>
-
-        <div class="group-subtitles">
-            <span class="circle-kpi yellow"></span>
-            
-            <span class="text-kpi">Médio</span>
-        </div>
-        
-        <div class="group-subtitles">
-            <span class="circle-kpi red"></span>
-            
-            <span class="text-kpi">Alta</span>
-        </div>
-      </div>
-      
-      <div class="container-alerts">
-
-        <div class="alerts">
-            <span class="title-machine">Máquina - 01</span>
-
-            <div class="container-details" id="details-1">
-              <div class="details">
-                <p class="log-details">Log - 001 05/04/2023</p>
-
-                <div class="container-text">
-                  <span class="circle-kpi yellow"></span>
-  
-                  <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>
-                </div>
-                <hr>
-              </div>
-
-              <div class="details">
-                <p class="log-details">Log - 002 05/04/2023</p>
-
-                <div class="container-text">
-                  <span class="circle-kpi red"></span>
-  
-                  <p class="log-phrase">A máquina está tendo 82% de uso da CPU.</p>  
-                </div>
-                <hr>
-              </div>
-
-              <div class="details">
-                <p class="log-details">Log - 003 05/04/2023</p>
-
-                <div class="container-text">
-                  <span class="circle-kpi yellow"></span>
-  
-                  <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-                </div>
-                <hr>
-              </div>
-
-              <div class="details">
-                <p class="log-details">Log - 004 05/04/2023</p>
-
-                <div class="container-text">
-                  <span class="circle-kpi green"></span>
-  
-                  <p class="log-phrase">A máquina está tendo 50% de uso da CPU.</p>  
-                </div>
-                <hr>
-              </div>
-
-              <div class="details">
-                <p class="log-details">Log - 006 05/04/2023</p>
-
-                <div class="container-text">
-                  <span class="circle-kpi yellow"></span>
-  
-                  <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-                </div>
-                <hr>
-              </div>
-            </div>
-
-            
-            <div class="details-options">
-              <p class="p-details" id="p-more-details">Mais detalhes</p>
-              <p class="p-details" id="p-less-details">Menos detalhes</p>
-
-              <button class="details-button" onclick="mostrarEsconderDiv()">
-                <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-1"></ion-icon>
-
-                <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-1"></ion-icon>
-              </button>
-            </div>
-        </div>
-
-        <div class="alerts">
-          <span class="title-machine">Máquina - 02</span>
-
-          <div class="container-details" id="details-2">
-            <div class="details">
-              <p class="log-details">Log - 001 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-
-            <div class="details">
-              <p class="log-details">Log - 001 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-
-            <div class="details">
-              <p class="log-details">Log - 002 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-
-            <div class="details">
-              <p class="log-details">Log - 003 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-
-            <div class="details">
-              <p class="log-details">Log - 004 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-
-            <div class="details">
-              <p class="log-details">Log - 005 05/04/2023</p>
-
-              <div class="container-text">
-                <span class="circle-kpi yellow"></span>
-
-                <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-              </div>
-              <hr>
-            </div>
-          </div>
-
-          
-          <div class="details-options">
-            <p class="p-details" id="p-more-details-2">Mais detalhes</p>
-            <p class="p-details" id="p-less-details-2">Menos detalhes</p>
-
-            <button class="details-button" onclick="mostrarEsconderDiv2()">
-              <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-2"></ion-icon>
-
-              <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-2"></ion-icon>
-            </button>
-          </div>
-      </div>
-        
-      <div class="alerts">
-        <span class="title-machine">Máquina - 03</span>
-
-        <div class="container-details" id="details-3">
-          <div class="details">
-            <p class="log-details">Log - 001 05/04/2023</p>
-
-            <div class="container-text">
-              <span class="circle-kpi red"></span>
-
-              <p class="log-phrase">A máquina está tendo 82% de uso da CPU.</p>  
-            </div>
-            <hr>
-          </div>
-
-          <div class="details">
-            <p class="log-details">Log - 002 05/04/2023</p>
-
-            <div class="container-text">
-              <span class="circle-kpi yellow"></span>
-
-              <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-            </div>
-            <hr>
-          </div>
-
-          <div class="details">
-            <p class="log-details">Log - 003 05/04/2023</p>
-
-            <div class="container-text">
-              <span class="circle-kpi yellow"></span>
-
-              <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-            </div>
-            <hr>
-          </div>
-
-          <div class="details">
-            <p class="log-details">Log - 004 05/04/2023</p>
-
-            <div class="container-text">
-              <span class="circle-kpi yellow"></span>
-
-              <p class="log-phrase">A máquina está tendo 60% de uso da CPU.</p>  
-            </div>
-            <hr>
-          </div>
-        </div>
-        
-        <div class="details-options">
-          <p class="p-details" id="p-more-details-3">Mais detalhes</p>
-          <p class="p-details" id="p-less-details-3">Menos detalhes</p>
-
-          <button class="details-button" onclick="mostrarEsconderDiv3()">
-            <ion-icon name="chevron-down-circle-outline" class="arrow-icon" id="arrow-down-3"></ion-icon>
-
-            <ion-icon name="chevron-up-circle-outline" class="arrow-icon" id="arrow-up-3"></ion-icon>
-          </button>
-        </div>
     </div>
+  </div>
+</body>
 
-      </div>
-    </div>
-    </body>
-    </html>
+</html>
 
-    
-    <script src="./js/historico_alertas.js" defer></script>
-    
-    
-    <script
-    type="module"
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-    nomodule
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+
+<script src="./js/historico_alertas.js" defer></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
