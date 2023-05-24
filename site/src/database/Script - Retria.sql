@@ -232,6 +232,10 @@ CREATE TABLE alerta (
         FOREIGN KEY (fk_metrica_componente) REFERENCES metrica_componente(id_metrica_componente)
 );
 
+-- Comando de insert
+ insert into administrador (nome_administrador, email_administrador, senha_administrador, telefone_administrador, fk_ocupacao, chave_seguranca_administrador, fk_empresa)values 
+ ('Lucas Silva', 'lucas@gmail.com', '123', '11985623014', 'aaaa',1 , 1);
+
 -- Drop tables 
 drop table [dbo].[alerta];
 drop table [dbo].[tipo_alerta];
