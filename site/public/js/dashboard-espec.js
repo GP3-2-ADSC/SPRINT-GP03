@@ -818,7 +818,7 @@ function atualizarGraficoRede(idMaquina) {
           data_geral_rede.datasets[0].data.shift();
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso);
         }
-        myChart_geral_cpu.update();
+        myChart_geral_rede.update();
 
         setTimeout(() => atualizarGraficoRede(idMaquina), 5000);
       });
