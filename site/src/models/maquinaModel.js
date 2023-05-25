@@ -34,6 +34,111 @@ function carregarMaquinaEspec(fkEmpresa, idAdmin) {
     return database.executar(instrucaoSql);
 }
 
+function carregarMaquinaUltra(fkEmpresa, idAdmin) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        m.id_maquina,
+        m.sistema_operacional,
+        m.numero_serial_maquina,
+        m.status_maquina,
+        adm.nome_administrador
+    FROM
+        administrador AS adm
+            JOIN
+        maquina_ultrassom AS m ON id_administrador = fk_administrador
+    WHERE
+        m.fk_administrador = ${fkEmpresa}
+            AND m.fk_empresa = ${idAdmin}`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+        m.id_maquina,
+        m.sistema_operacional,
+        m.numero_serial_maquina,
+        m.status_maquina,
+        adm.nome_administrador
+    FROM
+        administrador AS adm
+            JOIN
+        maquina_ultrassom AS m ON id_administrador = fk_administrador
+    WHERE
+        m.fk_administrador = ${fkEmpresa}
+            AND m.fk_empresa = ${idAdmin}`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function bloquearMaquina(fkEmpresa, idAdmin, idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        UPDATE maquina_ultrassom 
+        SET 
+            status_maquina = 'false'
+        WHERE
+            id_maquina = ${idMaquina} AND fk_administrador = ${idAdmin}
+                AND fk_empresa = ${fkEmpresa}`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        UPDATE maquina_ultrassom 
+        SET 
+            status_maquina = 'false'
+        WHERE
+            id_maquina = ${idMaquina} AND fk_administrador = ${idAdmin}
+                AND fk_empresa = ${fkEmpresa}`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function autorizarMaquina(fkEmpresa, idAdmin, idMaquina) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        UPDATE maquina_ultrassom 
+        SET 
+            status_maquina = 'true'
+        WHERE
+            id_maquina = ${idMaquina} AND fk_administrador = ${idAdmin}
+                AND fk_empresa = ${fkEmpresa}`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        UPDATE maquina_ultrassom 
+        SET 
+            status_maquina = 'false'
+        WHERE
+            id_maquina = ${idMaquina} AND fk_administrador = ${idAdmin}
+                AND fk_empresa = ${fkEmpresa}`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 function obterDadosIniciaisCpu(idMaquina) {
 
@@ -882,6 +987,7 @@ function obterEspecificacaoComponentes(idMaquina) {
 
 module.exports = {
     carregarMaquinaEspec,
+    carregarMaquinaUltra,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
     obterDadosIniciaisDisco,
@@ -891,5 +997,7 @@ module.exports = {
     atualizarGraficoCpu,
     atualizarGraficoRam,
     atualizarGraficoDisco,
-    atualizarGraficoRede
+    atualizarGraficoRede,
+    bloquearMaquina,
+    autorizarMaquina
 }

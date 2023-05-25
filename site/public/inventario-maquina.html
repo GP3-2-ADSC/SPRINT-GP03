@@ -20,7 +20,7 @@
     <title>Cadastro de Máquina</title>
 </head>
 
-<body>
+<body onload="iniciar()">
     <div class="container-menu">
 
         <div class="img-logo">
@@ -79,7 +79,7 @@
                 </li>
 
                 <li class="list">
-                    <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156" >
+                    <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
                         <span class="circle">
                             <span class="icon">
                                 <ion-icon name="help-circle-outline"></ion-icon>
@@ -109,117 +109,26 @@
         </a>
     </div>
 
-    
 
-    <div class="container-maquinas">
-        <div class="container-title">
-            <div class="container-title-button">
-                <h1>Cadastrar máquina</h1>
-            </div>
+
+    <div class="container-title">
+        <div class="container-title-button">
+            <h1>Inventário de máquinas</h1>
 
         </div>
+    </div>
 
-        <div class="container-all">
-            <div class="container-content">
-                <div class="container-general-chart">
-                    <div class="inputs-maquinas">
-                        <div class="campos-cima">
-                            <label class="input-text">Fornecedor:</label>
-                            <input class="input-maquina" type="text" id="in_fornecedor">
-                            <label class="input-text">Número Serial:</label>
-                            <input class="input-maquina" type="text" id="in_numSerial">
-                            <label class="input-text">Andar:</label>
-                            <input class="input-maquina" type="text" id="in_andar">
+    <div class="container-all">
+        <div class="container-content" id="containerContentRight">
 
-                        </div>
-                        <div class="campos-baixo">
-                            <label class="input-text">Tipo de máquina</label>
-                            <input class="input-maquina" type="text" id="in_tipoMaquina">
-                            <label class="input-text">Responsável</label>
-                            <input class="input-maquina" type="text" id="in_responsavel">
-                            <label class="input-text">Setor:</label>
-                            <input class="input-maquina" type="text" id="in_setor">
-                        </div>
-                    </div>
-                    <div class="btn-add">
-                        <button onclick="adicionar_maquina()"> Adicionar
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-    
-    <div id="div_title_cadastro">
-        <h1 id="title_cadastro2">Nenhuma máquina foi cadastrada até o momento</h1>
-    </div>
+        <div class="container-content" id="containerContent">
 
-    <div class="div_maquinas" id="div_maquinas">
-        <h1 id="title_cadastro"></h1>
-    </div>
-
+        </div>
 </body>
 
 </html>
-<script>
-    var id = 0;
-    title_cadastro2.style = "margin: 28px 0 10px 350px;"
-    function adicionar_maquina() {
-        title_cadastro.innerHTML = ""
-        var fornecedor = in_fornecedor.value
-        var numSerial = in_numSerial.value
-        var andar = in_andar.value
-        var responsavel = in_responsavel.value
-        var setor = in_setor.value
-        var tipoMaquina = in_tipoMaquina.value
-        var campoNull = fornecedor == "" || numSerial == "" || andar == "" || responsavel == "" || setor == "" || tipoMaquina == ""
-        
-        if (!campoNull) {    
-            
-            title_cadastro2.innerHTML = "Máquinas cadastradas com sucesso!"
-            
-            id++
-            div_maquinas.style = "margin: 28px 0 10px 0px;"
-            div_maquinas.innerHTML += `
-                <div class="container-content">
-                    <div class="container-maquinas-add">
-                        <div class="container-dados-maquina">
-                            <div class="dados-user">
-                                <span id="list-active">ID:<span>${id}</span></span>
-                                <span id="list-active">Responsável:<span>${responsavel}</span>;<span id="list-active">Tipo Máquina:<span>${tipoMaquina}</span></span></span>
-                                <span id="list-active">Andar:<span>${andar}</span>;<span id="list-active">Número Setor:</span><span>${setor}</span></span>
-                                <span id="list-active">Fornecedor:<span>${fornecedor}</span>;<span id="list-active">Número Serial:<span>${numSerial}</span></span></span>
-                            </div>
-                            <div class="btns-editar-excluir">
-                                <a href="#">
-                                    <span class="circle-lista">
-                                        <span class="icon-edit-exc">
-                                            <ion-icon name="pencil-outline"></ion-icon>
-                                        </span>
-                                    </span>
-                                </a>
-                                <i></i>
-                                <a href="#">
-                                    <span class="circle-lista2">
-                                        <span class="icon-edit-exc">
-                                            <ion-icon name="trash-bin-outline"></ion-icon>
-                                        </span>
-                                    </span>
-
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-
-        } else {
-            alert("Preencha todos os campos.")
-        }
-    }
-
-</script>
-<script src="./js/dashboard-espec.js"></script>
+<script src="./js/inventario-maquina.js"></script>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

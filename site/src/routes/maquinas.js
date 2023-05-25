@@ -7,6 +7,18 @@ router.post("/carregarMaquinaEspec", function (req, res) {
     maquinaController.carregarMaquinaEspec(req, res);
 });
 
+router.post("/carregarMaquinaUltra", function (req, res) {
+    maquinaController.carregarMaquinaUltra(req, res);
+});
+
+router.put("/bloquearMaquina", function (req, res) {
+    maquinaController.bloquearMaquina(req, res);
+});
+
+router.put("/autorizarMaquina", function (req, res) {
+    maquinaController.autorizarMaquina(req, res);
+});
+
 router.get("/obterDadosIniciaisCpu/:idMaquina", function (req, res) {
     maquinaController.obterDadosIniciaisCpu(req, res);
 });

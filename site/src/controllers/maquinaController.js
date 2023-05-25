@@ -24,6 +24,86 @@ function carregarMaquinaEspec(req, res) {
     }
 }
 
+function carregarMaquinaUltra(req, res) {
+    let fkEmpresa = req.body.id_adminServer;
+    let idAdmin = req.body.fk_empresaServer;
+
+    if (idAdmin == null) {
+        res.status(400).send("Seu idAdmin está undefined!");
+    } else if (fkEmpresa == null) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+
+        maquinaModel.carregarMaquinaUltra(fkEmpresa, idAdmin).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as máquinas do adm!", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
+function bloquearMaquina(req, res) {
+    let fkEmpresa = req.body.id_adminServer;
+    let idAdmin = req.body.fk_empresaServer;
+    let idMaquina = req.body.id_maquinaServer;
+
+    if (idAdmin == null) {
+        res.status(400).send("Seu idAdmin está undefined!");
+    } else if (fkEmpresa == null) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        maquinaModel.bloquearMaquina(fkEmpresa, idAdmin, idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a atualização: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function autorizarMaquina(req, res) {
+    let fkEmpresa = req.body.id_adminServer;
+    let idAdmin = req.body.fk_empresaServer;
+    let idMaquina = req.body.id_maquinaServer;
+
+    if (idAdmin == null) {
+        res.status(400).send("Seu idAdmin está undefined!");
+    } else if (fkEmpresa == null) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        maquinaModel.autorizarMaquina(fkEmpresa, idAdmin, idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a atualização: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function obterDadosIniciaisCpu(req, res) {
     console.log("NA CONTROLLER DO OBTER DADOS");
     let idMaquina = req.params.idMaquina;
@@ -260,6 +340,7 @@ function obterEspecificacaoComponentes(req, res) {
 
 module.exports = {
     carregarMaquinaEspec,
+    carregarMaquinaUltra,
     obterDadosIniciaisCpu,
     obterDadosIniciaisRam,
     obterDadosIniciaisDisco,
@@ -269,5 +350,7 @@ module.exports = {
     atualizarGraficoCpu,
     atualizarGraficoRam,
     atualizarGraficoDisco,
-    atualizarGraficoRede
+    atualizarGraficoRede,
+    bloquearMaquina,
+    autorizarMaquina
 }
