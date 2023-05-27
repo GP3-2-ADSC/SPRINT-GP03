@@ -60,6 +60,9 @@ create table maquina_ultrassom(
     sistema_operacional varchar(45),
     numero_serial_maquina varchar(45),
     status_maquina varchar(5) default 'false',
+    status_conexao varchar(45) 
+        constraint chkStatus 
+            check (status_conexao in ('Sucesso', 'Parcial', 'Erro')),
     fk_administrador int,
         foreign key (fk_administrador) references administrador(id_administrador),
     fk_empresa int,
@@ -115,6 +118,14 @@ create table alerta (
     fk_metrica_componente int,
         foreign key (fk_metrica_componente) references metrica_componente(id_metrica_componente)
 );
+
+create table webhook (
+	id_Web int auto_increment primary key,
+	link varchar(255)
+);
+
+insert into webhook (link) values 
+('https://hooks.slack.com/services/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');
 
 
 -- Script da Azure
@@ -176,6 +187,9 @@ CREATE TABLE maquina_ultrassom (
     sistema_operacional VARCHAR(45),
     numero_serial_maquina VARCHAR(45),
     status_maquina VARCHAR(5) default 'false',
+    status_conexao VARCHAR(45) 
+        CONSTRAINT chkStatusConexao 
+            CHECK (status_conexao IN ('Sucesso', 'Parcial', 'Erro')),
     fk_administrador INT,
         FOREIGN KEY (fk_administrador) REFERENCES administrador(id_administrador),
     fk_empresa INT,
@@ -232,9 +246,20 @@ CREATE TABLE alerta (
         FOREIGN KEY (fk_metrica_componente) REFERENCES metrica_componente(id_metrica_componente)
 );
 
+CREATE TABLE webhook (
+	id_Web INT IDENTITY(1,1) UNIQUE,
+	link VARCHAR(255)
+);
+
+INSERT INTO [dbo].[Webhook] VALUES 
+('https://hooks.slack.com/services/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');
+
 -- Comando de insert
- insert into administrador (nome_administrador, email_administrador, senha_administrador, telefone_administrador, fk_ocupacao, chave_seguranca_administrador, fk_empresa)values 
- ('Lucas Silva', 'lucas@gmail.com', '123', '11985623014', 'aaaa',1 , 1);
+ INSERT INTO administrador (
+    nome_administrador, email_administrador, senha_administrador, 
+    telefone_administrador, fk_ocupacao, 
+    chave_seguranca_administrador, fk_empresa
+    ) VALUES ('Lucas Silva', 'lucas@gmail.com', '123', '11985623014', 'aaaa',1 , 1);
 
 -- Drop tables 
 drop table [dbo].[alerta];
