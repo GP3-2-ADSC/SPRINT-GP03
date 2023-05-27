@@ -851,6 +851,7 @@ function obterAlertas(idMaquina) {
         resposta.forEach(element => {
 
           let situacao = "";
+          let alertas = ``;
           if (element.id_tipo_alerta == 1) {
             situacao = "alerta"
           } else if (element.id_tipo_alerta == 2) {
@@ -858,20 +859,21 @@ function obterAlertas(idMaquina) {
           } else {
             situacao = "crítico"
           }
+
           if (resposta.indexOf(element) == 0) {
             historic.innerHTML = `
             <div class="card-historic">
             <p class="historic-date">${element.dia}</p>
-              <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso}%)</p>
+              <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
             </div>`
           }
-
-          historic.innerHTML += `
+          alertas += `
               <div class="card-historic">
               <p class="historic-date">${element.dia}</p>
-                <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso}%)</p>
+                <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
               </div>`
 
+          historic.innerHTML += alertas
         });
       });
       setTimeout(() => obterAlertas(idMaquina), 5000);
