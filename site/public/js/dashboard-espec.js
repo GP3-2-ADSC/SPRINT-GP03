@@ -788,12 +788,12 @@ function atualizarGraficoRede(idMaquina) {
           data_geral_rede.datasets[0].data.shift();
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
 
-          if (contador >= 0) {
+          if (contador > 0) {
             document.getElementById('wifiOff').style.display = 'none'
             document.getElementById('wifiOn').style.display = 'block'
             statusRede.innerHTML = 'Conectada!'
             document.getElementById('statusRede').style.color = '#0061ba';
-            contador = -1;
+            contador = 0;
           }
         }
         myChart_geral_rede.update();
