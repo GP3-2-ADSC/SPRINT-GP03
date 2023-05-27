@@ -41,8 +41,6 @@ function getMaquinas() {
 
         if (response.ok) {
             response.json().then(async function (resposta) {
-                console.log("MAQUINAS PUXADAS!");
-                console.log(resposta);
                obterAlertas(resposta)
             });
         } else {
@@ -63,7 +61,6 @@ async function obterAlertas(maquinas) {
             if (response.ok) {
                 await response.json().then(function (resposta) {
                     console.log("DADOS DO OBTER DADOS INICIAIS");
-                    console.log(JSON.stringify(response));
                     let alertas = ``;
 
                     resposta.forEach(element => {

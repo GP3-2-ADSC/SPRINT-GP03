@@ -42,7 +42,6 @@ function getEmpresa() {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log("DADOS DO OBTER DADOS INICIAIS");
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 nomeEmpresa.innerHTML = resposta[0].nome_empresa;
                 cnpjEmpresa.innerHTML = mascaraCNPJ(resposta[0].cnpj);
@@ -71,7 +70,6 @@ function getAdministrador() {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log("DADOS DO OBTER DADOS INICIAIS");
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 nomeAdmin.innerHTML = resposta[0].nome_administrador;
                 cargoAdmin.innerHTML = resposta[0].cargo;
                 telefoneAdmin.innerHTML = mascaraTelefoneRetorno(resposta[0].telefone_administrador);

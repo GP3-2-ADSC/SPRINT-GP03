@@ -15,8 +15,6 @@ function getMaquinas() {
 
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("MAQUINAS PUXADAS!");
-        console.log(resposta);
         resposta.forEach(element => {
           listaMaquinas.push(element);
         });
@@ -72,14 +70,10 @@ function exibirTotalSinalizacoes() {
   
   fetch(`/maquinas/exibirTotalSinalizacoes/${idEmpresa}`, { cache: "no-store" })
     .then(function (response) {
-      console.log("RESPONSE -> ", response);
       if (response.ok) {
         response
           .json()
           .then(function (resposta) {
-            console.log("COUNT recebido:", resposta);
-            console.log(`RESPOSTA TOTAL_ALERTAS -> ${resposta[0].total_alertas}`);
-
             totalSinalizacoes.innerHTML = resposta[0].total_alertas;
           });
       } else {
@@ -96,16 +90,11 @@ function exibirTotalSinalizacoes() {
 async function obterAlertasGerais(idEmpresa) {
   console.log("Entrando na função obterAlertasGerais()");
 
-  console.log(`ID_EMPRESA -> ${idEmpresa}`);
-
   try {
     const response = await fetch(`/maquinas/obterAlertasGerais/${idEmpresa}`, { cache: "no-store" });
-    console.log("RESPONSE -> ", response);
-    
+
     if (response.ok) {
       const jsonData = await response.json();
-      console.log("jsonData recebido:", jsonData);
-      console.log(jsonData.length);
 
       const arrayObjetos = [];
       for (let i = 0; i < jsonData.length; i++) {
@@ -132,10 +121,6 @@ async function obterAlertasGerais(idEmpresa) {
         arrayObjetos.push(objeto);
       }
       
-      console.log(arrayObjetos);
-
-      console.log("Entrando no for => " + arrayObjetos[0].componentes[0].dt_metrica);
-
       if (arrayObjetos[0].componentes[0].dt_metrica != ultimaMetrica) {
         ultimaMetrica = arrayObjetos[0].componentes[0].dt_metrica;
         for (let i = 0; i < arrayObjetos.length; i++) {
@@ -227,10 +212,9 @@ async function obterAlertasGerais(idEmpresa) {
           </div>`;
           }
         }
-        console.log("ATÉ AQUI TUDO OK");
         
         var contCritico = arrayObjetos.filter(objeto => objeto.status == 'maquinaCritica'); 
-        console.log("CONTAGEM CRITICO -> ", contCritico.length);
+
         if (contCritico > 0 || !undefined) {
           contagemCritico.innerHTML = `${contCritico.length}`;
         } else {
@@ -239,7 +223,7 @@ async function obterAlertasGerais(idEmpresa) {
         }
   
         var contAlerta = arrayObjetos.filter(objeto => objeto.status == 'maquinaAlerta');
-        console.log("CONTAGEM ALERTA -> ", contAlerta.length);
+
         if (contAlerta > 0) {
           contagemAlerta.innerHTML = `${contAlerta.length}`;
         } else {
@@ -248,7 +232,7 @@ async function obterAlertasGerais(idEmpresa) {
         }
   
         var contPerigo = arrayObjetos.filter(objeto => objeto.status == 'maquinaPerigo');
-        console.log("CONTAGEM PERIGO -> ", contPerigo.length);
+
         if (contPerigo > 0) {
           contagemPerigo.innerHTML = `${contPerigo.length}`;
         } else {
@@ -271,10 +255,9 @@ function obterMaquinasAtivas() {
   
   fetch(`/maquinas/obterMaquinasAtivas/${idEmpresa}`, { cache: "no-store" })
     .then(function (response) {
-      console.log("RESPONSE -> ", response);
+
       if (response.ok) {
         response.json().then(function (resposta) {
-          console.log("RESPOSTA -> ", resposta);
           if (resposta.length > 0) {
             if (resposta[0].tot == 0) {
               totalAtivas.innerHTML = `${resposta[1].tot} / ${resposta[1].tot}`;

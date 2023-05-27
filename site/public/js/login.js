@@ -27,12 +27,7 @@ function entrar() {
         console.log("ESTOU NO THEN DO entrar()!")
 
         if (resposta.ok) {
-            console.log(resposta);
-
             resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-
                 sessionStorage.EMAIL_USUARIO = json.email_administrador;
                 sessionStorage.NOME_USUARIO = json.nome_administrador;
                 sessionStorage.ID_USUARIO = json.id_administrador;
@@ -99,8 +94,6 @@ function plotarValidacaoDeSerialKey() {
 
 function validarSerialKey() {
     let serialKeyInserida = in_serialKey.value;
-    console.log("serialKeyInseridada " + serialKeyInserida);
-    console.log("do banco " + serialKeyBanco);
     serialKeyInserida == serialKeyBanco ? autorizar(1) : autorizar(2);
 }
 

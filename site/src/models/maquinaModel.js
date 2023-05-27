@@ -955,7 +955,6 @@ function obterAlertas(idMaquina) {
 
 function obterEspecificacaoComponentes(idMaquina) {
     console.log("ENTREI NA **MODEL** DO ESPECIFICAÇÃO COMPONENTES");
-    console.log("ID DA MÁQUINA: " + idMaquina);
     console.log(`--------------------------------------------------`);
 
     instrucaoSql = '';
@@ -991,7 +990,6 @@ function obterEspecificacaoComponentes(idMaquina) {
 
 function exibirTotalSinalizacoes(idEmpresa) {
     console.log("ENTREI NA **MODEL** DO exibirTotalSinalizacoes");
-    console.log("ID DA EMPRESA: " + idEmpresa);
     console.log(`--------------------------------------------------`);
 
     instrucaoSql = '';

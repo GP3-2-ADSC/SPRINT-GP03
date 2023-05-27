@@ -536,8 +536,6 @@ function getMaquinas(idMaquina) {
 
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("MAQUINAS PUXADAS!");
-        console.log(resposta);
         resposta.forEach(element => {
           listaMaquinas.push(element);
         });
@@ -563,7 +561,6 @@ function obterDadosIniciaisCpu(idMaquina) {
     if (response.ok) {
       response.json().then(function (resposta) {
         console.log("DADOS DO OBTER DADOS INICIAIS");
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         resposta.reverse();
         if (labels_geral_cpu.length == 0 && data_geral_cpu.datasets[0].data.length == 0) {
           resposta.forEach(element => {
@@ -595,16 +592,9 @@ function atualizarGraficoCpu(idMaquina) {
   fetch(`/maquinas/atualizarGraficoCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
-
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-        console.log(`Dados atuais do gráfico:`);
-        console.log(novoRegistro[0].horario);
-        console.log(labels_geral_cpu[labels_geral_cpu.length - 1]);
-
         if (novoRegistro[0].horario == labels_geral_cpu[labels_geral_cpu.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-          console.log(novoRegistro[0].horario)
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -636,7 +626,6 @@ function obterDadosIniciaisRam(idMaquina) {
     if (response.ok) {
       response.json().then(function (resposta) {
         console.log("DADOS DO OBTER DADOS INICIAIS");
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         resposta.reverse();
 
         if (labels_geral_memoria.length == 0 && data_geral_memoria.datasets[0].data.length == 0) {
@@ -669,15 +658,9 @@ function atualizarGraficoRam(idMaquina) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
 
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-        console.log(`Dados atuais do gráfico:`);
-        console.log(novoRegistro[0].horario);
-        console.log(labels_geral_memoria[labels_geral_memoria.length - 1]);
-
         if (novoRegistro[0].horario == labels_geral_memoria[labels_geral_memoria.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-          console.log(novoRegistro[0].horario)
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -709,7 +692,6 @@ function obterDadosIniciaisDisco(idMaquina) {
     if (response.ok) {
       response.json().then(function (resposta) {
         console.log("DADOS DO OBTER DADOS INICIAIS");
-        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         resposta.reverse();
         resposta.forEach(element => {
           labels_geral_disco.push(element.horario);
@@ -735,15 +717,9 @@ function atualizarGraficoDisco(idMaquina) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
 
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-        console.log(`Dados atuais do gráfico:`);
-        console.log(novoRegistro[0].horario);
-        console.log(labels_geral_disco[labels_geral_disco.length - 1]);
-
         if (novoRegistro[0].horario == labels_geral_disco[labels_geral_disco.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-          console.log(novoRegistro[0].horario)
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -799,15 +775,9 @@ function atualizarGraficoRede(idMaquina) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
 
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-        console.log(`Dados atuais do gráfico:`);
-        console.log(novoRegistro[0].horario);
-        console.log(labels_geral_rede[labels_geral_rede.length - 1]);
-
         if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-          console.log(novoRegistro[0].horario)
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -870,7 +840,6 @@ function obterAlertas(idMaquina) {
     if (response.ok) {
       response.json().then(function (resposta) {
         console.log("DADOS DO OBTER DADOS INICIAIS");
-        console.log(JSON.stringify(response));
         resposta.forEach(element => {
 
           let situacao = "";
@@ -912,7 +881,6 @@ function obterEspecificacaoComponentes(idMaquina) {
   fetch(`/maquinas/especificacao-componentes/${idMaquina}`)
     .then(resposta => {
       console.log("ENTREI NO FETCH DO ESPECIFICAÇÃO COMPONENTES");
-      console.log("ID DA MÁQUINA: " + idMaquina);
       console.log(`--------------------------------------------------`);
 
       if (resposta.ok) {

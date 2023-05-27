@@ -13,8 +13,6 @@ function getMaquinasUltrassom() {
 
         if (response.ok) {
             response.json().then(function (resposta) {
-                console.log("MAQUINAS PUXADAS!");
-                console.log(resposta);
                 let cont = 0;
                 let situacao = "";
                 let cor ="";

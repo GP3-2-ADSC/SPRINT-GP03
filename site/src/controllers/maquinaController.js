@@ -131,7 +131,7 @@ function obterDadosIniciaisCpu(req, res) {
 function atualizarGraficoCpu(req, res) {
     console.log("NA CONTROLLER DO ATUALIZAR DADOS");
     let idMaquina = req.params.idMaquina;
-    console.log(idMaquina);
+
     if (idMaquina == null) {
         res.status(400).send("Seu idMaquina está undefined!");
     } else {
@@ -178,7 +178,7 @@ function obterDadosIniciaisRam(req, res) {
 function atualizarGraficoRam(req, res) {
     console.log("NA CONTROLLER DO ATUALIZAR DADOS");
     let idMaquina = req.params.idMaquina;
-    console.log(idMaquina);
+
     if (idMaquina == null) {
         res.status(400).send("Seu idMaquina está undefined!");
     } else {
@@ -225,7 +225,7 @@ function obterDadosIniciaisDisco(req, res) {
 function atualizarGraficoDisco(req, res) {
     console.log("NA CONTROLLER DO ATUALIZAR DADOS");
     let idMaquina = req.params.idMaquina;
-    console.log(idMaquina);
+
     if (idMaquina == null) {
         res.status(400).send("Seu idMaquina está undefined!");
     } else {
@@ -272,7 +272,7 @@ function obterDadosIniciaisRede(req, res) {
 function atualizarGraficoRede(req, res) {
     console.log("NA CONTROLLER DO ATUALIZAR DADOS");
     let idMaquina = req.params.idMaquina;
-    console.log(idMaquina);
+
     if (idMaquina == null) {
         res.status(400).send("Seu idMaquina está undefined!");
     } else {
@@ -317,7 +317,6 @@ function obterAlertas(req, res) {
 
 function obterEspecificacaoComponentes(req, res) {
     console.log("ENTREI NA *CONSOLE* DO ESPECIFICAÇÃO COMPONENTES");
-    console.log("ID DA MÁQUINA: " + idMaquina);
     console.log(`--------------------------------------------------`);
 
     var idMaquina = req.params.idMaquina;
@@ -339,7 +338,6 @@ function obterEspecificacaoComponentes(req, res) {
 function exibirTotalSinalizacoes(req, res) {
     console.log("ENTREI NA *CONTROLLER* DO TOTAL SINALIZAÇÕES");
     var idEmpresa = req.params.idEmpresa;
-    console.log("ID DA MÁQUINA: " + idEmpresa);
     console.log(`--------------------------------------------------`);
 
 
@@ -363,8 +361,6 @@ function obterAlertasGerais(req, res) {
     console.log("ENTREI NA *CONTROLLER* DO ALERTAS GERAIS");
   
     var idEmpresa = req.params.idEmpresa;
-
-    console.log("ID DA EMPRESA: " + idEmpresa);
   
     maquinaModel
       .obterAlertasGerais(idEmpresa)
@@ -385,7 +381,6 @@ function obterAlertasGerais(req, res) {
 function obterMaquinasAtivas(req, res) {
     console.log("ENTREI NA *CONTROLLER* DO MAQUINAS ATIVAS");
     var idEmpresa = req.params.idEmpresa;
-    console.log("ID DA EMPRESA: " + idEmpresa);
     console.log(`--------------------------------------------------`);
 
 

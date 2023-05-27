@@ -3,7 +3,6 @@ let enderecoStorage = [];
 
 function getStorage() {
     console.log("Estou no storage da empresa!");
-    console.log(empresaStorage);
 
     in_empresa.value = empresaStorage[0];
     in_cnpj.value = empresaStorage[1];
@@ -15,7 +14,6 @@ function getStorage() {
 
 function getStorageEnd() {
     console.log("Estou no storage do endereco!");
-    console.log(empresaStorage);
 
     in_cep.value = enderecoStorage[0];
     in_logradouro.value = enderecoStorage[1];
@@ -450,7 +448,6 @@ function carregarFkempresa(cnpj) {
     fetch(`/usuarios/carregarFkempresa/${cnpjVar}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 sessionStorage.setItem("FK_EMPRESA", resposta[0].id_empresa);
             });
             setTimeout(() => {
@@ -565,8 +562,6 @@ function cadastrarAdmin() {
             fkEmpresaServer: sessionStorage.getItem("FK_EMPRESA")
         })
     }).then(function (resposta) {
-
-        console.log("resposta: ", resposta);
 
         if (resposta.ok) {
             cardErro.style.display = "block";
