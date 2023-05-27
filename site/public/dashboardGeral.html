@@ -1,293 +1,219 @@
 <!DOCTYPE html>
 <html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Geral</title>
-  <link rel="stylesheet" href="./css/dashboardGeral.css" />
-  <link rel="stylesheet" href="./css/main.css" />
+    <title>Dashboard Geral</title>
+    
+    <link rel="stylesheet" href="./css/dashboardGeral.css" />
+    <link rel="stylesheet" href="./css/main.css" />
 
-  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
-    integrity="sha512-LZEOcU8s74hwWva82cMJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+  </head>
 
-<body>
-  <div class="container-menu">
-    <div class="img-logo">
-      <img src="assets/testelogoSprint Branco.png" alt="Logo Retria" />
-    </div>
-
-    <!-- Menu lateral -->
-    <div class="container-list">
-      <ul>
-        <li class="list">
-          <a href="dashboardGeral.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="stats-chart-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title" id="list-active">Dashboard geral</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="dashboard-espec.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="analytics-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Dashboard específico</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="historico-alertas.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="alert-circle-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Histórico de alertas</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="inventario-maquina.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="construct-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Inventário de máquinas</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="configuracoes-conta.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="settings-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Configurações de conta</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Ajuda</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="download-app.html">
-            <span class="circle">
-              <span class="icon">
-                <ion-icon name="download-outline"></ion-icon>
-              </span>
-            </span>
-
-            <span class="list-title">Download aplicação</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
-      <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
-    </a>
-  </div>
-
-
-  <div class="container-dash">
-    <div class="container-graficos">
-      <div class="top-page">
-        <div class="container-title-button">
-          <h1>Dashboard geral</h1>
-        </div>
-
-        <div class="container-kpi-geral">
-
-          <div class="kpi-geral">
-            <div class="content-kpi-geral">
-              <p class="p-kpi-geral">
-                Total de máquinas conectadas
-              </p>
-
-              <span id="total-maquinas">0</span>
-            </div>
-          </div>
-
-          <div class="kpi-geral">
-            <div class="content-kpi-geral">
-              <p class="p-kpi-geral">
-                Total de sinalizações do dia
-              </p>
-
-              <span id="total-sinalizações">0</span>
-            </div>
-          </div>
-
-        </div>
+  <body onload="iniciar()">
+    <div class="container-menu">
+      <div class="img-logo">
+        <img src="assets/testelogoSprint Branco.png" alt="Logo Retria" />
       </div>
 
-      <div class="container-shadow">
-        <div class="card-container-menores">
-          <div class="container-cc">
-            <div class="container-content">
-              <div class="group-subtitles">
-                <span class="circle-kpi green"></span>
+      <!-- Menu lateral -->
+      <div class="container-list">
+        <ul>
+          <li class="list">
+            <a href="dashboardGeral.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="stats-chart-outline"></ion-icon>
+                </span>
+              </span>
 
-                <span class="text-kpi">Baixa</span>
-              </div>
+              <span class="list-title" id="list-active">Dashboard geral</span>
+            </a>
+          </li>
 
-              <div class="group-subtitles">
-                <span class="circle-kpi yellow"></span>
+          <li class="list">
+            <a href="dashboard-espec.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="analytics-outline"></ion-icon>
+                </span>
+              </span>
 
-                <span class="text-kpi">Alerta</span>
-              </div>
+              <span class="list-title">Dashboard específico</span>
+            </a>
+          </li>
 
-              <div class="group-subtitles">
-                <span class="circle-kpi orange"></span>
+          <li class="list">
+            <a href="historico-alertas.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                </span>
+              </span>
 
-                <span class="text-kpi">Perigo</span>
-              </div>
+              <span class="list-title">Histórico de alertas</span>
+            </a>
+          </li>
 
-              <div class="group-subtitles">
-                <span class="circle-kpi red"></span>
+          <li class="list">
+            <a href="inventario-maquina.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="construct-outline"></ion-icon>
+                </span>
+              </span>
 
-                <span class="text-kpi">Crtítico</span>
+              <span class="list-title">Inventário de máquinas</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="configuracoes-conta.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="settings-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Configurações de conta</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a
+              target="_blank"
+              href="https://retria.tomticket.com?account=3939712P05042023082156"
+            >
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="help-circle-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Ajuda</span>
+            </a>
+          </li>
+
+          <li class="list">
+            <a href="download-app.html">
+              <span class="circle">
+                <span class="icon">
+                  <ion-icon name="download-outline"></ion-icon>
+                </span>
+              </span>
+
+              <span class="list-title">Download aplicação</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
+        <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+      </a>
+    </div>
+
+    <div class="container-dash">
+      <div class="container-graficos">
+        <div class="top-page">
+          <div class="container-title-button">
+            <h1>Dashboard geral</h1>
+          </div>
+
+          <div class="container-kpi-geral">
+            
+            <div class="kpi-geral">
+              <div class="content-kpi-geral">
+                <p class="p-kpi-geral">
+                  Total de máquinas ativas
+                </p>
+  
+                <span id="total-maquinas"> 0/0</span>
               </div>
             </div>
+
+            <div class="kpi-geral">
+              <div class="content-kpi-geral">
+                <p class="p-kpi-geral">
+                  Total de sinalizações do dia
+                </p>
+  
+                <span id="total-sinalizacoes">0</span>
+              </div>
+            </div>
+            
           </div>
         </div>
 
-        <div class="container-cards-emergencias">
-          <div class="card">
-            <div class="card-contagem">
-              <span>Máquinas em estado crítico</span>
-              <span class="contagem">1/3</span>
-            </div>
-
-            <p id="p-sem-maquinas-critico">Não há máquinas em estado crítico.</p>
-
-            <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-critico">
-              <div class="container-detalhammento">
-                <div class="container-maquina-detalhamento">
-                  <div class="titulo-maquina-detalhamento">
-                    <p>
-                      <a href="">Máquina 3</a>
-                    </p>
-                  </div>
-
-                  <div class="componentes">
-                    <p>CPU: <span>60%</span></p>
-                    <p>RAM: <span>60%</span></p>
-                    <p>Disco: <span>60%</span></p>
-                    <p>PING: <span>60%</span></p>
-                  </div>
-
-                  <div class="btn-mais">
-                    <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                    <button onclick="">
-                      <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                  </div>
+        <div class="container-shadow">
+          <div class="card-container-menores">
+            <div class="container-cc">
+              <div class="container-content">
+                <div class="group-subtitles">
+                    <span class="circle-kpi green"></span>
+        
+                    <span class="text-kpi">Baixa</span>
+                </div>
+        
+                <div class="group-subtitles">
+                    <span class="circle-kpi yellow"></span>
+                    
+                    <span class="text-kpi">Alerta</span>
                 </div>
 
+                <div class="group-subtitles">
+                  <span class="circle-kpi orange"></span>
+      
+                  <span class="text-kpi">Perigo</span>
+              </div>
+                
+                <div class="group-subtitles">
+                    <span class="circle-kpi red"></span>
+                    
+                    <span class="text-kpi">Crtítico</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-contagem">
-              <span>Máquinas em estado alerta</span>
-
-              <!-- TODO - Função p/ plotar em todas class "contagem" os dados de acordo com o estado atual da máquina -->
-              <span class="contagem">0/3</span>
-            </div>
-
-            <!-- TODO - Retirar o display flex do semMaquinaAlerta -->
-            <p id="p-sem-maquinas-alerta" style="display: flex;">Não há máquinas em estado de alerta.</p>
-
-            <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-alerta">
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-contagem">
-              <span>Máquinas em estado perigo</span>
-              <span class="contagem">2/3</span>
-            </div>
-
-            <p id="p-sem-maquinas-perigo">Não há máquinas em estado de alerta.</p>
-
-            <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-perigo">
-              <div class="container-detalhammento">
-                <div class="container-maquina-detalhamento">
-                  <div class="titulo-maquina-detalhamento">
-                    <p>
-                      <a href="">Máquina 5</a>
-                    </p>
-                  </div>
-
-                  <div class="componentes">
-                    <p id="comp_cpu">CPU: <span>60%</span></p>
-                    <p id="comp_ram">RAM: <span>60%</span></p>
-                    <p id="comp_disco">Disco: <span>60%</span></p>
-                    <p id="comp_ping">PING: <span>60%</span></p>
-                  </div>
-
-                  <div class="btn-mais">
-                    <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                    <button onclick="">
-                      <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-
+          <div class="container-cards-emergencias">
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado crítico</span>
+                <span class="contagem" id="contagem-critico"></span>
               </div>
 
-              <div class="container-detalhammento">
-                <div class="container-maquina-detalhamento">
-                  <div class="titulo-maquina-detalhamento">
-                    <p>
-                      <a href="">Máquina 8</a>
-                    </p>
-                  </div>
+              <p id="p-sem-maquinas-critico"></p>
 
-                  <div class="componentes">
-                    <p id="comp_cpu">CPU: <span>60%</span></p>
-                    <p id="comp_ram">RAM: <span>60%</span></p>
-                    <p id="comp_disco">Disco: <span>60%</span></p>
-                    <p id="comp_ping">PING: <span>60%</span></p>
-                  </div>
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-critico">
+              </div>
+            </div>
 
-                  <div class="btn-mais">
-                    <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                    <button onclick="">
-                      <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado alerta</span>
+                <span class="contagem" id="contagem-alerta"></span>
+              </div>
+
+              <p id="p-sem-maquinas-alerta"></p>
+
+              
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-alerta">
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-contagem">
+                <span>Máquinas em estado perigo</span>
+                <span class="contagem" id="contagem-perigo"></span>
+              </div>
+
+              <p id="p-sem-maquinas-perigo"></p>
+
+              <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-perigo">
 
               </div>
             </div>
@@ -295,12 +221,16 @@
         </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 
 <script src="./js/dashboard-geral.js"></script>
 
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
