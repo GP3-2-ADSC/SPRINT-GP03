@@ -37,7 +37,7 @@ function getMaquinasUltrassom() {
                         <h2 class="titulo-maquina">Maquina ${element.id_maquina}</h2>
                         
                         <p>
-                            <strong>Sitema operacional:</strong>
+                            <strong>Sistema operacional:</strong>
                             <span id="dadoEspecSo">${element.sistema_operacional}</span>
                         </p>
     
@@ -69,7 +69,7 @@ function getMaquinasUltrassom() {
                         <h2 class="titulo-maquina">Maquina ${element.id_maquina}</h2>
 
                         <p>
-                            <strong>Sitema operacional:</strong>
+                            <strong>Sistema operacional:</strong>
                             <span id="dadoEspecSo">${element.sistema_operacional}</span>
                         </p>
     
