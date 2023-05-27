@@ -13,7 +13,9 @@ function carregarMaquinaEspec(fkEmpresa, idAdmin) {
     where 
         fk_administrador = ${idAdmin}
     and
-        fk_empresa = ${fkEmpresa}`;
+        fk_empresa = ${fkEmpresa}
+    and
+        status_maquina = 'true'`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
@@ -24,7 +26,9 @@ function carregarMaquinaEspec(fkEmpresa, idAdmin) {
     where 
         fk_administrador = ${idAdmin}
     and
-        fk_empresa = ${fkEmpresa}`;
+        fk_empresa = ${fkEmpresa}
+    and
+        status_maquina = 'true'`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

@@ -454,7 +454,6 @@ let myChart_geral_rede = new Chart(
   config_geral_rede
 );
 
-
 var chartCPU = document.getElementById("chart-geral-cpu");
 var chartMemoria = document.getElementById("chart-geral-memoria");
 var chartDisco = document.getElementById("chart-geral-disco");
@@ -618,7 +617,7 @@ function atualizarGraficoCpu(idMaquina) {
         }
         myChart_geral_cpu.update();
         myChart_kpi_cpu.update();
-        
+
         setTimeout(() => atualizarGraficoCpu(idMaquina), 5000);
       });
     } else {
@@ -895,7 +894,7 @@ function obterAlertas(idMaquina) {
               <p class="historic-date">${element.dia}</p>
                 <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso}%)</p>
               </div>`
-          
+
         });
       });
       setTimeout(() => obterAlertas(idMaquina), 5000);
