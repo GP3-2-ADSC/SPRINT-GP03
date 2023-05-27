@@ -569,12 +569,12 @@ function obterDadosIniciaisCpu(idMaquina) {
         if (labels_geral_cpu.length == 0 && data_geral_cpu.datasets[0].data.length == 0) {
           resposta.forEach(element => {
             labels_geral_cpu.push(element.horario);
-            data_geral_cpu.datasets[0].data.push(element.uso);
+            data_geral_cpu.datasets[0].data.push(element.uso.toFixed(2));
           });
           myChart_geral_cpu.update()
 
           let usoAtual = resposta[resposta.length - 1].uso;
-          data_cpu.datasets[0].data = [100 - usoAtual, usoAtual]
+          data_cpu.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
           myChart_kpi_cpu.update()
 
         } else {
@@ -613,8 +613,8 @@ function atualizarGraficoCpu(idMaquina) {
           labels_geral_cpu.push(novoRegistro[0].horario);
 
           data_geral_cpu.datasets[0].data.shift();
-          data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso);
-          data_cpu.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+          data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
+          data_cpu.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
         }
         myChart_geral_cpu.update();
         myChart_kpi_cpu.update();
@@ -644,11 +644,11 @@ function obterDadosIniciaisRam(idMaquina) {
           resposta.forEach(element => {
             console.log("No foreach");
             labels_geral_memoria.push(element.horario);
-            data_geral_memoria.datasets[0].data.push(element.uso);
+            data_geral_memoria.datasets[0].data.push(element.uso.toFixed(2));
           });
           myChart_geral_memoria.update()
           let usoAtual = resposta[resposta.length - 1].uso;
-          data_memoria.datasets[0].data = [100 - usoAtual, usoAtual]
+          data_memoria.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
           myChart_kpi_memoria.update()
         } else {
           console.log("Já foi apertado!");
@@ -686,8 +686,8 @@ function atualizarGraficoRam(idMaquina) {
           labels_geral_memoria.push(novoRegistro[0].horario);
 
           data_geral_memoria.datasets[0].data.shift();
-          data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso);
-          data_memoria.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+          data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
+          data_memoria.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
         }
         myChart_geral_memoria.update();
         myChart_kpi_memoria.update()
@@ -714,11 +714,11 @@ function obterDadosIniciaisDisco(idMaquina) {
         resposta.reverse();
         resposta.forEach(element => {
           labels_geral_disco.push(element.horario);
-          data_geral_disco.datasets[0].data.push(element.uso);
+          data_geral_disco.datasets[0].data.push(element.uso.toFixed(2));
         });
         myChart_geral_disco.update()
         let usoAtual = resposta[resposta.length - 1].uso;
-        data_disco.datasets[0].data = [100 - usoAtual, usoAtual]
+        data_disco.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
         myChart_kpi_disco.update()
         atualizarGraficoDisco(idMaquina);
       });
@@ -752,8 +752,8 @@ function atualizarGraficoDisco(idMaquina) {
           labels_geral_disco.push(novoRegistro[0].horario);
 
           data_geral_disco.datasets[0].data.shift();
-          data_geral_disco.datasets[0].data.push(novoRegistro[0].uso);
-          data_disco.datasets[0].data = [100 - novoRegistro[0].uso, novoRegistro[0].uso]
+          data_geral_disco.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
+          data_disco.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
         }
         myChart_geral_cpu.update();
@@ -781,7 +781,7 @@ function obterDadosIniciaisRede(idMaquina) {
         resposta.reverse();
         resposta.forEach(element => {
           labels_geral_rede.push(element.horario);
-          data_geral_rede.datasets[0].data.push(element.uso);
+          data_geral_rede.datasets[0].data.push(element.uso.toFixed(2));
         });
         myChart_geral_rede.update()
         atualizarGraficoRede(idMaquina);
@@ -816,7 +816,7 @@ function atualizarGraficoRede(idMaquina) {
           labels_geral_rede.push(novoRegistro[0].horario);
 
           data_geral_rede.datasets[0].data.shift();
-          data_geral_rede.datasets[0].data.push(novoRegistro[0].uso);
+          data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
         }
         myChart_geral_rede.update();
 
