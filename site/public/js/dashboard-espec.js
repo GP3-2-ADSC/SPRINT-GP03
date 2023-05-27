@@ -780,16 +780,18 @@ function atualizarGraficoDisco(idMaquina) {
 
 function iniciar() {
   if (sessionStorage.POSICAO_ATUAL != null) {
-    posicao_maquina_atual = sessionStorage.getItem("POSICAO_ATUAL")
+    posicao_maquina_atual = sessionStorage.getItem("POSICAO_ATUAL");
+
     let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
-    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
+    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`;
+    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`;
     getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
   } else {
-    sessionStorage.POSICAO_ATUAL = posicao_maquina_atual
+    sessionStorage.POSICAO_ATUAL = posicao_maquina_atual;
+    
     let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
-    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
+    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`;
+    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`;
     getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
   }
 }

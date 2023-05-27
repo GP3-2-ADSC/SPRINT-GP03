@@ -1,7 +1,40 @@
+let listaMaquinas = [];
+
+
+function getMaquinas() {
+  fetch("/maquinas/carregarMaquinaEspec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_adminServer: sessionStorage.getItem('ID_USUARIO'),
+      fk_empresaServer: sessionStorage.getItem('FK_EMPRESA')
+    })
+  }).then(function (response) {
+
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log("MAQUINAS PUXADAS!");
+        console.log(resposta);
+        resposta.forEach(element => {
+          listaMaquinas.push(element);
+        });
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
 function iniciar() {
+  getMaquinas();
+
   setTimeout(function () {
     exibirTotalSinalizacoes();
-    
     console.log("Obtendo Alertas Gerais");
     obterAlertasGerais(sessionStorage.FK_EMPRESA);
     obterMaquinasAtivas();
@@ -22,6 +55,16 @@ var contagemAlerta = document.getElementById("contagem-alerta");
 var contagemPerigo = document.getElementById("contagem-perigo");
 
 var ultimaMetrica = '0';
+
+function redirecionarEspecifica(idMaquina) {
+  for (let i = 0; i < listaMaquinas.length; i++) {
+    if (listaMaquinas[i].id_maquina == idMaquina) {
+      sessionStorage.setItem("POSICAO_ATUAL", i);
+    }
+  }
+
+  window.location.href = "/dashboard-espec.html";
+}
 
 function exibirTotalSinalizacoes() {
   totalSinalizacoes = document.getElementById("total-sinalizacoes");
@@ -127,7 +170,7 @@ async function obterAlertasGerais(idEmpresa) {
               </div>
     
               <div class="btn-mais">
-                <button onclick="">
+                <button onclick="redirecionarEspecifica(${arrayObjetos[i].id_maquina})">
                   <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
               </button>
               </div>
@@ -152,7 +195,7 @@ async function obterAlertasGerais(idEmpresa) {
               </div>
     
               <div class="btn-mais">
-                <button onclick="">
+                <button onclick="redirecionarEspecifica(${arrayObjetos[i].id_maquina})">
                   <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
               </button>
               </div>
@@ -176,7 +219,7 @@ async function obterAlertasGerais(idEmpresa) {
               </div>
     
               <div class="btn-mais">
-                <button onclick="">
+                <button onclick="redirecionarEspecifica(${arrayObjetos[i].id_maquina})">
                   <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
               </button>
               </div>

@@ -989,7 +989,7 @@ function obterMaquinasAtivas(idEmpresa) {
         SELECT 
             COUNT(*) AS tot
             FROM maquina_ultrassom  
-                WHERE status_maquina = 'false' AND fk_empresa = ${idEmpresa}
+                WHERE status_maquina = 'true' AND fk_empresa = ${idEmpresa}
         
         UNION
         
