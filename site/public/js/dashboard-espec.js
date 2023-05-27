@@ -803,9 +803,9 @@ function atualizarGraficoRede(idMaquina) {
         console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
         console.log(`Dados atuais do gráfico:`);
         console.log(novoRegistro[0].horario);
-        console.log(labels_geral_disco[labels_geral_disco.length - 1]);
+        console.log(labels_geral_rede[labels_geral_rede.length - 1]);
 
-        if (novoRegistro[0].horario == labels_geral_disco[labels_geral_disco.length - 1]) {
+        if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
           console.log(novoRegistro[0].horario)

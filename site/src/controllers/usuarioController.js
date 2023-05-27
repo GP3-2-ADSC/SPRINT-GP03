@@ -207,6 +207,40 @@ function carregarFkempresa(req, res) {
     });
 }
 
+function getInformacaoEmpresa(req, res) {
+    let idEmpresa = req.params.idEmpresa;
+    
+    usuarioModel.getInformacaoEmpresa(idEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar o valor.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getInformacaoAdministrador(req, res) {
+    let idAdmin = req.params.idAdmin;
+    let idEmpresa = req.params.idEmpresa;
+
+    usuarioModel.getInformacaoAdministrador(idAdmin,idEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar o valor.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function getSerialKey(req, res) {
     let email = req.params.emailAdm;
     console.log("O email na controller é: " + email);
@@ -224,7 +258,78 @@ function getSerialKey(req, res) {
     });
 }
 
+function salvarAlteracaoEmpresa(req, res) {
+    let idEmpresa = req.body.idEmpresa;
+    let telefone_01 = req.body.telefone_01Server;
+    let telefone_02 = req.body.telefone_02Server;
+    let email = req.body.emailEmpresaServer;
 
+    if (idEmpresa == null) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }  else if (telefone_01 == null) {
+        res.status(400).send("Seu telefone_01 está undefined!");
+    } else if (telefone_02 == null) {
+        res.status(400).send("Seu telefone_02 está undefined!");
+    } else if (email == null) {
+        res.status(400).send("Seu email está undefined!");
+    } else {
+        usuarioModel.salvarAlteracaoEmpresa(idEmpresa,telefone_01,telefone_02,email)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a atualização: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function salvarAlteracaoAdmin(req, res) {
+    console.log("Na controller do admin");
+    let idAdmin = req.body.idAdminServer;
+    let fkEmpresa = req.body.fkEmpresaServer;
+    let nomeAdmin = req.body.nomeAdminServer;
+    let cargo = req.body.cargoServer;
+    let email = req.body.emailAdminServer;
+    let telefone = req.body.telefoneServer;
+    let senha = req.body.senhaServer;
+   
+
+    if (idAdmin == null) {
+        res.status(400).send("Seu idAdmin está undefined!");
+    }  else if (fkEmpresa == null) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (nomeAdmin == null) {
+        res.status(400).send("Seu nomeAdmin está undefined!");
+    } else if (cargo == null) {
+        res.status(400).send("Seu cargo está undefined!");
+    } else if (email == null) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (telefone == null) {
+        res.status(400).send("Seu telefone está undefined!");
+    } else if (senha == null) {
+        res.status(400).send("Seu senha está undefined!");
+    } else {
+        usuarioModel.salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone,senha)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a atualização: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
 
 module.exports = {
     entrar,
@@ -234,5 +339,9 @@ module.exports = {
     carregarFkempresa,
     getSerialKey,
     listar,
-    testar
+    testar,
+    getInformacaoEmpresa,
+    getInformacaoAdministrador,
+    salvarAlteracaoEmpresa,
+    salvarAlteracaoAdmin
 }

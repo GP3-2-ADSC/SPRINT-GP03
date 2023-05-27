@@ -19,6 +19,22 @@ router.get("/getSerialKey/:emailAdm", function (req, res) {
     usuarioController.getSerialKey(req, res);
 });
 
+router.get("/getInformacaoEmpresa/:idEmpresa", function (req, res) {
+    usuarioController.getInformacaoEmpresa(req, res);
+});
+
+router.get("/getInformacaoAdministrador/:idAdmin/:idEmpresa", function (req, res) {
+    usuarioController.getInformacaoAdministrador(req, res);
+});
+
+router.put("/salvarAlteracaoEmpresa", function (req, res) {
+    usuarioController.salvarAlteracaoEmpresa(req, res);
+});
+
+router.put("/salvarAlteracaoAdmin", function (req, res) {
+    usuarioController.salvarAlteracaoAdmin(req, res);
+});
+
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);

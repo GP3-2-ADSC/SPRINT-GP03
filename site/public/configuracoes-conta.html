@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/configs-conta.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.0.1/chartjs-plugin-annotation.min.js"
+        integrity="sha512-LZEOcU8s74hwWva82MJux7GgFNjfeExXG9yZPQrKz567Od4O2D/6UX3oGoZiRDOdbMtH33NBq7vonH4VOUPA/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Configurações de Administrador</title>
+</head>
+
+<body onload="iniciar()">
+    <div class="container-menu" id="containerMenu">
+
+        <div class="img-logo">
+            <img src="assets/testelogoSprint copiar.png" alt="Logo Retria" />
+        </div>
+
+        <!-- Menu lateral -->
+        <div class="container-list">
+            <ul>
+                <li class="list">
+                    <a href="dashboardGeral.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="stats-chart-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Dashboard geral</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="dashboard-espec.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="analytics-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Dashboard específico</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="historico-alertas.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="alert-circle-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Histórico de alertas</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="inventario-maquina.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="construct-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Inventário de máquinas</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="configuracoes-conta.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title" id="list-active">Configurações de conta</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a target="_blank" href="https://retria.tomticket.com?account=3939712P05042023082156">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="help-circle-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Ajuda</span>
+                    </a>
+                </li>
+
+                <li class="list">
+                    <a href="download-app.html">
+                        <span class="circle">
+                            <span class="icon">
+                                <ion-icon name="download-outline"></ion-icon>
+                            </span>
+                        </span>
+
+                        <span class="list-title">Download aplicação</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <a class="outside-icon" href="login.html" onclick="sessionStorage.clear()">
+            <ion-icon id="exit-icon" name="exit-outline"></ion-icon>
+        </a>
+    </div>
+
+
+
+    <div class="container-title" id="containerTitle">
+        <div class="container-title-button">
+            <h1>Configurações de conta</h1>
+
+        </div>
+    </div>
+
+    <div class="container-all" id="containerAll">
+        <div class="container-content" id="containerContentUp">
+            <div class="container-gray">
+                <h2 class="titulo-maquina">Informações da empresa</h2>
+                <div class="container-detalhes-especificacao">
+
+                    <div class="conteudo">
+                        <p>
+                            <strong>Nome/Razão Social</strong><br>
+                            <span id="nomeEmpresa"></span>
+                        </p>
+
+                        <p id="PTelefone1Empresa">
+                            <strong>Telefone 1</strong><br>
+                            <span id="telefone_1Empresa"></span>
+                        </p>
+
+                        <p id="PEmailEmpresa">
+                            <strong>Email para contato</strong><br>
+                            <span id="emailEmpresa"></span>
+                        </p>
+
+                    </div>
+
+                    <div class="conteudo">
+                        <p>
+                            <strong>CNPJ</strong><br>
+                            <span id="cnpjEmpresa"></span>
+                        </p>
+
+                        <p id="PTelefone2Empresa">
+                            <strong>Telefone 2</strong><br>
+                            <span id="telefone_2Empresa"></span>
+                        </p>
+
+                        <p>
+                            <strong>Responsável pela empresa</strong><br>
+                            <span id="responsavelEmpresa"></span>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="botoes" id="buttonsUp">
+                    <button class="bt-maquina" onclick="editarInformacoes(1)">Editar informações</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-content" id="containerContentDown">
+            <div class="container-gray">
+                <h2 class="titulo-maquina">Informações do administrador</h2>
+                <div class="container-detalhes-especificacao">
+
+                    <div class="conteudo">
+                        <p id="PNomeAdmin">
+                            <strong>Nome</strong><br>
+                            <span id="nomeAdmin"></span>
+                        </p>
+
+                        <p id="PEmailAdmin">
+                            <strong>Email</strong><br>
+                            <span id="emailAdmin"></span>
+                        </p>
+
+                        <p id="PSenhaAdmin"> 
+                            <strong>Senha</strong><br>
+                            <span id="senhaAdmin"></span>
+                        </p>
+
+                    </div>
+
+                    <div class="conteudo">
+                        <p id="PCargoAdmin">
+                            <strong>Cargo</strong><br>
+                            <span id="cargoAdmin"></span>
+                        </p>
+
+                        <p id="PTelefoneAdmin">
+                            <strong>Telefone</strong><br>
+                            <span id="telefoneAdmin"></span>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="botoes" id="buttonsDown">
+                    <button class="bt-maquina" onclick="editarInformacoes(2)">Editar informações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checklist" class="checklist Emp">
+        <input value="1" name="r" type="checkbox" id="01" class="emp">
+        <label for="01" class="emp" id="l01">Email da empresa</label>
+        <input value="2" name="r" type="checkbox" id="02" class="emp">
+        <label for="02" class="emp" id="l02">Telefone 1</label>
+        <input value="3" name="r" type="checkbox" id="03" class="emp">
+        <label for="03" class="emp" id="l03">Telefone 2</label>
+        <input value="4" name="r" type="checkbox" id="04" class="emp">
+        <label for="04" class="emp" id="l04">Nome do administrador</label>
+        <input value="5" name="r" type="checkbox" id="05" class="emp">
+        <label for="05" class="emp" id="l05">Cargo</label>
+        <input value="6" name="r" type="checkbox" id="06" class="emp">
+        <label for="06" class="emp" id="l06">Email</label>
+        <input value="7" name="r" type="checkbox" id="07" class="emp">
+        <label for="07" class="emp" id="l07">Telefone</label>
+        <input value="8" name="r" type="checkbox" id="08" class="emp">
+        <label for="08" class="emp" id="l08">Senha</label>
+        <button class="bt-checkbox" id="bt-checkbox" onclick="alterarInformacoes(1)">ok</button>
+        <button class="bt-checkbox" id="bt-checkboxAdmin" onclick="alterarInformacoes(2)">ok</button>
+    </div>
+</body>
+
+
+
+
+</html>
+<script src="./js/config-conta.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
