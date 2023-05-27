@@ -8,7 +8,7 @@ let data_cpu = {
   datasets: [
     {
       data: [100 - 72, 72],
-      backgroundColor: ["#d0d0d0", "#FFCD56"],
+      backgroundColor: ["#dee2e6", "#FFCD56"],
       borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
@@ -39,7 +39,7 @@ let data_memoria = {
   datasets: [
     {
       data: [100 - 87, 87],
-      backgroundColor: ["#d0d0d0", "#e10000"],
+      backgroundColor: ["#dee2e6", "#e10000"],
       borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
@@ -70,7 +70,7 @@ let data_disco = {
   datasets: [
     {
       data: [100 - 55, 55],
-      backgroundColor: ["#d0d0d0", "#3cb600"],
+      backgroundColor: ["#dee2e6", "#3cb600"],
       borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
@@ -101,7 +101,7 @@ let data_rede = {
   datasets: [
     {
       data: [100 - 19, 19],
-      backgroundColor: ["#d0d0d0", "#36A2EB"],
+      backgroundColor: ["#dee2e6", "#36A2EB"],
       borderColor: '#b8b8b8',
       hoverOffset: 4,
       cutout: "50%",
@@ -189,7 +189,7 @@ let config_geral_cpu = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da CPU da máquina 1",
+        text: "Monitoramento do uso da CPU da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
         color: "#000",
@@ -270,7 +270,7 @@ let config_geral_memoria = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da memória da máquina 1",
+        text: "Monitoramento do uso da memória da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
         color: "#000",
@@ -353,7 +353,7 @@ let config_geral_disco = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso do disco da máquina 1",
+        text: "Monitoramento do uso do disco da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
         color: "#000",
@@ -435,7 +435,7 @@ let config_geral_rede = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da rede da máquina 1",
+        text: "Monitoramento do uso da rede da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
         color: "#000",

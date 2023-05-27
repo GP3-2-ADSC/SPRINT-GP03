@@ -199,7 +199,7 @@ h1 {
 }
 
 .text-card-kpi {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .pop-out-content {
@@ -287,10 +287,14 @@ h1 {
   justify-content: center;
   font-weight: 400;
   font-size: 1.1em;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 #btn-menu-cpu {
   background-color: #0070ba;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 /* Especificação de componentes */
@@ -315,7 +319,7 @@ h1 {
 
 .container-gray {
   width: 100%;
-  background-color: #d9d9d9;
+  background-color: #ffffff;
   border-radius: 10px;
   padding: 5px;
 }
@@ -366,7 +370,7 @@ h1 {
 .historic {
   width: 238px;
   height: 500px;
-  background-color: #d9d9d9;
+  background-color: #ffffff;
   border-radius: 5px;
   
   overflow: auto;
