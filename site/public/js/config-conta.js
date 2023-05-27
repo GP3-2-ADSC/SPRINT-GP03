@@ -256,6 +256,26 @@ function salvarAlteracaoEmpresa() {
     const telefone1Ch = document.getElementById('02');
     const telefone2Ch = document.getElementById('03');
 
+    if (telefone1Ch.checked) {
+        let validacao1 = telefone_1Empresa.value
+        let contemLetra = /[a-zA-Z]/.test(validacao1)
+
+        if(validacao1.length != 11 || contemLetra) {
+            alert("Telefone 1 inválido!");
+            return false;
+        }
+    }
+
+    if (telefone2Ch.checked) {
+        let validacao2 = telefone_2Empresa.value
+        let contemLetra = /[a-zA-Z]/.test(validacao2)
+
+        if(validacao2.length != 11 || contemLetra) {
+            alert("Telefone 2 inválido!");
+            return false;
+        }
+    }
+
     fetch(`/usuarios/salvarAlteracaoEmpresa`, {
         method: "PUT",
         headers: {
@@ -289,6 +309,15 @@ function salvarAlteracaoAdmin() {
     const emailCh = document.getElementById('06');
     const telefoneCh = document.getElementById('07');
 
+    if (telefoneCh.checked) {
+        let validacao1 = telefoneAdmin.value
+        let contemLetra = /[a-zA-Z]/.test(validacao1)
+
+        if(validacao1.length != 11 || contemLetra) {
+            alert("Telefone do administrador inválido!");
+            return false;
+        }
+    }
 
     fetch(`/usuarios/salvarAlteracaoAdmin`, {
         method: "PUT",

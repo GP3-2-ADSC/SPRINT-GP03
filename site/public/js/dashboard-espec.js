@@ -778,7 +778,10 @@ function atualizarGraficoRede(idMaquina) {
         if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
           console.log("---------------------------------------------------------------")
           console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-
+          document.getElementById('wifiOn').style.display = 'none'
+          document.getElementById('wifiOff').style.display = 'block'
+          statusRede.innerHTML = 'Sem conexão!'
+          document.getElementById('statusRede').style.color = 'red';
         } else {
           console.log("TEM DADO NOVO!");
           labels_geral_rede.shift();
@@ -786,6 +789,10 @@ function atualizarGraficoRede(idMaquina) {
 
           data_geral_rede.datasets[0].data.shift();
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
+          document.getElementById('wifiOff').style.display = 'none'
+          document.getElementById('wifiOn').style.display = 'block'
+          statusRede.innerHTML = 'Conectada!'
+          document.getElementById('statusRede').style.color = '#fff';
         }
         myChart_geral_rede.update();
 
@@ -814,6 +821,7 @@ function iniciar() {
     num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
     nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
     getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
+    plotarNomeTabelas();
   }
 }
 
@@ -906,6 +914,12 @@ function obterEspecificacaoComponentes(idMaquina) {
     });
 }
 
+function plotarNomeTabelas() {
+  config_geral_cpu.options.title.text = "Monitoramento do uso da CPU da máquina " + 1;
+  config_geral_memoria.options.title.text = "Monitoramento do uso da memópria da máquina " + 1;
+  config_geral_disco.options.title.text = "Monitoramento do uso do disco da máquina " + 1;
+  config_geral_rede.options.title.text = "Monitoramento do uso da rede da máquina " + 1;
+}
 
 //<![CDATA[
 var ttChatLoaderS = document.createElement('script');
