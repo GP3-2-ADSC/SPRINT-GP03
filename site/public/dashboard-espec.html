@@ -397,6 +397,9 @@
 </html>
 
 <script src="./js/dashboard-espec.js"></script>
-<script src="./js/funcoes-maquinas.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- TODO - Fazer uma query que pegue os dados de alertas de todas as máquinas da empresa, uma será para registrar apenas a quantidade de alertas ao decorrer dos dias e o outro seria para mostrar linhas com o filtro pelo tipo_componente deixando claro quais que estavam em crítico, alerta e perigo e qual o tipo desse componente que recebeu alertas; tudo isso para ser apresentado em alguns gráficos de linhas na dashboard geral (talvez em baixo do quadro de alertas)[Usar group by data_alerta &&  tipo_componente + group by data_alerta && tipo_alerta] -->
+
+<!-- TODO - Colocar o curretTime como variável global p/ ser utilizada p/ plotar a quantidade de alertas naquele dia -->

@@ -190,10 +190,10 @@ function obterAlertas(req, res) {
 
 function obterEspecificacaoComponentes(req, res) {
     console.log("ENTREI NA *CONSOLE* DO ESPECIFICAÇÃO COMPONENTES");
+    var idMaquina = req.params.idMaquina;
     console.log("ID DA MÁQUINA: " + idMaquina);
     console.log(`--------------------------------------------------`);
 
-    var idMaquina = req.params.idMaquina;
     var idEspecificacaoComponente = req.params.idEspecificacaoComponente;
 
     maquinaModel.obterEspecificacaoComponentes(idMaquina, idEspecificacaoComponente).then(function (resultado) {
@@ -211,13 +211,13 @@ function obterEspecificacaoComponentes(req, res) {
 
 function exibirTotalSinalizacoes(req, res) {
     console.log("ENTREI NA *CONTROLLER* DO TOTAL SINALIZAÇÕES");
-    console.log("ID DA MÁQUINA: " + idMaquina);
+    var idEmpresa = req.params.idEmpresa;
+    console.log("ID DA MÁQUINA: " + idEmpresa);
     console.log(`--------------------------------------------------`);
 
-    var idMaquina = req.params.idMaquina;
 
     maquinaModel
-        .exibirTotalSinalizacoes(idMaquina)
+        .exibirTotalSinalizacoes(idEmpresa)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -232,6 +232,55 @@ function exibirTotalSinalizacoes(req, res) {
         });
 }
 
+function obterAlertasGerais(req, res) {
+    console.log("ENTREI NA *CONTROLLER* DO ALERTAS GERAIS");
+  
+    var idEmpresa = req.params.idEmpresa;
+
+    console.log("ID DA EMPRESA: " + idEmpresa);
+  
+    maquinaModel
+      .obterAlertasGerais(idEmpresa)
+      .then(function (resultado) {
+        if (resultado.length > 0) {
+          res.status(200).json(resultado);
+        } else {
+          res.status(204).send("Nenhum resultado encontrado!");
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os alertas gerais.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function obterMaquinasAtivas(req, res) {
+    console.log("ENTREI NA *CONTROLLER* DO MAQUINAS ATIVAS");
+    var idEmpresa = req.params.idEmpresa;
+    console.log("ID DA EMPRESA: " + idEmpresa);
+    console.log(`--------------------------------------------------`);
+
+
+    if (idEmpresa == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        maquinaModel
+        .obterMaquinasAtivas(idEmpresa).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as MAQUINAS ATIVAS.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
 
 module.exports = {
     carregarMaquinaEspec,
@@ -243,5 +292,7 @@ module.exports = {
     atualizarGraficoCpu,
     atualizarGraficoRam,
     atualizarGraficoDisco,
-    exibirTotalSinalizacoes
+    exibirTotalSinalizacoes,
+    obterAlertasGerais,
+    obterMaquinasAtivas
 }

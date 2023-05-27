@@ -114,10 +114,10 @@
             <div class="kpi-geral">
               <div class="content-kpi-geral">
                 <p class="p-kpi-geral">
-                  Total de máquinas conectadas
+                  Total de máquinas ativas
                 </p>
   
-                <span id="total-maquinas">0</span>
+                <span id="total-maquinas"> 0/0</span>
               </div>
             </div>
 
@@ -169,49 +169,23 @@
             <div class="card">
               <div class="card-contagem">
                 <span>Máquinas em estado crítico</span>
-                <span class="contagem">1/3</span>
+                <span class="contagem" id="contagem-critico"></span>
               </div>
 
-              <p id="p-sem-maquinas-critico">Não há máquinas em estado crítico.</p>
+              <p id="p-sem-maquinas-critico"></p>
 
               <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-critico">
-                <div class="container-detalhammento">
-                  <div class="container-maquina-detalhamento">
-                    <div class="titulo-maquina-detalhamento">
-                      <p>
-                        <a href="">Máquina 3</a>
-                      </p>
-                    </div>
-  
-                    <div class="componentes">
-                      <p>CPU: <span>60%</span></p>
-                      <p>RAM: <span>60%</span></p>
-                      <p>Disco: <span>60%</span></p>
-                      <p>PING: <span>60%</span></p>
-                    </div>
-  
-                    <div class="btn-mais">
-                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                      <button onclick="">
-                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                    </div>
-                  </div>
-                  
-                </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-contagem">
                 <span>Máquinas em estado alerta</span>
-
-                <!-- TODO - Função p/ plotar em todas class "contagem" os dados de acordo com o estado atual da máquina -->
-                <span class="contagem">0/3</span>
+                <span class="contagem" id="contagem-alerta"></span>
               </div>
 
-              <!-- TODO - Retirar o display flex do semMaquinaAlerta -->
-              <p id="p-sem-maquinas-alerta" style="display: flex;">Não há máquinas em estado de alerta.</p>
+              <p id="p-sem-maquinas-alerta"></p>
+
               
               <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-alerta">
               </div>
@@ -220,61 +194,13 @@
             <div class="card">
               <div class="card-contagem">
                 <span>Máquinas em estado perigo</span>
-                <span class="contagem">2/3</span>
+                <span class="contagem" id="contagem-perigo"></span>
               </div>
-              
-              <p id="p-sem-maquinas-perigo">Não há máquinas em estado de alerta.</p>
+
+              <p id="p-sem-maquinas-perigo"></p>
 
               <div class="container-scroll-detalhamento" id="container-scroll-detalhamento-perigo">
-                <div class="container-detalhammento">
-                  <div class="container-maquina-detalhamento">
-                    <div class="titulo-maquina-detalhamento">
-                      <p>
-                        <a href="">Máquina 5</a>
-                      </p>
-                    </div>
-  
-                    <div class="componentes">
-                      <p id="comp_cpu">CPU: <span>60%</span></p>
-                      <p id="comp_ram">RAM: <span>60%</span></p>
-                      <p id="comp_disco">Disco: <span>60%</span></p>
-                      <p id="comp_ping">PING: <span>60%</span></p>
-                    </div>
-  
-                    <div class="btn-mais">
-                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                      <button onclick="">
-                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-                <div class="container-detalhammento">
-                  <div class="container-maquina-detalhamento">
-                    <div class="titulo-maquina-detalhamento">
-                      <p>
-                        <a href="">Máquina 8</a>
-                      </p>
-                    </div>
-  
-                    <div class="componentes">
-                      <p id="comp_cpu">CPU: <span>60%</span></p>
-                      <p id="comp_ram">RAM: <span>60%</span></p>
-                      <p id="comp_disco">Disco: <span>60%</span></p>
-                      <p id="comp_ping">PING: <span>60%</span></p>
-                    </div>
-  
-                    <div class="btn-mais">
-                      <!-- TODO - Criar função que redirecione para a página da dash espec da máquina em questão -->
-                      <button onclick="">
-                        <ion-icon name="eye-outline" id="eye-outline"></ion-icon>
-                    </button>
-                    </div>
-                  </div>
-                  
-                </div>
+
               </div>
             </div>
           </div>

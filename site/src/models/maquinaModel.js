@@ -34,7 +34,6 @@ function carregarMaquinaEspec(fkEmpresa, idAdmin) {
     return database.executar(instrucaoSql);
 }
 
-
 function obterDadosIniciaisCpu(idMaquina) {
 
     instrucaoSql = ''
@@ -692,9 +691,9 @@ function obterEspecificacaoComponentes(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
-function exibirTotalSinalizacoes(idMaquina) {
-    console.log("ENTREI NA **MODEL** DO ESPECIFICAÇÃO COMPONENTES");
-    console.log("ID DA MÁQUINA: " + idMaquina);
+function exibirTotalSinalizacoes(idEmpresa) {
+    console.log("ENTREI NA **MODEL** DO exibirTotalSinalizacoes");
+    console.log("ID DA EMPRESA: " + idEmpresa);
     console.log(`--------------------------------------------------`);
 
     instrucaoSql = '';
@@ -702,7 +701,7 @@ function exibirTotalSinalizacoes(idMaquina) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-            COUNT(*) AS total_alertas
+            COUNT(id_alerta) AS total_alertas
         FROM
             alerta AS al
                 JOIN
@@ -718,12 +717,14 @@ function exibirTotalSinalizacoes(idMaquina) {
                 JOIN
             empresa AS emp ON emp.id_empresa = adm.fk_empresa
         WHERE
-            emp.id_empresa = ${idMaquina};
+            emp.id_empresa = ${idEmpresa}
+                AND 
+            CAST(al.dt_alerta AS DATE) = CAST(GETDATE() AS DATE);   
         `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT 
-            COUNT(*) AS total_alertas
+            COUNT(id_alerta) AS total_alertas
         FROM
             alerta AS al
                 JOIN
@@ -739,7 +740,277 @@ function exibirTotalSinalizacoes(idMaquina) {
                 JOIN
             empresa AS emp ON emp.id_empresa = adm.fk_empresa
         WHERE
-            emp.id_empresa = ${idMaquina};
+            emp.id_empresa = ${idEmpresa}
+                AND 
+            CAST(al.dt_alerta AS DATE) = CAST(GETDATE() AS DATE);        
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterAlertasGerais(idEmpresa) {
+    console.log("ENTREI NA **MODEL** DO obterAlertasGerais");
+    console.log("ID DA EMPRESA: " + idEmpresa);
+    console.log(`--------------------------------------------------`);
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT mu.id_maquina,
+            CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 3
+                ) THEN 'maquinaCritica'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 2
+                ) THEN 'maquinaPerigo'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 1
+                ) THEN 'maquinaAlerta'
+                ELSE ''
+            END AS status,
+            (
+                SELECT CONCAT(ec.tipo_componente, ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS tipos_componente,
+            (
+                SELECT CONCAT(CAST(mc.uso AS VARCHAR(10)), ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN (
+                    SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+                    FROM metrica_componente
+                    GROUP BY fk_especificacao_componente_maquina
+                ) AS max_mc ON mue_inner.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+                JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    AND max_mc.max_dt_metrica = mc.dt_metrica
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS usos,
+            (
+                SELECT CONCAT(CONVERT(VARCHAR(19), mc.dt_metrica, 120), ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN (
+                    SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+                    FROM metrica_componente
+                    GROUP BY fk_especificacao_componente_maquina
+                ) AS max_mc ON mue_inner.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+                JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    AND max_mc.max_dt_metrica = mc.dt_metrica
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS datas_metrica
+        FROM maquina_ultrassom AS mu
+        JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+        JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+        JOIN (
+            SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+            FROM metrica_componente
+            GROUP BY fk_especificacao_componente_maquina
+        ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+        JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+            AND max_mc.max_dt_metrica = mc.dt_metrica
+        JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
+        JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
+        JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+        WHERE mu.id_maquina IN (
+            SELECT id_maquina
+            FROM (
+                SELECT mu.id_maquina, ec.tipo_componente, mc.uso,
+                    ROW_NUMBER() OVER (PARTITION BY mu.id_maquina, ec.tipo_componente ORDER BY mc.dt_metrica DESC) AS row_num
+                FROM maquina_ultrassom AS mu
+                JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+                JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN metrica_componente AS mc ON mue.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                WHERE CAST(al.dt_alerta AS DATETIME) >= '2023-05-25'
+            ) AS subquery
+            WHERE row_num = 1
+        )
+        AND emp.id_empresa = ${idEmpresa}
+        GROUP BY mu.id_maquina;
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT mu.id_maquina,
+            CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 3
+                ) THEN 'maquinaCritica'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 2
+                ) THEN 'maquinaPerigo'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM maquina_ultrassom AS mu_inner
+                    JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                    JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                    JOIN metrica_componente AS mc ON mue_inner.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                    WHERE mu_inner.id_maquina = mu.id_maquina
+                        AND al.fk_tipo_alerta = 1
+                ) THEN 'maquinaAlerta'
+                ELSE ''
+            END AS status,
+            (
+                SELECT CONCAT(ec.tipo_componente, ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS tipos_componente,
+            (
+                SELECT CONCAT(CAST(mc.uso AS VARCHAR(10)), ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN (
+                    SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+                    FROM metrica_componente
+                    GROUP BY fk_especificacao_componente_maquina
+                ) AS max_mc ON mue_inner.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+                JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    AND max_mc.max_dt_metrica = mc.dt_metrica
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS usos,
+            (
+                SELECT CONCAT(CONVERT(VARCHAR(19), mc.dt_metrica, 120), ',') AS [text()]
+                FROM maquina_ultrassom AS mu_inner
+                JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
+                JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN (
+                    SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+                    FROM metrica_componente
+                    GROUP BY fk_especificacao_componente_maquina
+                ) AS max_mc ON mue_inner.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+                JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                    AND max_mc.max_dt_metrica = mc.dt_metrica
+                WHERE mu_inner.id_maquina = mu.id_maquina
+                FOR XML PATH('')
+            ) AS datas_metrica
+        FROM maquina_ultrassom AS mu
+        JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+        JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+        JOIN (
+            SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
+            FROM metrica_componente
+            GROUP BY fk_especificacao_componente_maquina
+        ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+        JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+            AND max_mc.max_dt_metrica = mc.dt_metrica
+        JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
+        JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
+        JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+        WHERE mu.id_maquina IN (
+            SELECT id_maquina
+            FROM (
+                SELECT mu.id_maquina, ec.tipo_componente, mc.uso,
+                    ROW_NUMBER() OVER (PARTITION BY mu.id_maquina, ec.tipo_componente ORDER BY mc.dt_metrica DESC) AS row_num
+                FROM maquina_ultrassom AS mu
+                JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+                JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+                JOIN metrica_componente AS mc ON mue.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+                JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+                WHERE CAST(al.dt_alerta AS DATETIME) >= '2023-05-25'
+            ) AS subquery
+            WHERE row_num = 1
+        )
+        AND emp.id_empresa = ${idEmpresa}
+        GROUP BY mu.id_maquina;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterMaquinasAtivas(idEmpresa) {
+    console.log("ENTREI NA **MODEL** do obterMaquinasAtivas");
+    console.log("ID DA EMPRESA: " + idEmpresa);
+    console.log(`--------------------------------------------------`);
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+            COUNT(*) AS tot
+            FROM maquina_ultrassom  
+                WHERE status_maquina = 'false' AND fk_empresa = ${idEmpresa}
+        
+        UNION
+        
+        SELECT 
+            COUNT(*) AS tot
+            FROM maquina_ultrassom
+        WHERE fk_empresa = ${idEmpresa};
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+            COUNT(*)
+            FROM maquina_ultrassom  
+                WHERE status_maquina = 'false' AND fk_empresa = ${idEmpresa}
+        
+        UNION
+        
+        SELECT 
+            COUNT(*)
+            FROM maquina_ultrassom
+        WHERE fk_empresa = ${idEmpresa};
         `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -760,5 +1031,7 @@ module.exports = {
     atualizarGraficoCpu,
     atualizarGraficoRam,
     atualizarGraficoDisco,
-    exibirTotalSinalizacoes
+    exibirTotalSinalizacoes,
+    obterAlertasGerais,
+    obterMaquinasAtivas
 }

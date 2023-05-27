@@ -360,7 +360,6 @@ body {
 #p-sem-maquinas-alerta,
 #p-sem-maquinas-critico,
 #p-sem-maquinas-perigo {
-  display: none;
   font-size:0.9em;
   margin-top: 15px;
 }

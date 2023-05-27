@@ -39,8 +39,16 @@ router.get("/especificacao-componentes/:idMaquina", function (req, res) {
     maquinaController.obterEspecificacaoComponentes(req, res);
 });
 
-router.get("/exibirTotalSinalizacoes/:idMaquina", function (req, res) {
+router.get("/exibirTotalSinalizacoes/:idEmpresa", function (req, res) {
     maquinaController.exibirTotalSinalizacoes(req, res);
+});
+
+router.get("/obterAlertasGerais/:idEmpresa", function (req, res) {
+    maquinaController.obterAlertasGerais(req, res);
+});
+
+router.get("/obterMaquinasAtivas/:idEmpresa", function (req, res) {
+    maquinaController.obterMaquinasAtivas(req, res);
 });
 
 module.exports = router;
