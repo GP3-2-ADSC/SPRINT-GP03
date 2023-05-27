@@ -297,7 +297,6 @@ function salvarAlteracaoAdmin(req, res) {
     let cargo = req.body.cargoServer;
     let email = req.body.emailAdminServer;
     let telefone = req.body.telefoneServer;
-    let senha = req.body.senhaServer;
    
 
     if (idAdmin == null) {
@@ -312,10 +311,8 @@ function salvarAlteracaoAdmin(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (telefone == null) {
         res.status(400).send("Seu telefone está undefined!");
-    } else if (senha == null) {
-        res.status(400).send("Seu senha está undefined!");
     } else {
-        usuarioModel.salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone,senha)
+        usuarioModel.salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone)
             .then(
                 function (resultado) {
                     res.json(resultado);

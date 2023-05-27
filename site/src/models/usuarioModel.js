@@ -145,7 +145,7 @@ function salvarAlteracaoEmpresa(idEmpresa,telefone_01,telefone_02,email) {
     return database.executar(instrucaoSql);
 }
 
-function salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone,senha) {
+function salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone) {
 
     instrucaoSql = ''
 
@@ -157,8 +157,7 @@ function salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone,s
             nome_administrador  = '${nomeAdmin}',
             fk_ocupacao  = ${cargo},
             email_administrador  = '${email}',
-            telefone_administrador  = '${telefone}',
-            senha_administrador  = '${senha}'
+            telefone_administrador  = '${telefone}'
         WHERE
             fk_empresa = ${fkEmpresa}
         and
@@ -172,8 +171,7 @@ function salvarAlteracaoAdmin(idAdmin,fkEmpresa,nomeAdmin,cargo,email,telefone,s
             nome_administrador  = '${nomeAdmin}',
             fk_ocupacao  = ${cargo},
             email_administrador  = '${email}',
-            telefone_administrador  = '${telefone}',
-            senha_administrador  = '${senha}'
+            telefone_administrador  = '${telefone}'
         WHERE
             fk_empresa = ${fkEmpresa}
         and

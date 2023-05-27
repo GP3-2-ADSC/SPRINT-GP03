@@ -76,7 +76,6 @@ function getAdministrador() {
                 cargoAdmin.innerHTML = resposta[0].cargo;
                 telefoneAdmin.innerHTML = mascaraTelefoneRetorno(resposta[0].telefone_administrador);
                 emailAdmin.innerHTML = resposta[0].email_administrador;
-                senhaAdmin.innerHTML = resposta[0].senha_administrador;
 
                 dadosAdmin.push(resposta[0])
             });
@@ -114,12 +113,10 @@ function editarInformacoes(n) {
         document.getElementById('05').style.display = 'grid'
         document.getElementById('06').style.display = 'grid'
         document.getElementById('07').style.display = 'grid'
-        document.getElementById('08').style.display = 'grid'
         document.getElementById('l04').style.display = 'grid'
         document.getElementById('l05').style.display = 'grid'
         document.getElementById('l06').style.display = 'grid'
         document.getElementById('l07').style.display = 'grid'
-        document.getElementById('l08').style.display = 'grid'
         document.getElementById('bt-checkboxAdmin').style.display = 'grid'
         document.getElementById('checklist').style.width = '300px'
         document.getElementById('checklist').style.height = '220px'
@@ -172,7 +169,6 @@ function alterarInformacoes(n) {
         const cargoCh = document.getElementById('05');
         const emailCh = document.getElementById('06');
         const telefoneCh = document.getElementById('07');
-        const senhaCh = document.getElementById('08');
 
         if (nomeCh.checked || cargoCh.checked || emailCh.checked || senhaCh.checked || telefoneCh.checked) {
 
@@ -205,14 +201,6 @@ function alterarInformacoes(n) {
             <input required="" type="text" name="text" autocomplete="off" class="input" id="emailAdmin">
             `
                 adminCheckedList.push(emailCh.value)
-            }
-
-            if (senhaCh.checked) {
-                PSenhaAdmin.innerHTML = `
-            <strong>Senha</strong><br>
-            <input required="" type="text" name="text" autocomplete="off" class="input" id="senhaAdmin" >
-            `
-                adminCheckedList.push(senhaCh.value)
             }
 
             if (telefoneCh.checked) {
@@ -253,12 +241,10 @@ function esconderMenu() {
     document.getElementById('05').style.display = 'none'
     document.getElementById('06').style.display = 'none'
     document.getElementById('07').style.display = 'none'
-    document.getElementById('08').style.display = 'none'
     document.getElementById('l04').style.display = 'none'
     document.getElementById('l05').style.display = 'none'
     document.getElementById('l06').style.display = 'none'
     document.getElementById('l07').style.display = 'none'
-    document.getElementById('l08').style.display = 'none'
     document.getElementById('bt-checkboxAdmin').style.display = 'none'
     document.getElementById('bt-checkbox').style.display = 'none'
 }
@@ -304,7 +290,6 @@ function salvarAlteracaoAdmin() {
     const cargoCh = document.getElementById('05');
     const emailCh = document.getElementById('06');
     const telefoneCh = document.getElementById('07');
-    const senhaCh = document.getElementById('08');
 
 
     fetch(`/usuarios/salvarAlteracaoAdmin`, {
@@ -318,8 +303,7 @@ function salvarAlteracaoAdmin() {
             nomeAdminServer: nomeCh.checked ? nomeAdmin.value : dadosAdmin[0].nome_administrador,
             cargoServer: cargoCh.checked ? in_cargo.value : dadosAdmin[0].fk_ocupacao,
             telefoneServer: telefoneCh.checked ? telefoneAdmin.value : dadosAdmin[0].telefone_administrador,
-            emailAdminServer: emailCh.checked ? emailAdmin.value : dadosAdmin[0].email_administrador,
-            senhaServer: senhaCh.checked ? senhaAdmin.value : dadosAdmin[0].senha_administrador,
+            emailAdminServer: emailCh.checked ? emailAdmin.value : dadosAdmin[0].email_administrador
         })
     }).then(function (resposta) {
 
