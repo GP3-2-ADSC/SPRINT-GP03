@@ -120,7 +120,7 @@ create table alerta (
 );
 
 create table webhook (
-	id_Web int auto_increment primary key,
+	id_web int auto_increment primary key,
 	link varchar(255)
 );
 
@@ -247,7 +247,7 @@ CREATE TABLE alerta (
 );
 
 CREATE TABLE webhook (
-	id_Web INT IDENTITY(1,1) UNIQUE,
+	id_web INT IDENTITY(1,1) UNIQUE,
 	link VARCHAR(255)
 );
 
@@ -272,3 +272,4 @@ drop table [dbo].[administrador];
 drop table [dbo].[ocupacao];
 drop table [dbo].[endereco];
 drop table [dbo].[empresa];
+drop table [dbo].[webhook];
