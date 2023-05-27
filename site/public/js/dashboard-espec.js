@@ -771,13 +771,15 @@ function atualizarGraficoRede(idMaquina) {
 
         if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
 
-          if (contador == 10) {
+          if (contador == 5) {
             document.getElementById('wifiOn').style.display = 'none'
             document.getElementById('wifiOff').style.display = 'block'
             statusRede.innerHTML = 'Sem conexão!'
             document.getElementById('statusRede').style.color = 'red';
           }
-          contador++;
+          if (contador < 5) {
+            contador++;
+          }
         } else {
           console.log("TEM DADO NOVO!");
           labels_geral_rede.shift();
@@ -786,11 +788,13 @@ function atualizarGraficoRede(idMaquina) {
           data_geral_rede.datasets[0].data.shift();
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
 
-          document.getElementById('wifiOff').style.display = 'none'
-          document.getElementById('wifiOn').style.display = 'block'
-          statusRede.innerHTML = 'Conectada!'
-          document.getElementById('statusRede').style.color = '#fff';
-          contador = 0;
+          if (contador >= 5 || contador == 0) {
+            document.getElementById('wifiOff').style.display = 'none'
+            document.getElementById('wifiOn').style.display = 'block'
+            statusRede.innerHTML = 'Conectada!'
+            document.getElementById('statusRede').style.color = '#0061ba';
+            contador = -1;
+          }
         }
         myChart_geral_rede.update();
 
