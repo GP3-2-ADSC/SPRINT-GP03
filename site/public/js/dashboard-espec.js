@@ -1,4 +1,5 @@
 let listaMaquinas = []
+let contador = 0;
 var posicao_maquina_atual = 0;
 
 
@@ -560,7 +561,6 @@ function obterDadosIniciaisCpu(idMaquina) {
   fetch(`/maquinas/obterDadosIniciaisCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("DADOS DO OBTER DADOS INICIAIS");
         resposta.reverse();
         if (labels_geral_cpu.length == 0 && data_geral_cpu.datasets[0].data.length == 0) {
           resposta.forEach(element => {
@@ -593,8 +593,7 @@ function atualizarGraficoCpu(idMaquina) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
         if (novoRegistro[0].horario == labels_geral_cpu[labels_geral_cpu.length - 1]) {
-          console.log("---------------------------------------------------------------")
-          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -625,7 +624,6 @@ function obterDadosIniciaisRam(idMaquina) {
   fetch(`/maquinas/obterDadosIniciaisRam/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("DADOS DO OBTER DADOS INICIAIS");
         resposta.reverse();
 
         if (labels_geral_memoria.length == 0 && data_geral_memoria.datasets[0].data.length == 0) {
@@ -659,8 +657,7 @@ function atualizarGraficoRam(idMaquina) {
       response.json().then(function (novoRegistro) {
 
         if (novoRegistro[0].horario == labels_geral_memoria[labels_geral_memoria.length - 1]) {
-          console.log("---------------------------------------------------------------")
-          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -691,7 +688,6 @@ function obterDadosIniciaisDisco(idMaquina) {
   fetch(`/maquinas/obterDadosIniciaisDisco/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("DADOS DO OBTER DADOS INICIAIS");
         resposta.reverse();
         resposta.forEach(element => {
           labels_geral_disco.push(element.horario);
@@ -718,8 +714,7 @@ function atualizarGraficoDisco(idMaquina) {
       response.json().then(function (novoRegistro) {
 
         if (novoRegistro[0].horario == labels_geral_disco[labels_geral_disco.length - 1]) {
-          console.log("---------------------------------------------------------------")
-          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+
 
         } else {
           console.log("TEM DADO NOVO!");
@@ -751,7 +746,6 @@ function obterDadosIniciaisRede(idMaquina) {
   fetch(`/maquinas/obterDadosIniciaisRede/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("DADOS DO OBTER DADOS INICIAIS");
         console.log(`Dados recebidos na REDE: ${JSON.stringify(resposta)}`);
         resposta.reverse();
         resposta.forEach(element => {
@@ -776,12 +770,14 @@ function atualizarGraficoRede(idMaquina) {
       response.json().then(function (novoRegistro) {
 
         if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
-          console.log("---------------------------------------------------------------")
-          console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-          document.getElementById('wifiOn').style.display = 'none'
-          document.getElementById('wifiOff').style.display = 'block'
-          statusRede.innerHTML = 'Sem conexão!'
-          document.getElementById('statusRede').style.color = 'red';
+
+          if (contador == 10) {
+            document.getElementById('wifiOn').style.display = 'none'
+            document.getElementById('wifiOff').style.display = 'block'
+            statusRede.innerHTML = 'Sem conexão!'
+            document.getElementById('statusRede').style.color = 'red';
+          }
+          contador++;
         } else {
           console.log("TEM DADO NOVO!");
           labels_geral_rede.shift();
@@ -789,10 +785,12 @@ function atualizarGraficoRede(idMaquina) {
 
           data_geral_rede.datasets[0].data.shift();
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
+
           document.getElementById('wifiOff').style.display = 'none'
           document.getElementById('wifiOn').style.display = 'block'
           statusRede.innerHTML = 'Conectada!'
           document.getElementById('statusRede').style.color = '#fff';
+          contador = 0;
         }
         myChart_geral_rede.update();
 
@@ -847,7 +845,6 @@ function obterAlertas(idMaquina) {
   fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log("DADOS DO OBTER DADOS INICIAIS");
         resposta.forEach(element => {
 
           let situacao = "";
@@ -890,8 +887,6 @@ function obterAlertas(idMaquina) {
 function obterEspecificacaoComponentes(idMaquina) {
   fetch(`/maquinas/especificacao-componentes/${idMaquina}`)
     .then(resposta => {
-      console.log("ENTREI NO FETCH DO ESPECIFICAÇÃO COMPONENTES");
-      console.log(`--------------------------------------------------`);
 
       if (resposta.ok) {
         resposta.json().then(resposta => {
