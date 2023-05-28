@@ -9,7 +9,7 @@ let data_cpu = {
   datasets: [
     {
       data: [100 - 72, 72],
-      backgroundColor: ["#f1f1f1", "#FFCD56"],
+      backgroundColor: ["#f1f1f1", "#36A2EB"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -40,7 +40,7 @@ let data_memoria = {
   datasets: [
     {
       data: [100 - 87, 87],
-      backgroundColor: ["#f1f1f1", "#e10000"],
+      backgroundColor: ["#f1f1f1", "#36A2EB"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -71,7 +71,7 @@ let data_disco = {
   datasets: [
     {
       data: [100 - 55, 55],
-      backgroundColor: ["#f1f1f1", "#3cb600"],
+      backgroundColor: ["#f1f1f1", "#36A2EB"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -383,7 +383,7 @@ let data_geral_rede = {
   labels: labels_geral_rede,
   datasets: [
     {
-      label: "Uso da Rede (%)",
+      label: "Velocidade de download (mbps)",
       backgroundColor: "#0061BA",
       borderColor: "#0061BA",
       pointRadius: 5,
@@ -571,6 +571,24 @@ function obterDadosIniciaisCpu(idMaquina) {
 
           let usoAtual = resposta[resposta.length - 1].uso;
           data_cpu.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
+
+          if (usoAtual <= 35) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#36A2EB");
+
+          } else if (usoAtual < 40) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#FFC107");
+
+          } else if (usoAtual < 40) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#ff8c00");
+
+          } else {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("red");
+          }
+
           myChart_kpi_cpu.update()
 
         } else {
@@ -596,13 +614,30 @@ function atualizarGraficoCpu(idMaquina) {
 
 
         } else {
-          console.log("TEM DADO NOVO!");
           labels_geral_cpu.shift();
           labels_geral_cpu.push(novoRegistro[0].horario);
 
           data_geral_cpu.datasets[0].data.shift();
           data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_cpu.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
+
+          if (novoRegistro[0].uso <= 35) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#36A2EB");
+
+          } else if (novoRegistro[0].uso < 40) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#FFC107");
+
+          } else if (novoRegistro[0].uso < 40) {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("#ff8c00");
+
+          } else {
+            data_cpu.datasets[0].backgroundColor.splice(1, 1);
+            data_cpu.datasets[0].backgroundColor.push("red");
+          }
+
         }
         myChart_geral_cpu.update();
         myChart_kpi_cpu.update();
@@ -635,6 +670,24 @@ function obterDadosIniciaisRam(idMaquina) {
           myChart_geral_memoria.update()
           let usoAtual = resposta[resposta.length - 1].uso;
           data_memoria.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
+
+          if (usoAtual <= 49) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#36A2EB");
+
+          } else if (usoAtual < 56) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#FFC107");
+
+          } else if (usoAtual < 63) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#ff8c00");
+
+          } else {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("red");
+          }
+
           myChart_kpi_memoria.update()
         } else {
           console.log("Já foi apertado!");
@@ -667,6 +720,24 @@ function atualizarGraficoRam(idMaquina) {
           data_geral_memoria.datasets[0].data.shift();
           data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_memoria.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
+
+          if (novoRegistro[0].uso <= 49) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#36A2EB");
+
+          } else if (novoRegistro[0].uso < 56) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#FFC107");
+
+          } else if (novoRegistro[0].uso < 63) {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("#ff8c00");
+
+          } else {
+            data_memoria.datasets[0].backgroundColor.splice(1, 1);
+            data_memoria.datasets[0].backgroundColor.push("red");
+          }
+
         }
         myChart_geral_memoria.update();
         myChart_kpi_memoria.update()
@@ -696,6 +767,24 @@ function obterDadosIniciaisDisco(idMaquina) {
         myChart_geral_disco.update()
         let usoAtual = resposta[resposta.length - 1].uso;
         data_disco.datasets[0].data = [100 - usoAtual.toFixed(2), usoAtual.toFixed(2)]
+
+        if (usoAtual <= 56) {
+          data_disco.datasets[0].backgroundColor.splice(1, 1);
+          data_disco.datasets[0].backgroundColor.push("#36A2EB");
+
+        } else if (usoAtual < 64) {
+          data_disco.datasets[0].backgroundColor.splice(1, 1);
+          data_disco.datasets[0].backgroundColor.push("#FFC107");
+
+        } else if (usoAtual < 72) {
+          data_disco.datasets[0].backgroundColor.splice(1, 1);
+          data_disco.datasets[0].backgroundColor.push("#ff8c00");
+
+        } else {
+          data_disco.datasets[0].backgroundColor.splice(1, 1);
+          data_disco.datasets[0].backgroundColor.push("red");
+        }
+
         myChart_kpi_disco.update()
         atualizarGraficoDisco(idMaquina);
       });
@@ -725,8 +814,25 @@ function atualizarGraficoDisco(idMaquina) {
           data_geral_disco.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_disco.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
+          if (novoRegistro[0].uso <= 56) {
+            data_disco.datasets[0].backgroundColor.splice(1, 1);
+            data_disco.datasets[0].backgroundColor.push("#36A2EB");
+  
+          } else if (novoRegistro[0].uso < 64) {
+            data_disco.datasets[0].backgroundColor.splice(1, 1);
+            data_disco.datasets[0].backgroundColor.push("#FFC107");
+  
+          } else if (novoRegistro[0].uso < 72) {
+            data_disco.datasets[0].backgroundColor.splice(1, 1);
+            data_disco.datasets[0].backgroundColor.push("#ff8c00");
+  
+          } else {
+            data_disco.datasets[0].backgroundColor.splice(1, 1);
+            data_disco.datasets[0].backgroundColor.push("red");
+          }
+
         }
-        myChart_geral_cpu.update();
+        myChart_geral_disco.update();
         myChart_kpi_disco.update();
 
         setTimeout(() => atualizarGraficoDisco(idMaquina), 5000);
@@ -892,14 +998,14 @@ function obterAlertas(idMaquina) {
           let alertas = ``;
           let situacao = "";
           if (element.id_tipo_alerta == 1) {
-              situacao = "alerta"
-              cor="#FFC107"
+            situacao = "alerta"
+            cor = "#FFC107"
           } else if (element.id_tipo_alerta == 2) {
-              situacao = "perigo"
-              cor="#ff8c00"
+            situacao = "perigo"
+            cor = "#ff8c00"
           } else {
-              situacao = "crítico"
-              cor="#e10000"
+            situacao = "crítico"
+            cor = "#e10000"
           }
 
           if (resposta.indexOf(element) == 0) {
