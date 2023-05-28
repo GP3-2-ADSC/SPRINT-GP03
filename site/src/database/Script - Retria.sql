@@ -125,7 +125,7 @@ create table webhook (
 );
 
 insert into webhook (link) values 
-('https://hooks.slack.com/services/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');
+('https://hooks.slack.com/services/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');
 
 
 -- Script da Azure
@@ -252,7 +252,7 @@ CREATE TABLE webhook (
 );
 
 INSERT INTO [dbo].[Webhook] VALUES 
-('https://hooks.slack.com/services/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');
+('https://hooks.slack.com/services/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');
 
 
 
