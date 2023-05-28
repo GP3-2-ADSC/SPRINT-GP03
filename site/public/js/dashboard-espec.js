@@ -821,15 +821,15 @@ function atualizarGraficoDisco(idMaquina) {
           if (novoRegistro[0].uso <= 56) {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
             data_disco.datasets[0].backgroundColor.push("#36A2EB");
-  
+
           } else if (novoRegistro[0].uso < 64) {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
             data_disco.datasets[0].backgroundColor.push("#FFC107");
-  
+
           } else if (novoRegistro[0].uso < 72) {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
             data_disco.datasets[0].backgroundColor.push("#ff8c00");
-  
+
           } else {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
             data_disco.datasets[0].backgroundColor.push("red");
@@ -985,12 +985,12 @@ function proximaMaquina(acao) {
   }
 }
 
-function obterAlertas(idMaquina) {
+async function obterAlertas(idMaquina) {
 
   console.log("Entrando na função obter alertas");
-  fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+  await fetch(`/maquinas/obterAlertas/${idMaquina}`, { cache: 'no-store' }).then(async function (response) {
     if (response.ok) {
-      response.json().then(function (resposta) {
+      await response.json().then(function (resposta) {
         resposta.forEach(element => {
 
           let cor = "";
