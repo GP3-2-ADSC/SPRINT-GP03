@@ -754,6 +754,7 @@ function obterDadosIniciaisRede(idMaquina) {
         });
         myChart_geral_rede.update()
         atualizarGraficoRede(idMaquina);
+        getStatusApiFornecedor(idMaquina);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -807,7 +808,43 @@ function atualizarGraficoRede(idMaquina) {
     .catch(function (error) {
       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
+}
 
+function getStatusApiFornecedor(idMaquina) {
+  fetch(`/maquinas/getStatusApiFornecedor/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+
+        if (resposta[0].status_conexao == 'Sucesso') {
+          const icone = document.getElementById('wifiOnFornecedor');
+          document.getElementById('wifiOffFornecedor').style.display = 'none'
+          icone.style.display = 'block';
+          icone.style.fill = '#0061ba';
+          document.getElementById('statusApiFornecedor').style.color = '#0061ba';
+          statusApiFornecedor.innerHTML = 'Conexão OK!'
+        } else if (resposta[0].status_conexao == 'Parcial') {
+          const icone = document.getElementById('wifiOnFornecedor');
+          document.getElementById('wifiOffFornecedor').style.display = 'none'
+          icone.style.display = 'block';
+          icone.style.fill = '#d35400';
+          document.getElementById('statusApiFornecedor').style.color = '#d35400';
+          statusApiFornecedor.innerHTML = 'Conexão Parcial!'
+        } else {
+          document.getElementById('wifiOffFornecedor').style.display = 'block'
+          document.getElementById('wifiOnFornecedor').style.display = 'none'
+          document.getElementById('statusApiFornecedor').style.color = 'red';
+          statusApiFornecedor.innerHTML = 'Conexão com erro!'
+        }
+
+        setTimeout(() => getStatusApiFornecedor(idMaquina), 5000);
+      });
+    } else {
+      setTimeout(() => getStatusApiFornecedor(idMaquina), 5000);
+    }
+  })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
 }
 
 function iniciar() {

@@ -71,4 +71,8 @@ router.get("/obterMaquinasAtivas/:idEmpresa", function (req, res) {
     maquinaController.obterMaquinasAtivas(req, res);
 });
 
+router.get("/getStatusApiFornecedor/:idMaquina", function (req, res) {
+    maquinaController.getStatusApiFornecedor(req, res);
+});
+
 module.exports = router;

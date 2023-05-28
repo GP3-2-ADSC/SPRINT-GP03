@@ -191,6 +191,32 @@ h1 {
   align-items: center;
 }
 
+.card-kpi-rede {
+  padding: 4px;
+  width: var(--card-kpi-width);
+  height: 98px;
+  background-color: #8cccf0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}
+
+.cards-rede {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .pop-out-content li {
   width: 160px;
   display: flex;
@@ -199,6 +225,10 @@ h1 {
 }
 
 .text-card-kpi {
+  font-weight: 500;
+}
+
+.text-card-kpi-rede {
   font-weight: 500;
 }
 
@@ -231,6 +261,14 @@ h1 {
   width: 25vw;
 }
 
+.chart-container-rede {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20vh;
+  width: 100%;
+}
+
 /* Menu dos gráficos */
 .menu-graphics {
   width: calc(100vw - 630px);
@@ -253,9 +291,9 @@ h1 {
 }
 
 .content-menu {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .btn-menu-chart {
@@ -310,7 +348,7 @@ h1 {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  
+
   background-color: #8cccf0;
   border-radius: 10px;
 
@@ -372,7 +410,7 @@ h1 {
   height: 500px;
   background-color: #ffffff;
   border-radius: 5px;
-  
+
   overflow: auto;
 }
 
@@ -393,12 +431,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 113px;
-  height: 113px;
+  width: 33px;
+  height: 33px;
+  margin-bottom: 0.5rem;
   background-color: #ffffff;
   border-radius: 100%;
   transition: all .6s ease;
-  margin-bottom: 1rem;
   pointer-events: none;
 }
 
@@ -415,13 +453,18 @@ h1 {
   position: absolute;
   top: calc(50% -13px);
   left: calc(50% -13px);
-  width: 56px;
-  height: 56px;
+  width: 23px;
+  height: 23px;
 }
 
 .wifi-on {
   fill: #0061ba;
 }
+
+.wifi-on-fornecedor {
+  fill: #0061ba;
+}
+
 
 .wifi-off {
   display: none;
@@ -434,6 +477,11 @@ h1 {
 }
 
 #statusRede {
+  font-weight: 600;
+  color: #0061ba;
+}
+
+#statusApiFornecedor {
   font-weight: 600;
   color: #0061ba;
 }

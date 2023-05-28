@@ -1,8 +1,8 @@
 var maquinaModel = require("../models/maquinaModel");
 
 function carregarMaquinaEspec(req, res) {
-    let fkEmpresa = req.body.id_adminServer;
-    let idAdmin = req.body.fk_empresaServer;
+    let fkEmpresa = req.body.fk_empresaServer;
+    let idAdmin = req.body.id_adminServer;
 
     if (idAdmin == null) {
         res.status(400).send("Seu idAdmin está undefined!");
@@ -25,8 +25,8 @@ function carregarMaquinaEspec(req, res) {
 }
 
 function carregarMaquinaUltra(req, res) {
-    let fkEmpresa = req.body.id_adminServer;
-    let idAdmin = req.body.fk_empresaServer;
+    let fkEmpresa = req.body.fk_empresaServer;
+    let idAdmin = req.body.id_adminServer;
 
     if (idAdmin == null) {
         res.status(400).send("Seu idAdmin está undefined!");
@@ -49,8 +49,8 @@ function carregarMaquinaUltra(req, res) {
 }
 
 function bloquearMaquina(req, res) {
-    let fkEmpresa = req.body.id_adminServer;
-    let idAdmin = req.body.fk_empresaServer;
+    let fkEmpresa = req.body.fk_empresaServer;
+    let idAdmin = req.body.id_adminServer;
     let idMaquina = req.body.id_maquinaServer;
 
     if (idAdmin == null) {
@@ -403,6 +403,27 @@ function obterMaquinasAtivas(req, res) {
     }
 }
 
+function getStatusApiFornecedor(req, res) {
+    var idMaquina = req.params.idMaquina;
+
+    if (idMaquina == null) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    } else {
+        maquinaModel
+        .getStatusApiFornecedor(idMaquina).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar as MAQUINAS ATIVAS.", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
 
 module.exports = {
     carregarMaquinaEspec,
@@ -421,5 +442,6 @@ module.exports = {
     autorizarMaquina,
     exibirTotalSinalizacoes,
     obterAlertasGerais,
-    obterMaquinasAtivas
+    obterMaquinasAtivas,
+    getStatusApiFornecedor
 }

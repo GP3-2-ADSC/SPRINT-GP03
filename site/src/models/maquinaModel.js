@@ -55,8 +55,8 @@ function carregarMaquinaUltra(fkEmpresa, idAdmin) {
             JOIN
         maquina_ultrassom AS m ON id_administrador = fk_administrador
     WHERE
-        m.fk_administrador = ${fkEmpresa}
-            AND m.fk_empresa = ${idAdmin}`;
+        m.fk_administrador = ${idAdmin}
+            AND m.fk_empresa = ${fkEmpresa}`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
@@ -71,8 +71,8 @@ function carregarMaquinaUltra(fkEmpresa, idAdmin) {
             JOIN
         maquina_ultrassom AS m ON id_administrador = fk_administrador
     WHERE
-        m.fk_administrador = ${fkEmpresa}
-            AND m.fk_empresa = ${idAdmin}`;
+        m.fk_administrador = ${idAdmin}
+            AND m.fk_empresa = ${fkEmpresa}`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -141,8 +141,6 @@ function autorizarMaquina(fkEmpresa, idAdmin, idMaquina) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
-
 
 function obterDadosIniciaisCpu(idMaquina) {
 
@@ -1317,6 +1315,42 @@ function obterMaquinasAtivas(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function getStatusApiFornecedor(idMaquina) {
+    console.log("ENTREI NA **MODEL** do obterMaquinasAtivas");
+    console.log("ID DA EMPRESA: " + idMaquina);
+    console.log(`--------------------------------------------------`);
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+            status_conexao
+        FROM
+            maquina_ultrassom
+        WHERE
+            id_maquina = ${idMaquina}
+        AND status_maquina = 'true';
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+            status_conexao
+        FROM
+            maquina_ultrassom
+        WHERE
+            id_maquina = ${idMaquina}
+        AND status_maquina = 'true';
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     carregarMaquinaEspec,
     carregarMaquinaUltra,
@@ -1334,5 +1368,6 @@ module.exports = {
     autorizarMaquina,
     exibirTotalSinalizacoes,
     obterAlertasGerais,
-    obterMaquinasAtivas
+    obterMaquinasAtivas,
+    getStatusApiFornecedor
 }
