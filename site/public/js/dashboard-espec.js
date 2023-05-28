@@ -9,7 +9,7 @@ let data_cpu = {
   datasets: [
     {
       data: [100 - 72, 72],
-      backgroundColor: ["#f1f1f1", "#36A2EB"],
+      backgroundColor: ["#f1f1f1", "#178959"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -40,7 +40,7 @@ let data_memoria = {
   datasets: [
     {
       data: [100 - 87, 87],
-      backgroundColor: ["#f1f1f1", "#36A2EB"],
+      backgroundColor: ["#f1f1f1", "#178959"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -71,7 +71,7 @@ let data_disco = {
   datasets: [
     {
       data: [100 - 55, 55],
-      backgroundColor: ["#f1f1f1", "#36A2EB"],
+      backgroundColor: ["#f1f1f1", "#178959"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -102,7 +102,7 @@ let data_rede = {
   datasets: [
     {
       data: [100 - 19, 19],
-      backgroundColor: ["#f1f1f1", "#36A2EB"],
+      backgroundColor: ["#f1f1f1", "#178959"],
       borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
@@ -578,7 +578,7 @@ function obterDadosIniciaisCpu(idMaquina) {
 
           if (usoAtual <= 35) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
-            data_cpu.datasets[0].backgroundColor.push("#36A2EB");
+            data_cpu.datasets[0].backgroundColor.push("#178959");
 
           } else if (usoAtual < 40) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
@@ -627,7 +627,7 @@ function atualizarGraficoCpu(idMaquina) {
 
           if (novoRegistro[0].uso <= 35) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
-            data_cpu.datasets[0].backgroundColor.push("#36A2EB");
+            data_cpu.datasets[0].backgroundColor.push("#178959");
 
           } else if (novoRegistro[0].uso < 40) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
@@ -677,7 +677,7 @@ function obterDadosIniciaisRam(idMaquina) {
 
           if (usoAtual <= 49) {
             data_memoria.datasets[0].backgroundColor.splice(1, 1);
-            data_memoria.datasets[0].backgroundColor.push("#36A2EB");
+            data_memoria.datasets[0].backgroundColor.push("#178959");
 
           } else if (usoAtual < 56) {
             data_memoria.datasets[0].backgroundColor.splice(1, 1);
@@ -727,7 +727,7 @@ function atualizarGraficoRam(idMaquina) {
 
           if (novoRegistro[0].uso <= 49) {
             data_memoria.datasets[0].backgroundColor.splice(1, 1);
-            data_memoria.datasets[0].backgroundColor.push("#36A2EB");
+            data_memoria.datasets[0].backgroundColor.push("#178959");
 
           } else if (novoRegistro[0].uso < 56) {
             data_memoria.datasets[0].backgroundColor.splice(1, 1);
@@ -774,7 +774,7 @@ function obterDadosIniciaisDisco(idMaquina) {
 
         if (usoAtual <= 56) {
           data_disco.datasets[0].backgroundColor.splice(1, 1);
-          data_disco.datasets[0].backgroundColor.push("#36A2EB");
+          data_disco.datasets[0].backgroundColor.push("#178959");
 
         } else if (usoAtual < 64) {
           data_disco.datasets[0].backgroundColor.splice(1, 1);
@@ -820,7 +820,7 @@ function atualizarGraficoDisco(idMaquina) {
 
           if (novoRegistro[0].uso <= 56) {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
-            data_disco.datasets[0].backgroundColor.push("#36A2EB");
+            data_disco.datasets[0].backgroundColor.push("#178959");
 
           } else if (novoRegistro[0].uso < 64) {
             data_disco.datasets[0].backgroundColor.splice(1, 1);
@@ -963,9 +963,8 @@ async function iniciar() {
     await getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
 
   } else {
-    await getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
     sessionStorage.POSICAO_ATUAL = posicao_maquina_atual
-
+    await getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
   }
 }
 

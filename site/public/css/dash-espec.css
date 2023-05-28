@@ -165,7 +165,7 @@ h1 {
 }
 
 .green {
-  background-color: #3cb600;
+  background-color: #178959;
 }
 
 .yellow {
@@ -262,7 +262,7 @@ h1 {
   align-items: center;
   padding-top: 10px;
   height: 20vh;
-  width: 25vw;
+  width: 100%;
 }
 
 .chart-container-rede {
