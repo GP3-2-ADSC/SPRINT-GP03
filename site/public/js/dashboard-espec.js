@@ -826,8 +826,8 @@ function getStatusApiFornecedor(idMaquina) {
           const icone = document.getElementById('wifiOnFornecedor');
           document.getElementById('wifiOffFornecedor').style.display = 'none'
           icone.style.display = 'block';
-          icone.style.fill = '#F6AA1C';
-          document.getElementById('statusApiFornecedor').style.color = '#F6AA1C';
+          icone.style.fill = '#FFC107';
+          document.getElementById('statusApiFornecedor').style.color = '#FFC107';
           statusApiFornecedor.innerHTML = 'Conexão Parcial!'
         } else {
           document.getElementById('wifiOffFornecedor').style.display = 'block'
@@ -893,13 +893,13 @@ function obterAlertas(idMaquina) {
           let situacao = "";
           if (element.id_tipo_alerta == 1) {
               situacao = "alerta"
-              cor="green"
+              cor="#FFC107"
           } else if (element.id_tipo_alerta == 2) {
               situacao = "perigo"
-              cor="#F6AA1C"
+              cor="#ff8c00"
           } else {
               situacao = "crítico"
-              cor="red"
+              cor="#e10000"
           }
 
           if (resposta.indexOf(element) == 0) {

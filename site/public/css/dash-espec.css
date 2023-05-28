@@ -184,6 +184,8 @@ h1 {
 
 .card-kpi {
   width: var(--card-kpi-width);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+
   height: 204px;
   background-color: #FFF;
   border-radius: 10px;
@@ -196,6 +198,7 @@ h1 {
 .card-kpi-rede {
   padding: 4px;
   width: var(--card-kpi-width);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   height: 98px;
   background-color: #FFF;
   border-radius: 10px;
@@ -275,7 +278,9 @@ h1 {
   width: calc(100vw - 630px);
 
   background-color: #FFF;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   border-radius: 0 0 10px 10px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -307,6 +312,7 @@ h1 {
   height: 335px;
   width: calc(100vw - 630px);
   background-color: #FFF;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   margin-top: 20px;
   border-radius: 10px 10px 0 0;
   border-bottom: 1px solid;
@@ -349,6 +355,7 @@ h1 {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 
   background-color: #FFF;
   border-radius: 10px;
@@ -395,6 +402,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
 
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   background-color: #FFF;
   border-radius: 10px;
   padding: 17px 25px;
@@ -419,7 +427,7 @@ h1 {
 }
 
 .card-historic {
-  margin: 15px;
+  margin: 10px 0px 10px 0px;
   padding: 5px;
   border: 1px solid black;
   border-radius: 5px;

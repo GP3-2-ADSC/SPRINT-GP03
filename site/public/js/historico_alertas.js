@@ -67,11 +67,11 @@ async function obterAlertas(maquinas) {
                         let cor = "";
                         let situacao = "";
                         if (element.id_tipo_alerta == 1) {
-                            situacao = "circle-kpi green"
-                            cor="green"
-                        } else if (element.id_tipo_alerta == 2) {
                             situacao = "circle-kpi yellow"
-                            cor="#F6AA1C"
+                            cor="#FFC107"
+                        } else if (element.id_tipo_alerta == 2) {
+                            situacao = "circle-kpi orange"
+                            cor="#ff8c00"
                         } else {
                             situacao = "circle-kpi red"
                             cor="red"

@@ -180,11 +180,15 @@ h1 {
 }
 
 .yellow {
-  background-color: #ffcd56;
+  background-color: #FFC107;
 }
 
 .red {
   background-color: #e10000;
+}
+
+.orange {
+  background-color: #ff8c00;
 }
 
 /* Alertas */
@@ -212,6 +216,8 @@ h1 {
   text-align: center;
 
   background-color: #ffffff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  
   border-radius: 10px;
 }
 
