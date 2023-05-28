@@ -254,7 +254,11 @@ CREATE TABLE webhook (
 INSERT INTO [dbo].[Webhook] VALUES 
 ('https://hooks.slack.com/services/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');
 
+
+
 -- Comando de insert
+insert into empresa (nome_empresa, cnpj, telefone_01, telefone_02, email, responsavel_empresa) values( 'Polmed Centro Médico & Ultrassom12', '14548758985879', '11985878562', '11985636987', 'polmedclinica@gmail.com', 'Carlos Barbosa');
+
  INSERT INTO administrador (
     nome_administrador, email_administrador, senha_administrador, 
     telefone_administrador, fk_ocupacao, 

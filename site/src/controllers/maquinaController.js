@@ -77,8 +77,8 @@ function bloquearMaquina(req, res) {
 }
 
 function autorizarMaquina(req, res) {
-    let fkEmpresa = req.body.id_adminServer;
-    let idAdmin = req.body.fk_empresaServer;
+    let fkEmpresa = req.body.fk_empresaServer;
+    let idAdmin = req.body.id_adminServer;
     let idMaquina = req.body.id_maquinaServer;
 
     if (idAdmin == null) {

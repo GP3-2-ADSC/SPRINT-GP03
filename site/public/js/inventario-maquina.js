@@ -10,7 +10,7 @@ function getMaquinasUltrassom() {
             fk_empresaServer: sessionStorage.getItem('FK_EMPRESA')
         })
     }).then(function (response) {
-
+            
         if (response.ok) {
             response.json().then(function (resposta) {
                 let cont = 0;
