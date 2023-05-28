@@ -772,13 +772,13 @@ function atualizarGraficoRede(idMaquina) {
 
         if (novoRegistro[0].horario == labels_geral_rede[labels_geral_rede.length - 1]) {
 
-          if (contador == 2) {
+          if (contador == 5) {
             document.getElementById('wifiOn').style.display = 'none'
             document.getElementById('wifiOff').style.display = 'block'
             statusRede.innerHTML = 'Sem conexão!'
             document.getElementById('statusRede').style.color = 'red';
           }
-          if (contador < 2) {
+          if (contador < 5) {
             contador++;
           }
         } else {
@@ -836,10 +836,10 @@ function getStatusApiFornecedor(idMaquina) {
           statusApiFornecedor.innerHTML = 'Conexão com erro!'
         }
 
-        setTimeout(() => getStatusApiFornecedor(idMaquina), 5000);
+        setTimeout(() => getStatusApiFornecedor(idMaquina), 10000);
       });
     } else {
-      setTimeout(() => getStatusApiFornecedor(idMaquina), 5000);
+      setTimeout(() => getStatusApiFornecedor(idMaquina), 10000);
     }
   })
     .catch(function (error) {
