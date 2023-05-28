@@ -9,8 +9,8 @@ let data_cpu = {
   datasets: [
     {
       data: [100 - 72, 72],
-      backgroundColor: ["#dee2e6", "#FFCD56"],
-      borderColor: '#b8b8b8',
+      backgroundColor: ["#f1f1f1", "#FFCD56"],
+      borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -40,8 +40,8 @@ let data_memoria = {
   datasets: [
     {
       data: [100 - 87, 87],
-      backgroundColor: ["#dee2e6", "#e10000"],
-      borderColor: '#b8b8b8',
+      backgroundColor: ["#f1f1f1", "#e10000"],
+      borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -71,8 +71,8 @@ let data_disco = {
   datasets: [
     {
       data: [100 - 55, 55],
-      backgroundColor: ["#dee2e6", "#3cb600"],
-      borderColor: '#b8b8b8',
+      backgroundColor: ["#f1f1f1", "#3cb600"],
+      borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -102,8 +102,8 @@ let data_rede = {
   datasets: [
     {
       data: [100 - 19, 19],
-      backgroundColor: ["#dee2e6", "#36A2EB"],
-      borderColor: '#b8b8b8',
+      backgroundColor: ["#f1f1f1", "#36A2EB"],
+      borderColor: '#dee2e6',
       hoverOffset: 4,
       cutout: "50%",
     },
@@ -193,7 +193,7 @@ let config_geral_cpu = {
         text: "Monitoramento do uso da CPU da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
-        color: "#000",
+        color: "#0061BA",
         font: {
           size: 20,
           weight: 600,
@@ -274,7 +274,7 @@ let config_geral_memoria = {
         text: "Monitoramento do uso da memória da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
-        color: "#000",
+        color: "#0061BA",
         font: {
           size: 20,
           weight: 600,
@@ -357,7 +357,7 @@ let config_geral_disco = {
         text: "Monitoramento do uso do disco da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
-        color: "#000",
+        color: "#0061BA",
         font: {
           size: 20,
           weight: 600,
@@ -439,7 +439,7 @@ let config_geral_rede = {
         text: "Monitoramento do uso da rede da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
         align: "center",
         fullSize: false,
-        color: "#000",
+        color: "#0061BA",
         font: {
           size: 20,
           weight: 600,
@@ -826,8 +826,8 @@ function getStatusApiFornecedor(idMaquina) {
           const icone = document.getElementById('wifiOnFornecedor');
           document.getElementById('wifiOffFornecedor').style.display = 'none'
           icone.style.display = 'block';
-          icone.style.fill = '#d35400';
-          document.getElementById('statusApiFornecedor').style.color = '#d35400';
+          icone.style.fill = '#F6AA1C';
+          document.getElementById('statusApiFornecedor').style.color = '#F6AA1C';
           statusApiFornecedor.innerHTML = 'Conexão Parcial!'
         } else {
           document.getElementById('wifiOffFornecedor').style.display = 'block'
@@ -874,7 +874,7 @@ function proximaMaquina(acao) {
   } else {
     if (posicao_maquina_atual < (listaMaquinas.length - 1) && posicao_maquina_atual >= 0) {
       posicao_maquina_atual++;
-      sessionStorage.setItem("POSICAO_ATUAL", posicao_maquina_atual)
+      sessionStorage.setItem("POSICAO_ATUAL", posicao_maquina_atual);
       location.reload();
     }
   }
@@ -888,27 +888,31 @@ function obterAlertas(idMaquina) {
       response.json().then(function (resposta) {
         resposta.forEach(element => {
 
-          let situacao = "";
+          let cor = "";
           let alertas = ``;
+          let situacao = "";
           if (element.id_tipo_alerta == 1) {
-            situacao = "alerta"
+              situacao = "alerta"
+              cor="green"
           } else if (element.id_tipo_alerta == 2) {
-            situacao = "perigo"
+              situacao = "perigo"
+              cor="#F6AA1C"
           } else {
-            situacao = "crítico"
+              situacao = "crítico"
+              cor="red"
           }
 
           if (resposta.indexOf(element) == 0) {
             historic.innerHTML = `
             <div class="card-historic">
             <p class="historic-date">${element.dia}</p>
-              <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
+              <p class="historic-text">${element.tipo_componente} em <span style="color: ${cor}";>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
             </div>`
           }
           alertas += `
               <div class="card-historic">
               <p class="historic-date">${element.dia}</p>
-                <p class="historic-text">${element.tipo_componente} em <span>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
+                <p class="historic-text">${element.tipo_componente} em <span style="color: ${cor}";>${situacao}</span> (${element.uso.toFixed(2)}%)</p>
               </div>`
 
           historic.innerHTML += alertas

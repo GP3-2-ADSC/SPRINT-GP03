@@ -2,6 +2,10 @@
   --card-kpi-width: 175px;
 }
 
+body {
+  background-color: #8ccbf049;
+}
+
 .container-menu {
   position: fixed;
   width: 280px;
@@ -140,8 +144,6 @@ h1 {
 }
 
 /* Legenda das KPIs */
-
-
 .circle-kpi {
   width: 100%;
   height: 22px;
@@ -183,7 +185,7 @@ h1 {
 .card-kpi {
   width: var(--card-kpi-width);
   height: 204px;
-  background-color: #8cccf0;
+  background-color: #FFF;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -195,7 +197,7 @@ h1 {
   padding: 4px;
   width: var(--card-kpi-width);
   height: 98px;
-  background-color: #8cccf0;
+  background-color: #FFF;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -224,12 +226,11 @@ h1 {
   padding: 8px 5px 8px 5px;
 }
 
-.text-card-kpi {
-  font-weight: 500;
-}
-
+.text-card-kpi,
 .text-card-kpi-rede {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1em;
+  color: #0061BA;
 }
 
 .pop-out-content {
@@ -273,7 +274,7 @@ h1 {
 .menu-graphics {
   width: calc(100vw - 630px);
 
-  background-color: #8cccf0;
+  background-color: #FFF;
   border-radius: 0 0 10px 10px;
   display: flex;
   flex-direction: column;
@@ -305,7 +306,7 @@ h1 {
 .container-general-chart {
   height: 335px;
   width: calc(100vw - 630px);
-  background-color: #8cccf0;
+  background-color: #FFF;
   margin-top: 20px;
   border-radius: 10px 10px 0 0;
   border-bottom: 1px solid;
@@ -316,7 +317,7 @@ h1 {
 #btn-menu-memoria,
 #btn-menu-disco,
 #btn-menu-rede {
-  background-color: #5eacd2;
+  background-color: #0061ba;
   padding: 8px;
   border-radius: 20px;
   width: 95px;
@@ -349,7 +350,7 @@ h1 {
   justify-content: space-evenly;
   align-items: center;
 
-  background-color: #8cccf0;
+  background-color: #FFF;
   border-radius: 10px;
 
   padding: 10px 14px;
@@ -367,8 +368,9 @@ h1 {
 }
 
 .container-titulo p {
+  font-weight: 600;
   font-size: 1em;
-  font-weight: 500;
+  color: #0061BA;  
 }
 
 .container-detalhes-especificacao {
@@ -393,14 +395,16 @@ h1 {
   justify-content: space-between;
   align-items: center;
 
-  background-color: #8cccf0;
+  background-color: #FFF;
   border-radius: 10px;
   padding: 17px 25px;
   margin-top: 20px;
 }
 
 .container-alerts span {
-  font-weight: 500;
+  font-size: 1em;
+  font-weight: 600;
+  color: #0061BA;
   margin-bottom: 5px;
 }
 
@@ -434,7 +438,8 @@ h1 {
   width: 33px;
   height: 33px;
   margin-bottom: 0.5rem;
-  background-color: #ffffff;
+  background-color: #f1f1f1;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   border-radius: 100%;
   transition: all .6s ease;
   pointer-events: none;
@@ -472,7 +477,6 @@ h1 {
 
 .theme:active {
   border-radius: 100%;
-  box-shadow: inset 0px 0px 10px 0px rgb(240, 237, 237);
   transform: translate(3px, 3px);
 }
 
