@@ -150,7 +150,6 @@ let data_geral_cpu = {
     },
   ],
 };
-
 let config_geral_cpu = {
   type: "line",
   data: data_geral_cpu,
@@ -190,7 +189,7 @@ let config_geral_cpu = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da CPU da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
+        text: "Monitoramento do uso da CPU da máquina ",
         align: "center",
         fullSize: false,
         color: "#0061BA",
@@ -271,7 +270,7 @@ let config_geral_memoria = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da memória da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
+        text: "Monitoramento do uso da memória da máquina ",
         align: "center",
         fullSize: false,
         color: "#0061BA",
@@ -354,7 +353,7 @@ let config_geral_disco = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso do disco da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
+        text: "Monitoramento do uso do disco da máquina ",
         align: "center",
         fullSize: false,
         color: "#0061BA",
@@ -436,7 +435,7 @@ let config_geral_rede = {
       },
       title: {
         display: true,
-        text: "Monitoramento do uso da rede da máquina " + (parseInt(sessionStorage.getItem('POSICAO_ATUAL')) + 1),
+        text: "Monitoramento do uso da rede da máquina ",
         align: "center",
         fullSize: false,
         color: "#0061BA",
@@ -540,6 +539,11 @@ function getMaquinas(idMaquina) {
         resposta.forEach(element => {
           listaMaquinas.push(element);
         });
+
+        let paraPlotar = listaMaquinas[sessionStorage.getItem("POSICAO_ATUAL")].id_maquina;
+        num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar)}`
+        nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar)}`
+        plotarNomeTabelas(listaMaquinas[idMaquina].id_maquina)
         obterDadosIniciaisCpu(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisRam(listaMaquinas[idMaquina].id_maquina);
         obterDadosIniciaisDisco(listaMaquinas[idMaquina].id_maquina);
@@ -953,20 +957,15 @@ function getStatusApiFornecedor(idMaquina) {
     });
 }
 
-function iniciar() {
+async function iniciar() {
   if (sessionStorage.POSICAO_ATUAL != null) {
     posicao_maquina_atual = sessionStorage.getItem("POSICAO_ATUAL")
-    let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
-    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
-    getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
+    await getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
+
   } else {
+    await getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
     sessionStorage.POSICAO_ATUAL = posicao_maquina_atual
-    let paraPlotar = sessionStorage.getItem("POSICAO_ATUAL");
-    num_maquina_atual.innerHTML = `Maquina ${parseInt(paraPlotar) + 1}`
-    nome_tabela.innerHTML = `Alertas da maquina ${parseInt(paraPlotar) + 1}`
-    getMaquinas(sessionStorage.getItem("POSICAO_ATUAL"));
-    plotarNomeTabelas();
+
   }
 }
 
@@ -1062,11 +1061,12 @@ function obterEspecificacaoComponentes(idMaquina) {
     });
 }
 
-function plotarNomeTabelas() {
-  config_geral_cpu.options.title.text = "Monitoramento do uso da CPU da máquina " + 1;
-  config_geral_memoria.options.title.text = "Monitoramento do uso da memópria da máquina " + 1;
-  config_geral_disco.options.title.text = "Monitoramento do uso do disco da máquina " + 1;
-  config_geral_rede.options.title.text = "Monitoramento do uso da rede da máquina " + 1;
+function plotarNomeTabelas(idMaquina) {
+  console.log("ID MAQUINA É " + idMaquina);
+  config_geral_cpu.options.plugins.title.text = "Monitoramento do uso da CPU da máquina " + idMaquina;
+  config_geral_memoria.options.plugins.title.text = "Monitoramento do uso da memória da máquina " + idMaquina;
+  config_geral_disco.options.plugins.title.text = "Monitoramento do uso do disco da máquina " + idMaquina;
+  config_geral_rede.options.plugins.title.text = "Monitoramento do uso da rede da máquina " + idMaquina;
 }
 
 //<![CDATA[
