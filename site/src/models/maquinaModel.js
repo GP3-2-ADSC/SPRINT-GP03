@@ -1099,7 +1099,7 @@ function obterAlertasGerais(idEmpresa) {
                 FOR XML PATH('')
             ) AS tipos_componente,
             (
-                SELECT CONCAT(CAST(mc.uso AS VARCHAR(10)), ',') AS [text()]
+                SELECT CONCAT(CAST(mc.uso AS VARCHAR(1000)), ',') AS [text()]
                 FROM maquina_ultrassom AS mu_inner
                 JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
                 JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
@@ -1114,7 +1114,7 @@ function obterAlertasGerais(idEmpresa) {
                 FOR XML PATH('')
             ) AS usos,
             (
-                SELECT CONCAT(CONVERT(VARCHAR(19), mc.dt_metrica, 120), ',') AS [text()]
+                SELECT CONCAT(CONVERT(VARCHAR(800), mc.dt_metrica, 120), ',') AS [text()]
                 FROM maquina_ultrassom AS mu_inner
                 JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
                 JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
@@ -1128,20 +1128,20 @@ function obterAlertasGerais(idEmpresa) {
                 WHERE mu_inner.id_maquina = mu.id_maquina
                 FOR XML PATH('')
             ) AS datas_metrica
-        FROM maquina_ultrassom AS mu
-        JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
-        JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
-        JOIN (
+            FROM maquina_ultrassom AS mu
+            JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+            JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+            JOIN (
             SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
             FROM metrica_componente
             GROUP BY fk_especificacao_componente_maquina
-        ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
-        JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+            ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+            JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
             AND max_mc.max_dt_metrica = mc.dt_metrica
-        JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
-        JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
-        JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
-        WHERE mu.id_maquina IN (
+            JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
+            JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
+            JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+            WHERE mu.id_maquina IN (
             SELECT id_maquina
             FROM (
                 SELECT mu.id_maquina, ec.tipo_componente, mc.uso,
@@ -1151,13 +1151,13 @@ function obterAlertasGerais(idEmpresa) {
                 JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
                 JOIN metrica_componente AS mc ON mue.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
                 JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
-                WHERE CAST(al.dt_alerta AS DATETIME) >= '2023-05-25'
+                WHERE CAST(al.dt_alerta AS DATE) = CAST(GETDATE() AS DATE)
             ) AS subquery
             WHERE row_num = 1
-        )
-        AND emp.id_empresa = ${idEmpresa}
-        GROUP BY mu.id_maquina;
-        `;
+            )
+            AND emp.id_empresa = ${idEmpresa}
+            GROUP BY mu.id_maquina;
+                `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT mu.id_maquina,
@@ -1203,7 +1203,7 @@ function obterAlertasGerais(idEmpresa) {
                 FOR XML PATH('')
             ) AS tipos_componente,
             (
-                SELECT CONCAT(CAST(mc.uso AS VARCHAR(10)), ',') AS [text()]
+                SELECT CONCAT(CAST(mc.uso AS VARCHAR(800)), ',') AS [text()]
                 FROM maquina_ultrassom AS mu_inner
                 JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
                 JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
@@ -1218,7 +1218,7 @@ function obterAlertasGerais(idEmpresa) {
                 FOR XML PATH('')
             ) AS usos,
             (
-                SELECT CONCAT(CONVERT(VARCHAR(19), mc.dt_metrica, 120), ',') AS [text()]
+                SELECT CONCAT(CONVERT(VARCHAR(800), mc.dt_metrica, 120), ',') AS [text()]
                 FROM maquina_ultrassom AS mu_inner
                 JOIN maquina_ultrassom_especificada AS mue_inner ON mu_inner.id_maquina = mue_inner.fk_maquina
                 JOIN especificacao_componente AS ec ON mue_inner.fk_especificacao_componente = ec.id_especificacao_componente
@@ -1232,20 +1232,20 @@ function obterAlertasGerais(idEmpresa) {
                 WHERE mu_inner.id_maquina = mu.id_maquina
                 FOR XML PATH('')
             ) AS datas_metrica
-        FROM maquina_ultrassom AS mu
-        JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
-        JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
-        JOIN (
+            FROM maquina_ultrassom AS mu
+            JOIN maquina_ultrassom_especificada AS mue ON mu.id_maquina = mue.fk_maquina
+            JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
+            JOIN (
             SELECT fk_especificacao_componente_maquina, MAX(dt_metrica) AS max_dt_metrica
             FROM metrica_componente
             GROUP BY fk_especificacao_componente_maquina
-        ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
-        JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
+            ) AS max_mc ON mue.id_especificacao_componente_maquina = max_mc.fk_especificacao_componente_maquina
+            JOIN metrica_componente AS mc ON max_mc.fk_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
             AND max_mc.max_dt_metrica = mc.dt_metrica
-        JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
-        JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
-        JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
-        WHERE mu.id_maquina IN (
+            JOIN maquina_ultrassom AS mu_empresa ON mu.id_maquina = mu_empresa.id_maquina
+            JOIN empresa AS emp ON mu_empresa.fk_empresa = emp.id_empresa
+            JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
+            WHERE mu.id_maquina IN (
             SELECT id_maquina
             FROM (
                 SELECT mu.id_maquina, ec.tipo_componente, mc.uso,
@@ -1255,13 +1255,13 @@ function obterAlertasGerais(idEmpresa) {
                 JOIN especificacao_componente AS ec ON mue.fk_especificacao_componente = ec.id_especificacao_componente
                 JOIN metrica_componente AS mc ON mue.id_especificacao_componente_maquina = mc.fk_especificacao_componente_maquina
                 JOIN alerta AS al ON mc.id_metrica_componente = al.fk_metrica_componente
-                WHERE CAST(al.dt_alerta AS DATETIME) >= '2023-05-25'
+                WHERE CAST(al.dt_alerta AS DATE) = CAST(GETDATE() AS DATE)
             ) AS subquery
             WHERE row_num = 1
-        )
-        AND emp.id_empresa = ${idEmpresa}
-        GROUP BY mu.id_maquina;
-    `;
+            )
+            AND emp.id_empresa = ${idEmpresa}
+            GROUP BY mu.id_maquina;
+            `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return;
