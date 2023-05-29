@@ -123,7 +123,3 @@ create table IF NOT EXISTS webhook (
 	id_web int auto_increment primary key,
 	link varchar(255)
 );
-
-insert into webhook (link) values 
-('https://hooks.slack.com/services/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');
-

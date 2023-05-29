@@ -121,9 +121,6 @@ CREATE TABLE webhook (
 	link VARCHAR(255)
 );
 
-INSERT INTO [dbo].[Webhook] VALUES 
-('https://hooks.slack.com/services/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');
-
 
 
 -- Comando de insert

@@ -621,7 +621,9 @@ function atualizarGraficoCpu(idMaquina) {
           labels_geral_cpu.shift();
           labels_geral_cpu.push(novoRegistro[0].horario);
 
-          data_geral_cpu.datasets[0].data.shift();
+          if (data_geral_cpu.datasets[0].data.length == 8) {
+            data_geral_cpu.datasets[0].data.shift();
+          }
           data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_cpu.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -721,7 +723,9 @@ function atualizarGraficoRam(idMaquina) {
           labels_geral_memoria.shift();
           labels_geral_memoria.push(novoRegistro[0].horario);
 
-          data_geral_memoria.datasets[0].data.shift();
+          if (data_geral_memoria.datasets[0].data.length == 8) {
+            data_geral_memoria.datasets[0].data.shift();
+          }
           data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_memoria.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -814,7 +818,9 @@ function atualizarGraficoDisco(idMaquina) {
           labels_geral_disco.shift();
           labels_geral_disco.push(novoRegistro[0].horario);
 
-          data_geral_disco.datasets[0].data.shift();
+          if (data_geral_disco.datasets[0].data.length == 8) {
+            data_geral_disco.datasets[0].data.shift();
+          }
           data_geral_disco.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_disco.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -893,10 +899,13 @@ function atualizarGraficoRede(idMaquina) {
           }
         } else {
           console.log("TEM DADO NOVO!");
+
           labels_geral_rede.shift();
           labels_geral_rede.push(novoRegistro[0].horario);
-
-          data_geral_rede.datasets[0].data.shift();
+          
+          if (data_geral_rede.datasets[0].data.length == 8) {
+            data_geral_rede.datasets[0].data.shift();
+          }
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
 
           if (contador > 0) {
