@@ -584,7 +584,7 @@ function obterDadosIniciaisCpu(idMaquina) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
             data_cpu.datasets[0].backgroundColor.push("#FFC107");
 
-          } else if (usoAtual < 40) {
+          } else if (usoAtual < 56) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
             data_cpu.datasets[0].backgroundColor.push("#ff8c00");
 
@@ -603,6 +603,7 @@ function obterDadosIniciaisCpu(idMaquina) {
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
+      obterDadosIniciaisCpu(idMaquina);
     }
   })
     .catch(function (error) {
@@ -615,15 +616,16 @@ function atualizarGraficoCpu(idMaquina) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
         if (novoRegistro[0].horario == labels_geral_cpu[labels_geral_cpu.length - 1]) {
-
+          console.log("Não há dados novos!");
 
         } else {
-          labels_geral_cpu.shift();
-          labels_geral_cpu.push(novoRegistro[0].horario);
 
-          if (data_geral_cpu.datasets[0].data.length == 8) {
+          if (data_geral_cpu.datasets[0].data.length >= 8 && labels_geral_cpu.length >= 8) {
+            labels_geral_cpu.shift();
             data_geral_cpu.datasets[0].data.shift();
           }
+
+          labels_geral_cpu.push(novoRegistro[0].horario);
           data_geral_cpu.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_cpu.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -635,7 +637,7 @@ function atualizarGraficoCpu(idMaquina) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
             data_cpu.datasets[0].backgroundColor.push("#FFC107");
 
-          } else if (novoRegistro[0].uso < 40) {
+          } else if (novoRegistro[0].uso < 56) {
             data_cpu.datasets[0].backgroundColor.splice(1, 1);
             data_cpu.datasets[0].backgroundColor.push("#ff8c00");
 
@@ -703,6 +705,7 @@ function obterDadosIniciaisRam(idMaquina) {
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
+      obterDadosIniciaisRam(idMaquina)
     }
   })
     .catch(function (error) {
@@ -720,12 +723,13 @@ function atualizarGraficoRam(idMaquina) {
 
         } else {
           console.log("TEM DADO NOVO!");
-          labels_geral_memoria.shift();
-          labels_geral_memoria.push(novoRegistro[0].horario);
 
-          if (data_geral_memoria.datasets[0].data.length == 8) {
+          if (data_geral_memoria.datasets[0].data.length >= 8 && labels_geral_memoria.length >= 8) {
+            labels_geral_memoria.shift();
             data_geral_memoria.datasets[0].data.shift();
           }
+
+          labels_geral_memoria.push(novoRegistro[0].horario);
           data_geral_memoria.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_memoria.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -798,6 +802,7 @@ function obterDadosIniciaisDisco(idMaquina) {
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
+      obterDadosIniciaisDisco(idMaquina)
     }
   })
     .catch(function (error) {
@@ -815,12 +820,13 @@ function atualizarGraficoDisco(idMaquina) {
 
         } else {
           console.log("TEM DADO NOVO!");
-          labels_geral_disco.shift();
-          labels_geral_disco.push(novoRegistro[0].horario);
 
-          if (data_geral_disco.datasets[0].data.length == 8) {
+          if (data_geral_disco.datasets[0].data.length >= 8 && labels_geral_disco.length >= 8) {
+            labels_geral_disco.shift();
             data_geral_disco.datasets[0].data.shift();
           }
+          
+          labels_geral_disco.push(novoRegistro[0].horario);
           data_geral_disco.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
           data_disco.datasets[0].data = [100 - novoRegistro[0].uso.toFixed(2), novoRegistro[0].uso.toFixed(2)]
 
@@ -874,6 +880,7 @@ function obterDadosIniciaisRede(idMaquina) {
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
+      obterDadosIniciaisRede(idMaquina)
     }
   })
     .catch(function (error) {
@@ -899,20 +906,21 @@ function atualizarGraficoRede(idMaquina) {
           }
         } else {
           console.log("TEM DADO NOVO!");
-
-          labels_geral_rede.shift();
-          labels_geral_rede.push(novoRegistro[0].horario);
           
-          if (data_geral_rede.datasets[0].data.length == 8) {
+          if (data_geral_rede.datasets[0].data.length >= 8 && labels_geral_rede >= 8) {
+            labels_geral_rede.shift();
             data_geral_rede.datasets[0].data.shift();
           }
+          
+          labels_geral_rede.push(novoRegistro[0].horario);
           data_geral_rede.datasets[0].data.push(novoRegistro[0].uso.toFixed(2));
 
           if (contador > 0) {
             document.getElementById('wifiOff').style.display = 'none'
             document.getElementById('wifiOn').style.display = 'block'
             statusRede.innerHTML = 'Conectada!'
-            document.getElementById('statusRede').style.color = '#0061ba';
+            document.getElementById('wifiOn').style.fill = '#178959'
+            document.getElementById('statusRede').style.color = '#178959';
             contador = 0;
           }
         }
@@ -938,8 +946,8 @@ function getStatusApiFornecedor(idMaquina) {
           const icone = document.getElementById('wifiOnFornecedor');
           document.getElementById('wifiOffFornecedor').style.display = 'none'
           icone.style.display = 'block';
-          icone.style.fill = '#0061ba';
-          document.getElementById('statusApiFornecedor').style.color = '#0061ba';
+          icone.style.fill = '#178959';
+          document.getElementById('statusApiFornecedor').style.color = '#178959';
           statusApiFornecedor.innerHTML = 'Conexão OK!'
         } else if (resposta[0].status_conexao == 'Parcial') {
           const icone = document.getElementById('wifiOnFornecedor');

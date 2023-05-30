@@ -1,4 +1,6 @@
 function getMaquinasUltrassom() {
+    containerContentRight.innerHTML = ``;
+    containerContent.innerHTML = ``;
 
     fetch("/maquinas/carregarMaquinaUltra", {
         method: "POST",
@@ -94,9 +96,11 @@ function getMaquinasUltrassom() {
 
                 }
             }
+            setTimeout(() => getMaquinasUltrassom(), 30000);
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
+            setTimeout(() => getMaquinasUltrassom(), 30000);
         }
     })
         .catch(function (error) {
