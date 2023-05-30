@@ -907,7 +907,7 @@ function atualizarGraficoRede(idMaquina) {
         } else {
           console.log("TEM DADO NOVO!");
           
-          if (data_geral_rede.datasets[0].data.length >= 8 && labels_geral_rede >= 8) {
+          if (data_geral_rede.datasets[0].data.length >= 8 && labels_geral_rede.length >= 8) {
             labels_geral_rede.shift();
             data_geral_rede.datasets[0].data.shift();
           }
