@@ -1,4 +1,4 @@
-# Retria - Monitoring Solutions (Em desenvolvimento)
+# Retria - Monitoring Solutions
 
 <img align='right' src="https://gp3-2-adsc.github.io/UMMS-Retria/site/public/assets/testelogoSprint copiar.png" width="180px">
 
