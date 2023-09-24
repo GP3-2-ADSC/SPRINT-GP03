@@ -2,7 +2,7 @@
 
 <img align='right' src="https://gp3-2-adsc.github.io/UMMS-Retria/site/public/assets/testelogoSprint copiar.png" width="180px">
 
-UMMS (Ultrasound Machine Monitoring Solution) é uma das soluções providas pela Retria, projeto de empresa que está sendo desenvolvido durante o 2º semestre do curso de Análise de Sistemas da faculdade São Paulo Tech School.
+UMMS (Ultrasound Machine Monitoring Solution) é uma das soluções providas pela Retria, projeto de empresa que foi desenvolvido durante o 2º semestre (2023/1) do curso de Análise de Sistemas da faculdade São Paulo Tech School.
 
 
 ## Regras para a condução do projeto
